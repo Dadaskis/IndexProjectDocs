@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - logic
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: non_playable_character
+								</h3>
+								<h3>
+									Script: logic
+								</h3>
+								<h3>
+									Class Name: NPCLogic
+								</h3>
+								<h3>
+									Extends: Object
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								No description set.
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									TOO_CLOSE_DISTANCE
+								</p>
+								<p class="var_desc_name_value">
+									0.8
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Minimum distance before considering too close to target
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NPC_HINTS_DATA_NODE_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"NPCHintsData"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Node name for NPC hint data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FIELD_OF_VIEW
+								</p>
+								<p class="var_desc_name_value">
+									190.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Field of view angle in degrees (190 = nearly behind)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									VISIBLE_ANYWAY_DISTANCE
+								</p>
+								<p class="var_desc_name_value">
+									100.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Distance where character is always visible
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									CHECK_DELAY
+								</p>
+								<p class="var_desc_name_value">
+									0.25
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Delay between character visibility checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LOGIC_TICK_TIME
+								</p>
+								<p class="var_desc_name_value">
+									0.5
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Time between logic updates
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_DIST_MULT
+								</p>
+								<p class="var_desc_name_value">
+									0.7
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Player distance multiplier to prioritize player first in character checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									CHAR_CHECK_COUNT
+								</p>
+								<p class="var_desc_name_value">
+									20
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Amount of characters to check in a batch of visibility check
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									STATES_SCRIPTS_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to state behavior scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to state behavior scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									character
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to controlled character
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									space_state
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physics space state for raycasting
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									physics_exclude
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of physics bodies to exclude from checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									npc_owner
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to owning NPC instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									close_check_move_direction
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Movement direction for close proximity checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_state_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current state name (uses setter)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									previous_state_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Previously active state name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_state
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current state instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									states
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of available states
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									location
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to location scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									all_characters
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of all detected characters
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									visible_characters
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of currently visible characters
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									enemy_characters
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of enemy characters
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_enemy
+								</p>
+								<p class="var_desc_name_value">
+									null
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current primary enemy target
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									check_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for character checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									close_check_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for close proximity checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									logic_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for logic updates
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									check_delay
+								</p>
+								<p class="var_desc_name_value">
+									0.25
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current delay between checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									change_counter
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Counter for state changes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									change_frames
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Frame counter for state changes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									last_shoot_author
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Last character that shot near NPC
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_ignoring_character_shooting
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag to ignore shooting events
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									character_shooting_func_ref
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to shooting event callback
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disable_character_check
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag to disable character checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									player_checked
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag if player was checked
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									state_name_next
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Next state to switch to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_character_check_id
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current character index to check visibility of
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_physics_exclude
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets physics exceptions and updates raycast
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_state_next
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Queues state change for next update
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_state_next_to_previous
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Queues change back to previous state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_state
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Changes to specified state with validation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_current_state_name
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Property setter for current_state_name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_check_delay
+								</p>
+								<p class="var_desc_name_value">
+									value: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets delay between character checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_state_to_previous
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reverts to previous state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									character_shooting
+								</p>
+								<p class="var_desc_name_value">
+									args: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Callback for character shooting events
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_damage
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Damage event handler
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									register_events
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Registers event listeners
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_ignore_character_shooting
+								</p>
+								<p class="var_desc_name_value">
+									is_ignore: bool
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Toggles shooting event listening
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_states
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads state scripts from configured path
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize
+								</p>
+								<p class="var_desc_name_value">
+									character: Character, space_state: PhysicsDirectSpaceState, npc_owner: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes logic controller
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_character_in_field_of_view
+								</p>
+								<p class="var_desc_name_value">
+									character: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if character is within field of view
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_character_visible
+								</p>
+								<p class="var_desc_name_value">
+									character: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if character is visible (raycast)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_enemy
+								</p>
+								<p class="var_desc_name_value">
+									character: Character
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if a character is an enemy based on faction relationships<br/>
+								Returns true if the character is from an enemy faction, false otherwise
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									detected_character
+								</p>
+								<p class="var_desc_name_value">
+									character: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes detection of a character and updates current enemy if needed<br/>
+								Handles prioritization of targets (especially player characters)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									pick_enemy
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Old enemy selection logic (now obsolete)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_characters
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks all characters in the game and detects potential enemies<br/>
+								Runs on a timer to limit performance impact
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_state
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates the current AI state logic<br/>
+								Runs state updates at fixed intervals (LOGIC_TICK_TIME)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_others_enemies
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Old method for checking other NPCs' enemies (now obsolete)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									force_check_characters
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Forces an immediate character check regardless of timer
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main update loop called every frame<br/>
+								Handles state changes, character checks and state updates
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reset
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Resets all character tracking lists and current enemy
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_grenade
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles grenade detection event<br/>
+								Delegates to current state's handler
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_flashbang
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles flashbang detection event<br/>
+								Delegates to current state's handler
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prop_hit
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles prop hit event<br/>
+								Delegates to current state's handler
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_model_tool
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: locations_tools
+								</h3>
+								<h3>
+									Script: location_model_tool
+								</h3>
+								<h3>
+									Class Name: LocationModelTool
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Singleton for material and mesh handling in locations.<br>
+								Handles material assignment, mesh processing, and resource management for<br>
+								all location assets.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PROPS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/props/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to props folder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PARTS_MATERIALS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/parts_materials/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to parts materials folder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PROP_MATERIALS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/prop_materials/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to prop materials folder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									DECAL_MATERIALS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/decal_materials/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to decal materials folder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MODEL_FORMAT_USED
+								</p>
+								<p class="var_desc_name_value">
+									".glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Model file format
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MISSING_MATERIAL_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Material placeholder for the missing materials
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Material placeholder for the missing materials
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									ERROR_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/locations_tools/assets/error/error.glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								ERROR model if model is missing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MESHES_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/meshes/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to save meshes at
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MISSING_MATERIAL
+								</p>
+								<p class="var_desc_name_value">
+									preload()
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded missing material placeholder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_CLIP_MAT_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"__PLAYER_CLIP"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Material name for player clips
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NODRAW_MAT_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"__NODRAW"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Material name for non-rendered surfaces
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									material_paths
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary mapping material names to their paths
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									material_dir
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary caching loaded materials
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_game_started
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag indicating if game has started
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									reset_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for periodic material cache reset
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_editor_materials
+								</p>
+								<p class="var_desc_name_value">
+									mesh_instance: MeshInstance, remove_nodraw: = true, remove_pclip_in_editor: = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes editor-specific materials from a mesh instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									resave_mesh_file
+								</p>
+								<p class="var_desc_name_value">
+									mesh_instance: MeshInstance, force_saver = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves mesh resources to files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_path_for_mat_paths
+								</p>
+								<p class="var_desc_name_value">
+									path: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Scans directory for material files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_material_paths
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates material path dictionary
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_game_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when game loads
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reset_material_dir
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Clears material cache
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_material
+								</p>
+								<p class="var_desc_name_value">
+									material_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads material with caching
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_materials_to_mesh
+								</p>
+								<p class="var_desc_name_value">
+									mesh: Mesh, save_mesh = false, remove_nodraw = true, remove_pclip_in_editor = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Assigns proper materials to a mesh
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_materials_to_mesh_instance
+								</p>
+								<p class="var_desc_name_value">
+									mesh_instance: MeshInstance, save_mesh = false, remove_nodraw = true, remove_pclip_in_editor = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Assigns proper materials to a mesh instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_physics_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Periodic maintenance in editor
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

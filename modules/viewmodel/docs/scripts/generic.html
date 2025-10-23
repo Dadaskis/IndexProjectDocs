@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - generic
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: viewmodel
+								</h3>
+								<h3>
+									Script: generic
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: ViewmodelAnimationSet
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Generic weapon animation controller<br>
+								Provides base functionality for standard FPS weapons with:<br>
+								- Draw/hide animations<br>
+								- Reload animations<br>
+								- Shoot animations<br>
+								- Idle states<br>
+								- Aim down sights functionality<br>
+								Requires these 5 animations to work properly:<br>
+								1. "take" (draw weapon)<br>
+								2. "hide" (holster weapon)<br>
+								3. "reload" (reload animation)<br>
+								4. "shoot" (firing animation)<br>
+								5. "idle" (idle state animation)<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									INSTANCES_AMOUNT
+								</p>
+								<p class="var_desc_name_value">
+									5
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Number of particle/casing instances to preload
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SIGHT_SOUND_TIMER_DELAY
+								</p>
+								<p class="var_desc_name_value">
+									0.5
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Minimum delay between aim sound effects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_taken
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tracks if weapon is currently equipped
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_hiding
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tracks if weapon is being holstered
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_reloading
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tracks if reload animation is playing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_shooting
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tracks if shoot animation is playing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									sight_sound_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for aim sound cooldown
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									shoot_particle
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Muzzle flash particle effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									casing_out_particle
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Ejected casing particle effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									casing_scene
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physical casing scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									take_enough
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when take animation finishes<br/>
+								Marks weapon as equipped and enables left hand
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									hide_enough
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when hide animation finishes<br/>
+								Marks weapon as holstered
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									shoot_end
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when shoot animation finishes<br/>
+								Resets shooting state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									fill_mag
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when reload animation finishes<br/>
+								Resets reload state and enables left hand
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									custom_initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes the animation system<br/>
+								Sets up callbacks and preloads effects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									custom_update
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates animation states each frame<br/>
+								delta: Time since last frame
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									take
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays weapon draw animation<br/>
+								Resets all weapon states
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									hide
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays weapon holster animation<br/>
+								Handles both normal and immediate hiding
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									shoot
+								</p>
+								<p class="var_desc_name_value">
+									hit: = false
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays shoot animation and effects<br/>
+								hit: Whether the shot hit a target (unused)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reload
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays reload animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_in_sight
+								</p>
+								<p class="var_desc_name_value">
+									in_sight: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets weapon aiming state<br/>
+								in_sight: Whether player is aiming down sights
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

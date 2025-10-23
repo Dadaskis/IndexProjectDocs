@@ -1,0 +1,35 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Flashbang node that flashes NPCs and the player as well.
+
+//img:flashbang/example0.jpg
+
+[c]Usage example[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var flashbang = Flashbang.new()
+loc_base.add_child(flashbang)
+flashbang.global_transform.origin = Vector3(1.0, 2.0, 3.0)
+flashbang.initialize()  # Start flashbang effect
+[/gd]
+
+[r]This module is NOT implementing the player's reaction to flashbangs nor affecting NPCs behavior. It has only Flashbang node that calls corresponding methods in player and NPCs that are affected by the flashbang[/r]"
+info_rus = "Узел Flashbang, который ослепляет NPC и игрока.
+
+//img:flashbang/example0.jpg
+
+[c]Пример использования[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var flashbang = Flashbang.new()
+loc_base.add_child(flashbang)
+flashbang.global_transform.origin = Vector3(1.0, 2.0, 3.0)
+flashbang.initialize()  # Запускает эффект флешбэнг
+[/gd]
+
+[r]Этот модуль НЕ реализует реакцию игрока на флешбэнг и НЕ влияет на поведение NPC. Он содержит только узел Flashbang, который вызывает соответствующие методы у игрока и NPC, поражённых флешбэнгом[/r]"
+edit_time = 1.76113e+09

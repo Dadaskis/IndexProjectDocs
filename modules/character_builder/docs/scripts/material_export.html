@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - material_export
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: character_builder
+								</h3>
+								<h3>
+									Script: material_export
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: Spatial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								This is a material export node that handles material rendering to textures<br>
+								for a character builder system. It manages multiple Viewports to generate<br>
+								texture maps (Diffuse, Normal, MRS, and Emission) from materials<br>
+								and providing access to the resulting rendered textures.<br>
+								The system automatically handles material stage detection<br>
+								(including emission if present) and maintains proper aspect ratios<br>
+								during rendering.<br>
+								<br>
+								Essentially this is the entire reason i've made CharacterBuilder, i fucking<br>
+								hated baking and all that stuff, it's much better this way.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_enum">
+									ENUM
+								</p>
+								<p class="var_desc_name_text">
+									MAT_STAGES
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								An enumeration defining different material rendering stages
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prepare_material
+								</p>
+								<p class="var_desc_name_value">
+									data: CB_MaterialExportData, mat_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prepares a specific material for rendering in different stages
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prepare_materials
+								</p>
+								<p class="var_desc_name_value">
+									data: CB_MaterialExportData
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prepares all materials from the export data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_textures
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns an array of all rendered textures (excluding the prefab)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_texture
+								</p>
+								<p class="var_desc_name_value">
+									tex_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets a specific texture by its viewport name
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

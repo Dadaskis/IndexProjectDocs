@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - debug_timer
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: debug_timer
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Таймер для отладки, который покажет, сколько времени занимает выполнение твоего кода. Не могу сказать, предоставляет ли он точные данные, но он был полезным тем не менее.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								DebugTimer.start("name")&emsp;&emsp;# Запускает таймер<br>
+								DebugTimer.end("name")&emsp;&emsp;# Останавливает таймер<br>
+								DebugTimer.toggle("name")&emsp;# "Переключает" таймер<br>
+								<br>
+								# Насчёт "переключения"...<br>
+								# Это может быть более полезно для тебя, если твой код становится грязьненьким :)<br>
+								DebugTimer.toggle("broken_ass_shit") &emsp;# Старт<br>
+								print("blah blah blah")<br>
+								for iter in range(133722800):&emsp;&emsp;&emsp;&emsp;&emsp;# "Дорогая" операция<br>
+								&emsp;var quick_maths = 1 + 2<br>
+								DebugTimer.toggle("broken_ass_shit") &emsp;# Стоп<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/debug_timer.html">
+								debug_timer
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

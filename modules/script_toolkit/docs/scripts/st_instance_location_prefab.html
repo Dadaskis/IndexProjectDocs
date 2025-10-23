@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - st_instance_location_prefab
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: script_toolkit
+								</h3>
+								<h3>
+									Script: st_instance_location_prefab
+								</h3>
+								<h3>
+									Class Name: ST_InstanceLocationPrefab
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								A Script Toolkit node that handles instantiating and removing location prefabs<br>
+								in response to location events. Supports both direct scene references and path-based<br>
+								loading of prefabs, with checkpoint saving/loading functionality.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PREFABS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/scenes/prefabs/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Base path for prefab assets
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SCENE_FILETYPE
+								</p>
+								<p class="var_desc_name_value">
+									".tscn"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								File extension for scene files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SUPPORTED_CLASSES
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List of supported node classes this can be attached to ("ALL" means any)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SUPPORTED_SCRIPTS
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List of specific scripts this node is compatible with (empty = any)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LOC_UNIQUE_VARS
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Unique variables that should persist per location instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									start_event_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Event name that triggers prefab instantiation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									remove_event_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Event name that triggers prefab removal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									prefab_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of prefab to load (when not using direct scene reference)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									use_scene
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Whether to use direct scene reference instead of path-based loading
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									prefab_scene
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Direct scene reference (used when use_scene is true)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									instance
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to spawned instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_spawned
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tracks whether prefab is currently spawned
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									spawn
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Instantiates the prefab at parent's location
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes the spawned prefab
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_location_event
+								</p>
+								<p class="var_desc_name_value">
+									loc_event_name: any, args: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles location events for spawning/removing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_checkpoint_save
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves spawn state during checkpoints
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_checkpoint_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Restores spawn state from checkpoint
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									node_init
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes node connections
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

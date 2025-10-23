@@ -1,0 +1,270 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "This is a monster. Alright. A class making humans look like something in this game. That's all you need to know about this entire module. It is used by NPCs to show human appearance.
+//img:human_model/example0.png
+
+[bc]How to work with this as an artist[/bc]
+Let's assume that you are just a guy that wants to get a human character into this game.
+//img:character_builder/use23.jpg
+//img:character_builder/use24.jpg
+So, to make some alchemy magic here, you just need to follow the following patterns and do the following actions:
+	- Make sure you have a following structure in Blender:
+	[gd]
+	└── human_rig
+		└── character
+	[/gd]
+	Where:
+		- [p]human_rig[/p] is a skeleton of the character. If you need to get a skeleton for your needs, it is stored in [p]res://.dev_sources/basic/human_rig.blend[/p] file. 
+		However you can also just import a Character Builder model for this one.
+		- [p]character[/p] mesh has to be parented to [p]human_rig[/p].
+
+[bc]Character Structure[/bc]
+[ctr][gd]
+└── human_rig # Character skeleton, keep it unchanged and reuse already existing Blender armature
+	└── character # Character main mesh
+	└── character_LOD # Character LOD mesh (lower detail) that is shown at certain distance from camera
+[/gd][/ctr]
+
+Then you just use BlenderFastTools to export your human model by pressing [p]Export Character[/p] under [p]Human Model Tools[/p] section. Before you press this button, make sure you have saved your .blend file with an appropriate name of the character you want to export. It is highly advised to store all human character models at [gd]\"res://.dev_sources/human_models/\"[/gd]. Once you've saved your file, you can press \"Export character\" model, that will automatically export appropriate GLTF file into [gd]\"res://modules/human_model/assets/models/[CHARACTER_NAME_HERE]\"[/gd].
+//img:character_builder/use26.jpg
+After exporting a character from Blender, make sure to visit this folder in Godot to import the models and configure the materials by assigning them correct values and textures in all slots.
+//img:character_builder/use27.jpg
+By default, Godot is importing [gd]SpatialMaterial[/gd] materials instead of [gd]UserSpatialUbershader[/gd] that are used for all materials in this game. Firstly - you need to replace [gd]SpatialMaterial[/gd] with [gd]UserSpatialUbershader[/gd]. You can just remove the file, create a new resource (with the same name, mind you) and then it's gonna be great. However, it might be too slow, so i would like to show some easier method. Firstly, copy the folder path...
+//img:character_builder/use28.jpg
+Then, open [c]OtherKit[/c] menu...
+//img:character_builder/use29.jpg
+Click here a couple of times...
+//img:character_builder/use30.jpg
+Find \"Material Replace\" tab, enter the folder path, click \"Replace\"
+//img:character_builder/use31.jpg
+While it might seem to be harder to do than doing it the plain-old way, I found it to be faster personally because \"Create a new resource\" window is working slowly in this project, plus i'm too lazy to save the resource properly, while this tool helps to detect any [gd]SpatialMaterial[/gd] and replace them accordingly. However, back to configuration. When you get your hands on a new [gd]UserSpatialUbershader[/gd], you need to enable effects... Also, make sure to change [c]Diffuse Mode[/c] to [gd]\"Burley\"[/gd] and [c]Specular Mode[/c] to [gd]\"Schlick GGX\"[/gd]...
+//img:character_builder/use32.jpg
+//img:character_builder/use33.jpg
+For the most characters you will need [c]Albedo[/c], [c]Normal Map[/c], [c]MRS[/c] effects. Sometimes - [c]Emission[/c]. All of these effects would be more than sufficient to make somewhat decent characters of any complexity. After you are done enabling effects, press [c]Force Update[/c] to update shader in this material to fit the requirements of renderer.
+//img:character_builder/use34.jpg
+After you've updated the material, you can assign textures to slots. Keep in mind - initially your material will be fully black, so do not forget to change [c]Albedo Color[/c] to be white. More than that, [c]Normal Map Power[/c] equals to [c]0.0[/c] by default, make sure to change value to [c]1.0[/c] so normal map would take full effect on lighting of this material. After all this - mr. Shitass0 should be looking fresh and clean.
+//img:character_builder/use35.jpg
+
+[bc]Script Structure[/bc]
+[gd]
+.
+├── autoload
+│   ├── human_model_file_archive.gd
+│   └── ragdoll_list.gd
+├── config
+│   ├── footstep_anim_footmark.gd
+│   ├── footstep_anim_mark.gd
+│   ├── footstep_marks.gd
+│   └── weapon_config.gd
+├── helper
+│   ├── anim_event_caller.gd
+│   └── ragdoll_logic.gd
+├── human_model.gd
+└── test
+    └── walker_control.gd
+[/gd]
+The heart of this entire module is [p]human_model.gd[/p] that is the [gd]HumanModel[/gd] class that *you are supposed to use*. That's the end of line. Close the documentation page, that's all you need to know... Just kidding, I think I also need to write how to use this class.
+
+Other files:
+	- [p]autoload/human_model_file_archive.gd[/p] is a [gd]HumanModelFileArchive[/gd] singleton that manages some stuff related to animation files and materials.
+	- [p]autoload/ragdoll_list.gd[/p] is a generic list of all ragdolls, controls some logic there too, that's [gd]RagdollList[/gd] class.
+	- [p]config/footstep_anim_footmark.gd[/p] is a [gd]HumanModelFootMark[/gd] resource-config file that has only 2 variables: Up and down frames. This class is used in [gd]HumanModelFootstepAnimMark[/gd] class.
+	- [p]config/footstep_anim_mark.gd[/p] is the forementioned [gd]HumanModelFootstepAnimMark[/gd] class that contains 2 arrays of [gd]HumanModelFootMark[/gd] for both left and right legs. It is tied to a specific animation too.
+	- [p]config/footstep_marks.gd[/p] is just a [gd]HumanModelFootstepMarks[/gd] class that contains an array of [gd]HumanModelFootstepAnimMark[/gd], which is later loaded by [gd]HumanModel[/gd] to mark the footstep events for variety of reasons like properly synced footstep sounds and abandoned \"Foot IK\" that nobody shall touch ever again.
+	- [p]config/weapon_config.gd[/p] configures a weapon used by [gd]HumanModel[/gd], that is a [gd]HumanWeaponConfig[/gd] resource.
+	- [p]helper/anim_event_caller.gd[/p] is a hack that I wrote with love and passion and pure hatred just to get [gd]animation_event_occured[/gd] called in [gd]HumanModel[/gd].
+	- [p]helper/ragdoll_logic.gd[/p] is a script for ragdoll logic that handles freezing of bones, their lifetime control, removal, etc.
+	- [p]test/walker_control.gd[/p] we are not talking about this one. I will never talk about this one. You don't want to know about this one.
+
+Scenes:
+	- [p]assets/ragdoll/ragdoll_model_v2.tscn[/p] - a ragdoll scene that is used for ragdoll instances of [gd]HumanModel[/gd].
+	- [p]assets/hitbox/hitbox.tscn[/p] - a hitbox scene that is used to instance a hitbox structure of [gd]HumanModel[/gd], keep in mind that the rest of hitbox initialization ([gd]KinematicBody[/gd] setup) may happen in the code of the hitbox initialization function in [gd]HumanModel[/gd]. [gd]NPCHuman[/gd] does its own tweaks to initialization of hitboxes, keep it in mind.
+
+[bc]How are you supposed to use HumanModel in code?[/bc]
+[ctr][gd]
+#	1. CREATE model container with height adjustment
+#		- Add Spatial node as \"model_tweak\"
+#		- Adjust Y position by \"MODEL_TWEAK_HEIGHT\" (in NPC's scenario it is \"0.0\" LOL)
+var model_tweak = Spatial.new()
+add_child(model_tweak)
+
+#	2. CREATE new \"HumanModel\" instance
+#		- Set \"scene_root\" reference to LocationBase
+var humanoid = HumanModel.new()
+humanoid.scene_root = LocationBaseScene.get_scene()
+
+#	3. CONFIGURE model settings
+#		- Add \"self\" (\"KinematicBody\" in this case) to exclude list (I don't know why is it needed, just do it)
+humanoid.exclude.append(self)
+
+#	4. LOAD character model
+#		- Select model name (e.g., \"merc_light_unit0\")
+#		- Call HumanModel.load_character() with model name and container
+humanoid.load_character(\"merc_light_unit0\", model_tweak)
+
+#	5. HANDLE weapon setup
+#		* Set armed animation sets (crouch, walk, move, run, idle) or unarmed/citizen animation sets
+#		* Enable weapon safe mode depending on your need
+#
+# Animation sets are just a bunch of animations in GLTF that get applied into AnimationPlayer
+# of HumanModel instance.
+humanoid.use_animation_set(\"armed_crouch\")
+humanoid.use_animation_set(\"armed_walk\")
+humanoid.use_animation_set(\"armed_move\")
+humanoid.use_animation_set(\"armed_run\", [], true)
+humanoid.use_animation_set(\"armed_idle\")
+humanoid.set_weapon_safe_mode(true)
+#	You can do that weapon stuff any time you want btw.
+# At least I think you can... I used it once...
+humanoid.set_weapon(\"AR-100\")
+
+#	6. CONNECT root motion callback, if necessary
+#		- Link \"on_root_offset\" signal to handler function
+humanoid.connect(\"on_root_offset\", self, \"on_root_offset_func\")
+[/gd][/ctr]
+
+[wc]Useful functions[/wc]
+[ctr][gd]
+# Enter the ACT mode and play an ACT animation
+humanoid.set_act_mode(true)
+humanoid.play_act_anim(\"heavy_unit_stun\")
+[/gd][/ctr]
+
+To be fair there's more to be said about this class, but I'm not quite sure what should be told. If you have something to point out - contact me, Dadaskis, I'll edit the docs accordingly. But other than that - it's done.
+"
+info_rus = "Это монстр. Ладно. Класс, который заставляет людей выглядеть как что-то в этой игре. Это всё, что тебе нужно знать об этом модуле. Он используется NPC для отображения человеческой внешности.
+//img:human_model/example0.png
+
+[bc]Как работать с этим в качестве художника[/bc]
+Предположим, ты просто парень, который хочет добавить человеческого персонажа в эту игру.
+//img:character_builder/use23.jpg
+//img:character_builder/use24.jpg
+Итак, чтобы сделать здесь некоторую алхимическую магию, тебе просто нужно следовать следующим шаблонам и выполнить следующие действия:
+	- Убедись, что у тебя есть следующая структура в Blender:
+	[gd]
+	└── human_rig
+		└── character
+	[/gd]
+	Где:
+		- [p]human_rig[/p] - это скелет персонажа. Если тебе нужно получить скелет для своих нужд, он хранится в файле [p]res://.dev_sources/basic/human_rig.blend[/p].
+		Однако ты также можешь просто импортировать модель из Character Builder для этого.
+		- Меш [p]character[/p] должен быть привязан к [p]human_rig[/p].
+
+[bc]Структура персонажа[/bc]
+[ctr][gd]
+└── human_rig # Скелет персонажа, сохраняй его неизменным и переиспользуй уже существующий арматур в Blender
+	└── character # Основной меш персонажа
+	└── character_LOD # LOD-меш персонажа (низкая детализация), который показывается на определённом расстоянии от камеры
+[/gd][/ctr]
+
+Затем ты просто используешь BlenderFastTools для экспорта своей человеческой модели, нажав [p]Export Character[/p] в разделе [p]Human Model Tools[/p]. Прежде чем нажать эту кнопку, убедись, что ты сохранил свой .blend файл с подходящим именем персонажа, которого хочешь экспортировать. Настоятельно рекомендуется хранить все модели человеческих персонажей в [gd]\"res://.dev_sources/human_models/\"[/gd]. Как только ты сохранил свой файл, ты можешь нажать \"Export character\", что автоматически экспортирует соответствующий GLTF файл в [gd]\"res://modules/human_model/assets/models/[CHARACTER_NAME_HERE]\"[/gd].
+//img:character_builder/use26.jpg
+После экспорта персонажа из Blender убедись, что посетил эту папку в Godot, чтобы импортировать модели и настроить материалы, назначив им правильные значения и текстуры во всех слотах.
+//img:character_builder/use27.jpg
+По умолчанию Godot импортирует материалы [gd]SpatialMaterial[/gd] вместо [gd]UserSpatialUbershader[/gd], которые используются для всех материалов в этой игре. Во-первых - тебе нужно заменить [gd]SpatialMaterial[/gd] на [gd]UserSpatialUbershader[/gd]. Ты можешь просто удалить файл, создать новый ресурс (с тем же именем, заметь) и тогда всё будет круто. Однако это может быть слишком медленно, так что я хотел бы показать более лёгкий метод. Сначала скопируй путь к папке...
+//img:character_builder/use28.jpg
+Затем открой меню [c]OtherKit[/c]...
+//img:character_builder/use29.jpg
+Кликни здесь несколько раз...
+//img:character_builder/use30.jpg
+Найди вкладку \"Material Replace\", введи путь к папке, нажми \"Replace\"
+//img:character_builder/use31.jpg
+Хотя это может показаться более сложным, чем делать это по-старинке, я лично нашёл это быстрее, потому что окно \"Create a new resource\" в этом проекте работает медленно, плюс я слишком ленив, чтобы правильно сохранять ресурс, тогда как этот инструмент помогает обнаружить любой [gd]SpatialMaterial[/gd] и заменить их соответственно. Однако вернёмся к конфигурации. Когда ты получил в свои руки новый [gd]UserSpatialUbershader[/gd], тебе нужно включить эффекты... Также убедись, что изменил [c]Diffuse Mode[/c] на [gd]\"Burley\"[/gd] и [c]Specular Mode[/c] на [gd]\"Schlick GGX\"[/gd]...
+//img:character_builder/use32.jpg
+//img:character_builder/use33.jpg
+Для большинства персонажей тебе понадобятся эффекты [c]Albedo[/c], [c]Normal Map[/c], [c]MRS[/c]. Иногда - [c]Emission[/c]. Все эти эффекты будут более чем достаточными, чтобы сделать по-сути приличных персонажей любой сложности. После того как ты закончил включать эффекты, нажми [c]Force Update[/c], чтобы обновить шейдер в этом материале в соответствии с требованиями рендерера.
+//img:character_builder/use34.jpg
+После того как ты обновил материал, ты можешь назначить текстуры в слоты. Имей в виду - изначально твой материал будет полностью чёрным, так что не забудь изменить [c]Albedo Color[/c] на белый. Более того, [c]Normal Map Power[/c] по умолчанию равен [c]0.0[/c], убедись, что изменил значение на [c]1.0[/c], чтобы normal map оказывал полное влияние на освещение этого материала. После всего этого - мистер Shitass0 должен выглядеть свежо и чисто.
+//img:character_builder/use35.jpg
+
+[bc]Структура скриптов[/bc]
+[gd]
+.
+├── autoload
+│   ├── human_model_file_archive.gd
+│   └── ragdoll_list.gd
+├── config
+│   ├── footstep_anim_footmark.gd
+│   ├── footstep_anim_mark.gd
+│   ├── footstep_marks.gd
+│   └── weapon_config.gd
+├── helper
+│   ├── anim_event_caller.gd
+│   └── ragdoll_logic.gd
+├── human_model.gd
+└── test
+    └── walker_control.gd
+[/gd]
+Сердце всего этого модуля - [p]human_model.gd[/p], который является классом [gd]HumanModel[/gd], который *ты должен использовать*. Это конец линии. Закрой страницу документации, это всё, что тебе нужно знать... Шучу, я думаю, мне также нужно написать, как использовать этот класс.
+
+Другие файлы:
+	- [p]autoload/human_model_file_archive.gd[/p] - это синглтон [gd]HumanModelFileArchive[/gd], который управляет некоторыми вещами, связанными с файлами анимаций и материалов.
+	- [p]autoload/ragdoll_list.gd[/p] - это общий список всех рэгдоллов, управляет некоторой логикой там тоже, это класс [gd]RagdollList[/gd].
+	- [p]config/footstep_anim_footmark.gd[/p] - это ресурс-конфиг [gd]HumanModelFootMark[/gd], который имеет только 2 переменные: кадры подъёма и опускания. Этот класс используется в классе [gd]HumanModelFootstepAnimMark[/gd].
+	- [p]config/footstep_anim_mark.gd[/p] - это упомянутый класс [gd]HumanModelFootstepAnimMark[/gd], который содержит 2 массива [gd]HumanModelFootMark[/gd] для обеих ног. Он также привязан к конкретной анимации.
+	- [p]config/footstep_marks.gd[/p] - это просто класс [gd]HumanModelFootstepMarks[/gd], который содержит массив [gd]HumanModelFootstepAnimMark[/gd], который позже загружается [gd]HumanModel[/gd] для отметки событий шагов по ряду причин, таких как правильно синхронизированные звуки шагов и заброшенный \"Foot IK\", которого никто не должен касаться никогда.
+	- [p]config/weapon_config.gd[/p] настраивает оружие, используемое [gd]HumanModel[/gd], это ресурс [gd]HumanWeaponConfig[/gd].
+	- [p]helper/anim_event_caller.gd[/p] - это хак, который я написал с любовью, страстью и чистой ненавистью, просто чтобы получить вызов [gd]animation_event_occured[/gd] в [gd]HumanModel[/gd].
+	- [p]helper/ragdoll_logic.gd[/p] - это скрипт для логики рэгдолла, который обрабатывает заморозку костей, контроль их времени жизни, удаление и т.д.
+	- [p]test/walker_control.gd[/p] мы не говорим об этом. Я никогда не буду говорить об этом. Ты не хочешь знать об этом.
+
+Сцены:
+	- [p]assets/ragdoll/ragdoll_model_v2.tscn[/p] - сцена рэгдолла, которая используется для экземпляров рэгдоллов [gd]HumanModel[/gd].
+	- [p]assets/hitbox/hitbox.tscn[/p] - сцена хитбокса, которая используется для инстанциирования структуры хитбоксов [gd]HumanModel[/gd], имей в виду, что остальная часть инициализации хитбоксов (настройка [gd]KinematicBody[/gd]) может происходить в коде функции инициализации хитбоксов в [gd]HumanModel[/gd]. [gd]NPCHuman[/gd] делает свои собственные регулировки к инициализации хитбоксов, имей это в виду.
+
+[bc]Как ты должен использовать HumanModel в коде?[/bc]
+[ctr][gd]
+#	1. СОЗДАЙ контейнер модели с регулировкой высоты
+#		- Добавь узел Spatial как \"model_tweak\"
+#		- Настрой позицию Y на \"MODEL_TWEAK_HEIGHT\" (в сценарии NPC это \"0.0\" LOL)
+var model_tweak = Spatial.new()
+add_child(model_tweak)
+
+#	2. СОЗДАЙ новый экземпляр \"HumanModel\"
+#		- Установи ссылку \"scene_root\" на LocationBase
+var humanoid = HumanModel.new()
+humanoid.scene_root = LocationBaseScene.get_scene()
+
+#	3. НАСТРОЙ параметры модели
+#		- Добавь \"self\" (\"KinematicBody\" в этом случае) в список исключений (Я не знаю, зачем это нужно, просто сделай это)
+humanoid.exclude.append(self)
+
+#	4. ЗАГРУЗИ модель персонажа
+#		- Выбери имя модели (например, \"merc_light_unit0\")
+#		- Вызови HumanModel.load_character() с именем модели и контейнером
+humanoid.load_character(\"merc_light_unit0\", model_tweak)
+
+#	5. НАСТРОЙ оружие
+#		* Установи вооружённые наборы анимаций (приседание, ходьба, движение, бег, покой) или наборы анимаций без оружия/гражданского
+#		* Включи безопасный режим оружия в зависимости от твоей потребности
+#
+# Наборы анимаций - это просто куча анимаций в GLTF, которые применяются в AnimationPlayer
+# экземпляра HumanModel.
+humanoid.use_animation_set(\"armed_crouch\")
+humanoid.use_animation_set(\"armed_walk\")
+humanoid.use_animation_set(\"armed_move\")
+humanoid.use_animation_set(\"armed_run\", [], true)
+humanoid.use_animation_set(\"armed_idle\")
+humanoid.set_weapon_safe_mode(true)
+#	Ты можешь делать эти штуки с оружием в любое время, кстати.
+# По крайней мере, я думаю, что можешь... Я использовал это всего раз в коде...
+humanoid.set_weapon(\"AR-100\")
+
+#	6. ПОДКЛЮЧИ callback root motion, если необходимо
+#		- Свяжи сигнал \"on_root_offset\" с функцией-обработчиком
+humanoid.connect(\"on_root_offset\", self, \"on_root_offset_func\")
+[/gd][/ctr]
+
+[wc]Полезные функции[/wc]
+[ctr][gd]
+# Войди в режим ACT и проиграй анимацию ACT
+humanoid.set_act_mode(true)
+humanoid.play_act_anim(\"heavy_unit_stun\")
+[/gd][/ctr]
+
+Честно говоря, об этом классе можно сказать больше, но я не совсем уверен, что следует рассказать. Если тебе есть что указать - свяжись со мной, Dadaskis, я отредактирую документацию соответственно. Но кроме этого - всё готово."
+edit_time = 1.76123e+09

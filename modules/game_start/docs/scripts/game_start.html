@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - game_start
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: game_start
+								</h3>
+								<h3>
+									Script: game_start
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Handles the initial game loading sequence including:<br>
+								- Resource pack loading<br>
+								- Mod initialization<br>
+								- System initialization<br>
+								- Loading screen animations<br>
+								- Achievement checks for special conditions<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									game_files_loaded
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								All game files loaded
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									loading_thread_complete
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Single loading thread complete
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_game_load_complete
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Game systems initialized
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									debug_loading
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enable to test file loading in development mode
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									fading
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Is fading?
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									file_list
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List of game files to load
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									file_counter
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current file being loaded
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									text
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to loading text display
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									threads
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loading threads
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									force_stop_loading
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emergency stop flag
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									log_text
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								All the log text added at this point
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									number0_text
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								First number text
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									number1_text
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Second number text
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									top_text
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Text at the top
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_game_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main game initialization function
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_files_thread
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Thread function for loading game files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									loading_thread
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main loading sequence. Used to be a thread, but then it broke so...<br/>
+								it's not so thread-y now, but the name stays
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_game_files
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Entry point for game file loading
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								No description set.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_input
+								</p>
+								<p class="var_desc_name_value">
+									event: InputEvent
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handle input for skipping the intro
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

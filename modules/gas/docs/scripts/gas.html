@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - gas
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: gas
+								</h3>
+								<h3>
+									Script: gas
+								</h3>
+								<h3>
+									Class Name: Gas
+								</h3>
+								<h3>
+									Extends: Spatial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Represents a gas cloud effect in-game that damages entities over time<br>
+								Handles particle effects, damage area, sound, and timing for gas dispersal<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PARTICLES_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/gas/assets/particles/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to particle effects folder
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PARTICLE_SCENE
+								</p>
+								<p class="var_desc_name_value">
+									preload()
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default particle scene for gas effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SOUND_SAMPLE
+								</p>
+								<p class="var_desc_name_value">
+									preload()
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sound sample for gas effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NPC_DAMAGE_MULT
+								</p>
+								<p class="var_desc_name_value">
+									3.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Damage multiplier for NPCs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_DAMAGE_MULT
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Damage multiplier for player
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									radius
+								</p>
+								<p class="var_desc_name_value">
+									8.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Radius of gas effect area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									time_to_disable
+								</p>
+								<p class="var_desc_name_value">
+									10.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Time until gas stops being active
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									time_to_remove
+								</p>
+								<p class="var_desc_name_value">
+									20.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Time until gas is fully removed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disabled_particles
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag if particles are disabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									area
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Area node for damage detection
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									bodies
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of bodies in gas area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									sound_player
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sound player for gas effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								General purpose timer
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									damage
+								</p>
+								<p class="var_desc_name_value">
+									3.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Base damage amount
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									damage_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for damage ticks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									damage_delay
+								</p>
+								<p class="var_desc_name_value">
+									0.3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Delay between damage ticks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_exploded
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag if gas has exploded/activated
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									character_owner
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Character that created this gas
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_particles
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays particle effects for gas
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									damage_area_body_enter
+								</p>
+								<p class="var_desc_name_value">
+									body: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when body enters damage area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									damage_area_body_exit
+								</p>
+								<p class="var_desc_name_value">
+									body: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when body exits damage area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									init_damage_area
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes damage detection area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									init_sound
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes sound effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									explode
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Activates the gas effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_for_disable_timer
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if gas should be disabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_for_remove_timer
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if gas should be removed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									damage_bodies
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Applies damage to bodies in area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_sound
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates sound effect over time
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_physics_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main physics processing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_location_reset
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Clean up on location reset
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initial setup
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_shader_compile_nodes
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Spatial
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Static method to precompile shaders for all particles
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

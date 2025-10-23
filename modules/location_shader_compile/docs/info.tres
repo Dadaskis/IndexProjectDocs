@@ -1,0 +1,117 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Shader compiling tool that has the following algorithm:
+1. Initialization Phase
+	- Disable physics interpolation
+	- Store reference to the scene root (loc_base)
+	- Create temporary camera for compilation:
+	- Position far from origin (10000,10000,10000)
+	- Set near/far planes (0.001, 1000)
+	- Make camera current
+2. Node Collection & Setup
+	- Create container node (meshes_node) for all compilation objects
+	- Position meshes_node in front of camera (8 units forward, 2 units down)
+	- Process and add different element types to meshes_node:
+	- Location meshes (blockout, combined, props)
+	- NPC models with animations
+	- Player weapons and effects
+	- Surface particles and debris
+	- Decals
+	- Bullet trails
+	- Character particles
+3. Shader Compilation Pass
+	- Make all collected nodes visible one by one
+	- For each node:
+		- Update progress display
+		- Set node visible
+		- Play any particle effects
+	- Process explosions separately at fixed position
+4. Geometry Compilation
+	- Disable occlusion culling
+	- Position camera at origin with huge far plane (300000)
+	- Render scene from 6 angles (front, back, left, right, top, bottom)
+	- Re-enable occlusion culling
+5. Post-Processing Effects
+	- Enable all player visual effects temporarily:
+	- Flashbang
+	- Underwater
+	- Night vision
+	- Drug effects
+6. Weapon-Specific Compilation
+	- Compile shaders for all player weapons
+	- Wait for weapon system to complete
+7. Cleanup Phase
+	- Remove temporary camera
+	- Disable all temporary visual effects
+	- Reparent player/camera if needed
+	- Re-enable physics interpolation
+	- Emit completion signal
+
+[gd]LocationShaderCompile[/gd] partially helps to fight shader compilation stutters that are occuring quite often in this game. If you are making something that has new visual behaviors (like instancing of meshes that haven't been rendered before), it is highly advised to add a support of this case into this class.
+
+[c]Usage Example[/c]
+[gd]
+LocationShaderCompile.compile(self)
+yield(LocationShaderCompile, \"complete\")
+# Keep doing your stuff here...
+[/gd]"
+info_rus = "Инструмент компиляции шейдеров со следующим алгоритмом:
+1. Фаза инициализации
+	- Отключить интерполяцию физики
+	- Сохранить ссылку на корень сцены (loc_base)
+	- Создать временную камеру для компиляции:
+	- Позиционировать далеко от начала координат (10000,10000,10000)
+	- Установить ближнюю/дальнюю плоскости (0.001, 1000)
+	- Сделать камеру текущей
+2. Сбор и настройка узлов
+	- Создать узел-контейнер (meshes_node) для всех объектов компиляции
+	- Позиционировать meshes_node перед камерой (8 единиц вперёд, 2 единицы вниз)
+	- Обработать и добавить различные типы элементов в meshes_node:
+	- Локационные меши (блокаут, объединённые, пропсы)
+	- Модели NPC с анимациями
+	- Оружие игрока и эффекты
+	- Поверхностные частицы и обломки
+	- Декали
+	- Следы пуль
+	- Частицы персонажей
+3. Проход компиляции шейдеров
+	- Делать все собранные узлы видимыми по одному
+	- Для каждого узла:
+		- Обновить отображение прогресса
+		- Сделать узел видимым
+		- Воспроизвести любые эффекты частиц
+	- Обработать взрывы отдельно в фиксированной позиции
+4. Компиляция геометрии
+	- Отключить отсечение окклюзии
+	- Позиционировать камеру в начале координат с огромной дальней плоскостью (300000)
+	- Рендерить сцену с 6 углов (спереди, сзади, слева, справа, сверху, снизу)
+	- Включить отсечение окклюзии обратно
+5. Пост-обработочные эффекты
+	- Включить все визуальные эффекты игрока временно:
+	- Флешбэнг
+	- Подводный
+	- Ночное видение
+	- Эффекты наркотиков
+6. Специфичная компиляция оружия
+	- Скомпилировать шейдеры для всего оружия игрока
+	- Ждать завершения системы оружия
+7. Фаза очистки
+	- Удалить временную камеру
+	- Отключить все временные визуальные эффекты
+	- Перепривязать игрока/камеру при необходимости
+	- Включить интерполяцию физики обратно
+	- Испустить сигнал завершения
+
+[gd]LocationShaderCompile[/gd] частично помогает бороться с задержками компиляции шейдеров, которые occurring quite часто в этой игре. Если ты создаёшь что-то, что имеет новое визуальное поведение (например, инстансирование мешей, которые не были отрендерены before), крайне рекомендуется добавить поддержку этого случая в этот класс.
+
+[c]Пример использования[/c]
+[gd]
+LocationShaderCompile.compile(self)
+yield(LocationShaderCompile, \"complete\")
+# Продолжай делать свои дела здесь...
+[/gd]"
+edit_time = 1.76123e+09

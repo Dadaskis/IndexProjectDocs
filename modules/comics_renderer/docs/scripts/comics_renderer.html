@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - comics_renderer
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: comics_renderer
+								</h3>
+								<h3>
+									Script: comics_renderer
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Main controller for comics rendering system<br>
+								<br>
+								Handles scene management, object selection, camera control, and rendering pipeline for:<br>
+								- Loading/saving comic scenes<br>
+								- Managing environment and character layers<br>
+								- Controlling render cameras and lighting<br>
+								- Processing multi-pass rendering (environment, characters, masks)<br>
+								- Exporting final comic panels<br>
+								<br>
+								Provides UI integration through ComicsRendererControl<br>
+								Works with specialized nodes (characters, props, lights)<br>
+								Manages viewports for separate rendering passes<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									location_changed
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when location changes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									render_env_complete
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when environment render completes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									render_char_complete
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when character render completes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									render_mask_complete
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when mask render completes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									HIT_BODY
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/helpers/comics_renderer_hit_body.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded hit body script for selection and interaction handling
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									CHARACTER_NODE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/nodes/character.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded character node script for comic character instances
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									POINT_LIGHT_NODE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/nodes/point_light.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded point light node script for omnidirectional light sources
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SPOT_LIGHT_NODE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/nodes/spot_light.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded spot light node script for directional light sources
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PROP_NODE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/nodes/prop.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded prop node script for interactive scene props
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LOC_OBJ_NODE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/comics_renderer/src/nodes/loc_obj.gd")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded location object node script for environment objects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAVE_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/comics_renderer/assets/.save_files/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path where scene save files are stored
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									EXPORT_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/comics_renderer/assets/.export_files/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path where rendered images are exported
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NODE_SCRIPTS
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/comics_renderer/src/nodes/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Directory containing all node scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_env
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current rendering environment settings
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_env_vars
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List of environment variables that get saved/loaded
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									camera
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to active camera
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									selected
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of currently selected objects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_previewing_camera
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag indicating if previewing render camera
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of current location scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									save_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of current save file
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									data
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary for storing scene data during save/load
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_FOV
+								</p>
+								<p class="var_desc_name_value">
+									90.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Field of view for render camera
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_obj
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to current location object
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_env_data
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Data for render environment settings
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									all_objects
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of all objects in scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									env_objects
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of environment objects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									char_objects
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of character objects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									char_meshes
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of character meshes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									white_mat
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								White material used for mask rendering
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									black_mat
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Black material used for mask rendering
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									env_tex
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Texture from environment render pass
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									char_tex
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Texture from character render pass
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									mask_tex
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Texture from mask render pass
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									prop_selected
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Currently selected prop for editing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_obj_meshes
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of location object meshes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when the node enters the scene tree<br/>
+								Initializes core renderer components and connections
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									select_node
+								</p>
+								<p class="var_desc_name_value">
+									unselect_previous = true
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles node selection via mouse click<br/>
+								unselect_previous: Whether to deselect other objects first (default true)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									select_node_process
+								</p>
+								<p class="var_desc_name_value">
+									body: any, unselect_previous = true
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes a collider hit during selection<br/>
+								body: The collider that was hit<br/>
+								unselect_previous: Whether to deselect other objects first
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									select_hit_body
+								</p>
+								<p class="var_desc_name_value">
+									hit_body: any, unselect_previous = true
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles selection state for a hit body<br/>
+								hit_body: The hit body to select/unselect<br/>
+								unselect_previous: Whether to deselect other objects first
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									unselect_hit_body
+								</p>
+								<p class="var_desc_name_value">
+									hit_body: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Unselects a hit body and removes it from selection controls<br/>
+								hit_body: The hit body to unselect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									init_properties
+								</p>
+								<p class="var_desc_name_value">
+									author: any
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes properties panel for an authoring node<br/>
+								author: The node requesting property initialization<br/>
+								Returns: True if initialization was successful
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_label
+								</p>
+								<p class="var_desc_name_value">
+									text: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a label to the properties panel<br/>
+								text: The label text to display
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_button
+								</p>
+								<p class="var_desc_name_value">
+									text: String, call_func: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a button to the properties panel<br/>
+								text: The button text<br/>
+								call_func: Name of function to call when pressed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_number
+								</p>
+								<p class="var_desc_name_value">
+									text: String, call_func: String, default_value: = 0.0
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a number input to the properties panel<br/>
+								text: Label for the input<br/>
+								call_func: Function to call when value changes<br/>
+								default_value: Default numeric value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_color
+								</p>
+								<p class="var_desc_name_value">
+									text: String, call_func: String, default_value: = Color.white
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a color picker to the properties panel<br/>
+								text: Label for the color picker<br/>
+								call_func: Function to call when color changes<br/>
+								default_value: Default color value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_bool
+								</p>
+								<p class="var_desc_name_value">
+									text: String, call_func: String, default_value: = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a checkbox to the properties panel<br/>
+								text: Label for the checkbox<br/>
+								call_func: Function to call when toggled<br/>
+								default_value: Default checked state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									property_add_dropdown
+								</p>
+								<p class="var_desc_name_value">
+									text: String, call_func: String, values: Array, default_value: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a dropdown selector to the properties panel<br/>
+								text: Label for the dropdown<br/>
+								call_func: Function to call when selection changes<br/>
+								values: Array of available options<br/>
+								default_value: Default selected option
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_node
+								</p>
+								<p class="var_desc_name_value">
+									node_type: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new node of specified type in the scene<br/>
+								node_type: The class/script of node to create
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_character
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new character node in the scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_point_light
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new point light node in the scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_spot_light
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new spot light node in the scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_prop
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new prop node in the scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called every frame to handle scene management and input processing<br/>
+								delta: Time elapsed since the last frame (in seconds)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_input
+								</p>
+								<p class="var_desc_name_value">
+									event: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles all input events<br/>
+								event: The InputEvent to process
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									init_nodes
+								</p>
+								<p class="var_desc_name_value">
+									loc_base: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes and processes nodes in the location for comics rendering<br/>
+								loc_base: The root node of the location scene to process
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_new_env
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a new default environment with white ambient light and no fog<br/>
+								Used when initializing a new scene or resetting environment settings
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_new_env_black
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates a black environment with no ambient light<br/>
+								Used for specific rendering passes like masks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_env_vars
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Applies the current environment settings to all cameras and viewports
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_location
+								</p>
+								<p class="var_desc_name_value">
+									loc_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads and initializes a new location scene<br/>
+								loc_name: String name of the location scene to load (without extension)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									replace_render_camera
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Copies the current camera's transform to the render camera<br/>
+								Used to match the editor view with the final render view
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									preview_render_camera
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Toggles between previewing the render camera and the editor camera<br/>
+								When enabled, switches to the render camera view
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_render_camera_FOV
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the field of view for the render camera<br/>
+								value: The new FOV value in degrees
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_save_data
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, var_list: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a node's data to the save dictionary<br/>
+								node: The node to save data from<br/>
+								var_list: Array of property names to save
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_log_text
+								</p>
+								<p class="var_desc_name_value">
+									source_color: Color, source_text: String, text: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a log message to the UI<br/>
+								source_color: Color for the source identifier<br/>
+								source_text: Text identifying the source<br/>
+								text: The log message content
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_standalone_path
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the path for saving scenes in standalone builds<br/>
+								Returns: Path to the comics_scenes directory
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_standalone_export_path
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the path for exported images in standalone builds<br/>
+								Returns: Path to the comics_export_img directory
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_PCK_scene
+								</p>
+								<p class="var_desc_name_value">
+									file_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if a scene file exists in the PCK (packed) resources<br/>
+								file_name: Name of the scene file (without extension)<br/>
+								Returns: True if exists in PCK, False otherwise
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_scene_save_path
+								</p>
+								<p class="var_desc_name_value">
+									file_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the full save path for a scene file<br/>
+								file_name: Name of the scene file (without extension)<br/>
+								Returns: Appropriate save path based on build type
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_scene_load_path
+								</p>
+								<p class="var_desc_name_value">
+									file_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns the appropriate load path for a scene file based on whether running in standalone mode<br/>
+								file_name: Name of the save file (without extension)<br/>
+								Returns: Full path to the scene resource file
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_file
+								</p>
+								<p class="var_desc_name_value">
+									file_name = "test"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves the current scene state to a file<br/>
+								file_name: Name to use for the save file (defaults to "test")
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_data
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, data: Dictionary
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Assigns saved data back to a node's properties<br/>
+								node: The node to restore data to<br/>
+								data: Dictionary containing the saved properties
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_last_saved_file
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the most recently modified save file<br/>
+								Returns: Name of the last saved file (without extension)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_scene_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Retrieves a list of all available saved scenes<br/>
+								Returns: Array of scene names (without extensions)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_file
+								</p>
+								<p class="var_desc_name_value">
+									file_name = "test"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads a scene from file<br/>
+								file_name: Name of the scene file to load (without extension)<br/>
+								If empty, loads the most recently modified scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_file
+								</p>
+								<p class="var_desc_name_value">
+									file_name: = "test"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Deletes a saved scene file from the filesystem<br/>
+								file_name: Name of the file to remove (without extension)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_mask
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders the mask pass for comic-style rendering<br/>
+								Creates a black-and-white mask separating characters from environment
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_env
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders the environment pass (background elements)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_char
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders the character layer to a separate viewport texture<br/>
+								Isolates character objects and renders them with proper camera settings
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main rendering pipeline that coordinates all render passes<br/>
+								Handles environment, character and mask rendering sequentially
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_render
+								</p>
+								<p class="var_desc_name_value">
+									postfix = ""
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Exports the final rendered image to file<br/>
+								postfix: Optional suffix to add to filename
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_prop_model
+								</p>
+								<p class="var_desc_name_value">
+									prop: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Opens prop selection UI for the specified prop<br/>
+								prop: The prop node to be modified
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_prop_change
+								</p>
+								<p class="var_desc_name_value">
+									prop_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles prop model change from UI selection<br/>
+								prop_name: Name of the new prop model to load
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

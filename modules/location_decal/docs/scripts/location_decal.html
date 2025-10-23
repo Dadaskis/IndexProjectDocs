@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_decal
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: location_decal
+								</h3>
+								<h3>
+									Script: location_decal
+								</h3>
+								<h3>
+									Class Name: LocationDecal
+								</h3>
+								<h3>
+									Extends: MeshInstance
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								LocationDecal class for creating and managing decals in a game environment.<br>
+								Decals are used for adding details like bullet holes, graffiti, or other surface details.<br>
+								This decal is a projected one (just a cube projecting a texture), however,<br>
+								depending on settings, it might be replaced with a simple non-projected plane.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NODE_MODEL_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/location_decal/assets/node_model/node.glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the node model used for the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									TEXTURES_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/location_decal/assets/textures/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing decal textures
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									USED_FILE_TYPE
+								</p>
+								<p class="var_desc_name_value">
+									".tga"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								File type used for textures
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									ALBEDO_POSTFIX
+								</p>
+								<p class="var_desc_name_value">
+									"_D"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Postfix for albedo texture files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MISSING_TEXTURE_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the texture used when a specified texture is missing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the texture used when a specified texture is missing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BORDER_TEXTURE_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the border texture used for the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the border texture used for the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MESH_PREFAB
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prefab for the standard decal mesh (projected decal)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prefab for the standard decal mesh (projected decal)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MESH_LOW_PREFAB
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prefab for the low-quality decal mesh (simple plane)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prefab for the low-quality decal mesh (simple plane)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									REMOVE_AFTER_TIME_SCRIPT
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Script for removing the decal after a specified time
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Script for removing the decal after a specified time
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									special_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Special name for the decal, if needed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									size_x
+								</p>
+								<p class="var_desc_name_value">
+									0.3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Size of the decal along the X axis
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									size_y
+								</p>
+								<p class="var_desc_name_value">
+									0.3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Size of the decal along the Y axis
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									depth
+								</p>
+								<p class="var_desc_name_value">
+									0.015
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Depth of the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									distance
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Distance for raycasting to position the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									texture_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of the texture to use for the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									tint_color
+								</p>
+								<p class="var_desc_name_value">
+									Color.white
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Tint color for the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_priority
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Render priority for the decal material
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update_material
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Whether to update the decal material
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									decal_prefab
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the decal prefab instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									decal_mesh
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the decal mesh instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_size_x
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when size_x is set, updates the decal scale<br/>
+								value: The new value for size_x
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_size_y
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when size_y is set, updates the decal scale<br/>
+								value: The new value for size_y
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_depth
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when depth is set, updates the decal scale<br/>
+								value: The new value for depth
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_distance
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when distance is set, updates the decal scale<br/>
+								value: The new value for distance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_texture_name
+								</p>
+								<p class="var_desc_name_value">
+									value: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when texture_name is set, updates the decal texture<br/>
+								value: The new value for texture_name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_update_material
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when update_material is set, updates the decal material<br/>
+								value: The new value for update_material
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_render_priority
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when render_priority is set, updates the decal material<br/>
+								value: The new value for render_priority
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									verify_mesh
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Verifies and updates the mesh if necessary
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									rescale_decal
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Rescales the decal based on the current size and depth properties
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_decal_material
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates the decal material with the current texture and properties
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									raycast_check
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Performs a raycast check to position the decal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									verify_decal
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Verifies and updates the decal instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Process function called every frame<br/>
+								delta: Time since the last frame
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Ready function called when the node is added to the scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_fast
+								</p>
+								<p class="var_desc_name_value">
+									texture: Texture
+								</p>
+								<p class="func_return_text">
+									Spatial
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Static function to create a fast decal with a given texture<br/>
+								texture: The texture to use for the decal<br/>
+								Returns: The created decal instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_class
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns the class name of this object<br/>
+								This is useful for identifying the type of the object at runtime
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

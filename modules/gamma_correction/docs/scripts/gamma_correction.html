@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - gamma_correction
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: gamma_correction
+								</h3>
+								<h3>
+									Script: gamma_correction
+								</h3>
+								<h3>
+									Class Name: GammaCorrection
+								</h3>
+								<h3>
+									Extends: CanvasLayer
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Autoload CanvasLayer that manages post-processing effects<br>
+								Handles real-time adjustment of gamma, brightness, contrast, saturation and sharpness<br>
+								Applies effects through a shader material and project settings<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									shader_mat
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the shader material used for color correction
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									gamma_value_changed
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts gamma value<br/>
+								value: New gamma value (1.0 = neutral)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									gamma_brightness_changed
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts brightness<br/>
+								value: New brightness value (1.0 = neutral)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									gamma_contrast_changed
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts contrast<br/>
+								value: New contrast value (1.0 = neutral)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									gamma_saturation_changed
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts saturation<br/>
+								value: New saturation value (1.0 = neutral)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									gamma_sharpen_changed
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts sharpen intensity<br/>
+								value: New sharpen value (0.0 = off)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_callback_fast
+								</p>
+								<p class="var_desc_name_value">
+									var_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Helper to quickly add value change callbacks<br/>
+								var_name: Base name of the value to watch (e.g. "gamma_value")
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Basic initialization of values and callbacks
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

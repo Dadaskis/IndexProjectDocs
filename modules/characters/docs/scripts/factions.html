@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - factions
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: characters
+								</h3>
+								<h3>
+									Script: factions
+								</h3>
+								<h3>
+									Class Name: Factions
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Globally accessible class of character faction relationships.<br>
+								Factions are used in this game to specify relationships between groups of NPCs<br>
+								instead of making them check relationships individually.<br>
+								If you want to make totally unique character with unique relationships,<br>
+								you'll have to make a unique faction for that.<br>
+								Otherwise, like in most cases of this game, you'll just have to specify relationships<br>
+								between limited list of "factions".<br>
+								Like "player", "minc", "scavenger", "police", "citizen", etc.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_enum">
+									ENUM
+								</p>
+								<p class="var_desc_name_text">
+									RelationshipType
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Types of relationships that can be used in character's AI.<br/>
+								At this moment, only "Neutral" and "Enemy" are used in calculations.<br/>
+								Other values are preserved for potential future use.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									relationships
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								A dictionary that stores all faction's relationships.<br/>
+								relationships
+								[faction0]
+								[faction1]
+								== relationship_type<br/>
+								Dictionary in dictionaries.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reset
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Resets relationships dictionary.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									verify_dict
+								</p>
+								<p class="var_desc_name_value">
+									faction0: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Verifies dictionary for
+								[faction0]
+								faction.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_faction_relationship
+								</p>
+								<p class="var_desc_name_value">
+									faction0: String, faction1: String, relationship_type: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets faction relationship between
+								[faction0]
+								and
+								[faction1]
+								to<br/>
+								[relationship_type]
+								RelationshipType enum.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_faction_relationship
+								</p>
+								<p class="var_desc_name_value">
+									faction0: String, faction1: String
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns RelationshipType that represents relationship between<br/>
+								[faction0]
+								and
+								[faction1]
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_faction_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns a list of all currently available factions.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_checkpoint_save
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saving current state of relationships
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_checkpoint_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loading the saved state of relationships
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Connects signals related to saving/loading
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

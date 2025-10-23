@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - achievement_data
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: achievements
+								</h3>
+								<h3>
+									Script: achievement_data
+								</h3>
+								<h3>
+									Class Name: AchievementData
+								</h3>
+								<h3>
+									Extends: Resource
+								</h3>
+								<h3>
+									RESOURCE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								A config resource for individual achievements.<br>
+								All achievements should be stored in: "res://modules/achievements/assets/data/"<br>
+								<br>
+								Each achievement requires:<br>
+								1. A .tres resource file defining its properties<br>
+								2. An optional icon in: "res://modules/achievements/assets/icons/"<br>
+								(using the same filename as the achievement resource)<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									ICONS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/achievements/assets/icons/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to achievement icons directory
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLACEHOLDER_ICON_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default icon used when achievement-specific icon isn't found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default icon used when achievement-specific icon isn't found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									display_name
+								</p>
+								<p class="var_desc_name_value">
+									"Achievement"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								[REQUIRED]
+								Display name shown in achievement menus
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									description
+								</p>
+								<p class="var_desc_name_value">
+									"Here is the description."
+								</p>
+							</div>
+							<p class="var_desc_text">
+								[REQUIRED]
+								Description shown in tooltips/hover effects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									count
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Target count required for unlocking (minimum: 1)<br/>
+								Note: Only used for incremental achievements (values >
+								1)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_secret
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								If true, achievement will be hidden until unlocked
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_count
+								</p>
+								<p class="var_desc_name_value">
+									value: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Validate count value when set via inspector
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_name
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns the achievement's unique identifier (filename without extension)<br/>
+								Note: This must match the filename of the .tres resource
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_icon
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Texture
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads achievement icon from filesystem<br/>
+								Returns placeholder if specific icon not found
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

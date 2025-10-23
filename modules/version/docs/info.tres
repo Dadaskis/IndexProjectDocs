@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Have you seen [p]res://version.tres[/p]? That one thing where you can write any damn thing as a version and then it'll show up at the corner of screen? Well, yeah. That's it. The entire purpose of this module. It also does that fancy \"Version HUD\" above everything else. It's great, right? There's no helpful info for you here."
+info_rus = "Видел [p]res://version.tres[/p]? Ту штуку, куда можно написать любую чёртову вещь в качестве версии, и потом она будет показываться в углу экрана? Ну, да. Это всё. Вся цель этого модуля. Он ещё делает тот прикольный \"Version HUD\" поверх всего остального. Здорово, правда? Здесь нет для тебя полезной информации."
+edit_time = 1.76123e+09

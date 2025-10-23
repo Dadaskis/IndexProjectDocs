@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_blockout
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: locations_tools
+								</h3>
+								<h3>
+									Script: location_blockout
+								</h3>
+								<h3>
+									Class Name: LocationBlockout
+								</h3>
+								<h3>
+									Extends: Spatial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								A LocationBlockout node.<br>
+								It is designed to manage blockout models in any game location, providing<br>
+								functionality to load, update, and process blockout models and their<br>
+								associated meshes, collisions, and other properties.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BLOCKOUTS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/blockouts/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing blockout models.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MODEL_FORMAT_USED
+								</p>
+								<p class="var_desc_name_value">
+									".glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Format used for blockout models.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MISSING_MATERIAL_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the missing material resource.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the missing material resource.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									ERROR_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the error model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the error model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MATERIAL_CONFIG_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing material configurations.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing material configurations.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BAKED_AO_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing baked ambient occlusion textures.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing baked ambient occlusion textures.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									COLLISION_DATA_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://locations/collision_data/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the directory containing collision data.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_CLIP_MAT_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"__PLAYER_CLIP"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name used for player clip materials.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									blockout_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of the blockout model to load.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to trigger an update of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update_only_new
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to update only new parts of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update_only_old
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to update only old parts of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									reset
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to trigger a reset of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									reset_accept
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to accept the reset of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									force_collisions
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to force the update of collision data.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									lightmap_texel_size
+								</p>
+								<p class="var_desc_name_value">
+									0.5
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Size of the lightmap texel.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									unwrap_uv2
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to trigger the unwrapping of UV2 coordinates.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update_nav_group
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Boolean to trigger the update of navigation groups.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									part_blacklist
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List of parts to exclude from processing.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_phys
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the LocationPhysics instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									convex_parts
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary to store convex parts of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									LOD_samples
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary to store LOD samples of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									meshes_dict
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary to store meshes of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_enable
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag to enable ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_update
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag to trigger an update of ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_brightness
+								</p>
+								<p class="var_desc_name_value">
+									0.356
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Brightness of the ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_contrast
+								</p>
+								<p class="var_desc_name_value">
+									2.191
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Contrast of the ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_mix_albedo
+								</p>
+								<p class="var_desc_name_value">
+									0.856
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Mixing factor of the ambient occlusion with albedo.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_specular_dec
+								</p>
+								<p class="var_desc_name_value">
+									0.718
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Specular decrease factor of the ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									AO_power
+								</p>
+								<p class="var_desc_name_value">
+									0.722
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Power of the ambient occlusion.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									meshes
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								List to store meshes of the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_collision_path
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the collision path for the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_physics_data
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves the physics data for the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_toggle_placeholders
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the toggle placeholders flag and updates their visibility.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_update
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO update flag and updates ambient occlusion textures.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_enable
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO enable flag and updates ambient occlusion settings.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_AO_params
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates the ambient occlusion parameters for all meshes.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_brightness
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO brightness and updates ambient occlusion parameters.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_contrast
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO contrast and updates ambient occlusion parameters.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_mix_albedo
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO mix albedo and updates ambient occlusion parameters.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_specular_dec
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO specular decrease and updates ambient occlusion parameters.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_AO_power
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the AO power and updates ambient occlusion parameters.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_reset
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the reset flag and removes all children if reset is accepted.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_occluder
+								</p>
+								<p class="var_desc_name_value">
+									node: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes an occluder node and creates an Occluder instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_room
+								</p>
+								<p class="var_desc_name_value">
+									node: any, keep_mesh = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes a room node and creates a Room instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_portal
+								</p>
+								<p class="var_desc_name_value">
+									node: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes a portal node and creates a Portal instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_convex_collision
+								</p>
+								<p class="var_desc_name_value">
+									mesh_instance: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes a convex collision mesh instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_LOD_sample
+								</p>
+								<p class="var_desc_name_value">
+									mesh_instance: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes a LOD sample mesh instance.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_mesh_instance
+								</p>
+								<p class="var_desc_name_value">
+									child: any, has_collision: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks a mesh instance and processes it based on its name and type.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_child
+								</p>
+								<p class="var_desc_name_value">
+									node: any, has_collision: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursively checks a child node and processes its mesh instances.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_blockout
+								</p>
+								<p class="var_desc_name_value">
+									has_collision = false, update_child = true
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates the blockout model and its associated meshes.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_blockout_name
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the blockout name and updates the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_update
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the update flag and updates the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_update_only_new
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the update only new flag and updates the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_update_only_old
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the update only old flag and updates the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									unwrap_uv2_recursion
+								</p>
+								<p class="var_desc_name_value">
+									node: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursively unwraps UV2 coordinates for the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_unwrap_uv2
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the unwrap UV2 flag and recursively unwraps UV2 coordinates.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_nav_group_recursion
+								</p>
+								<p class="var_desc_name_value">
+									node: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursively updates navigation groups for the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_update_nav_group
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets the update navigation group flag and recursively updates navigation groups.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_convex_collisions
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes convex collisions for the blockout model.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Called when the node is ready.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_class
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns the class name of the blockout.
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

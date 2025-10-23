@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "I seriously want to write a book about this module, but I'm tired. I wish I could write something really satirical, a huge wall of text that may or may not have any sense. But I won't. I keep it short, like a real, responsible businessman... [gd]Utilities[/gd] is just a huge pile of fucking garbage. Random functions doing random things. They have no home, they don't belong anywhere, they have no culture, *they suck*. But they can do helpful labor for you just for $0,15 :)
+
+If you *really* want to find more information, this page won't tell you anything, just consider to look up the [gd]Utilities[/gd] script document instead.
+
+Thank you for your attention. Have fun."
+info_rus = "Мне серьёзно хочется написать книгу об этом модуле, но я устал. Хотел бы я написать что-то действительно сатирическое, огромную стену текста, которая может иметь смысл, а может и нет. Но не буду. Я буду краток, как настоящий ответственный бизнесмен... [gd]Utilities[/gd] - это просто огромная куча ебучего мусора. Случайные функции, делающие случайные вещи. У них нет дома, они нигде не принадлежат, у них нет культуры, *они сосут*. Но они могут выполнять полезную работу для тебя всего за $0,15 :)
+
+Если ты *действительно* хочешь найти больше информации, эта страница тебе ничего не расскажет, просто загляни в документацию скрипта [gd]Utilities[/gd] вместо этого.
+
+Спасибо за внимание. Веселись."
+edit_time = 1.76123e+09

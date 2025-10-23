@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - character_parts_list
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: character_builder
+								</h3>
+								<h3>
+									Script: character_parts_list
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: Control
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Parts List UI Component<br>
+								<br>
+								A reusable UI component that displays a scrollable list of character parts<br>
+								with select/remove functionality. Manages dynamic list creation and cleanup.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									removed_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when a part is removed from the list<br/>
+								part_name: The name of the part that was removed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									selected_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when a part is selected from the list<br/>
+								part_name: The name of the part that was selected
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Hides the list and prefab template on ready
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles part removal logic and emits signal<br/>
+								part_name: Name of the part to remove
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									select_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles part selection logic and emits signal<br/>
+								part_name: Name of the part to select
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									clear_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Clears all items from the list except the prefab template
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_list
+								</p>
+								<p class="var_desc_name_value">
+									parts: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates the list with new parts data<br/>
+								parts: Array of part names to display<br/>
+								Note: Heavy operation when list is large due to child management
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_new
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Clears the list when creating a new character
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

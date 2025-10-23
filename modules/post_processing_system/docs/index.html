@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - post_processing_system
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: post_processing_system
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Post-Processing System module that simplifies work with various post-processing effects making it easy to extend the set of currently existing effects.<br>
+							<br>
+							<code class="gdscript">
+								PostProcessingSystem
+							</code>
+							itself is a glorified manager of an array of post-processing effects that are all extending <code class="gdscript">
+								PostProcessingBase
+							</code>
+							while questioning their existence in this damn codebase. Keep in mind that base-class for effects extends <code class="gdscript">
+								Resource
+							</code>
+							therefore it can be saved somewhere to illegally transport a <code class="gdscript">
+								DrugRGBPostProcessing
+							</code>
+							resource file through your country's borderline. I'm sorry if it sounds too corny at this point, but wouldn't you become a drug smuggler this way? It sounds romantic in a way. Just transporting a flash drive with this resource in there. Configured for hallucinatory pleasure. I almost fell down with my face on my own keyboard when I thought what I'd write here. What are chances of anybody finding out what I write here anyways? And why I wanna spend my last money to do what I just said about the flash drive?<br>
+							<br>
+							If you want to make your own precious post-processing effect, think twice. If you ignored these instructions and just skipped to the next line - you are the man.<br>
+							<br>
+							<code class="gdscript">
+								"res://modules/post_processing_system/assets/effects/"
+							</code>
+							contains all effects, that are stored in the following pattern:<br>
+							<code class="gdscript">
+								<br>
+								.<br>
+								└── effects<br>
+								&emsp;└── EFFECT_NAME_HERE<br>
+								&emsp;&emsp;└── effect.tres<br>
+							</code>
+							<br>
+							Everything else doesn't really matter. You just store anything else as you wish. Please, be advised: <code class="gdscript">
+								"effect.tres"
+							</code>
+							must be your own custom-written post-processing class that extends <code class="gdscript">
+								PostProcessingBase
+							</code>
+							.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							Example
+						</h4>
+						<p>
+							<br>
+							I'll take one of the existing effects so you'd examine its corpse and learn from it.<br>
+							<br>
+							<code class="red-marking">
+								Store your custom effects at res://modules/post_processing_system/src/effects please I beg you.
+							</code>
+							<br>
+							<code class="gdscript">
+								"res://modules/post_processing_system/src/effects/drug_rgb.gd"
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Handles RGB split and blur effects for drug/impairment visuals<br>
+								# Creates psychedelic color separation and blur effects with configurable intensity<br>
+								<br>
+								extends PostProcessingBase<br>
+								<br>
+								class_name DrugRGBPostProcessing<br>
+								<br>
+								# Texture defining the RGB color separation pattern<br>
+								export(CurveTexture) var curve_tex<br>
+								<br>
+								# Noise texture for effect distortion<br>
+								export(NoiseTexture) var noise_tex<br>
+								<br>
+								# Shader material implementing the visual effect<br>
+								var shader_mat: ShaderMaterial<br>
+								<br>
+								# Whether effect is currently active (use setter to toggle)<br>
+								var active = false setget set_active<br>
+								<br>
+								# Current effect intensity (0-1)<br>
+								var intensity = 0.0<br>
+								<br>
+								# Current blur strength (0-1)<br>
+								var blur_force = 0.0<br>
+								<br>
+								# Initializes the effect system<br>
+								func custom_initialize():<br>
+								&emsp;# Load appropriate shader based on quality setting<br>
+								&emsp;var shader_name = "drug_rgb"<br>
+								&emsp;if Values.get_value("post_processing_quality", "high") == "low":<br>
+								&emsp;&emsp;shader_name = "drug_rgb_low"<br>
+								&emsp;<br>
+								&emsp;# Create and configure shader material<br>
+								&emsp;shader_mat = load_shader(shader_name)<br>
+								&emsp;shader_mat.set_shader_param("curve_tex", curve_tex)<br>
+								&emsp;shader_mat.set_shader_param("noise0_tex", noise_tex)<br>
+								<br>
+								# Updates effect parameters each frame<br>
+								func custom_update(delta: float):<br>
+								&emsp;# Handle intensity transitions<br>
+								&emsp;if active:<br>
+								&emsp;&emsp;# Smooth fade in for main effect<br>
+								&emsp;&emsp;intensity = lerp(intensity, 1.0, 1.0 * delta)<br>
+								&emsp;&emsp;# Slower fade in for blur (creates staggered effect)<br>
+								&emsp;&emsp;blur_force = lerp(blur_force, 1.0, 0.1 * delta)<br>
+								&emsp;else:<br>
+								&emsp;&emsp;# Smooth fade out for main effect<br>
+								&emsp;&emsp;intensity = lerp(intensity, 0.0, 0.3 * delta)<br>
+								&emsp;&emsp;# Faster fade out for blur<br>
+								&emsp;&emsp;blur_force = lerp(blur_force, 0.0, 0.2 * delta)<br>
+								&emsp;<br>
+								&emsp;# Update shader parameters<br>
+								&emsp;shader_mat.set_shader_param("intensity", intensity)<br>
+								&emsp;shader_mat.set_shader_param("blur_force", blur_force)<br>
+								&emsp;<br>
+								&emsp;# Enable/disable effect based on intensity threshold<br>
+								&emsp;if intensity <= 0.005 and is_enabled:<br>
+								&emsp;&emsp;disable()<br>
+								&emsp;elif intensity >
+								= 0.005 and not is_enabled:<br>
+								&emsp;&emsp;enable()<br>
+								<br>
+								# Setter for active property - controls whether effect is enabled<br>
+								func set_active(value: bool):<br>
+								&emsp;active = value<br>
+							</code>
+							<br>
+							<br>
+							<img src="../../../_guide/.images/post_processing_system/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/post_processing_system/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Basically you write your class like <code class="gdscript">
+										DrugRGBPostProcessing
+									</code>
+									that does nothing but the utmost basic control of shader parameters. Shader... Just a shader doing the shit you desire. Resource just serves as a way to configure all the shit. The shit's done. You see the patterns, right? Good. And if you don't, get the hell out of here and go smug that flash drive with a <code class="gdscript">
+										DrugRGBPostProcessing
+									</code>
+									resource on it and make the borderline officers question your sanity.<br>
+									<br>
+									Have fun.
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/post_processing_system.html">
+										PostProcessingSystem
+									</a>
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/drug_rgb.html">
+										DrugRGBPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/hitman.html">
+										HitmanPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/hcss_outline.html">
+										HCSSOutlinePostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/drug_effect.html">
+										DrugEffectPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/suppression.html">
+										SuppressionPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/special_ability_overlay.html">
+										SpecialAbilityOverlayPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/SSAO.html">
+										SSAOPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/corner_color.html">
+										CornerColorPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/night_vision.html">
+										NightVisionPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/black_debug.html">
+										BlackDebugPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/underwater.html">
+										UnderwaterPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/armor_helmet_break.html">
+										ArmorHelmetBreakPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/motion_blur.html">
+										MotionBlurPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/flashbang.html">
+										FlashbangPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/low_hp.html">
+										LowHPPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/flashbang_blur.html">
+										FlashbangBlurPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/armor_helmet.html">
+										ArmorHelmetPostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/vignette.html">
+										VignettePostProcessing
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/post_processing_base.html">
+										PostProcessingBase
+									</a>
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../_guide/code_blocks.js">
+					</script>
+				</body>
+			</html>

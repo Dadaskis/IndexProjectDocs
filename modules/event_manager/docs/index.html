@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - event_manager
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: event_manager
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							General purpose event manager that is inspired by the one made for Garry's Mod. It was kinda useful at the beginning of project but i've stopped using it that much because locational events covered a lot of cases. Either way, it is still handy so it is going to stay in this project for long.<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Add event listener<br>
+								EventManager.add_event_listener(<br>
+								&emsp;"character_killed",<br>
+								&emsp;funcref(self, "on_character_kill")<br>
+								)<br>
+								<br>
+								# Run event<br>
+								EventManager.run_event("character_killed",
+								[victim, killer]
+								)<br>
+								<br>
+								# Remove event listener<br>
+								EventManager.remove_event_listener(<br>
+								&emsp;"character_killed",<br>
+								&emsp;funcref(self, "on_character_kill")<br>
+								)<br>
+							</code>
+							<br>
+							<br>
+							By using a console command called <code>
+								event_manager_list
+							</code>
+							, you can get a list of all available events:<br>
+							<code>
+								<br>
+								$ event_manager_list<br>
+								EventManager available events list:<br>
+								player_spawn<br>
+								exit_locked_triggered<br>
+								exit_unlocked_triggered<br>
+								character_killed<br>
+								character_bullet_damage<br>
+								prop_picked<br>
+								player_ammo_pickup<br>
+								on_free_orphan_nodes<br>
+								character_shooting<br>
+								...<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/event_manager.html">
+								EventManager
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

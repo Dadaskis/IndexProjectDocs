@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - graphics_control
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: graphics_control
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Модуль Graphics Control управляет определёнными графическими настройками этого игрового проекта.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Изменить сглаживание<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"disabled"<br>
+								#&emsp;&emsp;"x2"<br>
+								#&emsp;&emsp;"x4"<br>
+								#&emsp;&emsp;"x8"<br>
+								# Был и "x16", но его убрали, потому что НАХУЙ ЭТО<br>
+								Values.set_value("anti_aliasing_quality", "disabled")<br>
+								<br>
+								# Включить или отключить FXAA<br>
+								Values.set_value("fxaa_enabled", false)<br>
+								<br>
+								# Установить разрешение теневой карты солнца<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"very_low"<br>
+								#&emsp;&emsp;"low"<br>
+								#&emsp;&emsp;"medium"<br>
+								#&emsp;&emsp;"high"<br>
+								#&emsp;&emsp;"ultra"<br>
+								Values.set_value("sun_shadow_resolution", "high")<br>
+								<br>
+								# Качество фильтрации теневой карты<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"low"<br>
+								#&emsp;&emsp;"medium"<br>
+								#&emsp;&emsp;"high"<br>
+								Values.set_value("shadow_filter_quality", "high")<br>
+								<br>
+								# Общая настройка качества теневой карты<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"low"<br>
+								#&emsp;&emsp;"medium"<br>
+								#&emsp;&emsp;"high"<br>
+								#&emsp;&emsp;"ultra"<br>
+								Values.set_value("light_shadow_quality", "ultra")<br>
+								<br>
+								# Качество карты глубины (HDR или нет)<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"low"<br>
+								#&emsp;&emsp;"high"<br>
+								Values.set_value("depth_quality", "high")<br>
+								<br>
+								# Вертикальная синхронизация<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"disabled"<br>
+								#&emsp;&emsp;"enabled"<br>
+								Values.set_value("vsync_enabled", "disabled")<br>
+								<br>
+								# Препасс глубины<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"disabled"<br>
+								#&emsp;&emsp;"enabled"<br>
+								Values.set_value("depth_prepass", "enabled")<br>
+								<br>
+								# Качество освещения, влияет на количество источников света у одного объекта<br>
+								# Возможные значения:<br>
+								#&emsp;&emsp;"low"<br>
+								#&emsp;&emsp;"high"<br>
+								Values.set_value("lighting_quality", "high")<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/graphics_control.html">
+								GraphicsControl
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

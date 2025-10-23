@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "This one was made entirely by TNP so... Not gonna be too edgy in this one... Look, you probably played a lot of games that have a \"texture quality\" setting, right? A pretty pointless one if you ask me. Either way, it does exist and helps to fight videomemory usage. Yeah. Wouldn't that be great if Godot already had it? Yeah. But it doesn't. And so what? WE ARE GOING BALLS DEEP BABY WE ARE PROCESSING THIS SHIT OURSELVES HELL FUCKING YEAH.
+
+Despite the name of the module, \"texture changing\" operation here is just about resizing all textures to a different size. That's all you need to know.
+
+[c]Usage example[/c]
+[gd]
+TextureChangerServer.add_location_mesh(mesh)
+TextureChangerServer.add_character_mesh(mesh)
+TextureChangerServer.add_viewmodel_mesh(mesh)
+# By adding a mesh you register all the needed textures fast
+
+# Update all textures like a real dude
+TextureChangerServer.update_all_textures()
+[/gd]
+"
+info_rus = "Этот модуль был полностью сделан TNP, так что... Не буду здесь слишком едким... Смотри, ты наверняка играл во множество игр, где есть настройка \"качества текстур\", верно? Довольно бессмысленная, если спросишь меня. Так или иначе, она существует и помогает бороться с использованием видеопамяти. Ага. Разве не было бы здорово, если бы в Godot это уже было? Ага. Но нет. И что? МЫ ПРОДОЛЖАЕМ УГЛУБЛЯТЬСЯ, ДЕТКА, МЫ ОБРАБАТЫВАЕМ ЭТО ДЕРЬМО САМИ, ЧЁРТ ВОЗЬМИ, ДА.
+
+Несмотря на название модуля, операция \"смены текстур\" здесь заключается просто в изменении размера всех текстур. Это всё, что тебе нужно знать.
+
+[c]Пример использования[/c]
+[gd]
+TextureChangerServer.add_location_mesh(mesh)
+TextureChangerServer.add_character_mesh(mesh)
+TextureChangerServer.add_viewmodel_mesh(mesh)
+# Добавляя меш, ты быстро регистрируешь все нужные текстуры
+
+# Обнови все текстуры как настоящий чувак
+TextureChangerServer.update_all_textures()
+[/gd]"
+edit_time = 1.76123e+09

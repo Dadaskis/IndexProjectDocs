@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - checkpoint_data
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: checkpoints
+								</h3>
+								<h3>
+									Script: checkpoint_data
+								</h3>
+								<h3>
+									Class Name: CheckpointData
+								</h3>
+								<h3>
+									Extends: Resource
+								</h3>
+								<h3>
+									RESOURCE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Resource class for storing and managing game checkpoint/save data<br>
+								<br>
+								Encapsulates all data needed for game saves/checkpoints.<br>
+								It handles both the metadata (location, difficulty, etc.) and the actual game state data.<br>
+								<br>
+								Key Features:<br>
+								- Stores both game state (in the data Dictionary) and visual/session information<br>
+								- Manages screenshot images with fallback to default image when needed<br>
+								- Provides easy texture access through get_image_texture()<br>
+								- Serializable as a Resource for easy saving/loading<br>
+								<br>
+								Note: This is typically used in conjunction with the Checkpoints autoload<br>
+								which manages the actual save/load operations and maintains the save list.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									AUTO_IMAGE_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/checkpoints/assets/auto_image/auto_image.png"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the default image used when no screenshot is available
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									display_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Human-readable name of the location (for display in UI)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									difficulty_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of the difficulty setting when this checkpoint was saved
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									image_path
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to the screenshot image for this checkpoint (empty uses default)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Internal identifier of the location where checkpoint was saved
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									preloaded_locs
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of location names that were preloaded when saving
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									data
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary containing all serialized game state data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_image_texture
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Texture
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns a Texture for this checkpoint's image<br/>
+								- Uses screenshot if available and valid<br/>
+								- Falls back to default image if:<br/>
+								* No image_path specified<br/>
+								* Image file is missing<br/>
+								* Texture creation fails<br/>
+								Returns: Always returns a valid Texture object
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

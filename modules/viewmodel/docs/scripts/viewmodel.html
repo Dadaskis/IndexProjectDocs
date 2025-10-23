@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - viewmodel
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: viewmodel
+								</h3>
+								<h3>
+									Script: viewmodel
+								</h3>
+								<h3>
+									Class Name: Viewmodel
+								</h3>
+								<h3>
+									Extends: Object
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Main viewmodel controller that manages first-person weapon rendering and behavior<br>
+								Handles weapon models, animations, procedural effects, and integrates with:<br>
+								- Animation system<br>
+								- Particle effects<br>
+								- Sound effects<br>
+								- Procedural animations<br>
+								Provides interface for gameplay systems to control weapon presentation<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MODELS_FOLDER_PATH
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing weapon models
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing weapon models
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MODEL_FILE
+								</p>
+								<p class="var_desc_name_value">
+									"model.glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Filename for weapon model files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									CONFIG
+								</p>
+								<p class="var_desc_name_value">
+									"config.tres"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Filename for weapon configuration files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_WEAPON_ANIMATION_KEY_METHODS_PATH \
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to animation key methods script
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to animation key methods script
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SOUND_KILLER_SCRIPT_PATH \
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to sound killer script
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to sound killer script
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									ANIM_SETS_SCRIPTS_PATH
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing animation set scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing animation set scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SOUND_KILLER_SCRIPT
+								</p>
+								<p class="var_desc_name_value">
+									preload(SOUND_KILLER_SCRIPT_PATH)
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded sound killer script instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									casing_kill_time
+								</p>
+								<p class="var_desc_name_value">
+									3.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Time in seconds before casings are removed after ejection
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									main_node
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to main camera node
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									player
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to player kinematic body
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									config
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Weapon configuration resource
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									anim_player
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Animation player for weapon animations
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									framerate
+								</p>
+								<p class="var_desc_name_value">
+									60.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Animation framerate (typically 60 FPS)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									animation_sounds
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of loaded animation sounds
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									playing_sounds
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of currently playing sounds
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									animation_event_callbacks
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of animation event callbacks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									animation_set
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current animation set instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									animation_set_type
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Type name of current animation set
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									max_ammo
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum ammo capacity
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_ammo
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current ammo in magazine
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_ammo_left
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current reserve ammo
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									initialized
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization flag
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									proc_anim
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Procedural animation controller instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									centered_control
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Centered control node for procedural animations
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									model_instance
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Model instance handler
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									enabled
+								</p>
+								<p class="var_desc_name_value">
+									true
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enabled state flag
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									center_angle_offset
+								</p>
+								<p class="var_desc_name_value">
+									Vector3.ZERO
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Offset angles for centered control
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									center_angle_offset_alt
+								</p>
+								<p class="var_desc_name_value">
+									Vector3.ZERO
+								</p>
+							</div>
+							<p class="var_desc_text">
+								No description set.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									center_position_offset
+								</p>
+								<p class="var_desc_name_value">
+									Vector3.ZERO
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Offset positions for centered control
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									center_position_offset_alt
+								</p>
+								<p class="var_desc_name_value">
+									Vector3.ZERO
+								</p>
+							</div>
+							<p class="var_desc_text">
+								No description set.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									camera_transform_manager
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Camera transform manager reference
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									left_hand_disable
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Left hand animation disable flag
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									prev_anim_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Previously played animation name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									model_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of current weapon model
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_move_anim_speed
+								</p>
+								<p class="var_desc_name_value">
+									value: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets movement animation speed multiplier<br/>
+								value: Speed multiplier value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_visible
+								</p>
+								<p class="var_desc_name_value">
+									value: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets viewmodel visibility<br/>
+								value: True to show, false to hide
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_visible
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets current visibility state<br/>
+								Returns: True if visible, false if hidden
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_enabled
+								</p>
+								<p class="var_desc_name_value">
+									value: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets enabled state<br/>
+								value: True to enable, false to disable
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_enabled
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets current enabled state<br/>
+								Returns: True if enabled, false if disabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_current_ammo
+								</p>
+								<p class="var_desc_name_value">
+									value: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets current ammo count<br/>
+								value: New ammo count
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_current_ammo
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets current ammo count<br/>
+								Returns: Current ammo in magazine
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_current_ammo_left
+								</p>
+								<p class="var_desc_name_value">
+									value: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets reserve ammo count<br/>
+								value: New reserve ammo count
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_current_ammo_left
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets reserve ammo count<br/>
+								Returns: Current reserve ammo
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_max_ammo
+								</p>
+								<p class="var_desc_name_value">
+									value: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets maximum ammo capacity<br/>
+								value: New maximum ammo value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_max_ammo
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets maximum ammo capacity<br/>
+								Returns: Maximum ammo value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_particle_fire_pos_pool
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays particle effect from fire position pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_particle_casings_drop_pool
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays particle effect from casing drop position pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									launch_casing
+								</p>
+								<p class="var_desc_name_value">
+									force_mult = 1.0, torque_mult = 1.0
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Launches casing with physics forces<br/>
+								force_mult: Force multiplier (default 1.0)<br/>
+								torque_mult: Torque multiplier (default 1.0)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_fire_light_color
+								</p>
+								<p class="var_desc_name_value">
+									color: Color
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets muzzle flash light color<br/>
+								color: New light color
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									casings_sleep
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Puts all casings to sleep (disables physics)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_casings_pool
+								</p>
+								<p class="var_desc_name_value">
+									casing_scene: any, amount: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes pool of casing physics bodies<br/>
+								casing_scene: Casing model scene<br/>
+								amount: Number of casings to pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_particle_fire_pos_pool
+								</p>
+								<p class="var_desc_name_value">
+									particle: any, amount: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes pool of muzzle effect particles<br/>
+								particle: Particle scene<br/>
+								amount: Number of particles to pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_particle_casings_drop_pool
+								</p>
+								<p class="var_desc_name_value">
+									particle: any, amount: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes pool of casing ejection particles<br/>
+								particle: Particle scene<br/>
+								amount: Number of particles to pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									change_hands
+								</p>
+								<p class="var_desc_name_value">
+									hands_name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Changes hand model<br/>
+								hands_name: Name of hand model to use
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_particles_scene
+								</p>
+								<p class="var_desc_name_value">
+									particles_nameString: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets particle effect scene by name<br/>
+								particles_name: Name of particle effect<br/>
+								Returns: Loaded particle scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_casing_scene
+								</p>
+								<p class="var_desc_name_value">
+									casing_nameString: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets casing model scene by name<br/>
+								casing_name: Name of casing model<br/>
+								Returns: Loaded casing scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_in_sight
+								</p>
+								<p class="var_desc_name_value">
+									in_sight: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets aiming down sights state<br/>
+								in_sight: True if aiming, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_in_sight
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets aiming down sights state<br/>
+								Returns: True if aiming, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									move_forward
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Triggers forward movement animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									move_back
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Triggers backward movement animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									move_right
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Triggers right movement animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									move_left
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Triggers left movement animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_running
+								</p>
+								<p class="var_desc_name_value">
+									is_running: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets running state<br/>
+								is_running: True if running, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_running
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets running state<br/>
+								Returns: True if running, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_in_air
+								</p>
+								<p class="var_desc_name_value">
+									value: bool, is_jump: = false
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets in-air state<br/>
+								value: True if in air, false if grounded<br/>
+								is_jump: True if due to jumping (default false)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_in_air
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets in-air state<br/>
+								Returns: True if in air, false if grounded
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_slow_walk
+								</p>
+								<p class="var_desc_name_value">
+									value: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets slow walk state<br/>
+								value: True if slow walking, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_slow_walk
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets slow walk state<br/>
+								Returns: True if slow walking, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_crouching
+								</p>
+								<p class="var_desc_name_value">
+									value: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets crouching state<br/>
+								value: True if crouching, false if standing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_crouching
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets crouching state<br/>
+								Returns: True if crouching, false if standing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_mouse_velocity
+								</p>
+								<p class="var_desc_name_value">
+									value: Vector2
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds mouse movement input for procedural sway<br/>
+								value: Mouse movement vector
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_weapon_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets list of available weapon models<br/>
+								Returns: Array of weapon model names
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_sound
+								</p>
+								<p class="var_desc_name_value">
+									sound: any, name = "SOUND"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays sound effect with auto-removal<br/>
+								sound: Audio stream to play<br/>
+								name: Identifier for sound (default "SOUND")
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									stop_sounds_with_name
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Stops all sounds with matching name<br/>
+								name: Sound identifier to stop
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									stop_all_sounds
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Stops all playing sounds
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_animation
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays animation by name<br/>
+								name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_playing_animations
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if any animation is playing<br/>
+								Returns: True if playing, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									has_animation
+								</p>
+								<p class="var_desc_name_value">
+									anim_name: String
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if animation exists<br/>
+								anim_name: Animation name to check<br/>
+								Returns: True if exists, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_animation_forced
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Forces animation to play (stops current first)<br/>
+								name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									stop_animation
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Stops current animation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									register_config_anim_events
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Registers animation events from config
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_config
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads weapon configuration<br/>
+								name: Weapon model name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_animation_sounds
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads animation sounds for weapon<br/>
+								name: Weapon model name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_animation_methods_caller
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes animation event system
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_animation_set
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes animation set system
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_animation_set_controller
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets animation set controller<br/>
+								Returns: Animation set instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_weapon
+								</p>
+								<p class="var_desc_name_value">
+									name: String, main_node: any, player: KinematicBody, camera_transform_manager: SpatialAddTransformManager
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads and initializes weapon model<br/>
+								name: Weapon model name<br/>
+								main_node: Camera node to attach to<br/>
+								player: Player kinematic body<br/>
+								camera_transform_manager: Camera transform manager
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_weapon
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes current weapon model
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									animation_event_occured
+								</p>
+								<p class="var_desc_name_value">
+									name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles animation events<br/>
+								name: Event name that occurred
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_animation_event
+								</p>
+								<p class="var_desc_name_value">
+									animation_name: String, event_name: String, frame: int
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds animation event track<br/>
+								animation_name: Animation to add event to<br/>
+								event_name: Identifier for event<br/>
+								frame: Frame number to trigger on
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_animation_event_callback
+								</p>
+								<p class="var_desc_name_value">
+									event_name: String, callback: FuncRef
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds callback to animation event<br/>
+								event_name: Event name to bind to<br/>
+								callback: Function reference to call
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_weapon_mesh_instance
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									MeshInstance
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets weapon mesh instance<br/>
+								Returns: Weapon MeshInstance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_sight_animation
+								</p>
+								<p class="var_desc_name_value">
+									anim_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays sight animation<br/>
+								anim_name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_sight_animation_forced
+								</p>
+								<p class="var_desc_name_value">
+									anim_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Forces sight animation to play<br/>
+								anim_name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_sight_anim_blend
+								</p>
+								<p class="var_desc_name_value">
+									value: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets sight animation blend weight<br/>
+								value: Blend weight (0.0 to 1.0)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_sight_anim_blend
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									float
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets sight animation blend weight<br/>
+								Returns: Current blend weight
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_sight_animation_playing
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if sight animation is playing<br/>
+								Returns: True if playing, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_left_animation
+								</p>
+								<p class="var_desc_name_value">
+									anim_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays left hand animation<br/>
+								anim_name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_left_animation_forced
+								</p>
+								<p class="var_desc_name_value">
+									anim_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Forces left hand animation to play<br/>
+								anim_name: Animation name to play
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_left_animation_playing
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if left hand animation is playing<br/>
+								Returns: True if playing, false if not
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									blend_left_hand_anim
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates left hand animation blending<br/>
+								delta: Frame time delta
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_left_hand_animation_player
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									AnimationPlayer
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets left hand animation player<br/>
+								Returns: Left hand AnimationPlayer
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_left_hand_disable
+								</p>
+								<p class="var_desc_name_value">
+									value: bool, immediately: = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets left hand disabled state<br/>
+								value: True to disable, false to enable<br/>
+								immediately: True to skip blending (default false)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_left_hand_disable
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets left hand disabled state<br/>
+								Returns: True if disabled, false if enabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									unparent_casings
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes casings from scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_animation_set_type
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets animation set type<br/>
+								Returns: Animation set type name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_proc_anim_sight_blend
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									float
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets procedural animation sight blend<br/>
+								Returns: Current sight blend value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main update function (call in _process)<br/>
+								delta: Frame time delta
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physics update function (call in _physics_process)<br/>
+								delta: Physics frame time delta
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

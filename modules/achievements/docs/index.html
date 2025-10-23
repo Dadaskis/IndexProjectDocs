@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - achievements
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: achievements
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 8:00 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/achievements/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								Achievements module. Provides basic toolset to work with achievements in game.<br>
+								<code class="gdscript">
+									"./assets/data"
+								</code>
+								contain all achievement resources.<br>
+								Each resource refers to certain <code class="gdscript">
+									"./assets/icons"
+								</code>
+								.PNG image to get an icon: <br>
+								<code>
+									test_name.tres ->
+									test_name.png
+								</code>
+								<br>
+								<br>
+								To lock an achievement: <code class="gdscript">
+									Achievements.lock("test_name")
+								</code>
+								<br>
+								To unlock an achievement: <code class="gdscript">
+									Achievements.unlock("test_name")
+								</code>
+								<br>
+								To add "count" into an achievement: <code class="gdscript">
+									Achievements.add_count("test_name", 1)
+								</code>
+								<br>
+								<br>
+								All of the achievement values are stored inside global Values class so they are saved as soon as Values saved. It is using 2 dictionaries: <code>
+									achievements_unlocked
+								</code>
+								and <code>
+									achievements_counts
+								</code>
+								<br>
+								<code>
+									achievements_unlocked
+								</code>
+								- each key is an achievement's codename, and each value is a boolean in which case "true" means unlocked.<br>
+								<code>
+									achievements_counts
+								</code>
+								- each key is an achievement's codename, and each value is a number that refers to achievement's current amount property.<br>
+							</p>
+							<br>
+							<h2>
+								How to make an achievement?
+							</h2>
+							<br>
+							<p>
+								<br>
+								0. Create a new <code class="gdscript">
+									AchievementData
+								</code>
+								resource at <code class="gdscript">
+									"res://modules/achievements/assets/data/"
+								</code>
+								. You can give it any name you wish, it has just to be a unique name that'll serve as a codename of sorts. Using the name of this file you can manipulate the achievement with lock/unlock/add_count/etc methods.<br>
+								<img src="../../../_guide/.images/achievements/create0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<img src="../../../_guide/.images/achievements/create1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										1. Make an icon for an achievement and export it as .PNG at <code class="gdscript">
+											"res://modules/achievements/assets/icons/"
+										</code>
+										. File name of the exported image has to be assigned to the achievement's codename.<br>
+										<img src="../../../_guide/.images/achievements/create2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											2. Use in game. The simplest way: <code>
+												st_unlock_achievement
+											</code>
+											ST that can unlock an achievement on certain location event. However, you can add one of the <code>
+												Achievements
+											</code>
+											methods in code of anything you do.<br>
+											<img src="../../../_guide/.images/achievements/create3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												<br>
+												There's still a way needed to make "Achievement Listeners" that would allow to program complex achievement behaviors that might require complex steps to accomplish. However, this is all for the future yet.<br>
+											</p>
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											assets, docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/achievement_unlocked_display.html">
+												AchievementUnlockedDisplay
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/achievements.html">
+												Achievements
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/achievement_data.html">
+												AchievementData
+											</a>
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

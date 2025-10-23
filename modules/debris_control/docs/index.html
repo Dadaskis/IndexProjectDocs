@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - debris_control
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: debris_control
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Contains only <code class="gdscript">
+								DebrisControl
+							</code>
+							singleton that is being a global queue with extra steps. It was made for optimization of debris, it removes excessive amount of those. If overall amount of debris goes beyond the limit, the oldest pieces will be removed first.<br>
+							<br>
+							<code>
+								Usage Example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								if not DebrisControl.can_create_debris():&emsp;# Stops initialization if there's too much debris<br>
+								&emsp;return<br>
+								DebrisControl.add_debris(self)&emsp;&emsp;&emsp;&emsp;&emsp;# Adds debris<br>
+							</code>
+							<br>
+							<br>
+							All debris nodes need to have a <code class="gdscript">
+								remove_debris
+							</code>
+							method that will be called upon their "removal". <code class="gdscript">
+								DebrisControl
+							</code>
+							itself is NOT removing any nodes because they might need special treatment (aka removing from a scene tree instead of <code class="gdscript">
+								queue_free
+							</code>
+							ing them).
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/debris_control.html">
+								DebrisControl
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

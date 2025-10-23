@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - explosion
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: explosion
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Explosion node that creates various kinds of explosions, like generic explosions, electric explosions and bio-explosions.<br>
+							<br>
+							<img src="../../../_guide/.images/explosion/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/explosion/example1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									<code>
+										Usage Example
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										var loc_base = LocationBaseScene.get_scene()<br>
+										var explosion = Explosion.new()<br>
+										explosion.global_transform.origin = blast_position<br>
+										explosion.radius = 8.0<br>
+										explosion.damage = 75.0<br>
+										explosion.character_owner = player<br>
+										loc_base.add_child(explosion)<br>
+										explosion.explode("generic")<br>
+									</code>
+									<br>
+									<br>
+								</p>
+								<h2>
+									Technical Side
+								</h2>
+								<p>
+									<br>
+									<code class="gdscript">
+										<br>
+										├── explosion_areas.gd<br>
+										&emsp;# Pooling system to reuse Area nodes used for detection of<br>
+										&emsp;# damaged objects by explosions<br>
+										&emsp;<br>
+										├── explosion.gd<br>
+										&emsp;# Explosion node that is used outside this module to create<br>
+										&emsp;# explosions<br>
+										&emsp;<br>
+										├── explosion_particle_preloader.gd<br>
+										&emsp;# Particle pooling system to reuse particles as well, mainly<br>
+										&emsp;# it exists because of shader compilation issue that could only<br>
+										&emsp;# be resolved by creating a limited set of these particles<br>
+										&emsp;# to show them all at once on the screen<br>
+										&emsp;<br>
+										└── explosion_props.gd<br>
+										&emsp;# A list of all props/nodes that could potentially be affected<br>
+										&emsp;# by an explosion. This list have been used by earlier<br>
+										&emsp;# implementation of the system and is now unused.<br>
+										&emsp;# I don't even know why i keep this one here, but it is<br>
+										&emsp;# what it is<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Creating your own damaging area
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										func damage_area_body_enter(body):<br>
+										&emsp;# Damage logic here<br>
+										&emsp;# ...<br>
+										<br>
+										func create_damage_area():<br>
+										&emsp;# Create the damage area<br>
+										&emsp;var area: = ExplosionAreas.create_area(global_position, 10.0) as Area<br>
+										&emsp;area.connect("body_entered", self, "damage_area_body_enter")<br>
+										&emsp;<br>
+										&emsp;# Wait a few frames to catch collisions<br>
+										&emsp;for frame in range(10):<br>
+										&emsp;&emsp;yield(VisualServer, "frame_post_draw")<br>
+										&emsp;<br>
+										&emsp;# Clean up the area<br>
+										&emsp;area.disconnect("body_entered", self, "damage_area_body_enter")<br>
+										&emsp;ExplosionAreas.remove_area(area)<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Creating your own particle
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										ExplosionParticlePreloader.play_particle(<br>
+										&emsp;"generic", <br>
+										&emsp;global_position, <br>
+										&emsp;scale.x<br>
+										)<br>
+									</code>
+									<br>
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/explosion_particle_preloader.html">
+										ExplosionParticlePreloader
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/explosion_areas.html">
+										ExplosionAreas
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/explosion_props.html">
+										ExplosionProps
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/explosion.html">
+										Explosion
+									</a>
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../_guide/code_blocks.js">
+					</script>
+				</body>
+			</html>

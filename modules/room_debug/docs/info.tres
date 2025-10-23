@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Guess what it does? Name sounds nice, you know, \"Room Debug\". Debugging a room. Why would you debug a room? It's not like I'm your mom to mock you for the mess that you may or may not have. And rooms in Purger don't really have any special properties. Alright, I'm not gonna fool around with your mind now. This one is simple, really, [gd]RoomDebug[/gd] is supposed to... debug rooms... Okay, it's getting tricky. There's \"Portal-based Occlusion Culling\" in this amazing engine, right? It is shaping the space into \"rooms\" that are \"seeing\" each-other through \"portals\". So, these two fuckers can ultimately turns your life into hell especially when you have to analyze why occlusion culling suddenly broke in one of locations. That's the ultimate reason why this class exists.
+
+//img:room_debug/example0.png
+
+[c]Usage Example[/c]
+[gd]
+RoomDebug.debug_enable()
+RoomDebug.debug_disable()
+RoomDebug.debug_toggle()
+[/gd]
+
+It's just a fancy ass singleton."
+info_rus = "Угадаешь, что он делает? Название звучит красиво, знаешь ли, \"Room Debug\". Отладка комнаты. С чего бы ты вдруг стал отлаживать комнату? Не то чтобы я твоя мама, чтобы издеваться над беспорядком, который у тебя может быть или нет. А комнаты в Purger не имеют каких-то особых свойств. Ладно, не буду больше играть с твоим сознанием. На самом деле всё просто - [gd]RoomDebug[/gd] должен... отлаживать комнаты... Окей, становится сложнее. В этом замечательном движке есть \"Portal-based Occlusion Culling\", верно? Он разделяет пространство на \"комнаты\", которые \"видят\" друг друга через \"порталы\". Так вот, эти два ублюдка могут превратить твою жизнь в ад, особенно когда приходится анализировать, почему occlusion culling внезапно сломался в одной из локаций. Это и есть главная причина существования этого класса.
+
+//img:room_debug/example0.png
+
+[c]Пример использования[/c]
+[gd]
+RoomDebug.debug_enable()
+RoomDebug.debug_disable()
+RoomDebug.debug_toggle()
+[/gd]
+
+Это просто прикольный синглтон."
+edit_time = 1.76123e+09

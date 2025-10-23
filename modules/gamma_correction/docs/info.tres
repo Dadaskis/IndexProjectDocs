@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Gamma correction module that is applied no matter where you at, except UI.
+
+[c]Usage example[/c]
+[gd]
+# Simply sets parameters of this class to default values
+# But they can be changed to your liking
+Values.set_value(\"gamma_value\", 1.0)
+Values.set_value(\"gamma_brightness\", 1.0)
+Values.set_value(\"gamma_contrast\", 1.0)
+Values.set_value(\"gamma_saturation\", 1.0)
+Values.set_value(\"gamma_sharpen\", 0.0)
+[/gd]"
+info_rus = "Модуль гамма-коррекции, который применяется независимо от того, где вы находитесь, кроме UI.
+
+[c]Пример использования[/c]
+[gd]
+# Просто устанавливает параметры этого класса в значения по умолчанию
+# Но их можно изменить по вашему вкусу
+Values.set_value(\"gamma_value\", 1.0)
+Values.set_value(\"gamma_brightness\", 1.0)
+Values.set_value(\"gamma_contrast\", 1.0)
+Values.set_value(\"gamma_saturation\", 1.0)
+Values.set_value(\"gamma_sharpen\", 0.0)
+[/gd]"
+edit_time = 1.76113e+09

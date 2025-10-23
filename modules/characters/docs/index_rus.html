@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - characters
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: characters
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Модуль, созданный для работы с общими данными персонажей. Речь не о визуальном представлении персонажей, а в основном об их данных, которые используются для ИИ-расчётов и интерактивности. Этот модуль состоит из нескольких частей: класс HitBody <code class="gdscript">
+								Character
+							</code>
+							, класс HitBody <code class="gdscript">
+								CharacterDamagable
+							</code>
+							, синглтон <code class="gdscript">
+								CharacterList
+							</code>
+							, синглтон <code class="gdscript">
+								Factions
+							</code>
+							и ресурс <code class="gdscript">
+								FactionsInitData
+							</code>
+							.<br>
+							<br>
+							Учитывая тот факт, что персонажи практически являются просто данными HitBody, *что угодно* может быть персонажем. Проп, NPC или просто случайная группа узлов с какой-то физикой сверху. <code class="gdscript">
+								Character
+							</code>
+							просто содержит общие данные, такие как здоровье, "точка рейкаста", специальные/отображаемые имена, ссылка на узел, статус жив/мёртв и т.д. Для получения дополнительной информации о свойствах ты можешь проверить документацию <code class="gdscript">
+								Character
+							</code>
+							.<br>
+							<br>
+							Все объекты <code class="gdscript">
+								Character
+							</code>
+							добавляются в <code class="gdscript">
+								CharacterList
+							</code>
+							, и этот список используется в расчётах всех других персонажей, поэтому помни о необходимости поддерживать этот список в актуальном состоянии. Хотя сам <code class="gdscript">
+								Character
+							</code>
+							добавляет свой собственный объект в этот список, в зависимости от твоего случая использования может возникнуть необходимость перепроверить это и добавить его вручную. Если твоего персонажа не будет в этом списке, есть риск, что он не будет корректно включён в общую логику этой игры.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Создание нового объекта персонажа<br>
+								var character = Character.new()<br>
+								# Добавление этого объекта персонажа как свойства HitBody<br>
+								HitBodyTool.add_node_property(self, Character.OBJECT_NAME, character)<br>
+								# Установка имени фракции "funny_dudes"<br>
+								character.faction = "funny_dudes"<br>
+								# Установка максимального здоровья на 100<br>
+								# Имей в виду, если попытаешься установить здоровье больше 100<br>
+								# оно будет ограничено максимальным здоровьем<br>
+								character.max_health = 100<br>
+								# Установка здоровья на 100<br>
+								character.health = 100<br>
+								# Ссылка на узел, который "управляет" этим персонажем, в данном случае - это родитель этого узла<br>
+								character.control_node = get_parent()<br>
+								# Этот персонаж является Не-Игровым Персонажом?<br>
+								# Предположим, что это один из них, хотя это свойство в основном говорит нам, что<br>
+								# этот персонаж является производным от класса NonPlayableCharacter<br>
+								character.is_npc = true<br>
+								# Точка рейкаста по сути важна для проверок видимости<br>
+								# Если твой персонаж двигается - устанавливай её на каждом кадре<br>
+								# Имей в виду: Точка рейкаста - ВСЕГДА глобальная позиция<br>
+								character.set_raycast_point(global_transform.origin)<br>
+								# Добавление персонажа в список персонажей<br>
+								CharacterList.add_character(character)<br>
+								<br>
+								# Удаление персонажа из списка персонажей<br>
+								CharacterList.remove_character(character)<br>
+								<br>
+								# Проверяет, является ли другой персонаж дружественным<br>
+								var is_friendly = Factions.get_faction_relationship(other_character.faction, faction) != \<br>
+								&emsp;Factions.RelationshipType.ENEMY<br>
+								<br>
+								# Список персонажей, который ты можешь использовать для какой-нибудь крутой логики<br>
+								var list = CharacterList.get_character_list()<br>
+							</code>
+							<br>
+							<br>
+							<code>
+								Простая проверка видимости
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# ---        Простой алгоритм проверки видимости       ---<br>
+								# Сниппет, взятый из кода турели.<br>
+								# Он обнаруживает самого близкого ВИДИМОГО персонажа для стрельбы.<br>
+								#<br>
+								# Найденный ближайший персонаж<br>
+								var target: Character<br>
+								# Список всех персонажей<br>
+								var character_list = CharacterList.get_character_list()<br>
+								# Минимальная дистанция, равна большому числу, чтобы МАШИНА работала<br>
+								var min_distance = 100000000<br>
+								# Проверяем всех персонажей<br>
+								for value in character_list:<br>
+								&emsp;var character: = value as Character<br>
+								&emsp;<br>
+								&emsp;# Базовые проверки валидности<br>
+								&emsp;if not is_instance_valid(character):<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if not character.is_alive():<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if character == self.character:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if character.faction == faction:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;<br>
+								&emsp;# Пропускаем всех, кто не враг<br>
+								&emsp;if Factions.get_faction_relationship(character.faction, faction) != \<br>
+								&emsp;&emsp;&emsp;Factions.RelationshipType.ENEMY:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;<br>
+								&emsp;# Получаем точку рейкаста другого персонажа<br>
+								&emsp;# Обычно относится к голове существа, имеющей эту чёртову точку<br>
+								&emsp;var point = character.get_raycast_point()<br>
+								&emsp;# Получаем позицию для стрельбы<br>
+								&emsp;var pos = shoot_pos.global_transform.origin<br>
+								&emsp;# Получаем направление к персонажу, в которого стреляем<br>
+								&emsp;var dir = (point - pos).normalized()<br>
+								&emsp;<br>
+								&emsp;# Делаем простой рейкаст от позиции стрельбы к точке рейкаста<br>
+								&emsp;# другого персонажа<br>
+								&emsp;var ray = get_world().direct_space_state.intersect_ray(<br>
+								&emsp;&emsp;pos + (dir * 2.0),<br>
+								&emsp;&emsp;point - dir<br>
+								&emsp;)<br>
+								&emsp;<br>
+								&emsp;# Если есть столкновение, значит есть препятствие, следовательно<br>
+								&emsp;# другой персонаж НЕ виден<br>
+								&emsp;if ray:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;# Иначе, если нет препятствий, значит другой персонаж виден.<br>
+								&emsp;<br>
+								&emsp;# Проверяем дистанцию до точки рейкаста персонажа<br>
+								&emsp;var dist = \<br>
+								&emsp;&emsp;gun_prop.global_transform.origin.distance_to(point)<br>
+								&emsp;if dist < min_distance and dist < max_distance:<br>
+								&emsp;&emsp;# Если персонаж самый близкий: Запоминаем дистанцию<br>
+								&emsp;&emsp;# и самого персонажа<br>
+								&emsp;&emsp;min_distance = dist<br>
+								&emsp;&emsp;target = character<br>
+								# ...<br>
+								# Затем ты можешь просто использовать "target" для любой логики с найденным ближайшим персонажем<br>
+							</code>
+							<br>
+							<br>
+							<br>
+							<code class="gdscript">
+								CharacterDamagable
+							</code>
+							- это объект HitBody, который делает возможным "наносить урон" персонажу. Он работает как базовый объект <code class="gdscript">
+								Damagable
+							</code>
+							, но имеет ссылку на <code class="gdscript">
+								Character
+							</code>
+							и множитель входящего урона. В этом случае один <code class="gdscript">
+								Character
+							</code>
+							может иметь несколько объектов <code class="gdscript">
+								CharacterDamagable
+							</code>
+							с разными множителями (например, голова с множителем x2.0).<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# ---    Сниппет, взятый из класса NPCHuman    ---<br>
+								#<br>
+								# Перебираем хитбоксы, которые являются KinematicBody<br>
+								for collision in humanoid.hitbox_collisions:<br>
+								&emsp;# Создаём новый объект damageable<br>
+								&emsp;var damagable = CharacterDamagable.new()<br>
+								&emsp;<br>
+								&emsp;# Kinematic body<br>
+								&emsp;var kinematic_body = collision as KinematicBody<br>
+								&emsp;# Bone attachment, к которому прикреплён kinematic body<br>
+								&emsp;var bone_attachment = kinematic_body.get_parent() as BoneAttachment<br>
+								&emsp;<br>
+								&emsp;# Устанавливаем правильную ссылку на персонажа, которому будет наноситься урон<br>
+								&emsp;damagable.character = character<br>
+								&emsp;<br>
+								&emsp;# Применяем данные множителей хитбоксов и т.д.<br>
+								&emsp;for hitbox_multiplier in hitbox_data.damage_multipliers:<br>
+								&emsp;&emsp;if hitbox_multiplier.bone_keyword_name in bone_attachment.bone_name:<br>
+								&emsp;&emsp;&emsp;damagable.damage_multiplier = hitbox_multiplier.multiplier<br>
+								&emsp;<br>
+								&emsp;# Добавляем CharacterDamagable как свойство HitBody, чтобы позже<br>
+								&emsp;# любой рейкаст/область/и т.д. мог получить эту информацию<br>
+								&emsp;HitBodyTool.add_node_property(<br>
+								&emsp;&emsp;kinematic_body, CharacterDamagable.OBJECT_NAME, damagable)<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/particle_remover.html">
+								particle_remover
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/factions.html">
+								Factions
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_list.html">
+								CharacterList
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/character.html">
+								Character
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_damagable.html">
+								CharacterDamagable
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/factions_init_data.html">
+								FactionsInitData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

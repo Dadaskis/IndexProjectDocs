@@ -1,0 +1,71 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:location_decal/example0.jpg
+
+[gd]LocationDecal[/gd] creates a projected decal. It doesn't have that much of use as projected decals aren't very optimized and have a weird lighting, but they are still useful to apply character's blood on surfaces properly.
+
+[c]Usage example[/c]
+[gd]
+# Simple creation
+var img = load(\"res://path/to/texture.png\")
+var node = LocationDecal.create_fast(img)
+var loc_base = LocationBaseScene.get_scene()
+loc_base.add_child(node)
+node.global_position = Vector3(0.0, 1.0, 0.0)
+node.rotation_degrees = Vector3(45.0, 0.0, 0.0)
+[/gd]
+[gd]
+# Creating it in a way to look at the surface's normal
+# You can get a normal of a surface by using raycasts
+func hit_decal(texture: Texture, position: Vector3, normal: Vector3):
+	if not texture:
+		return
+	var loc_base = LocationBaseScene.get_scene()
+	var decal = LocationDecal.create_fast(texture)
+	if not decal:
+		return
+	loc_base.add_child(decal)
+	decal.scale = Vector3(0.3, 0.3, 0.01)
+	decal.global_transform.origin = position
+	decal.look_at(
+		position + (normal * 2.0) + (Vector3.ONE * 0.001), 
+		Vector3.UP
+	)
+[/gd]"
+info_rus = "//img:location_decal/example0.jpg
+
+[gd]LocationDecal[/gd] создаёт спроецированный декаль. Он не так часто используется, поскольку спроецированные декали не очень оптимизированы и имеют странное освещение, но они всё ещё полезны для правильного нанесения крови персонажа на поверхности.
+
+[c]Пример использования[/c]
+[gd]
+# Простое создание
+var img = load(\"res://path/to/texture.png\")
+var node = LocationDecal.create_fast(img)
+var loc_base = LocationBaseScene.get_scene()
+loc_base.add_child(node)
+node.global_position = Vector3(0.0, 1.0, 0.0)
+node.rotation_degrees = Vector3(45.0, 0.0, 0.0)
+[/gd]
+[gd]
+# Создание с ориентацией по нормали поверхности
+# Ты можешь получить нормаль поверхности с помощью рейкастов
+func hit_decal(texture: Texture, position: Vector3, normal: Vector3):
+	if not texture:
+		return
+	var loc_base = LocationBaseScene.get_scene()
+	var decal = LocationDecal.create_fast(texture)
+	if not decal:
+		return
+	loc_base.add_child(decal)
+	decal.scale = Vector3(0.3, 0.3, 0.01)
+	decal.global_transform.origin = position
+	decal.look_at(
+		position + (normal * 2.0) + (Vector3.ONE * 0.001), 
+		Vector3.UP
+	)
+[/gd]"
+edit_time = 1.76123e+09

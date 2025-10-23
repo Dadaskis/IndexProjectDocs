@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A module for [gd]DocInfo[/gd] resource that makes it possible to write descriptions for whole modules inside of Godot. I mean, you are looking at this description that is written in a [gd]DocInfo[/gd] file! It is used by [p]_doc_gen[/p] module and if you want to see more usage examples - it is highly advised to check [p]_doc_gen[/p] description."
+info_rus = "Модуль для ресурса [gd]DocInfo[/gd], который позволяет писать описания для целых модулей прямо внутри Godot. Вот же, ты сейчас смотришь на это описание, которое написано в файле [gd]DocInfo[/gd]! Он используется модулем [p]_doc_gen[/p], и если хочешь посмотреть больше примеров использования - настоятельно рекомендую заглянуть в описание [p]_doc_gen[/p]."
+edit_time = 1.76112e+09

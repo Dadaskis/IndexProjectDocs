@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - viewmodel
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: viewmodel
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Viewmodel (Модель от первого лица) - это специальный тип моделей, которые отображаются от первого лица и обычно представляют либо оружие, либо медицинские предметы. Помимо загрузки модели, он предоставляет множество интересных функций, таких как процедурная анимация, частичные эффекты, анимации для левой руки, анимации прицеливания и т.д.<br>
+							<br>
+							<img src="../../../_guide/.images/viewmodel/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Структура скриптов
+							</h4>
+							<p>
+								<br>
+							</p>
+							<center>
+								<br>
+								<code class="gdscript">
+									<br>
+									.<br>
+									├── animation_set.gd<br>
+									├── animation_sets<br>
+									│   ├── assault_rifle.gd<br>
+									│   ├── generic.gd<br>
+									│   ├── grenade.gd<br>
+									│   ├── melee.gd<br>
+									│   └── pump_shotgun.gd<br>
+									├── autoload<br>
+									│   └── viewmodel_sight_2D.gd<br>
+									├── configs<br>
+									│   ├── animation_event_data.gd<br>
+									│   └── config.gd<br>
+									├── helpers<br>
+									│   ├── animation_key_methods.gd<br>
+									│   ├── remove_object_in_seconds.gd<br>
+									│   ├── remove_sound_after_seconds.gd<br>
+									│   └── weapon_casing_logic.gd<br>
+									├── model_instance.gd<br>
+									├── preloader.gd<br>
+									├── procedural_animation.gd<br>
+									└── viewmodel.gd<br>
+								</code>
+								<br>
+							</center>
+							<p>
+								<br>
+								<br>
+							</p>
+							<h2>
+								Viewmodel <code class="gdscript">
+									"./viewmodel.gd"
+								</code>
+							</h2>
+							<p>
+								<br>
+								Это главный файл здесь, тот, что предоставляет API для работы со всей системой. Он выступает в качестве моста между геймплейным кодом и базовой системой оружия, управляя полным жизненным циклом моделей оружия (или любых моделей от первого лица), анимаций и визуальных эффектов.<br>
+								- Обрабатывает полную настройку оружия.<br>
+								- Предоставляет высокоуровневое воспроизведение анимаций (достать, убрать, выстрел, перезарядка).<br>
+								- Управляет frame-perfect колбэками и триггерами анимаций.<br>
+								- Предоставляет высокоуровневые функции для работы.<br>
+								- Использует <code class="gdscript">
+									ViewmodelModelInstance
+								</code>
+								для инициализации модели.<br>
+								- Использует <code class="gdscript">
+									ViewmodelProceduralAnimation
+								</code>
+								для координации процедурных анимаций.<br>
+								<code>
+									Пример
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Инициализация viewmodel<br>
+									viewmodel = Viewmodel.new()<br>
+									viewmodel.load_weapon(<br>
+									weapon_anim_class, main_node, player, camera_transform_manager)<br>
+									animation_set = viewmodel.get_animation_set_controller()<br>
+									<br>
+									# Подключение событий анимации<br>
+									viewmodel.add_animation_event_callback(<br>
+									hide_enough_event, funcref(self, "hide_enough")<br>
+									)<br>
+									viewmodel.add_animation_event_callback(<br>
+									take_enough_event, funcref(self, "take_enough")<br>
+									)<br>
+									viewmodel.add_animation_event_callback(<br>
+									shoot_event, funcref(self, "on_shoot")<br>
+									)<br>
+									<br>
+									# Смена рук<br>
+									viewmodel.change_hands(LoadoutSystem.get_viewmodel_hands())<br>
+									<br>
+									# Инициализация состояния оружия<br>
+									animation_set.hide()<br>
+									viewmodel.anim_player.advance(10000.0)<br>
+									viewmodel.stop_all_sounds()<br>
+									<br>
+									# Доставание<br>
+									animation_set.take()<br>
+									<br>
+									# Воспроизведение другой анимации<br>
+									viewmodel.play_animation("look")<br>
+									<br>
+									# Выстрел<br>
+									animation_set.shoot()<br>
+								</code>
+								<br>
+								<br>
+							</p>
+							<h2>
+								Viewmodel Model Instance <code class="gdscript">
+									"./model_instance.gd"
+								</code>
+							</h2>
+							<p>
+								<br>
+								Загружает и позиционирует модели оружия от первого лица. Управляет скелетами оружия для анимаций и attachment'ов. Создаёт и поддерживает сложную структуру нод для рендеринга viewmodel. Другими словами, просто инициализирует весь этот нодовый беспорядок.<br>
+								- Инициализирует модель.<br>
+								- Создаёт и управляет точками крепления для эффектов (дульная вспышка, выброс гильз).<br>
+								- Работает с позами костей, трансформациями и blending'ом анимаций.<br>
+								- Позиционирует оружие относительно кости камеры для правильного вида от первого лица.<br>
+								- Управляет дульными вспышками, эффектами выброса гильз и другими частичными эффектами оружия.<br>
+								- Контролирует огни дульных вспышек с затуханием цвета.<br>
+								- Реализует оптимизированные по производительности пулы для частиц и физических объектов.<br>
+								- Конвертирует стандартные материалы в шейдерные материалы для viewmodel.<br>
+								- Применяет правильные настройки поля зрения ко всем визуальным элементам.<br>
+								- Предотвращает clipping оружия через геометрию.<br>
+								- Настраивает правильные слои рендеринга для оружия от первого лица.<br>
+								<br>
+							</p>
+							<h2>
+								Viewmodel Procedural Animation <code class="gdscript">
+									"./procedural_animation.gd"
+								</code>
+							</h2>
+							<p>
+								<br>
+								Создает органичное движение оружия, которое реагирует на действия игрока, факторы окружающей среды и физику - делая оружие физичным и отзывчивым, а не статичным и роботизированным.<br>
+								- Естественное раскачивание и bounce, синхронизированные с движением игрока.<br>
+								- Управляемое мышью вращение и смещение оружия.<br>
+								- Плавное blending'ование между различными состояниями движения.<br>
+								- Анимации бега, ходьбы, приседания, медленной ходьбы.<br>
+								- Наклон и смещение оружия во время прыжков и падений.<br>
+								- Плавные переходы между стрельбой от бедра и прицеливанием.<br>
+								- Автоматическое отдаление оружия при приближении к стенам/объектам.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Autoload: <code class="gdscript">
+									ViewmodelPreloader
+								</code>
+							</h4>
+							<p>
+								<br>
+								Этот автолоад позволяет предзагружать GLTF-модели viewmodel'ей для более простого управления ассетами и оптимизации.<br>
+								- Динамическая загрузка и кэширование 3D-моделей оружия.<br>
+								- Система отдельных моделей рук с вариантами качества.<br>
+								- Эффективная загрузка/выгрузка ассетов оружия.<br>
+								- Контроль анимаций левой руки, чтобы они были общими для нескольких viewmodel'ей.<br>
+								<code>
+									Пример
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Контроль анимации левой руки<br>
+									ViewmodelPreloader.play_left_animation("grenade_throw")<br>
+									ViewmodelPreloader.stop_left_animation()<br>
+									<br>
+									# Стандартная схема загрузки оружия<br>
+									var model = ViewmodelPreloader.create_model("assault_rifle", parent_node)<br>
+									var hands = ViewmodelPreloader.get_hands("male_hands")<br>
+								</code>
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Autoload: <code class="gdscript">
+									ViewmodelSight2D
+								</code>
+							</h4>
+							<p>
+								<br>
+								<img src="../../../_guide/.images/viewmodel/scope0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									Реализация 2D-прицела для viewmodel'ей, используемая в данный момент BSR-10.<br>
+									<code>
+										Пример
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										ViewmodelSight2D.show()<br>
+										ViewmodelSight2D.hide()<br>
+										ViewmodelSight2D.set_offset(13, 37)<br>
+									</code>
+									<br>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									Экспорт собственного viewmodel'а
+								</h4>
+								<p>
+									<br>
+									<img src="../../../_guide/.images/viewmodel/export0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										<img src="../../../_guide/.images/viewmodel/export1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											0. Убедись, что иерархия правильная.<br>
+											- А также что ты используешь правильный риг рук из <code class="gdscript">
+												"res://.dev_sources/viewmodels/"
+											</code>
+											.<br>
+											1. Убедись, что у тебя есть соответствующим образом названные actions.<br>
+											2. Нажми <code class="gdscript">
+												"Export Player Weapon Viewmodel"
+											</code>
+											.<br>
+											3. Та-да.<br>
+											<code class="red-marking">
+												Для большего количества примеров просто изучи .blend файлы в <code class="gdscript">
+													"res://.dev_sources/viewmodels/"
+												</code>
+												.
+											</code>
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											assets, docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/viewmodel_sight_2D.html">
+												ViewmodelSight2D
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/weapon_casing_logic.html">
+												weapon_casing_logic
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/remove_sound_after_seconds.html">
+												remove_sound_after_seconds
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/animation_key_methods.html">
+												ViewmodelAnimationKeyMethods
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/remove_object_in_seconds.html">
+												remove_object_in_seconds
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/preloader.html">
+												ViewmodelPreloader
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/model_instance.html">
+												ViewmodelModelInstance
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/animation_set.html">
+												ViewmodelAnimationSet
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/viewmodel.html">
+												Viewmodel
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/generic.html">
+												generic
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/grenade.html">
+												grenade
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/pump_shotgun.html">
+												pump_shotgun
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/melee.html">
+												melee
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/assault_rifle.html">
+												assault_rifle
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/procedural_animation.html">
+												ViewmodelProceduralAnimation
+											</a>
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/animation_event_data.html">
+												ViewmodelAnimationEventData
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/config.html">
+												ViewmodelConfig
+											</a>
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

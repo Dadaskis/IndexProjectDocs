@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - non_playable_character
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: non_playable_character
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, давайте поговорим об этом ужасном piece of shit модуле. Да, это Не-Игровые Персонажи (NPC). Кажется, всё в порядке. Однако, хотя этот модуль изначально был задизайнен как универсальная платформа для всех типов NPC, не только человеческих персонажей, он оказался модулем только для человеческих персонажей! Ты не будешь работать с <code class="gdscript">
+								NonPlayableCharacter
+							</code>
+							, ты будешь работать с <code class="gdscript">
+								NPCHuman
+							</code>
+							всё время. Было бы круче назвать этот модуль <code class="gdscript">
+								"human_characters"
+							</code>
+							или <code class="gdscript">
+								"human_NPC"
+							</code>
+							или <code class="gdscript">
+								"NPC_human"
+							</code>
+							. В любом случае, имеет ли это значение? Ты можешь просто осознать, что этот модуль - это всё о людях.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							Структура скриптов
+						</h4>
+						<p>
+						</p>
+						<center>
+							<code class="gdscript">
+								<br>
+								.<br>
+								├── autoload<br>
+								│   ├── NPC_attack_queue.gd<br>
+								│   ├── NPC_max_distance_manager.gd<br>
+								│   ├── NPC_names.gd<br>
+								│   ├── NPC_position_queue.gd<br>
+								│   ├── NPC_spawn_queue.gd<br>
+								│   └── NPC_vision_queue.gd<br>
+								├── base_script.gd<br>
+								├── base_scripts<br>
+								│   ├── assets<br>
+								│   │   └── sounds<br>
+								│   │       ├── beeping.mp3<br>
+								│   │       ├── beeping.mp3.import<br>
+								│   │       ├── electrowave_attack.mp3<br>
+								│   │       ├── electrowave_attack.mp3.import<br>
+								│   │       ├── electrowave_imbound.mp3<br>
+								│   │       └── electrowave_imbound.mp3.import<br>
+								│   ├── minc_chemical_unit.gd<br>
+								│   ├── minc_electro_unit.gd<br>
+								│   ├── minc_explosives_unit.gd<br>
+								│   └── minc_heavy_unit_weak.gd<br>
+								├── configs<br>
+								│   ├── character_data.gd<br>
+								│   ├── hitbox_damage_multiplier.gd<br>
+								│   ├── hitbox_data.gd<br>
+								│   └── weapon_config.gd<br>
+								├── debug<br>
+								│   └── logic_state_label.gd<br>
+								├── logic.gd<br>
+								├── nodes<br>
+								│   ├── dead_body_search.gd<br>
+								│   ├── dropped_weapon.gd<br>
+								│   ├── NPC_spawn.gd<br>
+								│   └── patrol_point_hint.gd<br>
+								├── non_playable_character.gd<br>
+								├── pathfinding.gd<br>
+								├── state_base.gd<br>
+								├── states<br>
+								│   ├── citizen<br>
+								│   │   ├── act_playing.gd<br>
+								│   │   ├── attack_player.gd<br>
+								│   │   ├── none.gd<br>
+								│   │   ├── panic_anim.gd<br>
+								│   │   ├── panic.gd<br>
+								│   │   └── patrol.gd<br>
+								│   ├── heavy_unit<br>
+								│   │   ├── attack.gd<br>
+								│   │   ├── attack_player.gd<br>
+								│   │   ├── follow_player.gd<br>
+								│   │   ├── none.gd<br>
+								│   │   ├── patrol.gd<br>
+								│   │   ├── stand_and_shoot.gd<br>
+								│   │   ├── stand_and_shoot_player.gd<br>
+								│   │   ├── test_look.gd<br>
+								│   │   └── wait_enemy.gd<br>
+								│   └── light_unit<br>
+								│       ├── attack.gd<br>
+								│       ├── attack_player.gd<br>
+								│       ├── follow_player.gd<br>
+								│       ├── none.gd<br>
+								│       ├── patrol.gd<br>
+								│       ├── stand_and_shoot.gd<br>
+								│       ├── stand_and_shoot_player.gd<br>
+								│       ├── test_look.gd<br>
+								│       └── wait_enemy.gd<br>
+								└── types<br>
+								├── human<br>
+								│   ├── base_script_human.gd<br>
+								│   ├── human_weapon_handler.gd<br>
+								│   └── state_base_human.gd<br>
+								└── human.gd<br>
+							</code>
+						</center>
+						<p>
+							<br>
+							<br>
+						</p>
+						<h2>
+							Основные скрипты <code class="gdscript">
+								"./"
+							</code>
+						</h2>
+						<p>
+							<br>
+							<code class="gdscript">
+								"non_playable_character.gd"
+							</code>
+							- это базовый класс <code class="gdscript">
+								NonPlayableCharacter
+							</code>
+							для всех NPC. NPC в данном случае - это люди, конечно. Он содержит весь функционал, необходимый для создания NPC, который расширяется <code class="gdscript">
+								NPCHuman
+							</code>
+							.<br>
+							<code class="gdscript">
+								"state_base.gd"
+							</code>
+							- это базовый класс <code class="gdscript">
+								NPCLogicState
+							</code>
+							для логических состояний NPC. Каждое логическое состояние содержит уникальную логику для выполнения в Finite-State Machine этого NPC.<br>
+							<code class="gdscript">
+								"pathfinding.gd"
+							</code>
+							- это класс поиска пути <code class="gdscript">
+								NPCPathfinding
+							</code>
+							, он использует навигационную сетку для навигации NPC в локациях.<br>
+							<code class="gdscript">
+								"base_script.gd"
+							</code>
+							- это базовый класс скриптов NPC <code class="gdscript">
+								NPCBaseScript
+							</code>
+							, который может использоваться для "базовых скриптов", которые могут расширять логику определённых NPC. Обычно используется <code class="gdscript">
+								"тяжелыми юнитами"
+							</code>
+							для реализации логики "падения на пол после слишком большого урона".<br>
+							<code class="gdscript">
+								"logic.gd"
+							</code>
+							- это класс <code class="gdscript">
+								NPCLogic
+							</code>
+							, который обрабатывает логические состояния и обнаружение видимости других персонажей. Этот класс практически является Finite-State Machine.<br>
+							<br>
+						</p>
+						<h2>
+							Автозагрузки <code class="gdscript">
+								"./autoloads/"
+							</code>
+						</h2>
+						<p>
+							<br>
+							<code class="gdscript">
+								NPCAttackQueue
+							</code>
+							- очередь для оптимизации атак NPC, чтобы предотвратить слишком много атак в одном кадре.<br>
+							<code class="gdscript">
+								NPCMaxDistanceManager
+							</code>
+							- менеджер NPC, которые были временно удалены из дерева сцены (из-за расстояния) для оптимизации.<br>
+							<code class="gdscript">
+								NPCNames
+							</code>
+							- синглтон, который генерирует имена для NPC.<br>
+							<code class="gdscript">
+								NPCPositionQueue
+							</code>
+							- <code class="red-marking">
+								Устарело
+							</code>
+							Неполная реализация для системы укрытий NPC.<br>
+							<code class="gdscript">
+								NPCSpawnQueue
+							</code>
+							- очередь для создания порядка спавна NPC, чтобы они спавнились один-за-другим для корректной поддержки свойств типа <code class="gdscript">
+								named_npc_alive_limit
+							</code>
+							из <code class="gdscript">
+								NPCSpawn
+							</code>
+							.<br>
+							<code class="gdscript">
+								NPCVisionQueue
+							</code>
+							- очередь для оптимизации проверок видимости NPC, только один NPC за кадр делает проверку видимости, чтобы предотвратить too many проверок, выполненных в одном кадре.<br>
+							<br>
+						</p>
+						<h2>
+							Конфиги <code class="gdscript">
+								"./configs"
+							</code>
+						</h2>
+						<p>
+							<br>
+							<code class="gdscript">
+								NPCHitboxData
+							</code>
+							- конфиг, который содержит массив <code class="gdscript">
+								NPCHitboxDamageMultiplier
+							</code>
+							, которые определяют множители урона каждой кости хитбокса (например, голова может получать в 2 раза больше урона, чем другие кости, и т.д.).<br>
+							<code class="gdscript">
+								NPCWeaponConfig
+							</code>
+							- конфиг для оружия NPC, на данный момент поддерживается только для огнестрельного оружия.<br>
+							<code class="gdscript">
+								NPCHitboxDamageMultiplier
+							</code>
+							- конфиг, который содержит имя кости и множитель, на который будет умножен урон.<br>
+							<code class="gdscript">
+								NPCCharacterData
+							</code>
+							- конфиг данных персонажа, который содержит кучу настроек, таких как имя фракции, здоровье/броня, имя человеческой модели, назначенное оружие, опыт за убийство и т.д.<br>
+							<br>
+						</p>
+						<h2>
+							Узлы "
+						</code>
+						./nodes"
+					</code>
+				</h2>
+				<p>
+					<br>
+					<code class="gdscript">
+						"dead_body_search.gd"
+					</code>
+					- код, который может быть запущен, когда у тебя есть перк <code class="gdscript">
+						"Подбор патронов"
+					</code>
+					(булево значение перка <code class="gdscript">
+						"loot_corpses"
+					</code>
+					), он позволяет игроку собирать патроны с мёртвых тел, взаимодействуя с ними.<br>
+					<code class="gdscript">
+						"dropped_weapon.gd"
+					</code>
+					- код выброшенного оружия, оружие NPC - это оружие <code class="gdscript">
+						HumanModel
+					</code>
+					, которое было дублировано и превращено в rigidbodies. Этот код позволяет добавить логику этим rigidbodies, чтобы сделать возможным подбор оружия. Имей в виду, это отдельно от оружия, выброшенного игроком, или выброшенного оружия, которое было предварительно размещено на любой локации.<br>
+					<code class="gdscript">
+						"NPC_spawn.gd"
+					</code>
+					- узел <code class="gdscript">
+						NPCSpawn
+					</code>
+					, который даёт тебе возможность заспавнить NPC, предоставляет огромное количество настроек для конфигурации. Он инициализирует NPC once и затем переиспользует его экземпляр. Ты можешь заспавнить только одного одновременно живого NPC с этим узлом.<br>
+					<code class="gdscript">
+						"patrol_point_hint.gd"
+					</code>
+					- узел подсказки точки патрулирования, который позволяет пользователю установить позицию патрулирования NPC, которая может быть случайно выбрана в состоянии патрулирования.<br>
+					<br>
+				</p>
+				<h2>
+					Базовые скрипты <code class="gdscript">
+						"./base_scripts"
+					</code>
+				</h2>
+				<p>
+					<br>
+					Базовые скрипты расширяют функциональность NPC, делая возможным запуск дополнительной логики поверх кода NPC без переопределения уже существующего кода. Все базовые скрипты хранятся в <code class="gdscript">
+						"res://modules/non_playable_character/src/base_scripts/"
+					</code>
+					. Ты можешь назначить базовый скрипт логики в <code class="gdscript">
+						NPCCharacterData
+					</code>
+					.<br>
+					<code>
+						Шаблон
+					</code>
+					<br>
+					<code class="gdscript">
+						<br>
+						extends NPCBaseScript<br>
+						<br>
+						# Инициализация, может быть переопределена<br>
+						func initialize():<br>
+						&emsp;pass<br>
+						<br>
+						# Обновление, вызывается каждый физический кадр<br>
+						func update(delta: float):<br>
+						&emsp;pass<br>
+					</code>
+					<br>
+					<br>
+				</p>
+				<h2>
+					Логические состояния <code class="gdscript">
+						"./states"
+					</code>
+				</h2>
+				<p>
+					<br>
+					Каждая папка в <code class="gdscript">
+						"res://modules/non_playable_character/src/states/"
+					</code>
+					создаёт набор логики, который может быть определён в <code class="gdscript">
+						NPCCharacterData
+					</code>
+					. И каждый набор логики - это набор логических состояний, которые определяют поведение NPC. Логика NPC работает по принципу Finite-State Machine.<br>
+					<code>
+						Шаблон
+					</code>
+					<br>
+					<code class="gdscript">
+						<br>
+						class_name _LogicSet_NameHere<br>
+						# ^^^<br>
+						# Важно иметь определённое имя класса для логического состояния из-за дополнительной производительности.<br>
+						# Это не обязательно для функциональности, но, по какой-то причине, имя класса оптимизирует работу<br>
+						# логических состояний.<br>
+						<br>
+						extends NPCLogicStateHuman<br>
+						<br>
+						# Запускается, когда NPCLogic переключается на это состояние<br>
+						func on_switch() ->
+						void:<br>
+						&emsp;pass<br>
+						<br>
+						# Обновление, которое происходит во время _physics-process<br>
+						func update(delta: float) ->
+						void:<br>
+						&emsp;pass<br>
+					</code>
+					<br>
+					<br>
+				</p>
+				<h2>
+					Типы <code class="gdscript">
+						"./types"
+					</code>
+				</h2>
+				<p>
+					<br>
+					Помнишь, я сказал, что это должно было быть универсальной платформой для NPC? Так что да, <code class="gdscript">
+						NPCHuman
+					</code>
+					захватил этот весь модуль, и теперь <code class="gdscript">
+						"human.gd"
+					</code>
+					- это сердце этого модуля. Он определяет человеческих NPC, которые являются единственным работающим типом здесь. Может быть возможным сделать разные типы до сих-пор, но это потребовало бы переписывания. Глубоко в этой системе NPC всё ещё есть поддержка типов, так что да, есть и эта папка тоже.<br>
+					<br>
+				</p>
+				<h4 style="width: 60%">
+					Создание NPC
+				</h4>
+				<p>
+					<br>
+					<img src="../../../_guide/.images/non_playable_character/adding0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+						<br>
+						<img src="../../../_guide/.images/non_playable_character/adding1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+							<br>
+							0. Создай новую папку для твоего персонажа в <code class="gdscript">
+								"res://modules/non_playable_character/assets/characters/"
+							</code>
+							, имя твоей новой папки будет именем класса NPC персонажа.<br>
+							1. Создай <code class="gdscript">
+								"config.tres"
+							</code>
+							как <code class="gdscript">
+								NPCCharacterData
+							</code>
+							<br>
+							2. Определи настройки<br>
+							<code class="red-marking">
+								Если ты хочешь сделать новую модель для NPC вместо использования уже существующей, пожалуйста, загляни в документацию модулей <code class="gdscript">
+									"human_model"
+								</code>
+								или <code class="gdscript">
+									"character_builder"
+								</code>
+								.
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/NPC_names.html">
+								NPCNames
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_attack_queue.html">
+								NPCAttackQueue
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_spawn_queue.html">
+								NPCSpawnQueue
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_vision_queue.html">
+								NPCVisionQueue
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_position_queue.html">
+								NPCPositionQueue
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_max_distance_manager.html">
+								NPCMaxDistanceManager
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/logic_state_label.html">
+								logic_state_label
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/dropped_weapon.html">
+								dropped_weapon
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/NPC_spawn.html">
+								NPCSpawn
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/patrol_point_hint.html">
+								NPCPatrolPointHint
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/non_playable_character.html">
+								NonPlayableCharacter
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/pathfinding.html">
+								NPCPathfinding
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/state_base.html">
+								NPCLogicState
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/minc_heavy_unit_weak.html">
+								minc_heavy_unit_weak
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/minc_electro_unit.html">
+								minc_electro_unit
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/minc_explosives_unit.html">
+								minc_explosives_unit
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/minc_chemical_unit.html">
+								minc_chemical_unit
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/base_script.html">
+								NPCBaseScript
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/dead_body_search.html">
+								dead_body_search
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/follow_player.html">
+								_LightUnit_FollowAttack
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/attack.html">
+								_LightUnit_Attack
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/test_look.html">
+								_LightUnit_TestLook
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/none.html">
+								_LightUnit_None
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/stand_and_shoot_player.html">
+								_LightUnit_StandAndShootPlayer
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/wait_enemy.html">
+								_LightUnit_WaitEnemy
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/patrol.html">
+								_LightUnit_Patrol
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/stand_and_shoot.html">
+								_LightUnit_StandAndShoot
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/attack_player.html">
+								_LightUnit_AttackPlayer
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/none.html">
+								_Citizen_None
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/panic_anim.html">
+								_Citizen_PanicAnim
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/act_playing.html">
+								_Citizen_ActPlaying
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/patrol.html">
+								_Citizen_Patrol
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/panic.html">
+								_Citizen_Panic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/attack_player.html">
+								_Citizen_AttackPlayer
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/follow_player.html">
+								_HeavyUnit_FollowAttack
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/attack.html">
+								_HeavyUnit_Attack
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/test_look.html">
+								_HeavyUnit_TestLook
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/none.html">
+								_HeavyUnit_None
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/stand_and_shoot_player.html">
+								_HeavyUnit_StandAndShootPlayer
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/wait_enemy.html">
+								_HeavyUnit_WaitEnemy
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/patrol.html">
+								_HeavyUnit_Patrol
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/stand_and_shoot.html">
+								_HeavyUnit_StandAndShoot
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/attack_player.html">
+								_HeavyUnit_AttackPlayer
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/human.html">
+								NPCHuman
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/state_base_human.html">
+								NPCLogicStateHuman
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/human_weapon_handler.html">
+								NPCHumanWeaponHandler
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/base_script_human.html">
+								NPCBaseScriptHuman
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/logic.html">
+								NPCLogic
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/hitbox_data.html">
+								NPCHitboxData
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/weapon_config.html">
+								NPCWeaponConfig
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/hitbox_damage_multiplier.html">
+								NPCHitboxDamageMultiplier
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_data.html">
+								NPCCharacterData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

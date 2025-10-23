@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - sound
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: sound
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							This is an amazing module to work with sound. I mean, it doesn't do anything special in particular and mostly it is all about bullshit that is happening inside <code class="gdscript">
+								Sound
+							</code>
+							, but you know what...<br>
+							<br>
+							<code>
+								What does Sound do?
+							</code>
+							<br>
+							It's basically a singleton to manage sound in this game. You know, volumes, some SFX. Here's the list:<br>
+							<code class="gdscript">
+								<br>
+								Sound Type Management:<br>
+								&emsp;- Categorizes sounds into types (environmental, music, voice lines, etc.)<br>
+								&emsp;- Handles different playback behaviors for each type<br>
+								&emsp;- Automatic bus routing based on sound type<br>
+								<br>
+								Spatial Audio:<br>
+								&emsp;- Supports both 2D and 3D sound playback<br>
+								&emsp;- Obstacle detection for sound occlusion (commented out because it was so damn cursed)<br>
+								<br>
+								Environmental Effects:<br>
+								&emsp;- Dynamic reverb system that analyzes the environment (mainly unused?)<br>
+								&emsp;&emsp;- Manual configuration in soundscapes might be more preferrable<br>
+								&emsp;- Automatic environment classification (hallway, small room, outdoor, etc.)<br>
+								&emsp;- Smooth transitions between different acoustic environments<br>
+								&emsp;- Special underwater audio processing with filters<br>
+								<br>
+								Sound Playback:<br>
+								&emsp;- Creation and playback of sounds with various parameters<br>
+								&emsp;- Pitch modulation for varied sound effects<br>
+								&emsp;- Automatic cleanup of finished sounds<br>
+								&emsp;- Smooth fade-in/out effects<br>
+								&emsp;- All in code<br>
+								<br>
+								Volume Management:<br>
+								&emsp;- Individual volume controls for different sound categories<br>
+								&emsp;- Master volume control<br>
+								&emsp;- Voice ducking (music volume reduction when voice lines play)<br>
+								&emsp;- Special effect volumes (flashbang, underwater)<br>
+								<br>
+								Event Integration:<br>
+								&emsp;- Checkpoint system integration for sound state persistence<br>
+								<br>
+								Special Effects:<br>
+								&emsp;- Flashbang audio effects with temporary suppression<br>
+								&emsp;- Underwater audio filtering<br>
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								<br>
+								src<br>
+								├── helper<br>
+								│   └── remove_sound_on_finish.gd<br>
+								├── nodes<br>
+								│   ├── location_sound_2D.gd<br>
+								│   └── location_sound.gd<br>
+								├── reverb_system.gd<br>
+								└── sound.gd<br>
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								remove_sound_on_finish.gd
+							</code>
+							- Simple helper node script to remove a sound when its done playing<br>
+							<code class="gdscript">
+								location_sound_2D.gd
+							</code>
+							and <code class="gdscript">
+								location_sound.gd
+							</code>
+							- Nodes that extend functionality of <code class="gdscript">
+								AudioStreamPlayer
+							</code>
+							and <code class="gdscript">
+								AudioStreamPlayer3D
+							</code>
+							to include additional functionality required for whatever reason.<br>
+							<code class="gdscript">
+								reverb_system.gd
+							</code>
+							- A cursed automatic detection system for reverb, it's really weird and never worked that well in my opinion.<br>
+							<code class="gdscript">
+								sound.gd
+							</code>
+							- The singleton that made this entire module real, its main purpose is related to control of SFX in code, which includes bus management and creation of new sounds fast.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/sound.html">
+								Sound
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/location_sound.html">
+								LocationSound
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/location_sound_2D.html">
+								LocationSound2D
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/remove_sound_on_finish.html">
+								remove_sound_on_finish
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/reverb_system.html">
+								ReverbSystem
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

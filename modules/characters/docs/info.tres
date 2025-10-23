@@ -1,0 +1,286 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A module created for overall character data. It's not about visual representation of characters, but mostly about their data that is used for AI calculations and interactivity. This module consists of several parts: [gd]Character[/gd] HitBody class, [gd]CharacterDamagable[/gd] HitBody class, [gd]CharacterList[/gd] singleton, [gd]Factions[/gd] singleton and [gd]FactionsInitData[/gd] resource.
+
+Given the fact characters are practically just being HitBody data, *anything* can be a character. A prop, an NPC, or just a random bunch of nodes with some physics on top. [gd]Character[/gd] just contains general data like health, \"raycast point\", special/display names, reference to node, alive status, etc. For more information about properties you can check documentation of [gd]Character[/gd].
+
+All [gd]Character[/gd] objects are added to [gd]CharacterList[/gd], and this list is used in calculations of all other characters, therefore remember to keep this list up to date. Even though [gd]Character[/gd] itself is adding its own object to this list, depending on your use-case there might be need to double-check it and add it manually. If your character will be missing from this list, there might be a risk of it not being included correctly into overall logic of this game.
+
+[c]Usage example[/c]
+
+[gd]
+# Creating a new character object
+var character = Character.new()
+# Adding this character object as HitBody property
+HitBodyTool.add_node_property(self, Character.OBJECT_NAME, character)
+# Setting faction name equal to \"funny_dudes\"
+character.faction = \"funny_dudes\"
+# Setting maximum health to 100
+# Keep in mind, if you will try setting health to values greater than 100
+# it will be clamped to maximum health
+character.max_health = 100
+# Setting health to 100
+character.health = 100
+# Reference to a node that \"controls\" this character, in this case - it is parent of this node
+character.control_node = get_parent()
+# Is this character Non-Playable Character?
+# Let's assume that it's one of them, even though this property mostly tells us that
+# this character is derivative of NonPlayableCharacter class
+character.is_npc = true
+# Raycast point is essentially important for visibility checks
+# If your character moves - set it on each frame
+# Keep in mind: Raycast point is ALWAYS a global position
+character.set_raycast_point(global_transform.origin)
+# Adding a character to list of characters
+CharacterList.add_character(character)
+
+# Removing a character from list of characters
+CharacterList.remove_character(character)
+
+# Checks if other character is friendly
+var is_friendly = Factions.get_faction_relationship(other_character.faction, faction) != \\
+	Factions.RelationshipType.ENEMY
+
+# List of characters that you can use for some fancy logic
+var list = CharacterList.get_character_list()
+[/gd]
+
+[c]Simple visiblity check[/c]
+[gd]
+# ---        Simple visibility check algorithm       ---
+# A snippet taken from a sentry gun code.
+# It detects the closest VISIBLE character to do some shooting logic.
+#
+# The closest character to be found
+var target: Character
+# List of all characters
+var character_list = CharacterList.get_character_list()
+# Minimal distance, equals to a big number to make THE MACHINE work
+var min_distance = 100000000
+# Checking all characters
+for value in character_list:
+	var character: = value as Character
+	
+	# Basic validation checks
+	if not is_instance_valid(character):
+		continue
+	if not character.is_alive():
+		continue
+	if character == self.character:
+		continue
+	if character.faction == faction:
+		continue
+	
+	# Skip everyone who's not an enemy
+	if Factions.get_faction_relationship(character.faction, faction) != \\
+			Factions.RelationshipType.ENEMY:
+		continue
+	
+	# Getting another character's raycast point
+	# Usually refers to head of a being having this damn point
+	var point = character.get_raycast_point()
+	# Getting a position to shoot from
+	var pos = shoot_pos.global_transform.origin
+	# Getting a direction to character we are shooting at
+	var dir = (point - pos).normalized()
+	
+	# Doing a simple raycast from shooting position to another character's 
+	# raycast point
+	var ray = get_world().direct_space_state.intersect_ray(
+		pos + (dir * 2.0),
+		point - dir
+	)
+	
+	# If there's any collision, that means there's an obstacle, therefore
+	# another character is NOT visible
+	if ray:
+		continue
+	# Otherwise, if there's no obstacles, that means another character
+	# is visible.
+	
+	# Checking a distance to a character's raycast point
+	var dist = \\
+		gun_prop.global_transform.origin.distance_to(point)
+	if dist < min_distance and dist < max_distance:
+		# If character is the closest one: Remember the distance
+		# and the character as well
+		min_distance = dist
+		target = character
+# ...
+# Then you can just use \"target\" to do any logic with the closest character found
+[/gd]
+
+
+[gd]CharacterDamagable[/gd] is a HitBody object that makes it possible to \"damage\" a character. It works like a basic [gd]Damagable[/gd]object, but it has a reference to [gd]Character[/gd] and a multiplier of incoming damage. In this case, one [gd]Character[/gd] can have multiple [gd]CharacterDamagable[/gd] objects that will have different multipliers (for example head having x2.0 damage).
+
+[c]Usage Example[/c]
+[gd]
+# ---    A snippet taken from NPCHuman class    ---
+#
+# Iterate through hitboxes that are all KinematicBody
+for collision in humanoid.hitbox_collisions:
+	# Create a new damageable object
+	var damagable = CharacterDamagable.new()
+	
+	# Kinematic body
+	var kinematic_body = collision as KinematicBody
+	# Bone attachment that is kinematic body attached to
+	var bone_attachment = kinematic_body.get_parent() as BoneAttachment
+	
+	# Setting a proper character reference to a character that'll be damaged
+	damagable.character = character
+	
+	# Applying some data of hitbox multipliers and etc etc etc
+	for hitbox_multiplier in hitbox_data.damage_multipliers:
+		if hitbox_multiplier.bone_keyword_name in bone_attachment.bone_name:
+			damagable.damage_multiplier = hitbox_multiplier.multiplier
+	
+	# Adding CharacterDamagable as HitBody property, so later
+	# any raycast/area/etc would be able to get that info
+	HitBodyTool.add_node_property(
+		kinematic_body, CharacterDamagable.OBJECT_NAME, damagable)
+[/gd]"
+info_rus = "Модуль, созданный для работы с общими данными персонажей. Речь не о визуальном представлении персонажей, а в основном об их данных, которые используются для ИИ-расчётов и интерактивности. Этот модуль состоит из нескольких частей: класс HitBody [gd]Character[/gd], класс HitBody [gd]CharacterDamagable[/gd], синглтон [gd]CharacterList[/gd], синглтон [gd]Factions[/gd] и ресурс [gd]FactionsInitData[/gd].
+
+Учитывая тот факт, что персонажи практически являются просто данными HitBody, *что угодно* может быть персонажем. Проп, NPC или просто случайная группа узлов с какой-то физикой сверху. [gd]Character[/gd] просто содержит общие данные, такие как здоровье, \"точка рейкаста\", специальные/отображаемые имена, ссылка на узел, статус жив/мёртв и т.д. Для получения дополнительной информации о свойствах ты можешь проверить документацию [gd]Character[/gd].
+
+Все объекты [gd]Character[/gd] добавляются в [gd]CharacterList[/gd], и этот список используется в расчётах всех других персонажей, поэтому помни о необходимости поддерживать этот список в актуальном состоянии. Хотя сам [gd]Character[/gd] добавляет свой собственный объект в этот список, в зависимости от твоего случая использования может возникнуть необходимость перепроверить это и добавить его вручную. Если твоего персонажа не будет в этом списке, есть риск, что он не будет корректно включён в общую логику этой игры.
+
+[c]Пример использования[/c]
+
+[gd]
+# Создание нового объекта персонажа
+var character = Character.new()
+# Добавление этого объекта персонажа как свойства HitBody
+HitBodyTool.add_node_property(self, Character.OBJECT_NAME, character)
+# Установка имени фракции \"funny_dudes\"
+character.faction = \"funny_dudes\"
+# Установка максимального здоровья на 100
+# Имей в виду, если попытаешься установить здоровье больше 100
+# оно будет ограничено максимальным здоровьем
+character.max_health = 100
+# Установка здоровья на 100
+character.health = 100
+# Ссылка на узел, который \"управляет\" этим персонажем, в данном случае - это родитель этого узла
+character.control_node = get_parent()
+# Этот персонаж является Не-Игровым Персонажом?
+# Предположим, что это один из них, хотя это свойство в основном говорит нам, что
+# этот персонаж является производным от класса NonPlayableCharacter
+character.is_npc = true
+# Точка рейкаста по сути важна для проверок видимости
+# Если твой персонаж двигается - устанавливай её на каждом кадре
+# Имей в виду: Точка рейкаста - ВСЕГДА глобальная позиция
+character.set_raycast_point(global_transform.origin)
+# Добавление персонажа в список персонажей
+CharacterList.add_character(character)
+
+# Удаление персонажа из списка персонажей
+CharacterList.remove_character(character)
+
+# Проверяет, является ли другой персонаж дружественным
+var is_friendly = Factions.get_faction_relationship(other_character.faction, faction) != \\
+	Factions.RelationshipType.ENEMY
+
+# Список персонажей, который ты можешь использовать для какой-нибудь крутой логики
+var list = CharacterList.get_character_list()
+[/gd]
+
+[c]Простая проверка видимости[/c]
+[gd]
+# ---        Простой алгоритм проверки видимости       ---
+# Сниппет, взятый из кода турели.
+# Он обнаруживает самого близкого ВИДИМОГО персонажа для стрельбы.
+#
+# Найденный ближайший персонаж
+var target: Character
+# Список всех персонажей
+var character_list = CharacterList.get_character_list()
+# Минимальная дистанция, равна большому числу, чтобы МАШИНА работала
+var min_distance = 100000000
+# Проверяем всех персонажей
+for value in character_list:
+	var character: = value as Character
+	
+	# Базовые проверки валидности
+	if not is_instance_valid(character):
+		continue
+	if not character.is_alive():
+		continue
+	if character == self.character:
+		continue
+	if character.faction == faction:
+		continue
+	
+	# Пропускаем всех, кто не враг
+	if Factions.get_faction_relationship(character.faction, faction) != \\
+			Factions.RelationshipType.ENEMY:
+		continue
+	
+	# Получаем точку рейкаста другого персонажа
+	# Обычно относится к голове существа, имеющей эту чёртову точку
+	var point = character.get_raycast_point()
+	# Получаем позицию для стрельбы
+	var pos = shoot_pos.global_transform.origin
+	# Получаем направление к персонажу, в которого стреляем
+	var dir = (point - pos).normalized()
+	
+	# Делаем простой рейкаст от позиции стрельбы к точке рейкаста
+	# другого персонажа
+	var ray = get_world().direct_space_state.intersect_ray(
+		pos + (dir * 2.0),
+		point - dir
+	)
+	
+	# Если есть столкновение, значит есть препятствие, следовательно
+	# другой персонаж НЕ виден
+	if ray:
+		continue
+	# Иначе, если нет препятствий, значит другой персонаж виден.
+	
+	# Проверяем дистанцию до точки рейкаста персонажа
+	var dist = \\
+		gun_prop.global_transform.origin.distance_to(point)
+	if dist < min_distance and dist < max_distance:
+		# Если персонаж самый близкий: Запоминаем дистанцию
+		# и самого персонажа
+		min_distance = dist
+		target = character
+# ...
+# Затем ты можешь просто использовать \"target\" для любой логики с найденным ближайшим персонажем
+[/gd]
+
+
+[gd]CharacterDamagable[/gd] - это объект HitBody, который делает возможным \"наносить урон\" персонажу. Он работает как базовый объект [gd]Damagable[/gd], но имеет ссылку на [gd]Character[/gd] и множитель входящего урона. В этом случае один [gd]Character[/gd] может иметь несколько объектов [gd]CharacterDamagable[/gd] с разными множителями (например, голова с множителем x2.0).
+
+[c]Пример использования[/c]
+[gd]
+# ---    Сниппет, взятый из класса NPCHuman    ---
+#
+# Перебираем хитбоксы, которые являются KinematicBody
+for collision in humanoid.hitbox_collisions:
+	# Создаём новый объект damageable
+	var damagable = CharacterDamagable.new()
+	
+	# Kinematic body
+	var kinematic_body = collision as KinematicBody
+	# Bone attachment, к которому прикреплён kinematic body
+	var bone_attachment = kinematic_body.get_parent() as BoneAttachment
+	
+	# Устанавливаем правильную ссылку на персонажа, которому будет наноситься урон
+	damagable.character = character
+	
+	# Применяем данные множителей хитбоксов и т.д.
+	for hitbox_multiplier in hitbox_data.damage_multipliers:
+		if hitbox_multiplier.bone_keyword_name in bone_attachment.bone_name:
+			damagable.damage_multiplier = hitbox_multiplier.multiplier
+	
+	# Добавляем CharacterDamagable как свойство HitBody, чтобы позже
+	# любой рейкаст/область/и т.д. мог получить эту информацию
+	HitBodyTool.add_node_property(
+		kinematic_body, CharacterDamagable.OBJECT_NAME, damagable)
+[/gd]"
+edit_time = 1.76113e+09

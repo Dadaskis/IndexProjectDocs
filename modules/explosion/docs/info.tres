@@ -1,0 +1,145 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Explosion node that creates various kinds of explosions, like generic explosions, electric explosions and bio-explosions.
+
+//img:explosion/example0.jpg
+//img:explosion/example1.jpg
+
+[c]Usage Example[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var explosion = Explosion.new()
+explosion.global_transform.origin = blast_position
+explosion.radius = 8.0
+explosion.damage = 75.0
+explosion.character_owner = player
+loc_base.add_child(explosion)
+explosion.explode(\"generic\")
+[/gd]
+
+[t]Technical Side[/t]
+[gd]
+├── explosion_areas.gd
+	# Pooling system to reuse Area nodes used for detection of
+	# damaged objects by explosions
+	
+├── explosion.gd
+	# Explosion node that is used outside this module to create
+	# explosions
+	
+├── explosion_particle_preloader.gd
+	# Particle pooling system to reuse particles as well, mainly
+	# it exists because of shader compilation issue that could only
+	# be resolved by creating a limited set of these particles
+	# to show them all at once on the screen
+	
+└── explosion_props.gd
+	# A list of all props/nodes that could potentially be affected
+	# by an explosion. This list have been used by earlier
+	# implementation of the system and is now unused.
+	# I don't even know why i keep this one here, but it is
+	# what it is
+[/gd]
+
+[c]Creating your own damaging area[/c]
+[gd]
+func damage_area_body_enter(body):
+	# Damage logic here
+	# ...
+
+func create_damage_area():
+	# Create the damage area
+	var area: = ExplosionAreas.create_area(global_position, 10.0) as Area
+	area.connect(\"body_entered\", self, \"damage_area_body_enter\")
+	
+	# Wait a few frames to catch collisions
+	for frame in range(10):
+		yield(VisualServer, \"frame_post_draw\")
+	
+	# Clean up the area
+	area.disconnect(\"body_entered\", self, \"damage_area_body_enter\")
+	ExplosionAreas.remove_area(area)
+[/gd]
+
+[c]Creating your own particle[/c]
+[gd]
+ExplosionParticlePreloader.play_particle(
+	\"generic\", 
+	global_position, 
+	scale.x
+)
+[/gd]
+"
+info_rus = "Узел Explosion, создающий различные типы взрывов: обычные, электрические и био-взрывы.
+
+//img:explosion/example0.jpg
+//img:explosion/example1.jpg
+
+[c]Пример использования[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var explosion = Explosion.new()
+explosion.global_transform.origin = blast_position
+explosion.radius = 8.0
+explosion.damage = 75.0
+explosion.character_owner = player
+loc_base.add_child(explosion)
+explosion.explode(\"generic\")
+[/gd]
+
+[t]Техническая сторона[/t]
+[gd]
+├── explosion_areas.gd
+	# Система пулинга для повторного использования узлов Area,
+	# применяемых для обнаружения объектов, повреждённых взрывами
+	
+├── explosion.gd
+	# Узел Explosion, используемый вне этого модуля для создания
+	# взрывов
+	
+├── explosion_particle_preloader.gd
+	# Система пулинга частиц для их повторного использования;
+	# существует в основном из-за проблемы компиляции шейдеров,
+	# которую можно решить только созданием ограниченного набора
+	# этих частиц для их одновременного отображения на экране
+	
+└── explosion_props.gd
+	# Список всех пропсов/узлов, которые потенциально могут быть
+	# затронуты взрывом. Этот список использовался более ранней
+	# реализацией системы и сейчас не используется.
+	# Я даже не знаю, зачем храню его здесь, но пусть будет так.
+[/gd]
+
+[c]Создание собственной области нанесения урона[/c]
+[gd]
+func damage_area_body_enter(body):
+	# Логика нанесения урона здесь
+	# ...
+
+func create_damage_area():
+	# Создаём область урона
+	var area: = ExplosionAreas.create_area(global_position, 10.0) as Area
+	area.connect(\"body_entered\", self, \"damage_area_body_enter\")
+	
+	# Ждём несколько кадров для фиксации столкновений
+	for frame in range(10):
+		yield(VisualServer, \"frame_post_draw\")
+	
+	# Очищаем область
+	area.disconnect(\"body_entered\", self, \"damage_area_body_enter\")
+	ExplosionAreas.remove_area(area)
+[/gd]
+
+[c]Создание собственных частиц[/c]
+[gd]
+ExplosionParticlePreloader.play_particle(
+	\"generic\", 
+	global_position, 
+	scale.x
+)
+[/gd]"
+edit_time = 1.76113e+09

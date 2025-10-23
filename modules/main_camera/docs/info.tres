@@ -1,0 +1,30 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]MainCamera[/gd] is a top-notch fucking amazing singleton that does nothing but storing ONE variable. This class is so complex you would NEVER guess that this value is a camera reference! Amazing, right?
+
+[c]Usage example[/c]
+[gd]
+MainCamera.set_camera(camera) # Sets the camera OMG
+var camera = MainCamera.get_camera() # Returns the current main camera
+[/gd]
+
+The only reason of its existence is the fact that something has to keep the value of current camera to keep this entire eldritch codebase intact.
+
+I would've needed to write a damn book about this module, but I'm not paid for this shit. Enjoy.
+"
+info_rus = "[gd]MainCamera[/gd] - это fucking amazing синглтон высшего класса, который не делает ничего, кроме хранения ОДНОЙ переменной. Этот класс настолько сложен, что ты НИКОГДА не угадаешь, что это значение - ссылка на камеру! Удивительно, правда?
+
+[c]Пример использования[/c]
+[gd]
+MainCamera.set_camera(camera) # Устанавливает камеру OMG
+var camera = MainCamera.get_camera() # Возвращает текущую главную камеру
+[/gd]
+
+Единственная причина его существования - тот факт, что что-то должно хранить значение текущей камеры, чтобы сохранить всю эту кодовую базу рабочей.
+
+Мне бы пришлось написать чёртову книгу об этом модуле, но мне не платят за это дерьмо. Наслаждайся."
+edit_time = 1.76123e+09

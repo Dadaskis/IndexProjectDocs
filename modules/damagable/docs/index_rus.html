@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - damagable
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: damagable
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Модуль Damagable, содержащий базовые классы для нанесения урона, а также список damageable объектов и триггер урона. "That's a lot of damage."<br>
+							<br>
+							<code>
+								Иерархия скриптов
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								Ядро<br>
+								├── damagable.gd - Damagable<br>
+								│ # Самый базовый класс объекта, которому можно нанести урон<br>
+								│ └── basic_damagable.gd - BasicDamagable<br>
+								│ &emsp;# Реализация базового объекта для урона, используется пропсами и т.д.<br>
+								├── damagable_list.gd - DamagableList<br>
+								│ # Глобальный список всех объектов, которым можно нанести урон<br>
+								├── damage_trigger.gd - DamageTrigger<br>
+								│ # Триггер, который *наносит урон*, ты знаешь<br>
+								# Некоторые скрипты, такие как "reasons.gd" и "damagable_link.gd", не включены<br>
+								# потому что они *как бы* устарели<br>
+							</code>
+							<br>
+							<br>
+							<code>
+								Преврати свой объект во что-то ломаемое
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var static_body: StaticBody # Предположим, у него есть StaticBody как потомок<br>
+								var damagable: BasicDamagable<br>
+								# ...<br>
+								<br>
+								# Создаём компонент урона<br>
+								damagable = BasicDamagable.new()<br>
+								# Настраиваем параметры урона<br>
+								damagable.health = 100<br>
+								# Ссылка на узел для удаления при уничтожении<br>
+								damagable.node_to_remove = self<br>
+								# Это true по умолчанию, но я просто пишу это здесь, потому что...<br>
+								# ну, ты знаешь, ты можешь изменить это<br>
+								damagable.remove_on_destroy = true<br>
+								# Добавляем свойство урона к узлу<br>
+								HitBodyTool.add_node_property(<br>
+								&emsp;static_body, BasicDamagable.OBJECT_NAME, damagable<br>
+								)<br>
+								# Подключаем сигналы<br>
+								damagable.connect("on_damage", self, "prop_damaged")<br>
+								damagable.connect("on_destroyed", self, "prop_destroyed")<br>
+								# ...<br>
+								<br>
+								# Вызывается каждый раз, когда твой объект получает урон<br>
+								func prop_damaged():<br>
+								&emsp;# Ты можешь проверить последнее значение урона вот так<br>
+								&emsp;var value = damagable.last_damage_value<br>
+								<br>
+								# Вызывается каждый раз, когда твой объект уничтожается (может быть, в последний раз...)<br>
+								func prop_destroyed():<br>
+								&emsp;pass<br>
+							</code>
+							<br>
+							<br>
+							Для получения дополнительных нюансов реализации тебе крайне рекомендуется проверить исходный код либо <code class="gdscript">
+								BasicDamagable
+							</code>
+							, либо <code class="gdscript">
+								Damagable
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, icons, materials, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/damagable_list.html">
+								DamagableList
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/damagable_link.html">
+								DamagableLink
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/damagable.html">
+								Damagable
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/damage_trigger.html">
+								DamageTrigger
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/reasons.html">
+								DamagableReasons
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/basic_damagable.html">
+								BasicDamagable
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

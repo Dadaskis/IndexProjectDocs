@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - soundscape
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: soundscape
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							So, what are "soundscapes"? It's basically a fancier word for ambience. In this project, "soundscapes" are just a way to structure data for ambience. That includes looped audio samples *and* audio samples that are played randomly throughout the game. Different soundscapes can be used for different environments, interiors, exteriors, outer worlds, out in the skies, etc. You can make anything with it, really... As long as you have any experience in sound design, you are free to do anything you wish.<br>
+							<br>
+							<img src="../../../_guide/.images/soundscape/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/soundscape/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									This documentation page reads too normal and I need to find a way to fuck this up... Oh wait, I just did. Anyways...<br>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									Creating your own soundscape
+								</h4>
+								<p>
+									<br>
+									All soundscapes are stored at <code class="gdscript">
+										"res://modules/soundscape/assets/soundscapes/"
+									</code>
+									as <code class="gdscript">
+										SoundscapeClass
+									</code>
+									.<br>
+									<img src="../../../_guide/.images/soundscape/create0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										<br>
+										<code class="gdscript">
+											SoundscapeClass
+										</code>
+										has all the info you need, which are... Reverb data, an array of looped samples and an array of random samples. Reverb data is just a preset for reverberation/delay settings. Arrays should be self-explanatory.<br>
+										<img src="../../../_guide/.images/soundscape/create1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_reverb_data/"
+											</code>
+											contains <code class="gdscript">
+												SoundscapeReverbData
+											</code>
+											resource files that are configuring earlier mentioned reverberation and delay.<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_data_looped/"
+											</code>
+											contains <code class="gdscript">
+												SoundscapeLoopedSound
+											</code>
+											resource files that configure the looped sample, which is all about the audio sample, volume, pitch, inspiration value, tech debt...<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_data_random/"
+											</code>
+											contains <code class="gdscript">
+												SoundscapeRandomSounds
+											</code>
+											resource files that configure a set of random samples, which is all about the audio samples themselves, min/max volume, min/max pitch, location of the lizard people...<br>
+											<br>
+											All <code class="gdscript">
+												Soundscape
+											</code>
+											nodes contain a class name of the soundscape to play, which is just a file name of the <code class="gdscript">
+												SoundscapeClass
+											</code>
+											resource stored at <code class="gdscript">
+												"res://modules/soundscape/assets/soundscapes/"
+											</code>
+											. You just create a node, assign the soundscape name, and enjoy the ambience of your personal hellish temple.
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											assets, docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/soundscape_player.html">
+												SoundscapePlayer
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/soundscape.html">
+												Soundscape
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/soundscape_class.html">
+												SoundscapeClass
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/random_sounds.html">
+												SoundscapeRandomSounds
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/looped_sound.html">
+												SoundscapeLoopedSound
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/reverb_data.html">
+												SoundscapeReverbData
+											</a>
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

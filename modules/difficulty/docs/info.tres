@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Module made for handling difficulty settings in this game.
+
+[c]Usage example[/c]
+[gd]
+# Switch difficulty to Purger
+Difficulties.change_preset(Difficulties.DifficultyPreset.PURGER)
+# Switch difficulty to Normal
+Difficulties.change_preset(Difficulties.DifficultyPreset.NORMAL)
+# Switch difficulty to Sandbox
+Difficulties.change_preset(Difficulties.DifficultyPreset.SANDBOX)
+[/gd]
+
+To edit difficulty values of any kind - edit the [gd]change_preset[/gd] function at [p]res://modules/difficulty/src/difficulty.gd[/p]"
+info_rus = "Модуль, созданный для обработки настроек сложности в этой игре.
+
+[c]Пример использования[/c]
+[gd]
+# Переключить сложность на \"Ликвидатор\"
+Difficulties.change_preset(Difficulties.DifficultyPreset.PURGER)
+# Переключить сложность на \"Нормальную\"
+Difficulties.change_preset(Difficulties.DifficultyPreset.NORMAL)
+# Переключить сложность на \"Песочницу\"
+Difficulties.change_preset(Difficulties.DifficultyPreset.SANDBOX)
+[/gd]
+
+Чтобы редактировать значения сложности любого вида - редактируйте функцию [gd]change_preset[/gd] в файле [p]res://modules/difficulty/src/difficulty.gd[/p]"
+edit_time = 1.76113e+09

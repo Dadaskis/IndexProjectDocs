@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "I had a dream of making a game with voicelines until I started working with them and OH GOD how terrible it is to work with them. I would rather have characters mumbling shit instead of them actually speak. Mumbling shit is international too. Lazy? Screw you, mumbling for the win. Either way, voicelines are so deeply tied to this codebase to the point when it would make more sense to keep them. I mean... What if YOU, a poor soul, decided that this game needs voices for some reason? We all are hearing voices in our mind, but you decided that emitting voices by using this game would be even nicer idea? Great. Well, look, you don't really have much to do on this page... Except for some fancy things...
+
+[p]res://modules/voicelines/assets/samples/[/p] contains all the psychotic voices. It's nicer to organize them by folders, so you can... organize shit, you know? It's nicer to do something like [gd]Voicelines.play_voiceline(\"minc_generic/say_fight0.mp3\")[/gd] rather than [gd]Voicelines.play_voiceline(\"minc_generic_say_fight0.mp3\")[/gd] while dealing with a folder full of trash.
+[p]res://modules/voicelines/assets/samples_voicemess/[/p] has mumbling voices, which work pretty much the same way.
+
+[c]Usage example[/c]
+[gd]
+var voice = Voicelines.play_voiceline(\"minc_generic/say_fight0.mp3\")
+var mumble = Voicelines.play_voicemess(\"men0.ogg\")
+var char_voice = Voicelines.play_voiceline_character(
+	\"minc_generic/say_research0.mp3\", character, 20.0, -10.0)
+[/gd]
+
+For more information:
+	- Check docs of [gd]Voicelines[/gd]
+	- Reread."
+info_rus = "Была мечта у меня сделать игру с голосовыми репликами, пока я не начал с ними работать, и О БОЖЕ, как же ужасно с ними работать. Я бы лучше сделал, чтобы персонажи бубнили какую-то дичь, вместо того чтобы реально разговаривать. Бубнёж тоже интернационален. Лениво? Пошёл ты, бубнёж рулит. Так или иначе, голосовые реплики так глубоко вплетены в эту кодовую базу, что проще уже их оставить. В смысле... Что если ТЫ, бедная душа, решил, что этой игре по какой-то причине нужны голоса? Мы все и так слышим голоса в своей голове, но ты решил, что излучать голоса с помощью этой игры будет ещё лучшей идеей? Отлично. Что ж, смотри, тебе на этой странице на самом деле нечего делать... Кроме некоторых фанковых вещей...
+
+[p]res://modules/voicelines/assets/samples/[/p] содержит все психотические голоса. Их удобнее организовывать по папкам, так ты можешь... организовывать дерьмо, понимаешь? Гораздо приятнее делать что-то вроде [gd]Voicelines.play_voiceline(\"minc_generic/say_fight0.mp3\")[/gd], чем [gd]Voicelines.play_voiceline(\"minc_generic_say_fight0.mp3\")[/gd], имея дело с папкой, полной мусора.
+[p]res://modules/voicelines/assets/samples_voicemess/[/p] содержит бубнящие голоса, которые работают практически так же.
+
+[c]Пример использования[/c]
+[gd]
+var voice = Voicelines.play_voiceline(\"minc_generic/say_fight0.mp3\")
+var mumble = Voicelines.play_voicemess(\"men0.ogg\")
+var char_voice = Voicelines.play_voiceline_character(
+	\"minc_generic/say_research0.mp3\", character, 20.0, -10.0)
+[/gd]
+
+Для получения дополнительной информации:
+	- Проверь документацию [gd]Voicelines[/gd]
+	- Перечитай."
+edit_time = 1.76123e+09

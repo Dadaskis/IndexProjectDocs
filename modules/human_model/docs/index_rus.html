@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - human_model
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: human_model
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Это монстр. Ладно. Класс, который заставляет людей выглядеть как что-то в этой игре. Это всё, что тебе нужно знать об этом модуле. Он используется NPC для отображения человеческой внешности.<br>
+							<img src="../../../_guide/.images/human_model/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+							</p>
+							<h2>
+								Как работать с этим в качестве художника
+							</h2>
+							<p>
+								<br>
+								Предположим, ты просто парень, который хочет добавить человеческого персонажа в эту игру.<br>
+								<img src="../../../_guide/.images/character_builder/use23.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<img src="../../../_guide/.images/character_builder/use24.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Итак, чтобы сделать здесь некоторую алхимическую магию, тебе просто нужно следовать следующим шаблонам и выполнить следующие действия:<br>
+										&emsp;- Убедись, что у тебя есть следующая структура в Blender:<br>
+										&emsp;<code class="gdscript">
+											<br>
+											&emsp;└── human_rig<br>
+											&emsp;&emsp;└── character<br>
+											&emsp;
+										</code>
+										<br>
+										&emsp;Где:<br>
+										&emsp;&emsp;- <code class="gdscript">
+											"human_rig"
+										</code>
+										- это скелет персонажа. Если тебе нужно получить скелет для своих нужд, он хранится в файле <code class="gdscript">
+											"res://.dev_sources/basic/human_rig.blend"
+										</code>
+										.<br>
+										&emsp;&emsp;Однако ты также можешь просто импортировать модель из Character Builder для этого.<br>
+										&emsp;&emsp;- Меш <code class="gdscript">
+											"character"
+										</code>
+										должен быть привязан к <code class="gdscript">
+											"human_rig"
+										</code>
+										.<br>
+										<br>
+									</p>
+									<h2>
+										Структура персонажа
+									</h2>
+									<p>
+										<br>
+									</p>
+									<center>
+										<code class="gdscript">
+											<br>
+											└── human_rig # Скелет персонажа, сохраняй его неизменным и переиспользуй уже существующий арматур в Blender<br>
+											&emsp;└── character # Основной меш персонажа<br>
+											&emsp;└── character_LOD # LOD-меш персонажа (низкая детализация), который показывается на определённом расстоянии от камеры<br>
+										</code>
+									</center>
+									<p>
+										<br>
+										<br>
+										Затем ты просто используешь BlenderFastTools для экспорта своей человеческой модели, нажав <code class="gdscript">
+											"Export Character"
+										</code>
+										в разделе <code class="gdscript">
+											"Human Model Tools"
+										</code>
+										. Прежде чем нажать эту кнопку, убедись, что ты сохранил свой .blend файл с подходящим именем персонажа, которого хочешь экспортировать. Настоятельно рекомендуется хранить все модели человеческих персонажей в <code class="gdscript">
+											"res://.dev_sources/human_models/"
+										</code>
+										. Как только ты сохранил свой файл, ты можешь нажать "Export character", что автоматически экспортирует соответствующий GLTF файл в <code class="gdscript">
+											"res://modules/human_model/assets/models/
+											[CHARACTER_NAME_HERE]
+											"
+										</code>
+										.<br>
+										<img src="../../../_guide/.images/character_builder/use26.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											После экспорта персонажа из Blender убедись, что посетил эту папку в Godot, чтобы импортировать модели и настроить материалы, назначив им правильные значения и текстуры во всех слотах.<br>
+											<img src="../../../_guide/.images/character_builder/use27.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												По умолчанию Godot импортирует материалы <code class="gdscript">
+													SpatialMaterial
+												</code>
+												вместо <code class="gdscript">
+													UserSpatialUbershader
+												</code>
+												, которые используются для всех материалов в этой игре. Во-первых - тебе нужно заменить <code class="gdscript">
+													SpatialMaterial
+												</code>
+												на <code class="gdscript">
+													UserSpatialUbershader
+												</code>
+												. Ты можешь просто удалить файл, создать новый ресурс (с тем же именем, заметь) и тогда всё будет круто. Однако это может быть слишком медленно, так что я хотел бы показать более лёгкий метод. Сначала скопируй путь к папке...<br>
+												<img src="../../../_guide/.images/character_builder/use28.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													Затем открой меню <code>
+														OtherKit
+													</code>
+													...<br>
+													<img src="../../../_guide/.images/character_builder/use29.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+														Кликни здесь несколько раз...<br>
+														<img src="../../../_guide/.images/character_builder/use30.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+															Найди вкладку "Material Replace", введи путь к папке, нажми "Replace"<br>
+															<img src="../../../_guide/.images/character_builder/use31.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																Хотя это может показаться более сложным, чем делать это по-старинке, я лично нашёл это быстрее, потому что окно "Create a new resource" в этом проекте работает медленно, плюс я слишком ленив, чтобы правильно сохранять ресурс, тогда как этот инструмент помогает обнаружить любой <code class="gdscript">
+																	SpatialMaterial
+																</code>
+																и заменить их соответственно. Однако вернёмся к конфигурации. Когда ты получил в свои руки новый <code class="gdscript">
+																	UserSpatialUbershader
+																</code>
+																, тебе нужно включить эффекты... Также убедись, что изменил <code>
+																	Diffuse Mode
+																</code>
+																на <code class="gdscript">
+																	"Burley"
+																</code>
+																и <code>
+																	Specular Mode
+																</code>
+																на <code class="gdscript">
+																	"Schlick GGX"
+																</code>
+																...<br>
+																<img src="../../../_guide/.images/character_builder/use32.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																	<br>
+																	<img src="../../../_guide/.images/character_builder/use33.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																		<br>
+																		Для большинства персонажей тебе понадобятся эффекты <code>
+																			Albedo
+																		</code>
+																		, <code>
+																			Normal Map
+																		</code>
+																		, <code>
+																			MRS
+																		</code>
+																		. Иногда - <code>
+																			Emission
+																		</code>
+																		. Все эти эффекты будут более чем достаточными, чтобы сделать по-сути приличных персонажей любой сложности. После того как ты закончил включать эффекты, нажми <code>
+																			Force Update
+																		</code>
+																		, чтобы обновить шейдер в этом материале в соответствии с требованиями рендерера.<br>
+																		<img src="../../../_guide/.images/character_builder/use34.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																			<br>
+																			После того как ты обновил материал, ты можешь назначить текстуры в слоты. Имей в виду - изначально твой материал будет полностью чёрным, так что не забудь изменить <code>
+																				Albedo Color
+																			</code>
+																			на белый. Более того, <code>
+																				Normal Map Power
+																			</code>
+																			по умолчанию равен <code>
+																				0.0
+																			</code>
+																			, убедись, что изменил значение на <code>
+																				1.0
+																			</code>
+																			, чтобы normal map оказывал полное влияние на освещение этого материала. После всего этого - мистер Shitass0 должен выглядеть свежо и чисто.<br>
+																			<img src="../../../_guide/.images/character_builder/use35.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																				<br>
+																				<br>
+																			</p>
+																			<h2>
+																				Структура скриптов
+																			</h2>
+																			<p>
+																				<br>
+																				<code class="gdscript">
+																					<br>
+																					.<br>
+																					├── autoload<br>
+																					│   ├── human_model_file_archive.gd<br>
+																					│   └── ragdoll_list.gd<br>
+																					├── config<br>
+																					│   ├── footstep_anim_footmark.gd<br>
+																					│   ├── footstep_anim_mark.gd<br>
+																					│   ├── footstep_marks.gd<br>
+																					│   └── weapon_config.gd<br>
+																					├── helper<br>
+																					│   ├── anim_event_caller.gd<br>
+																					│   └── ragdoll_logic.gd<br>
+																					├── human_model.gd<br>
+																					└── test<br>
+																					└── walker_control.gd<br>
+																				</code>
+																				<br>
+																				Сердце всего этого модуля - <code class="gdscript">
+																					"human_model.gd"
+																				</code>
+																				, который является классом <code class="gdscript">
+																					HumanModel
+																				</code>
+																				, который *ты должен использовать*. Это конец линии. Закрой страницу документации, это всё, что тебе нужно знать... Шучу, я думаю, мне также нужно написать, как использовать этот класс.<br>
+																				<br>
+																				Другие файлы:<br>
+																				&emsp;- <code class="gdscript">
+																					"autoload/human_model_file_archive.gd"
+																				</code>
+																				- это синглтон <code class="gdscript">
+																					HumanModelFileArchive
+																				</code>
+																				, который управляет некоторыми вещами, связанными с файлами анимаций и материалов.<br>
+																				&emsp;- <code class="gdscript">
+																					"autoload/ragdoll_list.gd"
+																				</code>
+																				- это общий список всех рэгдоллов, управляет некоторой логикой там тоже, это класс <code class="gdscript">
+																					RagdollList
+																				</code>
+																				.<br>
+																				&emsp;- <code class="gdscript">
+																					"config/footstep_anim_footmark.gd"
+																				</code>
+																				- это ресурс-конфиг <code class="gdscript">
+																					HumanModelFootMark
+																				</code>
+																				, который имеет только 2 переменные: кадры подъёма и опускания. Этот класс используется в классе <code class="gdscript">
+																					HumanModelFootstepAnimMark
+																				</code>
+																				.<br>
+																				&emsp;- <code class="gdscript">
+																					"config/footstep_anim_mark.gd"
+																				</code>
+																				- это упомянутый класс <code class="gdscript">
+																					HumanModelFootstepAnimMark
+																				</code>
+																				, который содержит 2 массива <code class="gdscript">
+																					HumanModelFootMark
+																				</code>
+																				для обеих ног. Он также привязан к конкретной анимации.<br>
+																				&emsp;- <code class="gdscript">
+																					"config/footstep_marks.gd"
+																				</code>
+																				- это просто класс <code class="gdscript">
+																					HumanModelFootstepMarks
+																				</code>
+																				, который содержит массив <code class="gdscript">
+																					HumanModelFootstepAnimMark
+																				</code>
+																				, который позже загружается <code class="gdscript">
+																					HumanModel
+																				</code>
+																				для отметки событий шагов по ряду причин, таких как правильно синхронизированные звуки шагов и заброшенный "Foot IK", которого никто не должен касаться никогда.<br>
+																				&emsp;- <code class="gdscript">
+																					"config/weapon_config.gd"
+																				</code>
+																				настраивает оружие, используемое <code class="gdscript">
+																					HumanModel
+																				</code>
+																				, это ресурс <code class="gdscript">
+																					HumanWeaponConfig
+																				</code>
+																				.<br>
+																				&emsp;- <code class="gdscript">
+																					"helper/anim_event_caller.gd"
+																				</code>
+																				- это хак, который я написал с любовью, страстью и чистой ненавистью, просто чтобы получить вызов <code class="gdscript">
+																					animation_event_occured
+																				</code>
+																				в <code class="gdscript">
+																					HumanModel
+																				</code>
+																				.<br>
+																				&emsp;- <code class="gdscript">
+																					"helper/ragdoll_logic.gd"
+																				</code>
+																				- это скрипт для логики рэгдолла, который обрабатывает заморозку костей, контроль их времени жизни, удаление и т.д.<br>
+																				&emsp;- <code class="gdscript">
+																					"test/walker_control.gd"
+																				</code>
+																				мы не говорим об этом. Я никогда не буду говорить об этом. Ты не хочешь знать об этом.<br>
+																				<br>
+																				Сцены:<br>
+																				&emsp;- <code class="gdscript">
+																					"assets/ragdoll/ragdoll_model_v2.tscn"
+																				</code>
+																				- сцена рэгдолла, которая используется для экземпляров рэгдоллов <code class="gdscript">
+																					HumanModel
+																				</code>
+																				.<br>
+																				&emsp;- <code class="gdscript">
+																					"assets/hitbox/hitbox.tscn"
+																				</code>
+																				- сцена хитбокса, которая используется для инстанциирования структуры хитбоксов <code class="gdscript">
+																					HumanModel
+																				</code>
+																				, имей в виду, что остальная часть инициализации хитбоксов (настройка <code class="gdscript">
+																					KinematicBody
+																				</code>
+																				) может происходить в коде функции инициализации хитбоксов в <code class="gdscript">
+																					HumanModel
+																				</code>
+																				. <code class="gdscript">
+																					NPCHuman
+																				</code>
+																				делает свои собственные регулировки к инициализации хитбоксов, имей это в виду.<br>
+																				<br>
+																			</p>
+																			<h2>
+																				Как ты должен использовать HumanModel в коде?
+																			</h2>
+																			<p>
+																				<br>
+																			</p>
+																			<center>
+																				<code class="gdscript">
+																					<br>
+																					#&emsp;1. СОЗДАЙ контейнер модели с регулировкой высоты<br>
+																					#&emsp;&emsp;- Добавь узел Spatial как "model_tweak"<br>
+																					#&emsp;&emsp;- Настрой позицию Y на "MODEL_TWEAK_HEIGHT" (в сценарии NPC это "0.0" LOL)<br>
+																					var model_tweak = Spatial.new()<br>
+																					add_child(model_tweak)<br>
+																					<br>
+																					#&emsp;2. СОЗДАЙ новый экземпляр "HumanModel"<br>
+																					#&emsp;&emsp;- Установи ссылку "scene_root" на LocationBase<br>
+																					var humanoid = HumanModel.new()<br>
+																					humanoid.scene_root = LocationBaseScene.get_scene()<br>
+																					<br>
+																					#&emsp;3. НАСТРОЙ параметры модели<br>
+																					#&emsp;&emsp;- Добавь "self" ("KinematicBody" в этом случае) в список исключений (Я не знаю, зачем это нужно, просто сделай это)<br>
+																					humanoid.exclude.append(self)<br>
+																					<br>
+																					#&emsp;4. ЗАГРУЗИ модель персонажа<br>
+																					#&emsp;&emsp;- Выбери имя модели (например, "merc_light_unit0")<br>
+																					#&emsp;&emsp;- Вызови HumanModel.load_character() с именем модели и контейнером<br>
+																					humanoid.load_character("merc_light_unit0", model_tweak)<br>
+																					<br>
+																					#&emsp;5. НАСТРОЙ оружие<br>
+																					#&emsp;&emsp;* Установи вооружённые наборы анимаций (приседание, ходьба, движение, бег, покой) или наборы анимаций без оружия/гражданского<br>
+																					#&emsp;&emsp;* Включи безопасный режим оружия в зависимости от твоей потребности<br>
+																					#<br>
+																					# Наборы анимаций - это просто куча анимаций в GLTF, которые применяются в AnimationPlayer<br>
+																					# экземпляра HumanModel.<br>
+																					humanoid.use_animation_set("armed_crouch")<br>
+																					humanoid.use_animation_set("armed_walk")<br>
+																					humanoid.use_animation_set("armed_move")<br>
+																					humanoid.use_animation_set("armed_run",
+																					[]
+																					, true)<br>
+																					humanoid.use_animation_set("armed_idle")<br>
+																					humanoid.set_weapon_safe_mode(true)<br>
+																					#&emsp;Ты можешь делать эти штуки с оружием в любое время, кстати.<br>
+																					# По крайней мере, я думаю, что можешь... Я использовал это всего раз в коде...<br>
+																					humanoid.set_weapon("AR-100")<br>
+																					<br>
+																					#&emsp;6. ПОДКЛЮЧИ callback root motion, если необходимо<br>
+																					#&emsp;&emsp;- Свяжи сигнал "on_root_offset" с функцией-обработчиком<br>
+																					humanoid.connect("on_root_offset", self, "on_root_offset_func")<br>
+																				</code>
+																			</center>
+																			<p>
+																				<br>
+																				<br>
+																			</p>
+																			<h4 style="width: 60%">
+																				Полезные функции
+																			</h4>
+																			<p>
+																				<br>
+																			</p>
+																			<center>
+																				<code class="gdscript">
+																					<br>
+																					# Войди в режим ACT и проиграй анимацию ACT<br>
+																					humanoid.set_act_mode(true)<br>
+																					humanoid.play_act_anim("heavy_unit_stun")<br>
+																				</code>
+																			</center>
+																			<p>
+																				<br>
+																				<br>
+																				Честно говоря, об этом классе можно сказать больше, но я не совсем уверен, что следует рассказать. Если тебе есть что указать - свяжись со мной, Dadaskis, я отредактирую документацию соответственно. Но кроме этого - всё готово.
+																			</p>
+																			<h3>
+																				General Information
+																			</h3>
+																			<h4>
+																				Root directories list
+																			</h4>
+																			<p>
+																				assets, docs, src
+																			</p>
+																			<h4>
+																				Nodes
+																			</h4>
+																			<p>
+																				<a class="a_simple" href="./scripts/human_model_file_archive.html">
+																					HumanModelFileArchive
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/ragdoll_list.html">
+																					RagdollList
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/anim_event_caller.html">
+																					HumanModelAnimEventCaller
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/ragdoll_logic.html">
+																					ragdoll_logic
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/walker_control.html">
+																					walker_control
+																				</a>
+																			</p>
+																			<h4>
+																				Classes
+																			</h4>
+																			<p>
+																				<a class="a_simple" href="./scripts/human_model.html">
+																					HumanModel
+																				</a>
+																			</p>
+																			<h4>
+																				Resources
+																			</h4>
+																			<p>
+																				<a class="a_simple" href="./scripts/footstep_anim_mark.html">
+																					HumanModelFootstepAnimMark
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/footstep_marks.html">
+																					HumanModelFootstepMarks
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/footstep_anim_footmark.html">
+																					HumanModelFootMark
+																				</a>
+																				<br>
+																				<a class="a_simple" href="./scripts/weapon_config.html">
+																					HumanWeaponConfig
+																				</a>
+																			</p>
+																			<h4>
+																				Other Scripts
+																			</h4>
+																			<p>
+																				None
+																			</p>
+																		</div>
+																	</div>
+																</center>
+																<script src="../../../_guide/code_blocks.js">
+																</script>
+															</body>
+														</html>

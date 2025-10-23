@@ -1,0 +1,111 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Damagable module that contains basic damagable classes as well as the damagable list and a damage trigger. That's a lot of damage.
+
+[c]Script Hierarchy[/c]
+[gd]
+Core
+├── damagable.gd - Damagable
+│ # The most basic damageable object class
+│ └── basic_damagable.gd - BasicDamagable
+│ 	# Basic damageable object implementation, used by props and etc
+├── damagable_list.gd - DamagableList
+│ # Global list of all damageable objects
+├── damage_trigger.gd - DamageTrigger
+│ # Trigger that *damages*, you know
+# Some of the scripts like \"reasons.gd\" and \"damagable_link.gd\" are not included
+# because they are *kinda* obsolete
+[/gd]
+
+[c]Turn your object into something breakable[/c]
+[gd]
+var static_body: StaticBody # Let's assume it has StaticBody as child
+var damagable: BasicDamagable
+# ...
+
+# Create damage component 
+damagable = BasicDamagable.new()
+# Configure damage settings
+damagable.health = 100
+# Reference to a node to remove on destruction
+damagable.node_to_remove = self
+# It's true by default, but i'm just writing it here, because...
+# well, you know, you can change it
+damagable.remove_on_destroy = true
+# Add damage property to node
+HitBodyTool.add_node_property(
+	static_body, BasicDamagable.OBJECT_NAME, damagable
+)
+# Connect signals
+damagable.connect(\"on_damage\", self, \"prop_damaged\")
+damagable.connect(\"on_destroyed\", self, \"prop_destroyed\")
+# ...
+
+# Called every time your object is damaged
+func prop_damaged():
+	# You can check last damage value like this
+	var value = damagable.last_damage_value
+
+# Called every time your object is destroyed (might be the last time...)
+func prop_destroyed():
+	pass
+[/gd]
+
+For more implementation nuances, you are adviced to check source code of either [gd]BasicDamagable[/gd] or [gd]Damagable[/gd]"
+info_rus = "Модуль Damagable, содержащий базовые классы для нанесения урона, а также список damageable объектов и триггер урона. \"That's a lot of damage.\"
+
+[c]Иерархия скриптов[/c]
+[gd]
+Ядро
+├── damagable.gd - Damagable
+│ # Самый базовый класс объекта, которому можно нанести урон
+│ └── basic_damagable.gd - BasicDamagable
+│ 	# Реализация базового объекта для урона, используется пропсами и т.д.
+├── damagable_list.gd - DamagableList
+│ # Глобальный список всех объектов, которым можно нанести урон
+├── damage_trigger.gd - DamageTrigger
+│ # Триггер, который *наносит урон*, ты знаешь
+# Некоторые скрипты, такие как \"reasons.gd\" и \"damagable_link.gd\", не включены
+# потому что они *как бы* устарели
+[/gd]
+
+[c]Преврати свой объект во что-то ломаемое[/c]
+[gd]
+var static_body: StaticBody # Предположим, у него есть StaticBody как потомок
+var damagable: BasicDamagable
+# ...
+
+# Создаём компонент урона
+damagable = BasicDamagable.new()
+# Настраиваем параметры урона
+damagable.health = 100
+# Ссылка на узел для удаления при уничтожении
+damagable.node_to_remove = self
+# Это true по умолчанию, но я просто пишу это здесь, потому что...
+# ну, ты знаешь, ты можешь изменить это
+damagable.remove_on_destroy = true
+# Добавляем свойство урона к узлу
+HitBodyTool.add_node_property(
+	static_body, BasicDamagable.OBJECT_NAME, damagable
+)
+# Подключаем сигналы
+damagable.connect(\"on_damage\", self, \"prop_damaged\")
+damagable.connect(\"on_destroyed\", self, \"prop_destroyed\")
+# ...
+
+# Вызывается каждый раз, когда твой объект получает урон
+func prop_damaged():
+	# Ты можешь проверить последнее значение урона вот так
+	var value = damagable.last_damage_value
+
+# Вызывается каждый раз, когда твой объект уничтожается (может быть, в последний раз...)
+func prop_destroyed():
+	pass
+[/gd]
+
+Для получения дополнительных нюансов реализации тебе крайне рекомендуется проверить исходный код либо [gd]BasicDamagable[/gd], либо [gd]Damagable[/gd]"
+edit_time = 1.76113e+09

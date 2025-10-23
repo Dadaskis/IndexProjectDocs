@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "So, what are \"soundscapes\"? It's basically a fancier word for ambience. In this project, \"soundscapes\" are just a way to structure data for ambience. That includes looped audio samples *and* audio samples that are played randomly throughout the game. Different soundscapes can be used for different environments, interiors, exteriors, outer worlds, out in the skies, etc. You can make anything with it, really... As long as you have any experience in sound design, you are free to do anything you wish.
+
+//img:soundscape/example0.png
+//img:soundscape/example1.png
+
+This documentation page reads too normal and I need to find a way to fuck this up... Oh wait, I just did. Anyways...
+
+[wc]Creating your own soundscape[/wc]
+All soundscapes are stored at [p]res://modules/soundscape/assets/soundscapes/[/p] as [gd]SoundscapeClass[/gd].
+//img:soundscape/create0.png
+
+[gd]SoundscapeClass[/gd] has all the info you need, which are... Reverb data, an array of looped samples and an array of random samples. Reverb data is just a preset for reverberation/delay settings. Arrays should be self-explanatory.
+//img:soundscape/create1.png
+
+[p]res://modules/soundscape/assets/sounds_reverb_data/[/p] contains [gd]SoundscapeReverbData[/gd] resource files that are configuring earlier mentioned reverberation and delay.
+[p]res://modules/soundscape/assets/sounds_data_looped/[/p] contains [gd]SoundscapeLoopedSound[/gd] resource files that configure the looped sample, which is all about the audio sample, volume, pitch, inspiration value, tech debt...
+[p]res://modules/soundscape/assets/sounds_data_random/[/p] contains [gd]SoundscapeRandomSounds[/gd] resource files that configure a set of random samples, which is all about the audio samples themselves, min/max volume, min/max pitch, location of the lizard people...
+
+All [gd]Soundscape[/gd] nodes contain a class name of the soundscape to play, which is just a file name of the [gd]SoundscapeClass[/gd] resource stored at [p]res://modules/soundscape/assets/soundscapes/[/p]. You just create a node, assign the soundscape name, and enjoy the ambience of your personal hellish temple."
+info_rus = "Итак, что такое \"саундскейпы\" (soundscapes)? По сути, это просто более модное слово для атмосферных звуков. В этом проекте \"саундскейпы\" - это просто способ структурировать данные для атмосферы. Это включает зацикленные аудио сэмплы *и* аудио сэмплы, которые проигрываются случайным образом на протяжении игры. Разные саундскейпы могут использоваться для разных окружений: интерьеров, экстерьеров, внешних миров, в небесах и т.д. Ты действительно можешь сделать что угодно с их помощью... Пока у тебя есть какой-никакой опыт в саунд-дизайне, ты свободен делать всё, что пожелаешь.
+
+//img:soundscape/example0.png
+//img:soundscape/example1.png
+
+Эта страница документации читается слишком нормально, и мне нужно найти способ это испортить... Ой, подожди, я только что это сделал. В любом случае...
+
+[wc]Создание собственного саундскейпа[/wc]
+Все саундскейпы хранятся в [p]res://modules/soundscape/assets/soundscapes/[/p] как [gd]SoundscapeClass[/gd].
+//img:soundscape/create0.png
+
+[gd]SoundscapeClass[/gd] содержит всю необходимую тебе информацию, а именно... Данные реверберации, массив зацикленных сэмплов и массив случайных сэмплов. Данные реверберации - это просто пресет для настроек реверберации/эха. Массивы должны быть понятными.
+//img:soundscape/create1.png
+
+[p]res://modules/soundscape/assets/sounds_reverb_data/[/p] содержит файлы ресурсов [gd]SoundscapeReverbData[/gd], которые настраивают упомянутые ранее реверберацию и эхо.
+[p]res://modules/soundscape/assets/sounds_data_looped/[/p] содержит файлы ресурсов [gd]SoundscapeLoopedSound[/gd], которые настраивают зацикленный сэмпл - всё об аудио сэмпле, громкости, высоте тона, ценность, техническом долге...
+[p]res://modules/soundscape/assets/sounds_data_random/[/p] содержит файлы ресурсов [gd]SoundscapeRandomSounds[/gd], которые настраивают набор случайных сэмплов - всё о самих аудио сэмплах, мин./макс. громкости, мин./макс. высоте тона, местоположении людей-ящериц...
+
+Все ноды [gd]Soundscape[/gd] содержат имя класса саундскейпа для воспроизведения, которое является просто именем файла ресурса [gd]SoundscapeClass[/gd], хранящегося в [p]res://modules/soundscape/assets/soundscapes/[/p]. Ты просто создаёшь ноду, назначаешь имя саундскейпа и наслаждаесь атмосферой своего личного адского храма."
+edit_time = 1.76123e+09

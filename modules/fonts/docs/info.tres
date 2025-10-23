@@ -1,0 +1,57 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A module with quite a variety of fonts, but nothing besides that. I kept it as separate module because i had to reuse the fonts quite often.
+
+[gd]
+├── roboto_mono
+│   ├── RobotoMono-BoldItalic.ttf
+│   ├── RobotoMono-Bold.ttf
+│   ├── RobotoMono-ExtraLightItalic.ttf
+│   ├── RobotoMono-ExtraLight.ttf
+│   ├── RobotoMono-Italic.ttf
+│   ├── RobotoMono-LightItalic.ttf
+│   ├── RobotoMono-Light.ttf
+│   ├── RobotoMono-MediumItalic.ttf
+│   ├── RobotoMono-Medium.ttf
+│   ├── RobotoMono-Regular.ttf
+│   ├── RobotoMono-SemiBoldItalic.ttf
+│   ├── RobotoMono-SemiBold.ttf
+│   ├── RobotoMono-ThinItalic.ttf
+│   └── RobotoMono-Thin.ttf
+├── AreaKilometer50-ow3xB.ttf
+├── GiganticFs-d9doR.ttf
+├── PastiRegular-mLXnm.otf
+├── PixelIntv-OPxd.ttf
+├── RobotoMono-VariableFont_wght.ttf
+└── Tvcd-d92gK.ttf
+[/gd]"
+info_rus = "Модуль с довольно большим разнообразием шрифтов, но ничем кроме этого. Я оставил его как отдельный модуль, потому что мне приходилось довольно часто переиспользовать эти шрифты.
+
+[gd]
+├── roboto_mono
+│   ├── RobotoMono-BoldItalic.ttf
+│   ├── RobotoMono-Bold.ttf
+│   ├── RobotoMono-ExtraLightItalic.ttf
+│   ├── RobotoMono-ExtraLight.ttf
+│   ├── RobotoMono-Italic.ttf
+│   ├── RobotoMono-LightItalic.ttf
+│   ├── RobotoMono-Light.ttf
+│   ├── RobotoMono-MediumItalic.ttf
+│   ├── RobotoMono-Medium.ttf
+│   ├── RobotoMono-Regular.ttf
+│   ├── RobotoMono-SemiBoldItalic.ttf
+│   ├── RobotoMono-SemiBold.ttf
+│   ├── RobotoMono-ThinItalic.ttf
+│   └── RobotoMono-Thin.ttf
+├── AreaKilometer50-ow3xB.ttf
+├── GiganticFs-d9doR.ttf
+├── PastiRegular-mLXnm.otf
+├── PixelIntv-OPxd.ttf
+├── RobotoMono-VariableFont_wght.ttf
+└── Tvcd-d92gK.ttf
+[/gd]"
+edit_time = 1.76113e+09

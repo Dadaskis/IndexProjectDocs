@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - usable_showup
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: usable_showup
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/usable_showup/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								You see that text over there? The one that could easily insult a good chunk of the US population, you know? So yeah, this is what I call "Usable Showup". It helps the player to identify - what that usable object does. It was made because:<br>
+								A: People were confused about certain control panels that I love to use nonetheless...<br>
+								B: I'm the laziest fuck to exist, of course I'm going to abuse shit like this, instead of level designing it in a "right" way.<br>
+								One module solves a huge problem to exist. It's amazing. Makes life easier. Like a breathe of fresh air. A breathe of air full of text, but still.<br>
+								<br>
+								<code>
+									Usage example
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Our glorified parent node<br>
+									var parent<br>
+									<br>
+									# Sets the main prompt text (line 0)<br>
+									func set_text0_text(text: String):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text0_text(text)<br>
+									<br>
+									# Gets the main prompt text (line 0)<br>
+									func get_text0_text() ->
+									String:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return ""<br>
+									&emsp;return usable_showup.get_text0_text()<br>
+									<br>
+									# Sets the color for the main prompt text<br>
+									func set_text0_color(color: Color):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;usable_showup.set_text0_color(color)<br>
+									<br>
+									# Gets the color of the main prompt text<br>
+									func get_text0_color() ->
+									Color:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;return usable_showup.get_text0_color()<br>
+									<br>
+									# Sets the secondary prompt text (line 1)<br>
+									func set_text1_text(text: String):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text1_text(text)<br>
+									<br>
+									# Gets the secondary prompt text (line 1)<br>
+									func get_text1_text() ->
+									String:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return ""<br>
+									&emsp;return usable_showup.get_text1_text()<br>
+									<br>
+									# Sets the color for the secondary prompt text<br>
+									func set_text1_color(color: Color):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text1_color(color)<br>
+									<br>
+									# Gets the color of the secondary prompt text<br>
+									func get_text1_color() ->
+									Color:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;return usable_showup.get_text1_color()<br>
+									<br>
+									# Shows or hides the interaction prompt UI<br>
+									func set_showup_visible(value: bool):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_showup_visible(value)<br>
+									<br>
+									# Checks if the interaction prompt is currently visible<br>
+									func get_showup_visible() ->
+									bool:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return false<br>
+									&emsp;return usable_showup.get_showup_visible()<br>
+									<br>
+									# Creates and attaches the interaction prompt UI<br>
+									# showup_scale: Scaling factor for the prompt UI (default 1.0)<br>
+									func create_showup(showup_scale: = 1.0):<br>
+									&emsp;# If showup already exists, just update its scale and visibility<br>
+									&emsp;if usable_showup:<br>
+									&emsp;&emsp;usable_showup.scale = Vector3.ONE * showup_scale<br>
+									&emsp;&emsp;set_showup_visible(true)<br>
+									&emsp;&emsp;return<br>
+									&emsp;<br>
+									&emsp;# Create new showup instance and configure it<br>
+									&emsp;usable_showup = UsableShowup.create_showup()<br>
+									&emsp;usable_showup.scale = Vector3.ONE * showup_scale<br>
+									&emsp;parent.add_child(usable_showup)<br>
+								</code>
+								<br>
+								<br>
+								And all that functionality is a part of <code class="gdscript">
+									Usable
+								</code>
+								class that is already used by all buttons of any sorts, it is highly advised just to use <code class="gdscript">
+									Usable
+								</code>
+								instead. I mean dude. I wrote it already. You don't have to copypaste that shit I wrote already. It's amazing to exploit my labor. So? Just do it. It's funny. Doesn't take too much time. And...<br>
+								<br>
+								Good luck.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/usable_showup.html">
+									UsableShowup
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "I want to ask for forgiveness of all demigods because what I'm about to do is unforgivable...
+
+[gd]Values[/gd] singweton is a fancy-wancy w-way to save vawues gwobawwy acwoss a-all saves〜☆  j-just a gwobaw vawue. isn't affected by anything-.- gweat O.o w-wight☆  v-vewy c-coow☆  you can s-set a vawue and it'll be saved fowever ☆*:・☆  at weast untiw the pwayew won't n-nuke theiw own p-pc. it shouwd be a-awwight. :3
+[c]usage exampwe[/c]
+[gd]
+Values.set_value(\"thingy\", \"123\")
+var value = Values.get_value(\"thingy\", \"0\")
+[/gd]
+that's all☆☆☆  i h-hope you have a gweat day, s-sweetheawt. :3"
+info_rus = "Я хочу попросить прощения у всех полубогов, потому что то, что я сейчас сделаю, непростительно...
+
+[gd]Values[/gd] синглтон - это фанси-ванси способик глобально сохранять значения во всех сейвах〜☆ просто глобальная переменная. на неё ничего не влияет.-.- круто O.o да☆ о-очень клёво☆ можно установить значение, и оно сохранится навсегда ☆*:・☆ по крайней мере, пока игрок не удалит всё со своего пк. вроде всё норм. :3
+[c]пример использования[/c]
+[gd]
+Values.set_value(\"thingy\", \"123\")
+var value = Values.get_value(\"thingy\", \"0\")
+[/gd]
+это всё☆☆☆ надеюсь, у тебя будет замечательный день, милашка. :3"
+edit_time = 1.76123e+09

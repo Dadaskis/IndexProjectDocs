@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - characters
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: characters
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							A module created for overall character data. It's not about visual representation of characters, but mostly about their data that is used for AI calculations and interactivity. This module consists of several parts: <code class="gdscript">
+								Character
+							</code>
+							HitBody class, <code class="gdscript">
+								CharacterDamagable
+							</code>
+							HitBody class, <code class="gdscript">
+								CharacterList
+							</code>
+							singleton, <code class="gdscript">
+								Factions
+							</code>
+							singleton and <code class="gdscript">
+								FactionsInitData
+							</code>
+							resource.<br>
+							<br>
+							Given the fact characters are practically just being HitBody data, *anything* can be a character. A prop, an NPC, or just a random bunch of nodes with some physics on top. <code class="gdscript">
+								Character
+							</code>
+							just contains general data like health, "raycast point", special/display names, reference to node, alive status, etc. For more information about properties you can check documentation of <code class="gdscript">
+								Character
+							</code>
+							.<br>
+							<br>
+							All <code class="gdscript">
+								Character
+							</code>
+							objects are added to <code class="gdscript">
+								CharacterList
+							</code>
+							, and this list is used in calculations of all other characters, therefore remember to keep this list up to date. Even though <code class="gdscript">
+								Character
+							</code>
+							itself is adding its own object to this list, depending on your use-case there might be need to double-check it and add it manually. If your character will be missing from this list, there might be a risk of it not being included correctly into overall logic of this game.<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Creating a new character object<br>
+								var character = Character.new()<br>
+								# Adding this character object as HitBody property<br>
+								HitBodyTool.add_node_property(self, Character.OBJECT_NAME, character)<br>
+								# Setting faction name equal to "funny_dudes"<br>
+								character.faction = "funny_dudes"<br>
+								# Setting maximum health to 100<br>
+								# Keep in mind, if you will try setting health to values greater than 100<br>
+								# it will be clamped to maximum health<br>
+								character.max_health = 100<br>
+								# Setting health to 100<br>
+								character.health = 100<br>
+								# Reference to a node that "controls" this character, in this case - it is parent of this node<br>
+								character.control_node = get_parent()<br>
+								# Is this character Non-Playable Character?<br>
+								# Let's assume that it's one of them, even though this property mostly tells us that<br>
+								# this character is derivative of NonPlayableCharacter class<br>
+								character.is_npc = true<br>
+								# Raycast point is essentially important for visibility checks<br>
+								# If your character moves - set it on each frame<br>
+								# Keep in mind: Raycast point is ALWAYS a global position<br>
+								character.set_raycast_point(global_transform.origin)<br>
+								# Adding a character to list of characters<br>
+								CharacterList.add_character(character)<br>
+								<br>
+								# Removing a character from list of characters<br>
+								CharacterList.remove_character(character)<br>
+								<br>
+								# Checks if other character is friendly<br>
+								var is_friendly = Factions.get_faction_relationship(other_character.faction, faction) != \<br>
+								&emsp;Factions.RelationshipType.ENEMY<br>
+								<br>
+								# List of characters that you can use for some fancy logic<br>
+								var list = CharacterList.get_character_list()<br>
+							</code>
+							<br>
+							<br>
+							<code>
+								Simple visiblity check
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# ---        Simple visibility check algorithm       ---<br>
+								# A snippet taken from a sentry gun code.<br>
+								# It detects the closest VISIBLE character to do some shooting logic.<br>
+								#<br>
+								# The closest character to be found<br>
+								var target: Character<br>
+								# List of all characters<br>
+								var character_list = CharacterList.get_character_list()<br>
+								# Minimal distance, equals to a big number to make THE MACHINE work<br>
+								var min_distance = 100000000<br>
+								# Checking all characters<br>
+								for value in character_list:<br>
+								&emsp;var character: = value as Character<br>
+								&emsp;<br>
+								&emsp;# Basic validation checks<br>
+								&emsp;if not is_instance_valid(character):<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if not character.is_alive():<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if character == self.character:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;if character.faction == faction:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;<br>
+								&emsp;# Skip everyone who's not an enemy<br>
+								&emsp;if Factions.get_faction_relationship(character.faction, faction) != \<br>
+								&emsp;&emsp;&emsp;Factions.RelationshipType.ENEMY:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;<br>
+								&emsp;# Getting another character's raycast point<br>
+								&emsp;# Usually refers to head of a being having this damn point<br>
+								&emsp;var point = character.get_raycast_point()<br>
+								&emsp;# Getting a position to shoot from<br>
+								&emsp;var pos = shoot_pos.global_transform.origin<br>
+								&emsp;# Getting a direction to character we are shooting at<br>
+								&emsp;var dir = (point - pos).normalized()<br>
+								&emsp;<br>
+								&emsp;# Doing a simple raycast from shooting position to another character's <br>
+								&emsp;# raycast point<br>
+								&emsp;var ray = get_world().direct_space_state.intersect_ray(<br>
+								&emsp;&emsp;pos + (dir * 2.0),<br>
+								&emsp;&emsp;point - dir<br>
+								&emsp;)<br>
+								&emsp;<br>
+								&emsp;# If there's any collision, that means there's an obstacle, therefore<br>
+								&emsp;# another character is NOT visible<br>
+								&emsp;if ray:<br>
+								&emsp;&emsp;continue<br>
+								&emsp;# Otherwise, if there's no obstacles, that means another character<br>
+								&emsp;# is visible.<br>
+								&emsp;<br>
+								&emsp;# Checking a distance to a character's raycast point<br>
+								&emsp;var dist = \<br>
+								&emsp;&emsp;gun_prop.global_transform.origin.distance_to(point)<br>
+								&emsp;if dist < min_distance and dist < max_distance:<br>
+								&emsp;&emsp;# If character is the closest one: Remember the distance<br>
+								&emsp;&emsp;# and the character as well<br>
+								&emsp;&emsp;min_distance = dist<br>
+								&emsp;&emsp;target = character<br>
+								# ...<br>
+								# Then you can just use "target" to do any logic with the closest character found<br>
+							</code>
+							<br>
+							<br>
+							<br>
+							<code class="gdscript">
+								CharacterDamagable
+							</code>
+							is a HitBody object that makes it possible to "damage" a character. It works like a basic <code class="gdscript">
+								Damagable
+							</code>
+							object, but it has a reference to <code class="gdscript">
+								Character
+							</code>
+							and a multiplier of incoming damage. In this case, one <code class="gdscript">
+								Character
+							</code>
+							can have multiple <code class="gdscript">
+								CharacterDamagable
+							</code>
+							objects that will have different multipliers (for example head having x2.0 damage).<br>
+							<br>
+							<code>
+								Usage Example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# ---    A snippet taken from NPCHuman class    ---<br>
+								#<br>
+								# Iterate through hitboxes that are all KinematicBody<br>
+								for collision in humanoid.hitbox_collisions:<br>
+								&emsp;# Create a new damageable object<br>
+								&emsp;var damagable = CharacterDamagable.new()<br>
+								&emsp;<br>
+								&emsp;# Kinematic body<br>
+								&emsp;var kinematic_body = collision as KinematicBody<br>
+								&emsp;# Bone attachment that is kinematic body attached to<br>
+								&emsp;var bone_attachment = kinematic_body.get_parent() as BoneAttachment<br>
+								&emsp;<br>
+								&emsp;# Setting a proper character reference to a character that'll be damaged<br>
+								&emsp;damagable.character = character<br>
+								&emsp;<br>
+								&emsp;# Applying some data of hitbox multipliers and etc etc etc<br>
+								&emsp;for hitbox_multiplier in hitbox_data.damage_multipliers:<br>
+								&emsp;&emsp;if hitbox_multiplier.bone_keyword_name in bone_attachment.bone_name:<br>
+								&emsp;&emsp;&emsp;damagable.damage_multiplier = hitbox_multiplier.multiplier<br>
+								&emsp;<br>
+								&emsp;# Adding CharacterDamagable as HitBody property, so later<br>
+								&emsp;# any raycast/area/etc would be able to get that info<br>
+								&emsp;HitBodyTool.add_node_property(<br>
+								&emsp;&emsp;kinematic_body, CharacterDamagable.OBJECT_NAME, damagable)<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/particle_remover.html">
+								particle_remover
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/factions.html">
+								Factions
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_list.html">
+								CharacterList
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/character.html">
+								Character
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_damagable.html">
+								CharacterDamagable
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/factions_init_data.html">
+								FactionsInitData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "You wanna some control? I mean more control. I mean a possibility to control what people see in front of their eyes all the time. The window. Well, the name of this module explains it well. Window Control. Power. What else do you want to know?
+
+[c]Usage example[/c]
+[gd]
+Values.set_value(\"window_fullscreen\", false)
+Values.set_value(\"window_resolution\", \"640x480\") # God's house is 640x480
+Values.set_value(\"display\", 0) # Use the first display
+[/gd]"
+info_rus = "Хочешь немного контроля? В смысле, больше контроля. В смысле, возможность контролировать то, что люди видят перед своими глазами всё время. Окно. Ну, название этого модуля хорошо всё объясняет. Window Control (Управление Окном). Власть. Что ещё ты хочешь знать?
+
+[c]Пример использования[/c]
+[gd]
+Values.set_value(\"window_fullscreen\", false)
+Values.set_value(\"window_resolution\", \"640x480\") # Дом Бога это 640x480
+Values.set_value(\"display\", 0) # Использовать первый дисплей
+[/gd]"
+edit_time = 1.76123e+09

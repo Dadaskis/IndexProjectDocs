@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - cursor_control
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: cursor_control
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Единственная причина существования этого модуля связана с тем, что размер этого проекта стал настолько большим, что использование <code class="gdscript">
+								Input.set_mouse_mode
+							</code>
+							стало сложненьким способом стрелять себе в ноги. Другими словами, <code class="gdscript">
+								Input.set_mouse_mode
+							</code>
+							lacks контроля, когда несколько классов/узлов влияют на видимость курсора, поэтому <code class="gdscript">
+								CursorControl
+							</code>
+							был создан для разрешения этого conflicting поведения, когда курсор мог быть видимыми/невидимыми, когда он не должны быть.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								CursorControl.hide("name")&emsp;&emsp;&emsp;&emsp;# Скрывает курсор<br>
+								CursorControl.show("name")&emsp;&emsp;&emsp;# Показывает курсор<br>
+								CursorControl.deactivate("name")&emsp;# Отключает влияние на курсор<br>
+							</code>
+							<br>
+							<br>
+							Просто как дважды два, однако тебе нужно иметь в виду следующие моменты:<br>
+							&emsp;1. Эта система приоритизирует видимый курсор над невидимым.<br>
+							&emsp;Это значит, что если хотя бы один из предоставленных ключей видимый - курсор тоже станет видимым.<br>
+							&emsp;2. При каждой смене локации вызывается <code class="gdscript">
+								ControlControl.reset()
+							</code>
+							, который сбрасывает влияние всех ключей.<br>
+							&emsp;Просто убедись, что обновляешь ключ своего курсора, если локация изменена.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/cursor_control.html">
+								CursorControl
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

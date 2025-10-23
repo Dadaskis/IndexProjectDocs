@@ -1,0 +1,59 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[wc]It is not recommended to use this feature, because it is incomplete, untested, and is confirmed to have issues. Its development was dropped because it wasn't plausible enough to use. Overall preference was given to a bunch of smaller locations that are optimized for loading screens instead.
+
+[r]
+It is worth mentioning that Godot literally breaks when locations get too big. One of the flaws of this system's idea is related to this fact. Experimental m_day1_x failed due to overall amount of questionable behaviors/bugs and unexplained crashes that happened during playtesting of three players that tested it.
+
+Please, do not make your locations too big in terms of overall size or overall amount of nodes to avoid trouble.
+
+[/r]
+[/wc]
+
+The Location Base Combiner is a system that merges multiple locations into a single \"continuous\" location. It handles level stitching, environment setup, and runtime management of combined locations. Its main purpose is about lowering loading screens between locations to the minimum, while wasting more RAM and VRAM.
+
+[t]How to use it in a location[/t]
+- Create a new location for this one, or use it in an existing one, up to you
+- Create a [gd]LocationBaseCombiner[/gd] node
+//img:location_base_combiner/use0.jpg
+- Add locations you want to combine into list
+//img:location_base_combiner/use1.jpg
+- Click on [c]Update[/c] button
+[r]This is a destructive operation. It will remove all nodes in the scene and replace it with its own setup. You were warned.[/r]
+//img:location_base_combiner/use2.jpg
+- Witness combined locations :)
+//img:location_base_combiner/use3.jpg
+
+[t]How does it really work?[/t]
+It basically adds all mentioned locations into one. It is rewriting some of the location events to resolve potential conflicts, to get this kind of information [gd]LOC_UNIQUE_VARS[/gd] constant is used in the nodes that are processed in [gd]LocationBaseCombinerPart[/gd]. [r]It is not removing loading screens completely[/r], but [c]makes them much faster[/c]. Sadly it happens [r]in exchange for the initial loading screen being longer[/r]. Practically, it allows switching between \"combined\" locations faster, and if you are switching to a location that isn't combined into this one - it'll change the entire location fully."
+info_rus = "[wc]Не рекомендуется использовать эту функцию, потому что она не завершена, не протестирована и имеет подтверждённые проблемы. Её разработка была прекращена, потому что её использование оказалось недостаточно целесообразным. В целом предпочтение было отдано множеству небольших локаций, оптимизированных под экраны загрузки.
+
+[r]
+Стоит упомянуть, что Godot буквально ломается, когда локации становятся слишком большими. Один из недостатков идеи этой системы связан с этим фактом. Экспериментальная m_day1_x провалилась из-за общего количества сомнительных поведений/багов и необъяснимых вылетов, которые произошли во время тестирования тремя игроками.
+
+Пожалуйста, не делай свои локации слишком большими с точки зрения общего размера или общего количества узлов, чтобы избежать проблем.
+
+[/r]
+[/wc]
+
+Location Base Combiner — это система, которая объединяет несколько локаций в одну \"непрерывную\" локацию. Она обрабатывает сшивание уровней, настройку окружения и управление объединёнными локациями во время выполнения. Её основная цель — свести к минимуму экраны загрузки между локациями, расходуя при этом больше оперативной памяти и видеопамяти.
+
+[t]Как использовать это в локации[/t]
+- Создай новую локацию для этого или используй существующую - решать тебе
+- Создай узел [gd]LocationBaseCombiner[/gd]
+//img:location_base_combiner/use0.jpg
+- Добавь локации, которые хочешь объединить, в список
+//img:location_base_combiner/use1.jpg
+- Нажми кнопку [c]Update[/c]
+[r]Это разрушительная операция. Она удалит все узлы в сцене и заменит их своей собственной настройкой. Ты предупреждён.[/r]
+//img:location_base_combiner/use2.jpg
+- Увидь объединённые локации :)
+//img:location_base_combiner/use3.jpg
+
+[t]Как это действительно работает?[/t]
+Она по сути добавляет все упомянутые локации в одну. Она переписывает некоторые из событий локации, чтобы разрешить потенциальные конфликты, для получения этой информации константа [gd]LOC_UNIQUE_VARS[/gd] используется в узлах, которые обрабатываются в [gd]LocationBaseCombinerPart[/gd]. [r]Она не удаляет экраны загрузки completely[/r], но [c]делает их куда быстрее[/c]. К сожалению, это происходит [r]в обмен на более длинный стартовый экран загрузки[/r]. Практически это позволяет переключаться между \"объединёнными\" локациями быстрее, и если ты переключаешься на локацию, которая не объединена в эту — она полностью заменит всю локацию."
+edit_time = 1.76123e+09

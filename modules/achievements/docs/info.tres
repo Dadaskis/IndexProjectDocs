@@ -1,0 +1,61 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:achievements/example0.jpg
+Achievements module. Provides basic toolset to work with achievements in game.
+[p]./assets/data[/p] contain all achievement resources.
+Each resource refers to certain [p]./assets/icons[/p] .PNG image to get an icon: 
+[c]test_name.tres -> test_name.png[/c]
+
+To lock an achievement: [gd]Achievements.lock(\"test_name\")[/gd]
+To unlock an achievement: [gd]Achievements.unlock(\"test_name\")[/gd]
+To add \"count\" into an achievement: [gd]Achievements.add_count(\"test_name\", 1)[/gd]
+
+All of the achievement values are stored inside global Values class so they are saved as soon as Values saved. It is using 2 dictionaries: [c]achievements_unlocked[/c] and [c]achievements_counts[/c]
+[c]achievements_unlocked[/c] - each key is an achievement's codename, and each value is a boolean in which case \"true\" means unlocked.
+[c]achievements_counts[/c] - each key is an achievement's codename, and each value is a number that refers to achievement's current amount property.
+</p>
+<h2>How to make an achievement?</h2>
+<p>
+0. Create a new [gd]AchievementData[/gd] resource at [p]res://modules/achievements/assets/data/[/p]. You can give it any name you wish, it has just to be a unique name that'll serve as a codename of sorts. Using the name of this file you can manipulate the achievement with lock/unlock/add_count/etc methods.
+//img:achievements/create0.jpg
+//img:achievements/create1.jpg
+1. Make an icon for an achievement and export it as .PNG at [p]res://modules/achievements/assets/icons/[/p]. File name of the exported image has to be assigned to the achievement's codename.
+//img:achievements/create2.jpg
+2. Use in game. The simplest way: [c]st_unlock_achievement[/c] ST that can unlock an achievement on certain location event. However, you can add one of the [c]Achievements[/c] methods in code of anything you do.
+//img:achievements/create3.jpg
+
+There's still a way needed to make \"Achievement Listeners\" that would allow to program complex achievement behaviors that might require complex steps to accomplish. However, this is all for the future yet.
+</p>"
+info_rus = "//img:achievements/example0.jpg
+Модуль Достижений. Предоставляет базовый набор инструментов для работы с достижениями в игре.
+
+[p]./assets/data[/p] содержат все ресурсы достижений.
+Каждый ресурс ссылается на определённое изображение .PNG в [p]./assets/icons[/p] для получения иконки:
+[c]test_name.tres -> test_name.png[/c]
+
+Заблокировать достижение: [gd]Achievements.lock(\"test_name\")[/gd]
+Разблокировать достижение: [gd]Achievements.unlock(\"test_name\")[/gd]
+Добавить \"счётчик\" в достижение: [gd]Achievements.add_count(\"test_name\", 1)[/gd]
+
+Все значения достижений хранятся внутри глобального класса Values, поэтому они сохраняются сразу при сохранении Values. Используются 2 словаря: [c]achievements_unlocked[/c] и [c]achievements_counts[/c]
+[c]achievements_unlocked[/c] - каждый ключ это кодовое имя достижения, а каждое значение это булево значение, где \"true\" означает разблокировано.
+[c]achievements_counts[/c] - каждый ключ это кодовое имя достижения, а каждое значение это число, которое указывает на текущее свойство количества достижения.
+
+<h2>Как создать достижение?</h2>
+
+0. Создай новый ресурс [gd]AchievementData[/gd] в [p]res://modules/achievements/assets/data/[/p]. Ты можешь дать ему любое имя, главное чтобы оно было уникальным и служило своего рода кодовым именем. Используя имя этого файла, ты можешь управлять достижением методами lock/unlock/add_count и т.д.
+//img:achievements/create0.jpg
+//img:achievements/create1.jpg
+
+1. Создай иконку для достижения и экспортируй её как .PNG в [p]res://modules/achievements/assets/icons/[/p]. Имя файла экспортированного изображения должно соответствовать кодовому имени достижения.
+//img:achievements/create2.jpg
+
+2. Используй в игре. Самый простой способ: ST [c]st_unlock_achievement[/c], который может разблокировать достижение при определённом событии локации. Однако ты можешь добавить один из методов [c]Achievements[/c] в код чего угодно.
+//img:achievements/create3.jpg
+
+Всё ещё нужен способ создания \"Слушателей Достижений\", которые позволят программировать сложное поведение достижений, требующее комплексных шагов для выполнения. Однако это всё пока в будущем."
+edit_time = 1.76112e+09

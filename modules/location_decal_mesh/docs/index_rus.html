@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_decal_mesh
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_decal_mesh
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<code class="gdscript">
+								LocationDecalMesh
+							</code>
+							представляет собой оптимизированный декаль, который можно использовать в огромных количествах на любых локациях. Он использует mesh instance для этого (что означает точное освещение, меньшую нагрузку на GPU и т.д.) и объединяет всё вместе при запуске игры. Однако такой тип декалей не быстр в проецировании, так как это вычислительно затратно. Это можно сделать достаточно быстро, но это может быть непригодно для случаев, когда нужно создать кровь персонажа повсюду после выстрела (рассмотри возможность использования <code class="gdscript">
+								LocationDecal
+							</code>
+							вместо этого). Создание этих декалей в реальном времени не рекомендуется. Их основное предназначение - размещение их на локациях для добавления дополнительных деталей с помощью плоских плоскостей с полупрозрачными текстурами, которые служат декалями. Другими словами: основное использование этого узла - создание полностью статических декалей.<br>
+							<br>
+							<img src="../../../_guide/.images/location_decal_mesh/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Принцип работы
+							</h4>
+							<p>
+								<br>
+								Сам узел <code class="gdscript">
+									LocationDecalMesh
+								</code>
+								относительно прост, он управляет некоторыми простыми настройками и всем таким. Однако он не содержит логики проецирования. Логика проецирования хранится в <code class="gdscript">
+									"res://modules/location_decal_mesh/third_party/ProjectedDecal.tscn"
+								</code>
+								и связанном с ним скрипте.<br>
+								<br>
+								<a href="https://github.com/Miziziziz/GodotProjectedDecals">
+									Код проецирования декалей был вежливо украден отсюда.
+								</a>
+								<br>
+								<br>
+								Я всё-таки джентльмен.<br>
+								<br>
+								Честно говоря, я бы хотел объяснить, как именно он делает проецирование, но на самом деле... Он просто содержит ебаную кучу математики, которую я не понимаю. Так что всё, что я делаю, это инстанциирую сцену, чтобы сделать трюк с проецированием, получаю меш и на этом всё. Тебе следует поступать так же. Потеряй контроль. Обрети некоторую сомнительную свободу. Пожалуйста.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src, third_party
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/location_decal_mesh.html">
+									LocationDecalMesh
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/location_decal_mesh_combiner.html">
+									LocationDecalMeshCombiner
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/projectdecal.html">
+									projectdecal
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/location_decal_mesh_defaults.html">
+									LocationDecalMeshDefaults
+								</a>
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

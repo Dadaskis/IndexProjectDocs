@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "You can end up just like this class. Being used for your entire life and you will never know... I mean... This module's name says it all. Usable. Usability. Player comes to a button, neuron activation, player sees action, player presses a button, it causes nuclear warfare and the game ends with nuclear ashes instead of credits. Sounds promising? Yeah? Wanna code it yourself? I know you wanna do this dude, here's how:
+[c]Usage example[/c]
+[gd]
+extends Usable
+
+func use():
+	# Code to cause nuclear destruction with all the fancy effects
+[/gd]
+
+[c]Assigning Usable thingy to existing objects[/c]
+[gd]
+var usable = NUCLEAR_DESTRUCTION_SCRIPT.new()
+HitBodyTool.add_node_property(usable_node, Usable.OBJECT_NAME, usable)
+[/gd]
+
+Kabooom."
+info_rus = "Ты можешь закончить точно так же, как этот класс. Тебя будут использовать всю жизнь, и ты так никогда и не узнаешь... В смысле... Название этого модуля говорит само за себя. Usable (Используемое). Удобство использования. Игрок подходит к кнопке, активация нейронов, игрок видит действие, игрок нажимает кнопку, это вызывает ядерную войну, и игра заканчивается ядерным пеплом вместо титров. Звучит многообещающе? Ага? Хочешь запрограммировать это сам? Я знаю, ты хочешь это сделать, чувак, вот как:
+[c]Пример использования[/c]
+[gd]
+extends Usable
+
+func use():
+	# Код для вызова ядерного уничтожения со всеми эффектами
+[/gd]
+
+[c]Назначение Usable штуки существующим объектам[/c]
+[gd]
+var usable = NUCLEAR_DESTRUCTION_SCRIPT.new()
+HitBodyTool.add_node_property(usable_node, Usable.OBJECT_NAME, usable)
+[/gd]
+
+Кабууум."
+edit_time = 1.76123e+09

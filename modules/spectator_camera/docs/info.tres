@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Spectator camera. Promising name that should be self-explanatory. Yeah... It should explain itself pretty well... I'm still not sure what to write about it... Maybe an image will do the trick?
+
+//img:spectator_camera/example0.png
+
+So... This is the spectator camera. Fuck, we are going in circles and I still have no clue what the hell I am supposed to write here. It's just a floating camera, come on, shouldn't that be easy to explain? That's it. Just use [gd]toggle_spectator_camera[/gd] console command to find out what it really is.
+
+[c]Usage example[/c]
+[gd]
+# Creation
+var spec_cam = SpectatorCamera.create_camera()
+
+# Keep in mind - it won't remove the player all by itself
+[/gd]
+
+It is lacking information like shit, but better than nothing, right?"
+info_rus = "Камера наблюдателя. Многообещающее название, которое должно говорить само за себя. Ага... Оно должно очень хорошо всё объяснять... Я до сих пор не уверен, что тут писать... Может, картинка сработает?
+
+//img:spectator_camera/example0.png
+
+Итак... Это камера наблюдателя. Чёрт, мы ходим по кругу, и я до сих пор не имею понятия, что, чёрт возьми, я должен здесь написать. Это просто летающая камера, да ладно, разве это не должно объясняться легко? Вот и всё. Просто используй консольную команду [gd]toggle_spectator_camera[/gd], чтобы понять, что это такое на самом деле.
+
+[c]Пример использования[/c]
+[gd]
+# Создание
+var spec_cam = SpectatorCamera.create_camera()
+
+# Имей в виду - она сама по себе не удалит игрока
+[/gd]
+
+Не хватает информации, как говна за баней, но лучше, чем ничего, верно?"
+edit_time = 1.76123e+09

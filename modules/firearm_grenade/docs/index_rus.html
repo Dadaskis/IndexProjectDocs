@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - firearm_grenade
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: firearm_grenade
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Специальный тип "гранаты", которая взрывается при ударе.<br>
+							<img src="../../../_guide/.images/firearm_grenade/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								<code>
+									Пример использования
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Создаём и настраиваем снаряд-гранату<br>
+									var grenade = FirearmGrenade.new()<br>
+									LocationBaseScene.add_scene_child(grenade)<br>
+									<br>
+									# Устанавливаем свойства гранаты<br>
+									grenade.explosion_damage = 100.0<br>
+									grenade.explosion_damage_type = Damagable.DamageType.EXPLOSION<br>
+									grenade.explosion_force = 10.0<br>
+									grenade.explosion_particles = "generic"<br>
+									grenade.explosion_radius = 10.0<br>
+									grenade.explosion_ragdoll_force_mult = 1.0<br>
+									grenade.explosion_scale = 1.0<br>
+									grenade.character_owner = character<br>
+									<br>
+									# Вычисляем позицию/направление запуска<br>
+									var pos = global_position<br>
+									var forward = Vector3(0.0, 0.0, 1.0)<br>
+									<br>
+									# Запускаем гранату<br>
+									grenade.launch(pos, forward)<br>
+								</code>
+								<br>
+								<br>
+							</p>
+							<h2>
+								Техническая сторона
+							</h2>
+							<p>
+								<br>
+								<br>
+								<code class="gdscript">
+									<br>
+									├── firearm_grenade_areas.gd<br>
+									&emsp;<code class="gdscript">
+										FirearmGrenadeAreas
+									</code>
+									- Автозагрузка<br>
+									&emsp;# Пул узлов Area, используемых для обнаружения повреждённых тел<br>
+									<br>
+									└── firearm_grenade.gd<br>
+									&emsp;<code class="gdscript">
+										FirearmGrenade
+									</code>
+									- Узел<br>
+									&emsp;# Собственно граната, крайне рекомендуется использовать только этот класс<br>
+								</code>
+								<br>
+								<br>
+								В технической реализации этого узла нет ничего особенного, так как код довольно самодостаточен. Однако стоит упомянуть следующие моменты:<br>
+								&emsp;- Визуал <code class="gdscript">
+									FirearmGrenade
+								</code>
+								можно изменить в <code class="gdscript">
+									"res://modules/firearm_grenade/assets/visual_prefab/visual_mesh.tscn"
+								</code>
+								<br>
+								&emsp;- <code class="gdscript">
+									FirearmGrenade
+								</code>
+								НЕ создаёт узлы <code class="gdscript">
+									Area
+								</code>
+								, вместо этого он вызывает <code class="gdscript">
+									FirearmGrenadeAreas.get_area()
+								</code>
+								для их получения. Это оптимизационная техника, необходимая из-за того, что узлы <code class="gdscript">
+									Area
+								</code>
+								по какой-то причине имеют довольно медленную инициализацию физики
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/firearm_grenade_areas.html">
+									FirearmGrenadeAreas
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/firearm_grenade.html">
+									FirearmGrenade
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

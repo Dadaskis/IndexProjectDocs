@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - player_controller
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: player_controller
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Сам игрок. Или сама. В любом случае, это штука игрока. Это довольно комплексный модуль, но в основном он состоит из кода, поэтому мы разберём его файл за файлом.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							Структура скриптов
+						</h4>
+						<p>
+							<br>
+						</p>
+						<center>
+							<code class="gdscript">
+								<br>
+								.<br>
+								├── globals<br>
+								│   ├── global_data.gd<br>
+								│   ├── pc_water_list.gd<br>
+								│   └── player_stats.gd<br>
+								├── mouse_look.gd<br>
+								├── nodes<br>
+								│   ├── ladder.gd<br>
+								│   ├── player_spawn.gd<br>
+								│   ├── player_teleport_pos.gd<br>
+								│   └── water.gd<br>
+								├── player_camera_motion.gd<br>
+								├── player_main.gd<br>
+								├── states<br>
+								│   ├── state_debug_fly.gd<br>
+								│   ├── state_ladder.gd<br>
+								│   ├── state_walk.gd<br>
+								│   └── state_water.gd<br>
+								├── stats_adder.gd<br>
+								└── weapon_handler.gd<br>
+							</code>
+						</center>
+						<p>
+							<br>
+							<br>
+						</p>
+						<h2>
+							Главный скрипт игрока <code class="gdscript">
+								"./player_main.gd"
+							</code>
+						</h2>
+						<p>
+							<br>
+							Итак, это класс. Большой. Не самый большой в игре, но эй (я всё равно не проверял). Это не типичный <code class="gdscript">
+								"player.gd"
+							</code>
+							, который был бы самой большой штукой в игре. Ладно, это не меняет того факта, что он огромен. Он огромен, потому что есть много систем, с которыми игрок должен взаимодействовать. <code class="gdscript">
+								"player_main.gd"
+							</code>
+							- это своего рода хаб для всех систем. Он делает следующее:<br>
+							&emsp;- Берет <code class="gdscript">
+								"res://modules/player_controller/assets/scene/player.tscn"
+							</code>
+							и инициализирует всё из него. Типа, сцена имеет *некоторые* узлы, но остальное происходит в коде.<br>
+							&emsp;- Управляет/контролирует разделённые состояния движения (ходьба, плавание, лестница, debug полёт).<br>
+							&emsp;&emsp;- Использует <code class="gdscript">
+								PlayerStateWalk
+							</code>
+							для физики ходьбы/бега.<br>
+							&emsp;&emsp;- Использует <code class="gdscript">
+								PlayerStateLadder
+							</code>
+							для движения по лестнице.<br>
+							&emsp;&emsp;- Использует <code class="gdscript">
+								PlayerStateWater
+							</code>
+							для логики плавания.<br>
+							&emsp;&emsp;- Использует <code class="gdscript">
+								PlayerStateDebugFly
+							</code>
+							для режима свободного полёта для отладки.<br>
+							&emsp;- Напрямую управляет переходом высоты игрока.<br>
+							&emsp;&emsp;- Используется <code class="gdscript">
+								PlayerStateWalk
+							</code>
+							для настройки высоты при приседании.<br>
+							&emsp;- Обрабатывает физику и позиционирование подобранных объектов.<br>
+							&emsp;- Обрабатывает проверку границ локации, сбрасывает позицию игрока, если за пределами (может мне нужно сделать локацию out_of_bounds вместо этого?)<br>
+							&emsp;- Контролирует иерархию и трансформы камеры.<br>
+							&emsp;- Управляет корректировками FOV из настроек.<br>
+							&emsp;- Обрабатывает настройки толчков/тряски камеры.<br>
+							&emsp;- Координирует multiple эффекты камеры, такие как подавление, тремор при низком HP, волна от взрыва.<br>
+							&emsp;- Инициализирует и обновляет все элементы HUD, управляет их видимостью.<br>
+							&emsp;&emsp;- В основном просто вызывает класс <code class="gdscript">
+								HeadsUpDisplay
+							</code>
+							для этого.<br>
+							&emsp;- Обрабатывает "провал миссии" (смерть).<br>
+							&emsp;- Обрабатывает некоторую логику, связанную с прицелами (как в функции <code class="gdscript">
+								process_dealt_damage_info
+							</code>
+							).<br>
+							&emsp;- Обрабатывает логику регенерации здоровья.<br>
+							&emsp;- Инициализирует и обрабатывает систему оружия.<br>
+							&emsp;&emsp;- <code class="gdscript">
+								PlayerWeaponHandler
+							</code>
+							обрабатывает вводы для оружия.<br>
+							&emsp;&emsp;- <code class="gdscript">
+								PlayerWeaponSystem
+							</code>
+							предоставляет интерфейс для оружия.<br>
+							&emsp;- Инициализирует логику движения мыши.<br>
+							&emsp;&emsp;- После этого <code class="gdscript">
+								PlayerMouseLook
+							</code>
+							обрабатывает логику движения мыши для перемещения камеры.<br>
+							&emsp;- Инициализирует логику пост-обработки.<br>
+							&emsp;&emsp;- Использует <code class="gdscript">
+								PostProcessingSystem
+							</code>
+							для этого.<br>
+							&emsp;&emsp;- Хранит отдельные классы эффектов (<code class="gdscript">
+								FlashbangPostProcessing
+							</code>
+							, <code class="gdscript">
+								UnderwaterPostProcessing
+							</code>
+							и т.д.)<br>
+							&emsp;- Хранит и обрабатывает данные <code class="gdscript">
+								Character
+							</code>
+							.<br>
+							&emsp;- Обрабатывает шаги с помощью класса <code class="gdscript">
+								Footstep
+							</code>
+							.<br>
+							&emsp;- Обрабатывает некоторую логику снаряжения/перков с помощью <code class="gdscript">
+								LoadoutSystem
+							</code>
+							.<br>
+							&emsp;- Обрабатывает функции загрузки/сохранения системы сохранений для сохранения своих данных.<br>
+							<code>
+								Смотри, я знаю, что ты скажешь.
+							</code>
+							<br>
+							Ты скажешь, что это могло быть более модульным. Да, могло бы. И я скажу тебе заткнуться нахрен и увидеть реальность такой, какая она есть - мне просто нужно было что-то, что бы работало и что не ебалось бы с моим разумом слишком сильно, имея слишком много вызовов между скриптами. Так что, ты и я, мы будем работать с этим монолитным еле-разделённым монстром, потому что такова жизнь.<br>
+							<br>
+						</p>
+						<h2>
+							Движение мыши игрока <code class="gdscript">
+								"./mouse_look.gd"
+							</code>
+						</h2>
+						<p>
+							<br>
+							Это простой класс, который обрабатывает логику движения мыши для перемещения камеры, здесь нет ничего special.<br>
+							<br>
+						</p>
+						<h2>
+							Движение камеры игрока для размытия в движении <code class="gdscript">
+								"./player_camera_motion.gd"
+							</code>
+						</h2>
+						<p>
+							<br>
+							<code class="red-marking">
+								Типо устарело
+							</code>
+							Этот класс использовался для размытия в движении, которое не является частью этой игры больше. В коде остались некоторые остатки, и это можно как бы восстановить, но зачем тебе это нужно? Это не было чем-то крутым. Это было багнуто и плохо.<br>
+							<br>
+						</p>
+						<h2>
+							Обработчик оружия игрока <code class="gdscript">
+								"./player_weapon_handler.gd"
+							</code>
+						</h2>
+						<p>
+							<br>
+							Класс, который обрабатывает взаимодействие с системой оружия. Имей в виду, класс <code class="gdscript">
+								PlayerWeaponSystem
+							</code>
+							не является частью этого модуля. <code class="gdscript">
+								PlayerWeaponHandler
+							</code>
+							только "общается" с системой оружия и обрабатывает некоторые вводы. Я бы сказал, что не необходимо его существование, но как уж есть.<br>
+							<br>
+						</p>
+						<h2>
+							Добавление статистики игрока "
+						</code>
+						./stats_adder.gd"
+					</code>
+				</h2>
+				<p>
+					<br>
+					<code class="red-marking">
+						Устарело
+					</code>
+					Итак, был классненький экран в конце миссии со всеми видами статистики. Это больше не работающая часть этой игры, остались некоторые остатки, которые мне слишком лень удалять.<br>
+					<br>
+				</p>
+				<h4 style="width: 60%">
+					Автозагрузки
+				</h4>
+				<p>
+					<br>
+					<code class="gdscript">
+						PlayerData
+					</code>
+					- по сути существует просто потому, что мне нужно было написать <code class="gdscript">
+						PlayerData.get_player()
+					</code>
+					где-то, чтобы получить игрока, это всё.<br>
+					<code class="gdscript">
+						PCWaterList
+					</code>
+					- просто простой список всех источников воды, он так же может использоваться для создания брызг.<br>
+					<code class="gdscript">
+						PlayerStats
+					</code>
+					- <code class="red-marking">
+						Устарело
+					</code>
+					связано с упомянутой ранее статистикой игрока, которая не является частью этой игры больше.<br>
+					<br>
+				</p>
+				<h4 style="width: 60%">
+					Узлы
+				</h4>
+				<p>
+					<br>
+					<br>
+				</p>
+				<h2>
+					<code class="gdscript">
+						PlayerControllerLadder
+					</code>
+				</h2>
+				<p>
+					<br>
+					<img src="../../../_guide/.images/player_controller/ladder0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+						<br>
+						Узел лестницы. Игрок входит в область, поднимается/спускается и т.д. Принуждает игрока войти в <code class="gdscript">
+							PlayerStateLadder
+						</code>
+						. Эта штука как бы понятна, если ты хочешь увидеть больше - загляни в исходный код. Работает путём установки начальной и конечной точек.<br>
+						<br>
+					</p>
+					<h2>
+						<code class="gdscript">
+							PlayerControllerWater
+						</code>
+					</h2>
+					<p>
+						<br>
+						<img src="../../../_guide/.images/player_controller/water0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+							<br>
+							Узел воды. Игрок входит в область и начинает плавать. Принуждает игрока войти в <code class="gdscript">
+								PlayerStateWater
+							</code>
+							. Работает путём установки начальной и конечной точек.<br>
+							<br>
+						</p>
+						<h2>
+							<code class="gdscript">
+								PlayerSpawn
+							</code>
+						</h2>
+						<p>
+							<br>
+							<img src="../../../_guide/.images/player_controller/player_spawn0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								Узел спавна игрока. Спавнит игрока во время инициализации локации. Стоит упомянуть, что игрок "спавнится" только один раз, и его экземпляр переиспользуется в разных локациях, чтобы ускорить экран загрузки. Могут быть установлены точки перехода для переходов между локациями. Это также может использоваться вместе с событиями локаций, чтобы либо реагировать на спавн, либо принудительно заспавнить игрока снова.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Состояния
+							</h4>
+							<p>
+								<br>
+								<code class="gdscript">
+									PlayerStateWalk
+								</code>
+								- обычное состояние, когда игрок просто ходит вокруг.<br>
+								<code class="gdscript">
+									PlayerStateLadder
+								</code>
+								- активируется во время подъёма по лестнице, просто превращает движение в движение вдоль определённой линии (которая определяется <code class="gdscript">
+									PlayerControllerLadder
+								</code>
+								).<br>
+								<code class="gdscript">
+									PlayerStateWater
+								</code>
+								- активируется во время плавания в области воды, определённой <code class="gdscript">
+									PlayerWater
+								</code>
+								.<br>
+								<code class="gdscript">
+									PlayerStateDebugFly
+								</code>
+								- активируется с использованием консольных команд, таких как <code class="gdscript">
+									"debug_fly"
+								</code>
+								.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/ladder.html">
+									PlayerControllerLadder
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/player_teleport_pos.html">
+									PlayerTeleportPos
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/water.html">
+									PlayerControllerWater
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/player_spawn.html">
+									PlayerSpawn
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/pc_water_list.html">
+									PCWaterList
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/player_stats.html">
+									PlayerStats
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/global_data.html">
+									PlayerData
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/player_main.html">
+									PlayerMain
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/player_camera_motion.html">
+									PlayerCameraMotion
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/weapon_handler.html">
+									PlayerWeaponHandler
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/stats_adder.html">
+									PlayerStatsAdder
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/mouse_look.html">
+									PlayerMouseLook
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/state_debug_fly.html">
+									PlayerStateDebugFly
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/state_water.html">
+									PlayerStateWater
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/state_ladder.html">
+									PlayerStateLadder
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/state_walk.html">
+									PlayerStateWalk
+								</a>
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

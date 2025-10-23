@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - reverb_system
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: sound
+								</h3>
+								<h3>
+									Script: reverb_system
+								</h3>
+								<h3>
+									Class Name: ReverbSystem
+								</h3>
+								<h3>
+									Extends: Object
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								System for calculating environmental reverb properties based on spatial analysis<br>
+								Uses raycasting to determine room dimensions and automatically classify environment types<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_enum">
+									ENUM
+								</p>
+								<p class="var_desc_name_text">
+									EnvTypes
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enum defining different environmental acoustic types
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									RAY_MAX_DISTANCE
+								</p>
+								<p class="var_desc_name_value">
+									100.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum raycast distance for environment probing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									location
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the location/world for physics queries
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_distances_at_position
+								</p>
+								<p class="var_desc_name_value">
+									position: Vector3
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Calculates distances to walls in all six cardinal directions from given position
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									setup_dists_data_in_reverb_data
+								</p>
+								<p class="var_desc_name_value">
+									reverb_data: ReverbData, dists: Array
+								</p>
+								<p class="func_return_text">
+									ReverbData
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes raw distances into ReverbData structure
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									calculate_env_type
+								</p>
+								<p class="var_desc_name_value">
+									reverb_data: ReverbData
+								</p>
+								<p class="func_return_text">
+									ReverbData
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Classifies environment type based on dimensional analysis
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_reverb_data_at_position
+								</p>
+								<p class="var_desc_name_value">
+									position: Vector3
+								</p>
+								<p class="func_return_text">
+									ReverbData
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main function to get complete reverb data for a position
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_location_base
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Property setter for location reference
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_location_base
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Property getter for location reference
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization function (currently empty)
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

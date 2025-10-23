@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - common_editor
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: common_editor
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/common_editor/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								Модуль для общих инструментов разработки редакторов. На данный момент включает:<br>
+								- Gizmos, которые используются как модулями <code>
+									comics_renderer
+								</code>
+								, так и <code>
+									character_builder
+								</code>
+								<br>
+								- UI свойств, пригодный для редактирования материалов или других потенциальных целей<br>
+								<br>
+								<code>
+									Добавление поддержки gizmos в твой редактор
+								</code>
+								<br>
+								- Инстанциируй следующие сцены в сцене твоего редактора:<code class="gdscript">
+									<br>
+									"res://modules/common_editor/assets/prefabs/position.tscn"<br>
+									"res://modules/common_editor/assets/prefabs/rotation.tscn"
+								</code>
+								<br>
+								Затем, в твоём главном скрипте редактора (я предполагаю, он назначен на корневой узел):<br>
+								<code>
+									Украсть и забыть
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Узел gizmo вращения, который появляется, когда ты можешь что-то вращать<br>
+									onready var rotation_gizmo = $rotation<br>
+									# Узел gizmo позиции, который показывается, когда ты можешь перемещать что-то<br>
+									onready var position_gizmo = $position<br>
+									<br>
+									# Массив всех выбранных hitbodies<br>
+									var selected =
+									[]
+									<br>
+									# Эта переменная используется для более точной проверки текущего выбранного body.<br>
+									# Она может на деле не хранить текущий, так что тебе лучше использовать selected
+									[0]
+									<br>
+									var selected_body = null<br>
+									# Пользователь directly сейчас что-то выбирает? Используется для исправления выделения<br>
+									var is_selecting = false<br>
+									# Количество кадров, в которых пользователь ещё ничего не выбрал<br>
+									# Используется для исправления выделения<br>
+									var nothing_selected_frames = 0<br>
+									<br>
+									# Принудительное выделение определённого объекта. phys_body должен иметь скрипт hit_body<br>
+									# привязанный к нему<br>
+									func force_selection(phys_body):<br>
+									&emsp;select_node_process(phys_body, true)<br>
+									<br>
+									# Возвращает словарь рейкаста проверки. Он отправляет луч под курсором.<br>
+									func get_camera_ray():<br>
+									&emsp;var camera = MainCamera.get_camera()<br>
+									&emsp;if not is_instance_valid(camera):<br>
+									&emsp;&emsp;return null<br>
+									&emsp;var mouse_pos = get_viewport().get_mouse_position()<br>
+									&emsp;var from = camera.project_ray_origin(mouse_pos)<br>
+									&emsp;var to = from + camera.project_ray_normal(mouse_pos) * 100.0<br>
+									&emsp;var space_state = get_world().get_direct_space_state()<br>
+									&emsp;var ray = space_state.intersect_ray(from, to)<br>
+									&emsp;return ray<br>
+									<br>
+									# Дополнительная проверка выделения для исправления несогласованности выделения.<br>
+									# Всегда проверяет, есть ли какой-либо объект под курсором, и если есть,<br>
+									# сбрасывает nothing_selected_frames и устанавливает selected_body.<br>
+									# Вызывается каждый физический кадр.<br>
+									func check_node_selection_ray():<br>
+									&emsp;var ray = get_camera_ray()<br>
+									&emsp;if not ray:<br>
+									&emsp;&emsp;nothing_selected_frames += 1<br>
+									&emsp;&emsp;return<br>
+									&emsp;if not ray.collider:<br>
+									&emsp;&emsp;nothing_selected_frames += 1<br>
+									&emsp;&emsp;return<br>
+									&emsp;nothing_selected_frames = 0<br>
+									&emsp;selected_body = ray.collider<br>
+									<br>
+									# Я украл это дерьмо из Comics Renderer и теперь я даже не уверен, что<br>
+									# блять оно здесь делает. Ладно, раньше оно делало какую-то общую логику<br>
+									# выделения здесь, но оно было заменено тем ебанутым исправлением выделения, которое я сделал.<br>
+									# Оно всё ещё используется в одном случае, когда счётчик nothing_selected_frames выше 10.<br>
+									# Я не знаю почему, и я не хочу знать почему, и я не собираюсь это менять.<br>
+									func select_node(unselect_previous = true):<br>
+									&emsp;var ray = get_camera_ray()<br>
+									&emsp;if not ray:<br>
+									&emsp;&emsp;selected.clear()<br>
+									&emsp;&emsp;position_gizmo.reset_selection()<br>
+									&emsp;&emsp;rotation_gizmo.reset_selection()<br>
+									&emsp;&emsp;return<br>
+									&emsp;if not ray.collider:<br>
+									&emsp;&emsp;return<br>
+									&emsp;select_node_process(ray.collider, unselect_previous)<br>
+									<br>
+									# Обрабатывает логику выделения целевого body, используется исправлением выделения вместо select_node.<br>
+									# Проверяет как HIT_BODY "CommonEditorBody", используемый gizmos.<br>
+									func select_node_process(body, unselect_previous = true):<br>
+									&emsp;if not is_instance_valid(body):<br>
+									&emsp;&emsp;return<br>
+									&emsp;var hit_body = \<br>
+									&emsp;&emsp;HitBodyTool.get_node_property(body, "CommonEditorBody")<br>
+									&emsp;if hit_body:<br>
+									&emsp;&emsp;select_hit_body(hit_body, unselect_previous)<br>
+									<br>
+									# Выделить hit_body, просто как дважды два<br>
+									func select_hit_body(hit_body, unselect_previous = true):<br>
+									&emsp;if hit_body.is_selected:<br>
+									&emsp;&emsp;rotation_gizmo.remove_selected(hit_body)<br>
+									&emsp;&emsp;position_gizmo.remove_selected(hit_body)<br>
+									&emsp;&emsp;hit_body.unselect_node()<br>
+									&emsp;&emsp;selected.erase(hit_body)<br>
+									&emsp;&emsp;return<br>
+									&emsp;if unselect_previous and not hit_body.dont_deselect_others:<br>
+									&emsp;&emsp;for select_body in selected:<br>
+									&emsp;&emsp;&emsp;select_body.unselect_node()<br>
+									&emsp;&emsp;rotation_gizmo.reset_selection()<br>
+									&emsp;&emsp;position_gizmo.reset_selection()<br>
+									&emsp;&emsp;selected =
+									[]
+									<br>
+									&emsp;if hit_body.can_be_rotated:<br>
+									&emsp;&emsp;rotation_gizmo.add_selected(hit_body)<br>
+									&emsp;if hit_body.can_be_positioned:<br>
+									&emsp;&emsp;position_gizmo.add_selected(hit_body)<br>
+									&emsp;hit_body.select_node()<br>
+									&emsp;selected.append(hit_body)<br>
+									<br>
+									# Снять выделение с hit_body<br>
+									func unselect_hit_body(hit_body):<br>
+									&emsp;if hit_body.is_selected:<br>
+									&emsp;&emsp;position_gizmo.remove_selected(hit_body)<br>
+									&emsp;&emsp;rotation_gizmo.remove_selected(hit_body)<br>
+									&emsp;&emsp;hit_body.unselect_node()<br>
+									&emsp;&emsp;selected.erase(hit_body)<br>
+									<br>
+									# Функция ввода, просто проверяет, выбирает ли пользователь что-либо<br>
+									func _input(event):<br>
+									&emsp;if event is InputEventMouseButton:<br>
+									&emsp;&emsp;if in_UI:<br>
+									&emsp;&emsp;&emsp;return<br>
+									&emsp;&emsp;if event.button_index == 1 and event.pressed:<br>
+									&emsp;&emsp;&emsp;is_selecting = true<br>
+									<br>
+									# Обновление физического кадра для проверки следующих вещей:<br>
+									# - Если nothing_selected_frames больше 10, нет selected_body<br>
+									# - Если пользователь что-то выбирает, запустит логику выделения<br>
+									func _physics_process(delta):<br>
+									&emsp;if nothing_selected_frames >
+									10:<br>
+									&emsp;&emsp;selected_body = null<br>
+									&emsp;check_node_selection_ray()<br>
+									&emsp;if is_selecting:<br>
+									&emsp;&emsp;is_selecting = false<br>
+									&emsp;&emsp;var keep = Input.is_key_pressed(KEY_SHIFT) or \<br>
+									&emsp;&emsp;&emsp;Input.is_key_pressed(KEY_CONTROL)<br>
+									&emsp;&emsp;if nothing_selected_frames >
+									10:<br>
+									&emsp;&emsp;&emsp;select_node(not keep)<br>
+									&emsp;&emsp;else:<br>
+									&emsp;&emsp;&emsp;select_node_process(selected_body, not keep)<br>
+								</code>
+								<br>
+								Всё этого кода должно быть достаточно для добавления поддержки gizmos в твой главный скрипт редактора, ОДНАКО, тебе нужно добавить эту поддержку и твоим редактируемым объектам тоже.<br>
+								<br>
+								<code>
+									Поддержка Common Editor HitBody
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Ссылка на скрипт hit body, используемый для выделения и взаимодействия<br>
+									const HIT_BODY = preload(<br>
+									&emsp;"res://modules/common_editor/src/common_editor_hit_body.gd")<br>
+									<br>
+									hit_body = HIT_BODY.new()<br>
+									hit_body.real_node = self<br>
+									hit_body.can_be_rotated = true<br>
+									hit_body.can_be_positioned = true<br>
+									hit_body.can_be_removed = true<br>
+									var size = get_aabb().get_longest_axis_size()<br>
+									hit_body.rotation_scale = size * 0.8<br>
+									hit_body.position_scale = size * 0.8<br>
+									HitBodyTool.add_node_property(static_body, HIT_BODY.OBJECT_NAME, hit_body)<br>
+								</code>
+								<br>
+								<br>
+								И этого НЕ enough для твоего поддерживаемого объекта, чтобы перемещаться! Если ты хочешь, чтобы он перемещался, добавь этот сниппет:<br>
+								<code class="gdscript">
+									<br>
+									# Обрабатывает операции вращения из ввода<br>
+									# axis: Вектор оси вращения<br>
+									# value: Количество вращения<br>
+									func on_rotate(axis: Vector3, value: float):<br>
+									&emsp;var og_axis = axis<br>
+									&emsp;var bone_rot = value * 0.005<br>
+									&emsp;if slow_edit:<br>
+									&emsp;&emsp;bone_rot *= 0.2<br>
+									&emsp;rotate_object_local(axis, bone_rot)<br>
+									&emsp;rot_data.vec3 = rotation_degrees<br>
+									<br>
+									# Обрабатывает операции смещения позиции из ввода<br>
+									# offset: Вектор трансляции<br>
+									func on_offset(offset: Vector3):<br>
+									&emsp;if slow_edit:<br>
+									&emsp;&emsp;offset *= 0.1<br>
+									&emsp;global_transform.origin += offset<br>
+									&emsp;pos_data.vec3 = position<br>
+								</code>
+								<br>
+								HitBody Common Editor вызывает следующие методы в <code class="gdscript">
+									real_node
+								</code>
+								:<br>
+								<code class="gdscript">
+									<br>
+									on_select &emsp;&emsp;# Вызывается при выделении<br>
+									on_unselect &emsp;# Вызывается при снятии выделения<br>
+									on_rotate&emsp;&emsp;&emsp;# Вызывается при вращении<br>
+									on_rotate&emsp;&emsp;&emsp;# Вызывается при смещении позиции<br>
+								</code>
+								<br>
+								<br>
+								Это могло бы быть проще, но мы любим стрелять себе в ноги, верно? :)
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/vbox_fill_x.html">
+									vbox_fill_x
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/properties.html">
+									properties
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/editor_rotation_axis.html">
+									editor_rotation_axis
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/material_property.html">
+									material_property
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/editor_rotation.html">
+									editor_rotation
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/editor_position_axis.html">
+									editor_position_axis
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/editor_position.html">
+									editor_position
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/common_editor_hit_body.html">
+									common_editor_hit_body
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/properties_data.html">
+									CE_PropertiesData
+								</a>
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

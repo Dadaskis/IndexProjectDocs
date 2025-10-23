@@ -1,0 +1,145 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "So. This module. It's just some code, right?
+
+[gd]
+.
+├── autoload
+│   ├── base_scene.gd
+│   ├── light_queue.gd
+│   └── location_events.gd
+├── base.gd
+├── button_trigger_cube.gd
+├── button_trigger.gd
+├── button_usable.gd
+├── exit_trigger.gd
+├── logic_base.gd
+├── shader_compile
+│   └── meshes_node.gd
+├── trigger_cube.gd
+└── trigger.gd
+[/gd]
+
+I mean look, it's just GDScript for the most part, you get what I mean? I'll describe this module by telling you what each file does in a \"chronological\" order of importance.
+
+[wc]base.gd - LocationBase[/wc]
+The father of all locations. A special node. A very special one. It's also basically a shitty-written god class BUT HEEEY let's not be so negative about that. All locations must use [gd]LocationBase[/gd] because I decided so. Really, it's making easier to control initialization of any location. Easier to put some settings. Easy to customize. It was easy to support too, when it wasn't a huge bunch of garbage. Honestly, I wish I could tell you more about this thing, but you better take a look into source code yourself.
+
+[wc]autoload/location_events.gd - LocationEvents[/wc]
+A special singleton that is being the basis of all the location gameplay logic. Despite of its little source code size, it is exceptionally meaningful for functioning of this entire game.
+
+[wc]logic_base.gd - LocationLogicBase[/wc]
+A location logic script base that you can use to define a logic script of a location. [p]res://locations/scenes/logic/[/p] contains all the logic scripts and they aren't really used anymore because STs do the job better.
+
+[wc]autoload/base_scene.gd - LocationBaseScene[/wc]
+A little funny [gd]LocationBaseScene[/gd] singleton that allows you to get your current [gd]LocationBase[/gd] by doing [gd]LocationBaseScene.get_scene()[/gd]. Yes. That's why it exists. The only reason.
+
+[wc]button_trigger_cube.gd - LocationButtonTriggerCube[/wc]
+//img:location_logic/button_cube0.png
+A button that player can use. It is a cube that you can scale and put wherever you want.
+
+[wc]button_trigger.gd - LocationButtonTrigger[/wc]
+//img:location_logic/button_cube0.png
+A button that player can use. Unlike the cube version, you have to define start and end points to form a trigger. It's an older version, so it isn't really recommended to be used.
+
+[wc]trigger_cube.gd - LocationTriggerCube[/wc]
+//img:location_logic/trigger_cube0.png
+A trigger that player can enter/exit. It is a cube that you can scale and put wherever you want. It is emitting a location event upon entering/exiting.
+
+[wc]trigger.gd - LocationTrigger[/wc]
+//img:location_logic/trigger0.png
+Same as [gd]LocationTriggerCube[/gd] except you have to define start/end points. Again, it is older so it isn't really recommended for use.
+
+[wc]light_queue.gd -  LocationLightQueue[/wc]
+A singleton that works with optimization of light sources by hiding them if they are way too far.
+
+[wc]button_usable.gd - LocationButtonTriggerUsable[/wc]
+Just a [gd]Usable[/gd]-extended class that just calls [gd]use[/gd] function in a button node.
+
+[r]Outdated: shader_compile/meshes_node.gd, exit_trigger.gd[/r]
+
+[wc]Location Events[/wc]
+//img:location_logic/location_events0.png
+Location events are simple. Some code calls [gd]LocationEvents.location_event_occured(\"thingy\")[/gd] and then other code checks...
+[gd]
+LocationEvents.connect(\"on_location_event\", self, \"thingy_checker\")
+# ...
+func thingy_checker(event_name, args):
+	if event_name == \"thingy\":
+		Console.write_line(\"Wow thingy has happened\")
+[/gd]
+Location event is just a string message that is sent over that \"global event bus.\" It allows making scalable game systems easily, however it might be complicated to design levels with it."
+info_rus = "Итак. Этот модуль. Это просто какой-то код, верно?
+
+[gd]
+.
+├── autoload
+│   ├── base_scene.gd
+│   ├── light_queue.gd
+│   └── location_events.gd
+├── base.gd
+├── button_trigger_cube.gd
+├── button_trigger.gd
+├── button_usable.gd
+├── exit_trigger.gd
+├── logic_base.gd
+├── shader_compile
+│   └── meshes_node.gd
+├── trigger_cube.gd
+└── trigger.gd
+[/gd]
+
+Я имею в виду, посмотри, это в основном просто GDScript, ты понимаешь, о чём я? Я опишу этот модуль, рассказав тебе, что делает каждый файл в \"хронологическом\" порядке важности.
+
+[wc]base.gd - LocationBase[/wc]
+Отец всех локаций. Особый узел. Очень особенный. Это также плохо написанный god class, НО ЭЙЕЙ давай не будем так негативны насчёт этого. Все локации должны использовать [gd]LocationBase[/gd], потому что я так решил. Реально, так легче контролировать инициализацию любой локации. Легче добавить некоторые настройки. Легко настраивать. Это было легко поддерживать тоже, когда это не было огромной кучей мусора. Честно говоря, я бы хотел рассказать тебе больше об этой штуке, но тебе лучше заглянуть в исходный код самостоятельно.
+
+[wc]autoload/location_events.gd - LocationEvents[/wc]
+Особый синглтон, который является основой всей игровой логики локаций. Несмотря на его маленький размер исходного кода, он исключительно важен для функционирования всей этой игры.
+
+[wc]logic_base.gd - LocationLogicBase[/wc]
+Базовый скрипт логики локации, который ты можешь использовать для определения скрипта логики локации. [p]res://locations/scenes/logic/[/p] содержит все скрипты логики, и они не используются anymore, потому что ST делают работу лучше.
+
+[wc]autoload/base_scene.gd - LocationBaseScene[/wc]
+Маленький забавный синглтон [gd]LocationBaseScene[/gd], который позволяет тебе получить твою текущую [gd]LocationBase[/gd], выполнив [gd]LocationBaseScene.get_scene()[/gd]. Да. Вот почему он существует. Единственная причина.
+
+[wc]button_trigger_cube.gd - LocationButtonTriggerCube[/wc]
+//img:location_logic/button_cube0.png
+Кнопка, которую игрок может использовать. Это куб, который ты можешь масштабировать и помещать куда угодно.
+
+[wc]button_trigger.gd - LocationButtonTrigger[/wc]
+//img:location_logic/button_cube0.png
+Кнопка, которую игрок может использовать. В отличие от кубической версии, тебе нужно определить начальную и конечную точки для формирования триггера. Это более старая версия, так что её не рекомендуется использовать.
+
+[wc]trigger_cube.gd - LocationTriggerCube[/wc]
+//img:location_logic/trigger_cube0.png
+Триггер, в который игрок может войти/выйти. Это куб, который ты можешь масштабировать и помещать куда угодно. Он испускает событие локации при входе/выходе.
+
+[wc]trigger.gd - LocationTrigger[/wc]
+//img:location_logic/trigger0.png
+То же, что и [gd]LocationTriggerCube[/gd], за исключением того, что тебе нужно определить начальную/конечную точки. Опять же, это старше, так что не really рекомендуется для использования.
+
+[wc]light_queue.gd -  LocationLightQueue[/wc]
+Синглтон, который работает с оптимизацией источников света, скрывая их, если они слишком далеко.
+
+[wc]button_usable.gd - LocationButtonTriggerUsable[/wc]
+Просто класс, расширенный от [gd]Usable[/gd], который просто вызывает функцию [gd]use[/gd] в узле кнопки.
+
+[r]Устарело: shader_compile/meshes_node.gd, exit_trigger.gd[/r]
+
+[wc]События локаций[/wc]
+//img:location_logic/location_events0.png
+События локаций просты. Какой-то код вызывает [gd]LocationEvents.location_event_occured(\"thingy\")[/gd], а затем другой код проверяет...
+[gd]
+LocationEvents.connect(\"on_location_event\", self, \"thingy_checker\")
+# ...
+func thingy_checker(event_name, args):
+	if event_name == \"thingy\":
+		Console.write_line(\"Вау, thingy произошло\")
+[/gd]
+Событие локации - это просто строковое сообщение, которое отправляется через этот \"глобальный шин событий\". Это позволяет легко создавать масштабируемые игровые системы, однако проектировать уровни с этим может быть сложно."
+edit_time = 1.76123e+09

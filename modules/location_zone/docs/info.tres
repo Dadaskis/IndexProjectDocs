@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationZone[/gd] is some kind of aggressive location optimization. If you enter a different zone, other ones are removing nodes from scene tree, potentially drastically optimizing the game's performance on huge locations. The only problem is that you will have to separate your level into huge parts that are only normally accessible through certain kind of silent teleportation (doors?), can be useful for interiors.
+
+[r]This module is severely outdated and might be a target for future removal. Please consider to use [gd]LocationChunk[/gd] instead.[/r]"
+info_rus = "[gd]LocationZone[/gd] — это своего рода агрессивная оптимизация локаций. Если ты входишь в другую зону, другие удаляют узлы из дерева сцены, оптимизируя производительность игры на огромных локациях. Единственная проблема заключается в том, что тебе придётся разделить свой уровень на огромные части, которые доступны только через определённый вид тихой телепортации (двери?), может быть полезно для интерьеров.
+
+[r]Этот модуль сильно устарел и может быть целью для будущего удаления. Пожалуйста, рассмотри возможность использования [gd]LocationChunk[/gd] вместо этого.[/r]"
+edit_time = 1.76123e+09

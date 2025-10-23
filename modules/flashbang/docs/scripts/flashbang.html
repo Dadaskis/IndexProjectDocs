@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - flashbang
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: flashbang
+								</h3>
+								<h3>
+									Script: flashbang
+								</h3>
+								<h3>
+									Class Name: Flashbang
+								</h3>
+								<h3>
+									Extends: OmniLight
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Handles flashbang visual and gameplay effects<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LIGHT_COLOR
+								</p>
+								<p class="var_desc_name_value">
+									Color(1.0, 0.79, 0.43)
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Base color for flashbang light effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LIGHT_RADIUS
+								</p>
+								<p class="var_desc_name_value">
+									20.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum radius of flashbang light effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LIGHT_ENERGY
+								</p>
+								<p class="var_desc_name_value">
+									1000.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initial energy level for flashbang light
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PLAYER_DISTANCE
+								</p>
+								<p class="var_desc_name_value">
+									12.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum distance to affect players
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									NPC_DISTANCE
+								</p>
+								<p class="var_desc_name_value">
+									8.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum distance to affect NPCs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SOUND_SAMPLE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/flashbang/assets/sounds/flashbang.mp3")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sound sample for flashbang explosion
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SOUND_HIT_SAMPLE
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/flashbang/assets/sounds/flashbang_hit.mp3")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sound sample for when flashbang hits player
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FLASH0_PREFAB_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/flashbang/assets/prefabs/flash0.tscn"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to primary flash effect prefab
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FLASH_IMG_DIR_PATHS
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of paths to flash effect textures
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for effect duration tracking
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_player
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks and applies flashbang effect to player if conditions met
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_NPC
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks and applies flashbang effect to NPCs in range
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_sound
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays flashbang explosion sound
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes flashbang effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_physics_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Handles physics process for light fade and cleanup
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

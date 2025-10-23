@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_generator
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: location_generator
+								</h3>
+								<h3>
+									Script: location_generator
+								</h3>
+								<h3>
+									Class Name: LocationGenerator
+								</h3>
+								<h3>
+									Extends: Spatial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Procedural location generator that creates environments from prefab components<br>
+								using cell-based placement rules. Handles prefab loading, rotation, and border walls.<br>
+								<br>
+								This shit is broken and i didn't complete it, so...<br>
+								It's been for about 2 years (from this point) ever since i worked on it.<br>
+								The idea seemed nice, but then i decided to prioritize working on these<br>
+								manually.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_enum">
+									ENUM
+								</p>
+								<p class="var_desc_name_text">
+									ROTATION_TYPES
+								</p>
+								<p class="var_desc_name_value">
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enum for rotation types when placing prefabs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PREFABS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/location_generator/assets/prefabs/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to prefab assets
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LOC_DATA_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/location_generator/assets/loc_data/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to location configuration data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									location_data_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of location data resource to use
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									location_size
+								</p>
+								<p class="var_desc_name_value">
+									Vector3(10.0, 0.0, 10.0)
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Size of location in cells
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									generate
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Toggle to trigger generation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									cell_size
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Size of each cell unit
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									cells
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary tracking cell occupancy and data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loaded_prefab_scenes
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Cache of loaded prefab scenes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									loc_data
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current location configuration data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									list_files
+								</p>
+								<p class="var_desc_name_value">
+									path: any
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Lists files in directory<br/>
+								path: Directory path to scan<br/>
+								Returns: Array of filenames
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									clear_everything
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Clears all generated content
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_if_cells_occupied
+								</p>
+								<p class="var_desc_name_value">
+									start: Vector3, end: Vector3
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if cells in area are occupied<br/>
+								start: Start position of area<br/>
+								end: End position of area<br/>
+								Returns: True if any cell is occupied
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									occupy_cells
+								</p>
+								<p class="var_desc_name_value">
+									start: Vector3, end: Vector3
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Marks cells in area as occupied<br/>
+								start: Start position of area<br/>
+								end: End position of area
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									filter_possible_rotations
+								</p>
+								<p class="var_desc_name_value">
+									x: any, y: any, z: any, prefab_data: any, possible_rotations: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Filters possible rotations based on cell availability<br/>
+								x/y/z: Cell coordinates<br/>
+								prefab_data: Prefab configuration<br/>
+								possible_rotations: Array of rotation types to check<br/>
+								Returns:
+								[valid_rotations, rotation_cell_data]
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									fill_cell
+								</p>
+								<p class="var_desc_name_value">
+									x: int, y: int, z: int, depth = 0
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Attempts to fill a cell with a prefab<br/>
+								x/y/z: Cell coordinates<br/>
+								depth: Recursion depth counter
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									place_border_wall_corner
+								</p>
+								<p class="var_desc_name_value">
+									x: int, y: int, z: int, rotation_type: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Places border wall corner prefab<br/>
+								x/y/z: Cell coordinates<br/>
+								rotation_type: Rotation to apply
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									place_border_wall
+								</p>
+								<p class="var_desc_name_value">
+									x: int, y: int, z: int, rotation_type: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Places border wall prefab<br/>
+								x/y/z: Cell coordinates<br/>
+								rotation_type: Rotation to apply
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									fill_cells
+								</p>
+								<p class="var_desc_name_value">
+									depth = 0
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Fills all cells in location<br/>
+								depth: Recursion depth counter
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prefab_child_set_owner
+								</p>
+								<p class="var_desc_name_value">
+									prefab: Node
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets owner recursively for prefab hierarchy<br/>
+								prefab: Root node to process
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_cell_prefab
+								</p>
+								<p class="var_desc_name_value">
+									cell_data: LocGenCellData, x: int, y: int, z: int
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Instantiates prefab for cell<br/>
+								cell_data: Cell configuration<br/>
+								x/y/z: Cell coordinates
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_cell_prefabs
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates all prefab instances from cell data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_loc_data
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads location configuration data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									generate_location
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main generation function
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_generate
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Setter for generate toggle
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

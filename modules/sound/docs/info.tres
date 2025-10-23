@@ -1,0 +1,121 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "This is an amazing module to work with sound. I mean, it doesn't do anything special in particular and mostly it is all about bullshit that is happening inside [gd]Sound[/gd], but you know what...
+
+[c]What does Sound do?[/c]
+It's basically a singleton to manage sound in this game. You know, volumes, some SFX. Here's the list:
+[gd]
+Sound Type Management:
+	- Categorizes sounds into types (environmental, music, voice lines, etc.)
+	- Handles different playback behaviors for each type
+	- Automatic bus routing based on sound type
+
+Spatial Audio:
+	- Supports both 2D and 3D sound playback
+	- Obstacle detection for sound occlusion (commented out because it was so damn cursed)
+
+Environmental Effects:
+	- Dynamic reverb system that analyzes the environment (mainly unused?)
+		- Manual configuration in soundscapes might be more preferrable
+	- Automatic environment classification (hallway, small room, outdoor, etc.)
+	- Smooth transitions between different acoustic environments
+	- Special underwater audio processing with filters
+
+Sound Playback:
+	- Creation and playback of sounds with various parameters
+	- Pitch modulation for varied sound effects
+	- Automatic cleanup of finished sounds
+	- Smooth fade-in/out effects
+	- All in code
+
+Volume Management:
+	- Individual volume controls for different sound categories
+	- Master volume control
+	- Voice ducking (music volume reduction when voice lines play)
+	- Special effect volumes (flashbang, underwater)
+
+Event Integration:
+	- Checkpoint system integration for sound state persistence
+
+Special Effects:
+	- Flashbang audio effects with temporary suppression
+	- Underwater audio filtering
+[/gd]
+
+[gd]
+src
+├── helper
+│   └── remove_sound_on_finish.gd
+├── nodes
+│   ├── location_sound_2D.gd
+│   └── location_sound.gd
+├── reverb_system.gd
+└── sound.gd
+[/gd]
+
+[gd]remove_sound_on_finish.gd[/gd] - Simple helper node script to remove a sound when its done playing
+[gd]location_sound_2D.gd[/gd] and [gd]location_sound.gd[/gd] - Nodes that extend functionality of [gd]AudioStreamPlayer[/gd] and [gd]AudioStreamPlayer3D[/gd] to include additional functionality required for whatever reason.
+[gd]reverb_system.gd[/gd] - A cursed automatic detection system for reverb, it's really weird and never worked that well in my opinion.
+[gd]sound.gd[/gd] - The singleton that made this entire module real, its main purpose is related to control of SFX in code, which includes bus management and creation of new sounds fast."
+info_rus = "Это потрясающий модуль для работы со звуком. Ну, то есть он не делает ничего особенного конкретного, и в основном всё сводится к той хрени, что творится внутри [gd]Sound[/gd], но знаешь что...
+
+[c]Что делает Sound?[/c]
+Это по сути синглтон для управления звуком в этой игре. Ну знаешь, громкости, какие-то SFX. Вот список:
+[gd]
+Управление типами звуков:
+	- Классифицирует звуки по типам (окружение, музыка, голосовые реплики и т.д.)
+	- Обрабатывает различное поведение воспроизведения для каждого типа
+	- Автоматическая маршрутизация по шинам на основе типа звука
+
+Пространственный звук:
+	- Поддерживает воспроизведение как 2D, так и 3D звуков
+	- Обнаружение препятствий для окклюзии звука (закомментировано, потому что было чертовски проклято)
+
+Эффекты окружения:
+	- Динамическая система реверберации, которая анализирует окружение (в основном не используется?)
+		- Ручная конфигурация в soundscapes может быть более предпочтительной
+	- Автоматическая классификация окружения (коридор, маленькая комната, улица и т.д.)
+	- Плавные переходы между различными акустическими средами
+	- Специальная обработка подводного звука с фильтрами
+
+Воспроизведение звуков:
+	- Создание и воспроизведение звуков с различными параметрами
+	- Модуляция высоты тона для разнообразных звуковых эффектов
+	- Автоматическая очистка завершённых звуков
+	- Плавные эффекты fade-in/out
+	- Всё в коде
+
+Управление громкостью:
+	- Индивидуальный контроль громкости для различных категорий звуков
+	- Общий контроль master-громкости
+	- Уменьшение громкости музыки при воспроизведении голосовых реплик
+	- Громкости специальных эффектов (вспышка, под водой)
+
+Интеграция с событиями:
+	- Интеграция с системой чекпоинтов для сохранения состояния звука
+
+Специальные эффекты:
+	- Аудио эффекты вспышки с временным подавлением
+	- Фильтрация подводного звука
+[/gd]
+
+[gd]
+src
+├── helper
+│   └── remove_sound_on_finish.gd
+├── nodes
+│   ├── location_sound_2D.gd
+│   └── location_sound.gd
+├── reverb_system.gd
+└── sound.gd
+[/gd]
+
+[gd]remove_sound_on_finish.gd[/gd] - Простой скрипт ноды-помощника для удаления звука, когда он закончил воспроизведение
+[gd]location_sound_2D.gd[/gd] и [gd]location_sound.gd[/gd] - Ноды, которые расширяют функциональность [gd]AudioStreamPlayer[/gd] и [gd]AudioStreamPlayer3D[/gd], чтобы включить дополнительную функциональность, нужной по какой-то причине.
+[gd]reverb_system.gd[/gd] - Проклятая система автоматического обнаружения реверберации, она очень странная и никогда не работала так нормально, по моему мнению.
+[gd]sound.gd[/gd] - Синглтон, который сделал весь этот модуль реальным, его обязанность связана с контролем SFX в коде, что включает управление шинами и быстрое создание новых звуков."
+edit_time = 1.76123e+09

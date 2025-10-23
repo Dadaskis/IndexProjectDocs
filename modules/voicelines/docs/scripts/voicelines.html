@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - voicelines
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: voicelines
+								</h3>
+								<h3>
+									Script: voicelines
+								</h3>
+								<h3>
+									Class Name: Voicelines
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Central voiceline management system for playing character dialogue and voice messages<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAMPLES_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/voicelines/assets/samples/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to regular voiceline samples
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAMPLES_VOICEMESS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/voicelines/assets/samples_voicemess/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to voice message samples
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_audio
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads an audio sample from the voicelines directory<br/>
+								file_name: Name of audio file to load<br/>
+								Returns: AudioStream or null if not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_voiceline
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays a 2D voiceline (no spatial positioning)<br/>
+								file_name: Name of audio file to play<br/>
+								Returns: The created AudioStreamPlayer or null
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_voiceline_character
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String, character: Character, range_add = 0.0, volume_add = 0.0, no_voice_bus = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays a 3D voiceline attached to a character<br/>
+								file_name: Name of audio file to play<br/>
+								character: Character to attach sound to<br/>
+								range_add: Additional range for sound attenuation<br/>
+								volume_add: Additional volume adjustment<br/>
+								no_voice_bus: Whether to bypass voice audio bus<br/>
+								Returns: The created AudioStreamPlayer3D or null
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_audio_voicemess
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads a voice message audio sample<br/>
+								file_name: Name of audio file to load (without extension)<br/>
+								Returns: AudioStream or null if not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_voicemess
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays a 2D voice message with random start position<br/>
+								file_name: Name of audio file to play (without extension)<br/>
+								Returns: The created AudioStreamPlayer or null
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_voicemess_character
+								</p>
+								<p class="var_desc_name_value">
+									file_name: String, character: Character, range_add = 0.0, volume_add = 0.0, no_voice_bus = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Plays a 3D voice message attached to a character with random start position<br/>
+								file_name: Name of audio file to play (without extension)<br/>
+								character: Character to attach sound to<br/>
+								range_add: Additional range for sound attenuation<br/>
+								volume_add: Additional volume adjustment<br/>
+								no_voice_bus: Whether to bypass voice audio bus<br/>
+								Returns: The created AudioStreamPlayer3D or null
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

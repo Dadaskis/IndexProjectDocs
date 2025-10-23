@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - comics_player
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: comics_player
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/comics_editor/game0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/comics_editor/editor0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									A comics player that comes along with an editor in <code class="gdscript">
+										"comics_editor"
+									</code>
+									location. This is a simple "comics" player that shows some images, text, boxes, text bubbles, glitch effects, etc. Imagery used in comics are presumably rendered in <code class="gdscript">
+										"comics_renderer"
+									</code>
+									and might have minor adjustments in any image editor.<br>
+									<br>
+									<code>
+										Usage example
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										ComicsPlayer.play_comics_by_name("test0")<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Keep in mind
+									</code>
+									<br>
+									<code class="gdscript">
+										ComicsPlayer
+									</code>
+									is not handling any cursor control logic. Therefore, you might be interested to use a following setup:<br>
+									<code class="gdscript">
+										<br>
+										CursorControl.show("comics_player")<br>
+										ComicsPlayer.play_comics_by_name("test0")<br>
+										yield(ComicsPlayer, "finished")<br>
+										CursorControl.deactivate("comics_player")<br>
+									</code>
+									<br>
+									<br>
+								</p>
+								<h2>
+									Technical Side
+								</h2>
+								<p>
+									<br>
+									<br>
+									<code>
+										Script Hierarchy
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										Core Data<br>
+										├── comics_data.gd (Root)<br>
+										│&emsp;└── comics_page_data.gd (Pages)<br>
+										│&emsp;&emsp;└── comics_picture_data.gd (Panels)<br>
+										│&emsp;&emsp;&emsp;└── comics_text_box_data.gd (Text/Audio)<br>
+										│<br>
+										Editor System<br>
+										├── comics_editor.gd (Main UI)<br>
+										├── editor_comic_control.gd (Rendering)<br>
+										├── editor_relay.gd (Data ↔ UI)<br>
+										└── text_box_transform_button.gd (Editing Tools)<br>
+										│<br>
+										Player System<br>
+										├── comics_player.gd (Playback Engine)<br>
+										└── comics_player_test.gd (Test Script)<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Core Data
+									</code>
+									<br>
+									This is the data of comics. Root has data about multiple pages, pages have data about pattern and its panels, panel data contains info about pictures and text boxes. Simple enough, but it is nested for the sake of extensibility.<br>
+									<code class="gdscript">
+										<br>
+										Core Data<br>
+										├── comics_data.gd (Root)<br>
+										│&emsp;# Array of pages<br>
+										│&emsp;└── comics_page_data.gd (Pages)<br>
+										│&emsp;&emsp;# Page data, in this case, it contains pattern info and then an array of pictures filling up this pattern<br>
+										│&emsp;&emsp;└── comics_picture_data.gd (Panels)<br>
+										│&emsp;&emsp;&emsp;# Picture data that has image data as well as array of text boxes tied to this panel<br>
+										│&emsp;&emsp;&emsp;└── comics_text_box_data.gd (Text/Audio)<br>
+										│&emsp;&emsp;&emsp;&emsp;# Text box data, contains text info, typewriter settings, voice/audio config, as well as <br>
+										│&emsp;&emsp;&emsp;&emsp;# conditions of "continuing" to the next text box. All of the text boxes are playing one<br>
+										│&emsp;&emsp;&emsp;&emsp;# after another<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Editor System
+									</code>
+									<br>
+									Editor is *trying* to follow <code class="gdscript">
+										"What You See Is What You Get"
+									</code>
+									principle, however it doesn't allow seeing all the effects on top without playing the comic fully. However, it does allow to quickly setup all comics data and see how it basically looks like. Main key features of editor system are being non-destructive workflows (you can return whenever you want and original files are untouched) and possibility for very easy preview of all images, audio, text box positioning, pages, as well as possibility to pre-play the comics to see how it would look like in-game.<br>
+									<code class="gdscript">
+										<br>
+										Editor System<br>
+										├── comics_editor.gd (Main UI)<br>
+										│&emsp;# The brain of the editor, or, at least, "visual" one for the end-user.<br>
+										│&emsp;# - Manages UI panels, like page list, image selector, text box settings<br>
+										│&emsp;# - Handles saving/loading of comic files stored at...<br>
+										│&emsp;# res://modules/comics_player/assets/comics/<br>
+										│&emsp;# - Coordinates between editing tools and visual preview<br>
+										├── editor_comic_control.gd (Rendering)<br>
+										│&emsp;# The renderer.<br>
+										│&emsp;# - Takes data from ComicsPageData and displays it in real-time<br>
+										│&emsp;# - Applies shaders for panel borders, image effects<br>
+										│&emsp;# - Handles pattern templates (1_pic, 2_pic, 3_pic, 4_pic, etc)<br>
+										├── editor_relay.gd (Data ↔ UI)<br>
+										│&emsp;# "Relay" between comic's data and UI<br>
+										│&emsp;# - Connects UI controls (like text inputs) to the actual comic's data<br>
+										│&emsp;# - Updates text boxes when you type, changes styles when you pick one of the variants, etc<br>
+										└── text_box_transform_button.gd (Editing Tools)<br>
+										│&emsp;# Allows you to move, rotate and scale text boxes<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Player System
+									</code>
+									<br>
+									The player system loads comic files (.tres) and turns them into a "slideshow" with animations, sounds, and click-to-advance controls. Uses data exported by the editor system to show to the player.<br>
+									<code class="gdscript">
+										<br>
+										Player System<br>
+										├── comics_player.gd (Playback Engine)<br>
+										│&emsp;# A complex playback script that has a following algorithm:<br>
+										│&emsp;# - Loading the comic<br>
+										│&emsp;#&emsp;- Preloads images, fonts, audio, sets up timers/animations<br>
+										│&emsp;# - Playing a page<br>
+										│&emsp;#&emsp;- Loads a pattern scene, places images there<br>
+										│&emsp;#&emsp;- Animate elements, fade panels, process typewriter effect, play audio<br>
+										│&emsp;# - Wait for input/timer<br>
+										│&emsp;#&emsp;- Auto-advance after delay OR click a button to continue<br>
+										│&emsp;# - Advancing to the next page to repeat all over again or end the comic, if no pages left to play.<br>
+										└── comics_player_test.gd (Test Script)<br>
+										│&emsp;# A little test script, kept just in case :)<br>
+									</code>
+									<br>
+									<br>
+								</p>
+								<h2>
+									How to use the comics editor
+								</h2>
+								<p>
+									<br>
+									The system is simple, really... But if you are so hopeless and have to go here to read it all... Well i guess i'll have to yoink some of your RAM to show you ~imagery~.<br>
+									<br>
+									Firstly you simply switch to <code class="gdscript">
+										"comics_editor"
+									</code>
+									location with <code>
+										change_location comics_editor
+									</code>
+									in console or by using <code>
+										dev_menu
+									</code>
+									<br>
+									<img src="../../../_guide/.images/comics_editor/use0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										<img src="../../../_guide/.images/comics_editor/use1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											By pressing "New Page" you make a new page (wow, unbelievable)<br>
+											<img src="../../../_guide/.images/comics_editor/use2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												By pressing on a newly made page called "Page 0" you will edit this page's config (super hard, i know)<br>
+												<img src="../../../_guide/.images/comics_editor/use3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													You can change pattern here<br>
+													<img src="../../../_guide/.images/comics_editor/use4.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+														You can also add pictures, tweak its positioning, keep in mind - only after adding a picture you can add text boxes as they are tied directly to a given picture.<br>
+														<img src="../../../_guide/.images/comics_editor/use5.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+															When you are done: Just save it, for the first time it'll require you to set a name for your comic's data file, but then pressing "Save" button will save it automatically to a given file.<br>
+															<img src="../../../_guide/.images/comics_editor/use6.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																By pressing a "Play Comics" button - you'll be able to preview how your comics will be played in-game. "Play Comics" plays all the pages. "Play Comics Page" plays only the page you are currently editing.<br>
+																<img src="../../../_guide/.images/comics_editor/use7.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																	<br>
+																	And i swear to god, if you will have any questions regarding functionality of this editor tool even AFTER all these images...
+																</p>
+																<h3>
+																	General Information
+																</h3>
+																<h4>
+																	Root directories list
+																</h4>
+																<p>
+																	assets, docs, src
+																</p>
+																<h4>
+																	Nodes
+																</h4>
+																<p>
+																	<a class="a_simple" href="./scripts/comics_player.html">
+																		ComicsPlayer
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_text_layer.html">
+																		comics_text_layer
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_player_test.html">
+																		comics_player_test
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/text_box_transform_button.html">
+																		text_box_transform_button
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/editor_comic_control.html">
+																		editor_comic_control
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_editor.html">
+																		comics_editor
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/editor_relay.html">
+																		editor_relay
+																	</a>
+																</p>
+																<h4>
+																	Classes
+																</h4>
+																<p>
+																	None
+																</p>
+																<h4>
+																	Resources
+																</h4>
+																<p>
+																	<a class="a_simple" href="./scripts/comics_picture_data.html">
+																		ComicsPictureData
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_data.html">
+																		ComicsData
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_page_data.html">
+																		ComicsPageData
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/comics_text_box_data.html">
+																		ComicsTextBoxData
+																	</a>
+																</p>
+																<h4>
+																	Other Scripts
+																</h4>
+																<p>
+																	None
+																</p>
+															</div>
+														</div>
+													</center>
+													<script src="../../../_guide/code_blocks.js">
+													</script>
+												</body>
+											</html>

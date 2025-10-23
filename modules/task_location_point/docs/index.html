@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - task_location_point
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: task_location_point
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/task_location_point/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								Have you seen these little fuckers when you press Tab in game? They are supposed to be waypoints to your success. You follow them and get exactly where you need to be. As if the divine hand is ruling over your will to help you in your sacred mission. That's what it is and that's what this module is about.<br>
+								<br>
+								<code class="gdscript">
+									"res://modules/task_location_point/assets/scene/task_point.tscn"
+								</code>
+								contains the scene with this task point, contains all the stuff you need.<br>
+								<br>
+								<code>
+									Usage example
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Add the task point with all configured parameters<br>
+									TaskPoints.add_task_point(<br>
+									&emsp;"test0", <br>
+									&emsp;"Very damn test 0", <br>
+									&emsp;global_position,<br>
+									&emsp;false, # force_to_show<br>
+									&emsp;false, # ignore_chunks<br>
+									&emsp;"point_arrow.png"<br>
+									)<br>
+									<br>
+									# Handle task point removal<br>
+									TaskPoints.remove_task_point(key)<br>
+								</code>
+								<br>
+								<br>
+								Or just use the damn <code class="gdscript">
+									ST_TaskPoint
+								</code>
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/task_points.html">
+									TaskPoints
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/task_point_data.html">
+									task_point_data
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

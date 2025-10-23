@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - grenade
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: grenade
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Grenade node to create grenades. For more configs look at folders of <code class="gdscript">
+								"res://modules/grenade/assets/grenades/"
+							</code>
+							<br>
+							<br>
+							<code>
+								Usage example"
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var loc_base = LocationBaseScene.get_scene()<br>
+								var grenade = Grenade.new()<br>
+								loc_base.add_child(grenade)<br>
+								grenade.character_owner = player.character<br>
+								grenade.add_collision_exception_with(player)  # Prevent self-collision<br>
+								grenade.initialize("EG-5")<br>
+							</code>
+							<br>
+							<br>
+						</p>
+						<h2>
+							Creating your own grenade
+						</h2>
+						<p>
+							<br>
+							All grenades are stored at <code class="gdscript">
+								"res://modules/grenade/assets/grenades/"
+							</code>
+							, each folder is a unique grenade with the following file structure:<br>
+							<code class="gdscript">
+								<br>
+								├── logic.tres<br>
+								└── model.glb<br>
+							</code>
+							<br>
+							- <code class="gdscript">
+								"logic.tres"
+							</code>
+							is practically any resource that extends functionality of <code class="gdscript">
+								BasicGrenadeLogic
+							</code>
+							(any "grenade logic"). Since this is a resource file - you just configure its properties via exported variables<br>
+							- <code class="gdscript">
+								"model.glb"
+							</code>
+							is the grenade model that'll be used for visuals<br>
+							Additional files placed in the folder don't really matter as much, these can be just materials and etc<br>
+							<br>
+						</p>
+						<h2>
+							Creating your own logic
+						</h2>
+						<p>
+							<br>
+							<code>
+								Logic template
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Basic grenade logic template<br>
+								extends BasicGrenadeLogic<br>
+								class_name ExampleGrenadeLogic<br>
+								<br>
+								# Create parameters with export variables<br>
+								export(float) var parameter: = 5.0<br>
+								<br>
+								# Write your own explosion behavior here<br>
+								func explode():<br>
+								&emsp;pass<br>
+							</code>
+							<br>
+							Write your code and save it at <code class="gdscript">
+								"res://modules/grenade/src/logic/"
+							</code>
+							, you can take a closer look at existing logic to see what they are doing under the hood. Mainly what you can change is the explosion behavior. After that you just can create your own grenade while using your class for <code class="gdscript">
+								"logic.tres"
+							</code>
+							instead.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/grenade_models.html">
+								GrenadeModels
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/grenade.html">
+								Grenade
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/basic_logic.html">
+								BasicGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/frag_logic.html">
+								FragGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/flash_logic.html">
+								FlashGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/gas_logic.html">
+								GasGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/teleporer_logic.html">
+								TeleporterGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/grenade_logic_base.html">
+								GrenadeLogicBase
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

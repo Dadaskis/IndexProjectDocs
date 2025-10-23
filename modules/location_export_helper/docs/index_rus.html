@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_export_helper
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_export_helper
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, предположим, ты решил экспортировать GLTF своей локации. Знаешь, для прикола. Я не знаю, у тебя внезапно возникло желание отредактировать сцену, которой по какой-то причине не хватает proper файла .blend, который тебе так блять нужен. Конечно, есть способ экспортировать GLTF по умолчанию, ты просто заходишь в <code class="gdscript">
+								"Project >
+								Tools >
+								Export GLTF..."
+							</code>
+							. Это экспортирует нужный тебе GLTF. Единороги блюют радугой у тебя за окном. Солнечный свет заполняет комнату. Ангелы поют, пока ты экспортировал свой GLTF. За исключением того, что это всё хуета, и всякий раз, когда ты импортируешь GLTF, ты получаешь огромную кучу дерьма, которую ты никогда не просил. О, если тебе удастся экспортировать файл GLTF, в последний раз, когда я пытался использовать эту кнопку, это заняло у меня 52 лет этого манёвра, просто чтобы увидеть то, что я только что сказал.<br>
+							<br>
+							Вот причина, по которой существует этот модуль. Глупо? Это конечно блять так.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							Как использовать?
+						</h4>
+						<p>
+							<br>
+							0. Перейди в <code class="gdscript">
+								"res://modules/location_export_helper/assets/editor_scene/exporter.tscn"
+							</code>
+							, открой его<br>
+							1. Измени экспортируемое свойство <code class="gdscript">
+								loc_name
+							</code>
+							(должно называться <code class="gdscript">
+								"Loc Name"
+							</code>
+							по-человечески) на желаемую локацию и нажми <code class="gdscript">
+								export_loc
+							</code>
+							checkbox, который должен называться <code class="gdscript">
+								"Export Loc"
+							</code>
+							<br>
+							3. Найди свою свежеэкспортированную локацию GLTF в <code class="gdscript">
+								"res://.dev_sources/exported_location_GLTF/"
+							</code>
+							<br>
+							<br>
+							Изначально это было сделано, чтобы получать локации для comics renderers, но затем я понял, что было бы больше смысла потратить хороший кусок своей жизни на создание программы, которая бы автоматизировала 8 часов повторяющегося болезненного мозгоебли, который вдобавок занимал слишком много места на моём диске.<br>
+							<br>
+							Возьми это. Держи это. Люби это.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/location_export.html">
+								location_export
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

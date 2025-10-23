@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - raycast_bullet_system
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: bullet_system
+								</h3>
+								<h3>
+									Script: raycast_bullet_system
+								</h3>
+								<h3>
+									Class Name: RaycastBulletSystem
+								</h3>
+								<h3>
+									Extends: BulletSystem
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Instant-hit bullet physics using raycasts<br>
+								<br>
+								Key features:<br>
+								- High-performance bullet simulation using raycasting<br>
+								- Physical interactions with rigidbodies and ragdolls<br>
+								- Visual bullet trails and impact effects<br>
+								- Armor penetration and damage calculation<br>
+								- Spread mechanics for weapon accuracy simulation<br>
+								- NPC-specific optimizations for better performance<br>
+								- Configurable via game settings for scalability<br>
+								<br>
+								Used by most firearms due to its performance efficiency<br>
+								<br>
+								Steps of work:<br>
+								- Initialization<br>
+								- - Considers all performance-related settings<br>
+								- - Preloads bullet trail instances and removes them from scene to use later<br>
+								- Bullet shooting (called from BulletSystem API)<br>
+								- - Spread calculation<br>
+								- - Processing NPC-related logic for additional performance<br>
+								- - Handling of water impacts<br>
+								- - Calculating the main raycast to use it for further processing<br>
+								- - - It basically does it in process_normal_bullet<br>
+								- Damage and particle effects on hit<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									IMPULSE_MULTIPLIER
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Central force multiplier for rigidbody impacts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FORCE_MULTIPLIER
+								</p>
+								<p class="var_desc_name_value">
+									0.3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Positional force multiplier for rigidbody impacts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BONE_MULTIPLIER
+								</p>
+								<p class="var_desc_name_value">
+									3.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Force multiplier for physical bones (ragdolls)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BULLET_TRAIL_PATH \
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to bullet trail visual effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to bullet trail visual effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SPREAD_FORCE_MIN
+								</p>
+								<p class="var_desc_name_value">
+									0.02
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Minimum spread multiplier (best accuracy)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SPREAD_FORCE_MAX
+								</p>
+								<p class="var_desc_name_value">
+									2.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum spread multiplier (worst accuracy)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PRELOAD_TRAILS_COUNT
+								</p>
+								<p class="var_desc_name_value">
+									5
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Number of bullet trail instances to preload
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									spread_force
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current spread intensity (increases with rapid fire)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									use_spread_force
+								</p>
+								<p class="var_desc_name_value">
+									true
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enables spread buildup for player weapons
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									spread_mult
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Global spread multiplier (modified by attachments)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									ads_spread_mult
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Additional spread reduction when aiming down sights
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									npc_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Time accumulator for NPC firing delays
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									npc_delay
+								</p>
+								<p class="var_desc_name_value">
+									1.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current delay between NPC shots
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									npc_dist_mult
+								</p>
+								<p class="var_desc_name_value">
+									0.001
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Distance-to-delay multiplier for NPCs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									npc_min_delay
+								</p>
+								<p class="var_desc_name_value">
+									0.3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Minimum delay between NPC shots
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									bullet_trail_scene
+								</p>
+								<p class="var_desc_name_value">
+									preload(BULLET_TRAIL_PATH)
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded bullet trail scene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									last_fake_ray
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Cached ray data for NPC fake shots
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									trails
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Pool of preloaded bullet trail instances
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									trail_index
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current index in bullet trail pool
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disable_water_checks
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Skips water impact processing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disable_glass_checks
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Skips glass penetration checks
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disable_shoot_events
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Disables bullet impact events
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disable_bullet_trails
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Disables visual bullet trails
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization of raycast bullet system<br/>
+								Consists of 3 parts:<br/>
+								1. Reading Values to disable certain checks.<br/>
+								2. Preloading (or not, if it's disabled) bullet trails.<br/>
+								3. Creating a default surface data for terrain_surf_data variable.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_new_bullet_trail
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									MeshInstance
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns a bullet trail to shoot.<br/>
+								That's just a mesh instance with custom script on it.<br/>
+								Returns null if bullet trails are disabled.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_damagable
+								</p>
+								<p class="var_desc_name_value">
+									damagable: Damagable, pos_start: Vector3, ray: any, direction: Vector3, data: BulletData
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Process damagable with given parameters:<br/>
+								damagable - Damagable itself.<br/>
+								pos_start - Bullet's global start position.<br/>
+								ray - Raycast's ray dictionary.<br/>
+								direction - Bullet's global direction.<br/>
+								data - Bullet properties.<br/>
+								<br/>
+								What it does is just applying damage to damagable, but it does different kind of logic<br/>
+								if damagable is being a character. In this case, it is calling crosshair logic<br/>
+								to show some health data or hitmarkers. If character is killed, this code also gives<br/>
+								experience for that, both level EXP and EXP itself.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_normal_bullet
+								</p>
+								<p class="var_desc_name_value">
+									pos_start: Vector3, direction: Vector3, data: BulletData, exclude: Array =
+									[]
+								</p>
+								<p class="func_return_text">
+									Damagable
+								</p>
+							</div>
+							<p class="var_desc_text">
+								A function that is shooting a ray and does additional checks to it.<br/>
+								If finds a damagable, calls "process_damagable".<br/>
+								Additional checks related to checks of water, glass, HTerrain,<br/>
+								rigibodies and physical bones.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_spread
+								</p>
+								<p class="var_desc_name_value">
+									pos_start: Vector3, direction: Vector3, data: BulletData, exclude: Array =
+									[]
+								</p>
+								<p class="func_return_text">
+									Vector3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Takes direction and applies randomized spread on it.<br/>
+								Returns a direction with spread.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_water
+								</p>
+								<p class="var_desc_name_value">
+									pos_start: Vector3, direction: Vector3, data: BulletData, exclude: Array =
+									[]
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								A function that checks if we are hitting water with raycasts.<br/>
+								Checks only areas and not bodies.<br/>
+								Potentially may require a fix to do as you can hit water through<br/>
+								solid surfaces. Maybe remember that ray dict and just apply it at<br/>
+								certain circumstances?
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_npc
+								</p>
+								<p class="var_desc_name_value">
+									pos_start: Vector3, direction: Vector3, data: BulletData, exclude: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Process NPC related logic.<br/>
+								Simply saying, RaycastBulletSystem behaves differently for NPC in order to save performance,<br/>
+								as earlier spamming of raycasts resulted in major performance decreasement.<br/>
+								What it does is basically lowering amount of raycasts to do.<br/>
+								It is shooting fake bullet trails if NPC cannot shoot yet.<br/>
+								Shoots a real bullet if timer is up.<br/>
+								Timer's delay depends on enemy character's position.<br/>
+								The higher the distance, the higher the delay too.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									shoot_bullet
+								</p>
+								<p class="var_desc_name_value">
+									pos_start: Vector3, direction: Vector3, data: BulletData, exclude: Array =
+									[]
+								</p>
+								<p class="func_return_text">
+									Damagable
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Shooting a bullet. Consists of multiple parts:<br/>
+								1. Applying spread on direction.<br/>
+								2. Running NPC related logic if any is needed.<br/>
+								3. Running water ray checks.<br/>
+								4. Running normal (default?) ray checks<br/>
+								Returns damagable if there is one, or null if none.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Update mainly is needed by NPC's timer and by spread force.
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

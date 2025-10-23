@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Severely outdated module in which I've attempted to make my very own occlusion culling as \"Rooms and Portals\" of Godot 3.x didn't really suit my needs. Now i'd rather use LocationChunk, LocationZone and Godot's Occluder node.
+
+UPD: Now \"Rooms & Portals\" Occlusion Culling works just fine making this one development of mine even more pointless.
+
+[r]Obsolete module. A target for removal. Or not. I don't know. Who cares?[/r]"
+info_rus = "Сильно устаревший модуль, в котором я пытался сделать свою собственную систему отсечения невидимых поверхностей (occlusion culling), поскольку \"Rooms and Portals\" в Godot 3.x не подходили для моих нужд. Теперь я бы предпочёл использовать LocationChunk, LocationZone и узел Occluder от Godot.
+
+ОБНОВЛЕНИЕ: Теперь Occlusion Culling \"Rooms & Portals\" работает just fine, делая эту мою разработку ещё более бессмысленной.
+
+[r]Устаревший модуль. Цель для удаления. Или нет. Я не знаю. Кого это волнует?[/r]"
+edit_time = 1.76123e+09

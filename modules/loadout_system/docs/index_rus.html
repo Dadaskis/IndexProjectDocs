@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - loadout_system
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: loadout_system
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, в старые времена не было никаких меню для снаряжения. Тебе приходилось самостоятельно выбирать оружие в определённой локации, где ты просто использовал пропсы для выбора своей экипировки. И всё. Работало ли это? Да. Однако после тестирования сборки 4, после нескольких игровых сессий, я понял, что... это скучно. Нет, серьёзно, скучно иметь очень ограниченный набор оружия, очень ограниченный набор брони и, конечно, никакой возможности выбирать перки, кроме специальных устройств. Именно тогда было решено сделать меню для снаряжения вместо этого. Зачем тебе нужно это знать? Ну, если ты заглянешь в код, ты можешь заметить там МУСОР. Не трогай этот мусор и просто знай, что он там делает.<br>
+							<br>
+							<img src="../../../_guide/.images/loadout_system/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Общая техническая информация
+							</h4>
+							<p>
+								<br>
+								- <code class="gdscript">
+									"res://modules/loadout_system/assets/ui_scene/loadout_ui.tscn"
+								</code>
+								- это сцена, в которой находится UI. Маловероятно, что тебе понадобится работать с этим, но, эй, тебе нужно знать на всякий случай.<br>
+								- Узел <code class="gdscript">
+									LoadoutSelection
+								</code>
+								- это тот, который открывает крутой UI снаряжения.<br>
+								- <code class="gdscript">
+									LoadoutSystem
+								</code>
+								- это синглтон, который обрабатывает всю логику.<br>
+								- <code class="gdscript">
+									LoadoutSystem
+								</code>
+								использует <code class="gdscript">
+									Globals
+								</code>
+								для хранения данных. Он не использует локальные переменные и сохранение <code class="gdscript">
+									Checkpoints
+								</code>
+								так уж много, потому что у него не было proper системы сохранения к тому времени, когда он был сделан.<br>
+								<br>
+								Просто, не так ли?<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Как добавить предмет?
+							</h4>
+							<p>
+								<br>
+								- Найди <code class="gdscript">
+									"res://modules/loadout_system/assets/items/"
+								</code>
+								<br>
+								- Реши, что ты хочешь добавить. Каждая папка - это отдельная категория, которая обрабатывается отдельно.<br>
+								- Создай соответствующий файл, производный от <code class="gdscript">
+									Resource
+								</code>
+								.<br>
+								&emsp;- <code class="gdscript">
+									LoadoutPerkItem
+								</code>
+								для перков.<br>
+								&emsp;- <code class="gdscript">
+									LoadoutOperationItem
+								</code>
+								для "операций" (забудь об этом, это устарело)<br>
+								&emsp;- <code class="gdscript">
+									LoadoutWeaponItem
+								</code>
+								для оружия.<br>
+								&emsp;- <code class="gdscript">
+									LoadoutSpecialDeviceItem
+								</code>
+								для специальных устройств.<br>
+								&emsp;- <code class="gdscript">
+									LoadoutArmorItem
+								</code>
+								для частей брони.<br>
+								- <code class="red-marking">
+									[Для оружия]
+								</code>
+								Сделай иконку в локации <code class="gdscript">
+									"loadout_iconmaker"
+								</code>
+								.<br>
+								- <code class="red-marking">
+									[Для всего остального]
+								</code>
+								Следуй процедуре для иконки:<br>
+								&emsp;- Возьми изображение, с которым хочешь работать.<br>
+								&emsp;- Выбери графический редактор по своему выбору.<br>
+								&emsp;- Открой изображение.<br>
+								&emsp;- Обесцветь до чёрно-белого изображения.<br>
+								&emsp;- Настрой яркость/контрастность (и яркость, и контрастность высокие).<br>
+								&emsp;- Добавь резкость.<br>
+								&emsp;- Вырежи для прозрачности.<br>
+								&emsp;- Сохрани по адресу:<br>
+								&emsp;&emsp;- <code class="gdscript">
+									"res://modules/loadout_system/assets/ui_images/big_
+									[NAME]
+									.png"
+								</code>
+								для большого изображения иконки.<br>
+								&emsp;&emsp;- <code class="gdscript">
+									"res://modules/loadout_system/assets/ui_images/small_
+									[NAME]
+									.png"
+								</code>
+								для маленького изображения иконки.<br>
+								&emsp;- Настрой оба свойства <code class="gdscript">
+									"image_icon"
+								</code>
+								и <code class="gdscript">
+									"image_icon_small"
+								</code>
+								в твоём файле, производном от <code class="gdscript">
+									LoadoutItemDataBase
+								</code>
+								.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Пример кода
+							</h4>
+							<p>
+								<br>
+							</p>
+							<center>
+								<code class="gdscript">
+									<br>
+									# Установить основное оружие<br>
+									LoadoutSystem.set_primary_weapon("AR-100")<br>
+									# Получить основное оружие<br>
+									var primary_weapon = LoadoutSystem.get_primary_weapon()<br>
+									# Также есть...<br>
+									# get/set_secondary_weapon<br>
+									# get/set_melee_weapon<br>
+									# get/set_grenade_weapon<br>
+									# get/set_usable_item<br>
+									# get/set_special_device<br>
+									<br>
+									# Применить часть брони<br>
+									var item = load("res://modules/loadout_system/assets/items/armor/body/body_armor_lvl1.tres")<br>
+									LoadoutSystem.set_armor_part(item.armor_type, item.get_armor_data_dict())<br>
+									<br>
+									# Применить перки<br>
+									var perks =
+									[<br>
+									&emsp;load("res://modules/loadout_system/assets/items/perks/complex/perk_maniac.tres"),<br>
+									&emsp;load("res://modules/loadout_system/assets/items/perks/behavior/perk_2_fast.tres")<br>
+									]
+									<br>
+									LoadoutSystem.set_perks_list(perks)<br>
+									<br>
+									# Выдать снаряжение игроку<br>
+									var player = PlayerData.player<br>
+									LoadoutSystem.refill_supplies()<br>
+									var loadout = LoadoutSystem.LoadoutMask.new()<br>
+									loadout.give_first = true<br>
+									loadout.give_second = true<br>
+									loadout.give_melee = true<br>
+									loadout.give_item = true<br>
+									loadout.give_grenade = true<br>
+									loadout.give_special_device = false<br>
+									loadout.give_armor = true<br>
+									loadout.activate_perks = true<br>
+									LoadoutSystem.give_loadout_to_player(loadout)<br>
+									player.initialize_perk_related_things()<br>
+									player.nv_enabled = false<br>
+									player.flashlight_enabled = false<br>
+									LoadoutSystem.reset_refill_supplies()<br>
+								</code>
+							</center>
+							<p>
+								<br>
+								<br>
+								Если тебе интересно о mystery режимах, ты можешь проверить их в <code class="gdscript">
+									"res://modules/loadout_system/src/logic/perk_mystery.gd"
+								</code>
+								<br>
+								<br>
+								Веселись.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/item.html">
+									item
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/main_control.html">
+									main_control
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_presentation_shared.html">
+									loadout_presentation_shared
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_presentation.html">
+									LoadoutPresentation
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_presentation_page.html">
+									loadout_presentation_page
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_system.html">
+									LoadoutSystem
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_selection.html">
+									LoadoutSelection
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/icon_gen_control.html">
+									icon_gen_control
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/perk_engineer.html">
+									perk_engineer
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/perk_hitman.html">
+									perk_hitman
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/op_factory.html">
+									op_factory
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/perk_mystery.html">
+									perk_mystery
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_logic_base.html">
+									LoadoutLogicBase
+								</a>
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/loadout_item_data_base.html">
+									LoadoutItemDataBase
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_perk_item.html">
+									LoadoutPerkItem
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_operation_item.html">
+									LoadoutOperationItem
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_weapon_item.html">
+									LoadoutWeaponItem
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_special_device_item.html">
+									LoadoutSpecialDeviceItem
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/loadout_armor_item.html">
+									LoadoutArmorItem
+								</a>
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/icon_gen.html">
+									icon_gen
+								</a>
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

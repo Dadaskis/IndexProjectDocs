@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - spatial_add_transform
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: spatial_add_transform
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, присядь, устройся поудобнее и послушай мою историю... Допустим, ты делаешь гипер-сложный контроллер игрока, который надерёт всем задницы. О да. Приятное чувство. В любом случае, есть проблема... Многие вещи, которые делают твой контроллер "живым", связаны с движениями камеры. Так как же ты справишься со всем этим, не превратив это в спагетти-код, который отстрелит тебе ноги? **ДЗЫНЬ-ДЗЫНЬ-ДЗЫНЬ** ты прав! Именно для этого и нужен этот модуль! Это была не очень хорошая история, но ты понял суть.<br>
+							<br>
+							<code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							- это нода, которая добавляется как ребёнок к любой ноде, наследующей от <code class="gdscript">
+								Spatial
+							</code>
+							. Она применяет некоторые магические трюки со смещениями к родителю. Все изменения аддитивные и управляются через класс <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							. Проще говоря, ты используешь <code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							, чтобы зарегистрировать <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							, а затем изменяешь его данные для управления смещениями. Таким образом, у тебя может быть множество факторов, которые могут влиять на вид твоей потенциальной камеры, без деструктивного вмешательства. Конечно, это было сделано с прицелом на камеры, но может использоваться для любой ноды, наследующей от <code class="gdscript">
+								Spatial
+							</code>
+							, потому что, типа, мы же software engineers, любим расширяемые штуки, которые делают вещи за пределами их изначального скоупа, верно?.. Верно?..<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var camera: Camera # Допустим, она у тебя есть<br>
+								# ...<br>
+								<br>
+								var manager = SpatialAddTransformManager.new()<br>
+								camera.add_child(manager)<br>
+								manager.initialize()<br>
+								<br>
+								# ...<br>
+								<br>
+								var data: = manager.register_data(true)<br>
+								# ^^^ Аргумент "true" нужен, чтобы сразу добавить его в список<br>
+								data.degrees_rotation = Vector3(30.0, 0.0, 0.0)<br>
+								<br>
+								# Та-да, это должно повлиять на твои трансформы<br>
+							</code>
+							<br>
+							<br>
+							Загляни в документацию <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							и <code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							, чтобы узнать, что ещё они умеют.<br>
+							<br>
+							<code class="red-marking">
+								Для получения дополнительной информации, пожалуйста, перечитай.
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/manager.html">
+								SpatialAddTransformManager
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/data.html">
+								SpatialAddTransformData
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

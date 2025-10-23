@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationLOD[/gd] class provides functionality to \"bake\" a LOD model with one diffuse material to save draw-calls amount.
+
+[c]Usage example[/c]
+[gd]
+LocationLOD.bake_LOD_mesh(sample_mesh_LOD, self.mesh.resource_path)
+yield(LocationLOD, \"bake_complete\")
+# Store results
+var data = LocationLOD.get_baked_LOD_data()
+var mesh_LOD = data.mesh
+# ...
+[/gd]
+
+That's really what you need to know about this thing. If you want to see usage of it in current implementations, check [gd]LocationProp[/gd], [gd]LocationBlockoutMesh[/gd] and [gd]LocationMeshCombiner[/gd].
+
+[r]TODO: Potentially write LocationLODControl singleton that would switch LOD meshes in a separate thread OR control visibility over distance generally as well. Switch of the meshes should be happening in a main thread. This thing should work as something standalone, aka it just registers mesh instances, LOD data, maximum visual distance, and then it does the job. Separate thread will only be handling distance checks as they are the most expensive out of all required calculations.[/r]"
+info_rus = "Класс [gd]LocationLOD[/gd] предоставляет функциональность для \"запекания\" LOD-модели с одним диффузным материалом, чтобы сохранить количество отрисовок.
+
+[c]Пример использования[/c]
+[gd]
+LocationLOD.bake_LOD_mesh(sample_mesh_LOD, self.mesh.resource_path)
+yield(LocationLOD, \"bake_complete\")
+# Сохраняем результаты
+var data = LocationLOD.get_baked_LOD_data()
+var mesh_LOD = data.mesh
+# ...
+[/gd]
+
+Это действительно всё, что тебе нужно знать об этой штуке. Если ты хочешь увидеть её использование в текущих реализациях, проверь [gd]LocationProp[/gd], [gd]LocationBlockoutMesh[/gd] и [gd]LocationMeshCombiner[/gd].
+
+[r]TODO: Потенциально написать синглтон LocationLODControl, который будет переключать LOD-меши в отдельном потоке ИЛИ управлять видимостью в зависимости от расстояния в целом. Переключение мешей должно происходить в основном потоке. Эта штука должна работать как нечто самостоятельное, т.е. она просто регистрирует экземпляры мешей, LOD-данные, максимальную дистанцию видимости, а затем выполняет работу. Отдельный поток будет заниматься только проверками расстояния, так как они являются самыми дорогостоящими из всех необходимых вычислений.[/r]"
+edit_time = 1.76123e+09

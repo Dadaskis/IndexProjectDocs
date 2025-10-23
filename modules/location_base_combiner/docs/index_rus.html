@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_base_combiner
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_base_combiner
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+						</p>
+						<h4 style="width: 60%">
+							Не рекомендуется использовать эту функцию, потому что она не завершена, не протестирована и имеет подтверждённые проблемы. Её разработка была прекращена, потому что её использование оказалось недостаточно целесообразным. В целом предпочтение было отдано множеству небольших локаций, оптимизированных под экраны загрузки.<br>
+							<br>
+							<code class="red-marking">
+								<br>
+								Стоит упомянуть, что Godot буквально ломается, когда локации становятся слишком большими. Один из недостатков идеи этой системы связан с этим фактом. Экспериментальная m_day1_x провалилась из-за общего количества сомнительных поведений/багов и необъяснимых вылетов, которые произошли во время тестирования тремя игроками.<br>
+								<br>
+								Пожалуйста, не делай свои локации слишком большими с точки зрения общего размера или общего количества узлов, чтобы избежать проблем.<br>
+								<br>
+							</code>
+							<br>
+						</h4>
+						<p>
+							<br>
+							<br>
+							Location Base Combiner — это система, которая объединяет несколько локаций в одну "непрерывную" локацию. Она обрабатывает сшивание уровней, настройку окружения и управление объединёнными локациями во время выполнения. Её основная цель — свести к минимуму экраны загрузки между локациями, расходуя при этом больше оперативной памяти и видеопамяти.<br>
+							<br>
+						</p>
+						<h2>
+							Как использовать это в локации
+						</h2>
+						<p>
+							<br>
+							- Создай новую локацию для этого или используй существующую - решать тебе<br>
+							- Создай узел <code class="gdscript">
+								LocationBaseCombiner
+							</code>
+							<br>
+							<img src="../../../_guide/.images/location_base_combiner/use0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								- Добавь локации, которые хочешь объединить, в список<br>
+								<img src="../../../_guide/.images/location_base_combiner/use1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									- Нажми кнопку <code>
+										Update
+									</code>
+									<br>
+									<code class="red-marking">
+										Это разрушительная операция. Она удалит все узлы в сцене и заменит их своей собственной настройкой. Ты предупреждён.
+									</code>
+									<br>
+									<img src="../../../_guide/.images/location_base_combiner/use2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										- Увидь объединённые локации :)<br>
+										<img src="../../../_guide/.images/location_base_combiner/use3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											<br>
+										</p>
+										<h2>
+											Как это действительно работает?
+										</h2>
+										<p>
+											<br>
+											Она по сути добавляет все упомянутые локации в одну. Она переписывает некоторые из событий локации, чтобы разрешить потенциальные конфликты, для получения этой информации константа <code class="gdscript">
+												LOC_UNIQUE_VARS
+											</code>
+											используется в узлах, которые обрабатываются в <code class="gdscript">
+												LocationBaseCombinerPart
+											</code>
+											. <code class="red-marking">
+												Она не удаляет экраны загрузки completely
+											</code>
+											, но <code>
+												делает их куда быстрее
+											</code>
+											. К сожалению, это происходит <code class="red-marking">
+												в обмен на более длинный стартовый экран загрузки
+											</code>
+											. Практически это позволяет переключаться между "объединёнными" локациями быстрее, и если ты переключаешься на локацию, которая не объединена в эту — она полностью заменит всю локацию.
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/location_base_combiner_part.html">
+												LocationBaseCombinerPart
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/location_base_combiner.html">
+												LocationBaseCombiner
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - utilities
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: utilities
+								</h3>
+								<h3>
+									Script: utilities
+								</h3>
+								<h3>
+									Class Name: Utilities
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								General utility functions for file operations, node manipulation, and common game tasks<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									list_directories
+								</p>
+								<p class="var_desc_name_value">
+									path: any
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								path: Directory path to scan<br/>
+								Returns: Array of directory names in the given path
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									list_files
+								</p>
+								<p class="var_desc_name_value">
+									path: any
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								path: Directory path to scan<br/>
+								Returns: Array of file names in the given path
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									list_all_files
+								</p>
+								<p class="var_desc_name_value">
+									path: String
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								path: Starting directory path<br/>
+								Returns: Array of all file paths recursively found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									list_all_directories
+								</p>
+								<p class="var_desc_name_value">
+									path: any
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								path: Starting directory path<br/>
+								Returns: Array of all directory paths recursively found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									find_file_recursively
+								</p>
+								<p class="var_desc_name_value">
+									start_path: any, target_file_name: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								start_path: Directory to start searching<br/>
+								target_file_name: File name to find<br/>
+								Returns: Full path to found file or empty string if not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									internal_find_by_type
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, node_class_name: String, result: Array
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursive helper for find_nodes_by_type
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									find_nodes_by_type
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, type_name: String
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								node: Root node to search from<br/>
+								type_name: Class name to search for<br/>
+								Returns: Array of matching nodes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									internal_find_by_script
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, node_script_name: String, result: Array
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursive helper for find_nodes_by_script
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									find_nodes_by_script
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, script_name: String
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								node: Root node to search from<br/>
+								script_name: Script name to search for<br/>
+								Returns: Array of nodes using matching scripts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_random_vector
+								</p>
+								<p class="var_desc_name_value">
+									radius: = 1.0
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								radius: Maximum distance from origin<br/>
+								Returns: Random normalized Vector3 scaled by radius
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									optimize_physics_body
+								</p>
+								<p class="var_desc_name_value">
+									body: PhysicsBody
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								body: PhysicsBody to optimize<br/>
+								Consolidates collision shapes into single shape owner
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									toggle_physics_body
+								</p>
+								<p class="var_desc_name_value">
+									body: PhysicsBody, enabled: bool
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								body: PhysicsBody to modify<br/>
+								enabled: Whether to enable or disable physics
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									internal_get_all_children
+								</p>
+								<p class="var_desc_name_value">
+									node: Node
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Recursive helper for get_all_children
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_all_children
+								</p>
+								<p class="var_desc_name_value">
+									node: Node
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								node: Parent node<br/>
+								Returns: Array of all children recursively
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_string_lines
+								</p>
+								<p class="var_desc_name_value">
+									text: String
+								</p>
+								<p class="func_return_text">
+									PoolStringArray
+								</p>
+							</div>
+							<p class="var_desc_text">
+								text: Multiline string to split<br/>
+								Returns: Array of lines
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									combine_string_lines
+								</p>
+								<p class="var_desc_name_value">
+									lines: Array, split_symbol = "\n"
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								lines: Array of strings to combine<br/>
+								split_symbol: Separator between lines<br/>
+								Returns: Combined string
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									find_keyword_in_lines
+								</p>
+								<p class="var_desc_name_value">
+									lines: Array, keyword: String
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								lines: Array of strings to search<br/>
+								keyword: Text to find<br/>
+								Returns: Index of first matching line or -1
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									find_line_with_keyword
+								</p>
+								<p class="var_desc_name_value">
+									text: String, keyword: String
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								text: Multiline string to search<br/>
+								keyword: Text to find<br/>
+								Returns: First line containing keyword
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									human_readable_array
+								</p>
+								<p class="var_desc_name_value">
+									list: Array
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								list: Array to format<br/>
+								Returns: Comma-separated string
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									simple_array_string
+								</p>
+								<p class="var_desc_name_value">
+									list: Array, space_str = "", tab_level = 0
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								list: Array to format<br/>
+								space_str: Separator between items<br/>
+								tab_level: Number of tabs to indent<br/>
+								Returns: Formatted string
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									snake_to_camel_case
+								</p>
+								<p class="var_desc_name_value">
+									text: String
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								text: snake_case string<br/>
+								Returns: camelCase string
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_multiple_keywords_in_string
+								</p>
+								<p class="var_desc_name_value">
+									keywords: Array, text: String
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								keywords: Array of strings to search for<br/>
+								text: String to check<br/>
+								Returns: True if any keyword found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_for_actionkeys
+								</p>
+								<p class="var_desc_name_value">
+									note: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								note: String containing actionkey tags<br/>
+								Returns: String with actionkeys replaced with input names
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_random_vector3
+								</p>
+								<p class="var_desc_name_value">
+									range_value: float
+								</p>
+								<p class="func_return_text">
+									Vector3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								range_value: Maximum value for each component<br/>
+								Returns: Random Vector3 within range
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									play_particles
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, force_one_shot = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								node: Parent node containing particles<br/>
+								force_one_shot: Whether to force one-shot emission
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									create_particle
+								</p>
+								<p class="var_desc_name_value">
+									scene: PackedScene, play_immediately = true, force_one_shot = false, position: Vector3 = Vector3.ZERO, direction: Vector3 = Vector3.ZERO, parent: Node = null
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								scene: PackedScene of particle system<br/>
+								play_immediately: Whether to start emitting<br/>
+								force_one_shot: One-shot emission flag<br/>
+								position: World position to spawn<br/>
+								direction: Orientation direction<br/>
+								parent: Node to attach to<br/>
+								Returns: Created particle node
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_the_damn_material_name
+								</p>
+								<p class="var_desc_name_value">
+									mat: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								mat: Material to get name from<br/>
+								Returns: Resource name or basename from path
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

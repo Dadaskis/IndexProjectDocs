@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - footstep
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: footstep
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Footsteps module. Used by player and NPCs. Manages playing appropriate footstep sounds based on surface and movement state.<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Initialization<br>
+								footstep = Footstep.new()<br>
+								footstep.volume_2D = -30.0<br>
+								footstep.sound_2D = true # Whether the sound is played with 3D positioning or not<br>
+								footstep.has_cloth = true <br>
+								footstep.has_equipment = true<br>
+								footstep.has_shoes = true<br>
+								footstep.delay = 0.001<br>
+								footstep.initialize()<br>
+								<br>
+								# Usage<br>
+								footstep.play()<br>
+								<br>
+								# Additional methods<br>
+								footstep.play_equipment_sound()<br>
+								footstep.on_landing()<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/footstep.html">
+								Footstep
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/sounds_data.html">
+								FootstepSoundsData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

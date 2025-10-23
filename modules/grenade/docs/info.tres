@@ -1,0 +1,81 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Grenade node to create grenades. For more configs look at folders of [p]res://modules/grenade/assets/grenades/[/p]
+
+[c]Usage example[/p]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var grenade = Grenade.new()
+loc_base.add_child(grenade)
+grenade.character_owner = player.character
+grenade.add_collision_exception_with(player)  # Prevent self-collision
+grenade.initialize(\"EG-5\")
+[/gd]
+
+[t]Creating your own grenade[/t]
+All grenades are stored at [p]res://modules/grenade/assets/grenades/[/p], each folder is a unique grenade with the following file structure:
+[gd]
+├── logic.tres
+└── model.glb
+[/gd]
+- [p]logic.tres[/p] is practically any resource that extends functionality of [gd]BasicGrenadeLogic[/gd] (any \"grenade logic\"). Since this is a resource file - you just configure its properties via exported variables
+- [p]model.glb[/p] is the grenade model that'll be used for visuals
+Additional files placed in the folder don't really matter as much, these can be just materials and etc
+
+[t]Creating your own logic[/t]
+[c]Logic template[/c]
+[gd]
+# Basic grenade logic template
+extends BasicGrenadeLogic
+class_name ExampleGrenadeLogic
+
+# Create parameters with export variables
+export(float) var parameter: = 5.0
+
+# Write your own explosion behavior here
+func explode():
+	pass
+[/gd]
+Write your code and save it at [p]res://modules/grenade/src/logic/[/p], you can take a closer look at existing logic to see what they are doing under the hood. Mainly what you can change is the explosion behavior. After that you just can create your own grenade while using your class for [p]logic.tres[/p] instead."
+info_rus = "Узел Grenade для создания гранат. Для дополнительных конфигураций смотрите папки в [p]res://modules/grenade/assets/grenades/[/p]
+
+[c]Пример использования[/p]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+var grenade = Grenade.new()
+loc_base.add_child(grenade)
+grenade.character_owner = player.character
+grenade.add_collision_exception_with(player)  # Предотвратить столкновение с собой
+grenade.initialize(\"EG-5\")
+[/gd]
+
+[t]Создание своей собственной гранаты[/t]
+Все гранаты хранятся в [p]res://modules/grenade/assets/grenades/[/p], каждая папка представляет собой уникальную гранату со следующей структурой файлов:
+[gd]
+├── logic.tres
+└── model.glb
+[/gd]
+- [p]logic.tres[/p] - это практически любой ресурс, расширяющий функциональность [gd]BasicGrenadeLogic[/gd] (любая \"логика гранаты\"). Поскольку это файл ресурса - вы просто настраиваете его свойства через экспортируемые переменные
+- [p]model.glb[/p] - это модель гранаты, которая будет использоваться для визуализации
+Дополнительные файлы, размещённые в папке, не really имеют такого значения, это могут быть просто материалы и т.д.
+
+[t]Создание своей собственной логики[/t]
+[c]Шаблон логики[/c]
+[gd]
+# Базовый шаблон логики гранаты
+extends BasicGrenadeLogic
+class_name ExampleGrenadeLogic
+
+# Создайте параметры с помощью экспортируемых переменных
+export(float) var parameter: = 5.0
+
+# Напишите своё собственное поведение взрыва здесь
+func explode():
+	pass
+[/gd]
+Напишите свой код и сохраните его в [p]res://modules/grenade/src/logic/[/p], вы можете приглядеться к существующей логике, чтобы увидеть, что они делают \"под капотом\". В основном то, что вы можете изменить, это поведение взрыва. После этого вы просто можете создать свою собственную гранату, используя ваш класс для [p]logic.tres[/p] instead."
+edit_time = 1.76113e+09

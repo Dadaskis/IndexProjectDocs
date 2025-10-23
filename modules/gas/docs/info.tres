@@ -1,0 +1,51 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "\"Gas\" node that is usually created by gas grenades or M.Inc's chemical units.
+
+[c]Usage example[/c]
+[gd]
+# Create new gas effect instance
+var gas = Gas.new()
+
+# Add to scene hierarchy
+var loc_base = LocationBaseScene.get_scene()
+loc_base.add_child(gas)
+
+# Position at grenade's location
+gas.global_transform.origin = global_position
+
+# Set owner for damage attribution
+gas.character_owner = character
+
+# Activate gas effect
+gas.explode()
+[/gd]
+
+Visuals of gas particles can be edited at [p]res://modules/gas/assets/particles/generic.tscn[/p]"
+info_rus = "Узел \"Gas\", который обычно создается газовыми гранатами или химическими подразделениями M.Inc.
+
+[c]Пример использования[/c]
+[gd]
+# Создать новый экземпляр эффекта газа
+var gas = Gas.new()
+
+# Добавить в иерархию сцены
+var loc_base = LocationBaseScene.get_scene()
+loc_base.add_child(gas)
+
+# Позиционировать в месте гранаты
+gas.global_transform.origin = global_position
+
+# Установить владельца для атрибуции урона
+gas.character_owner = character
+
+# Активировать эффект газа
+gas.explode()
+[/gd]
+
+Визуальные эффекты частиц газа можно редактировать в [p]res://modules/gas/assets/particles/generic.tscn[/p]"
+edit_time = 1.76113e+09

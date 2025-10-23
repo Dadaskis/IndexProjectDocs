@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - properties_data
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: common_editor
+								</h3>
+								<h3>
+									Script: properties_data
+								</h3>
+								<h3>
+									Class Name: CE_PropertiesData
+								</h3>
+								<h3>
+									Extends: class Text PropType:
+								</h3>
+								<h3>
+									CLASS
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Property data container and manager for editor UI elements<br>
+								Defines and organizes various property types (text, vectors, colors, etc)<br>
+								with change tracking and visibility control for dynamic property editing<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									changed_visibility
+								</p>
+								<p class="var_desc_name_value">
+									visible
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when property visibility changes
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									props
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array containing all property instances
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_text
+								</p>
+								<p class="var_desc_name_value">
+									text: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new text property
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_button
+								</p>
+								<p class="var_desc_name_value">
+									text: String, obj: any, func_name: any, binds =
+									[]
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new button property
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_vec3
+								</p>
+								<p class="var_desc_name_value">
+									text: String, vec3: Vector3
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new Vector3 property
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_enum
+								</p>
+								<p class="var_desc_name_value">
+									text: String, options: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new enum dropdown property<br/>
+								text: Display label for the enum<br/>
+								options: Array of available options
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_color
+								</p>
+								<p class="var_desc_name_value">
+									text: String, color: Color
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new color picker property<br/>
+								text: Display label for the color picker<br/>
+								color: Initial color value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_bool
+								</p>
+								<p class="var_desc_name_value">
+									text: String, value: bool
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new boolean toggle property<br/>
+								text: Display label for the toggle<br/>
+								value: Initial boolean state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_float
+								</p>
+								<p class="var_desc_name_value">
+									text: String, value: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new float input property<br/>
+								text: Display label for the input<br/>
+								value: Initial float value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_material
+								</p>
+								<p class="var_desc_name_value">
+									mat: UserSpatialUbershader, subtextures =
+									{}
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Creates and adds a new material editor property<br/>
+								mat: Material to edit<br/>
+								subtextures: Dictionary of subtextures (optional)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_visible
+								</p>
+								<p class="var_desc_name_value">
+									visible: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets visibility for all properties and emits change signal<br/>
+								visible: Whether properties should be visible
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

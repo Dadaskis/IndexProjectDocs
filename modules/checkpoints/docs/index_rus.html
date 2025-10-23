@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - checkpoints
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: checkpoints
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Гипер-универсальная система сохранений, которая воскресила викторианского ребёнка и убила мой разум в 3.5. Изначально она называлась "чекпойнты", потому что, ну, это были буквальные чекпойнты, работающие на зубочистках и жвачке. Со временем она была переписана в более универсальное решение, которое позволяет игроку сохраняться где угодно, не ломая игру. Более того, она позволяет легко добавить поддержку сохранений практически любому узлу или объекту, используя эту систему.<br>
+							<br>
+							<code>
+								Пример поддержки сохранений
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var spawned: bool<br>
+								var spawn_enabled: bool<br>
+								var spawned_npc: NonPlayableCharacter<br>
+								# ...<br>
+								<br>
+								# Сохраняет состояние NPC в чекпойнт<br>
+								func on_checkpoint_save():<br>
+								&emsp;# Сохраняем данные в систему чекпойнтов<br>
+								&emsp;Checkpoints.add_data_node(self,
+								[<br>
+								&emsp;&emsp;"spawned",<br>
+								&emsp;&emsp;"spawn_enabled",<br>
+								&emsp;&emsp;"spawned_npc:transform",<br>
+								&emsp;&emsp;# ...<br>
+								&emsp;&emsp;"spawned_npc:logic:current_state_name",<br>
+								&emsp;]
+								)<br>
+								<br>
+								# Загружает состояние NPC из чекпойнта<br>
+								func on_checkpoint_load():<br>
+								&emsp;# Загружаем сохранённые данные<br>
+								&emsp;Checkpoints.assign_node_data(self)<br>
+								<br>
+								# Инициализирует узел<br>
+								func node_init():<br>
+								&emsp;# Регистрируем в системе чекпойнтов<br>
+								&emsp;Checkpoints.add_on_save_and_load(self)<br>
+							</code>
+							<br>
+							<br>
+							Три основных момента здесь - это <code class="gdscript">
+								Checkpoints.add_on_save_and_load(self)
+							</code>
+							, <code class="gdscript">
+								on_checkpoint_load
+							</code>
+							и <code class="gdscript">
+								on_checkpoint_save
+							</code>
+							. <code class="gdscript">
+								Checkpoints.add_on_save_and_load(self)
+							</code>
+							позволяет быстро подключить твой узел/объект к сигналам <code class="gdscript">
+								Checkpoints
+							</code>
+							, по умолчанию имена подключённых функций - <code class="gdscript">
+								on_checkpoint_load
+							</code>
+							и <code class="gdscript">
+								on_checkpoint_save
+							</code>
+							, и они вызываются соответственно. Имей в виду, для узлов добавить поддержку особенно легко. Ты просто подключаешь сигналы, затем просто вызываешь <code class="gdscript">
+								Checkpoints.add_data_node(self,
+								["var_name_here"]
+								)
+							</code>
+							при сохранении и <code class="gdscript">
+								Checkpoints.assign_node_data(self)
+							</code>
+							при загрузке. Таким образом, все данные будут назначены с лёгкостью, и ты можешь добавить больше логики сохранения, которую ты можешь полностью контролировать. <code class="gdscript">
+								Checkpoints.add_data_node
+							</code>
+							на самом деле очень легко использовать, он просто имеет ссылку на узел в качестве первого аргумента и затем список переменных для сохранения. Этот список содержит только имена переменных, которые ты по-нормальному получил бы с помощью функции <code class="gdscript">
+								Object.get_indexed
+							</code>
+							. В данном случае, в этом классе есть переменные с именами <code class="gdscript">
+								"spawned", "spawn_enabled", "spawned_npc"
+							</code>
+							, большинство из которых являются базовыми типами, которые могут быть сохранены как есть. Однако <code class="gdscript">
+								"spawned_npc"
+							</code>
+							- это сложный, пользовательский класс, который содержит много информации внутри. Ты можешь написать аналог <code class="gdscript">
+								spawned_npc.transform
+							</code>
+							как <code class="gdscript">
+								"spawned_npc:transform"
+							</code>
+							, и это позволит тебе сохранить трансформы этого узла! В этом случае, помни, тебе нужно предоставить список переменных, которые представляют базовые типы, которые могут быть сохранены в любом файле, производном от <code class="gdscript">
+								Resource
+							</code>
+							. Если ты предоставишь просто объект для сохранения, он может сохраниться неправильно.<br>
+							<br>
+							Однако этот пример покрывает только узлы. Если у тебя есть объекты, они обрабатываются по-другому, поскольку они обычно не существуют в дереве сцены. Такие объекты могут быть либо полностью самостоятельными экземплярами какого-либо класса, либо просто автозагрузками.<br>
+							<code>
+								Примеры
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Обработка сохранения класса BasicDamagable<br>
+								<br>
+								# Базовое значение здоровья для этого объекта, которому можно нанести урон<br>
+								var health = 100.0<br>
+								<br>
+								# Ссылка на узел, который должен быть удалён при уничтожении<br>
+								var node_to_remove<br>
+								<br>
+								# Флаг, отслеживающий, был ли этот объект уничтожен<br>
+								var is_destroyed = false<br>
+								<br>
+								# ...<br>
+								<br>
+								# Обрабатывает сохранение состояния этого объекта при создании чекпойнта<br>
+								# Сохраняет критические свойства, такие как здоровье и состояние уничтожения<br>
+								func on_checkpoint_save():<br>
+								&emsp;# Регистрируем данные этого объекта в системе чекпойнтов<br>
+								&emsp;Checkpoints.add_data_obj(<br>
+								&emsp;&emsp;cp_key,&emsp;&emsp;&emsp;&emsp;&emsp;# Уникальный идентификатор для этого объекта<br>
+								&emsp;&emsp;self,&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Ссылка на этот экземпляр скрипта<br>
+								&emsp;&emsp;
+								[&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Список свойств для сохранения:<br>
+								&emsp;&emsp;&emsp;"health",      &emsp;# Текущее значение здоровья<br>
+								&emsp;&emsp;&emsp;"is_destroyed" # Флаг состояния уничтожения<br>
+								&emsp;&emsp;]
+								<br>
+								&emsp;)<br>
+								<br>
+								# Обрабатывает загрузку состояния этого объекта из чекпойнта<br>
+								# Восстанавливает сохранённые свойства и управляет визуальным состоянием обломков<br>
+								func on_checkpoint_load():<br>
+								&emsp;# Восстанавливаем сохранённые свойства из данных чекпойнта<br>
+								&emsp;Checkpoints.assign_obj_data(cp_key, self)<br>
+								&emsp;<br>
+								&emsp;# Сначала очищаем любые существующие статические обломки<br>
+								&emsp;disable_static_debris_only()<br>
+								&emsp;<br>
+								&emsp;# Ждём 5 кадров для обеспечения правильной настройки сцены<br>
+								&emsp;for frame in range(5):<br>
+								&emsp;&emsp;yield(VisualServer, "frame_post_draw")<br>
+								&emsp;&emsp;yield(VisualServer, "frame_post_draw")<br>
+								&emsp;<br>
+								&emsp;# Если этот объект был уничтожен при сохранении, обрабатываем визуальное представление<br>
+								&emsp;if is_destroyed and is_instance_valid(node_to_remove):<br>
+								&emsp;&emsp;# Удаляем основной узел, чтобы показать уничтоженное состояние<br>
+								&emsp;&emsp;var loc_base = LocationBaseScene.get_scene()<br>
+								&emsp;&emsp;loc_base.remove_node(node_to_remove)<br>
+								&emsp;&emsp;<br>
+								&emsp;&emsp;# Если настроено с обломками, включаем визуализацию статических обломков<br>
+								&emsp;&emsp;if has_debris:<br>
+								&emsp;&emsp;&emsp;enable_static_debris_only()<br>
+								<br>
+								# Регистрирует этот объект в системе чекпойнтов<br>
+								# Генерирует уникальный ключ и настраивает колбэки сохранения/загрузки<br>
+								func register_checkpoint():<br>
+								&emsp;# Создаём уникальный ключ, комбинируя путь узла и идентификатор типа<br>
+								&emsp;cp_key = Checkpoints.get_node_key(node_to_remove) + "__DAMAGEABLE"<br>
+								&emsp;<br>
+								&emsp;# Регистрируем функции колбэков как для сохранения, так и для загрузки<br>
+								&emsp;Checkpoints.add_on_save_and_load(self)<br>
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Пример использования PlayerAnimatedItemMedical<br>
+								<br>
+								# Сохраняет текущее состояние медицинского предмета в систему чекпойнтов<br>
+								func on_checkpoint_save():<br>
+								&emsp;Checkpoints.add_data_obj(<br>
+								&emsp;&emsp;"player_item_medical:" + weapon_name,<br>
+								&emsp;&emsp;self,<br>
+								&emsp;&emsp;
+								[<br>
+								&emsp;&emsp;&emsp;"healing",<br>
+								&emsp;&emsp;&emsp;"timer",<br>
+								&emsp;&emsp;&emsp;# ...<br>
+								&emsp;&emsp;&emsp;"drug_active",<br>
+								&emsp;&emsp;&emsp;"drug_loop:volume_db",<br>
+								&emsp;&emsp;&emsp;"restored_health"<br>
+								&emsp;&emsp;]
+								<br>
+								&emsp;)<br>
+								<br>
+								# Загружает состояние медицинского предмета из системы чекпойнтов<br>
+								func on_checkpoint_load():<br>
+								&emsp;# ...<br>
+								&emsp;Checkpoints.assign_obj_data("player_item_medical:" + weapon_name, self)<br>
+								&emsp;# ...<br>
+							</code>
+							<br>
+							<br>
+							Проще говоря, единственное различие для объектов - это использование методов с именами <code class="gdscript">
+								Checkpoints.add_data_obj
+							</code>
+							и <code class="gdscript">
+								Checkpoints.assign_obj_data
+							</code>
+							. Однако, в отличие от узлов, они требуют ещё один параметр: ключ объекта. Узлы не нуждаются в нём, потому что их ключ генерируется automatically на основе позиционирования этого узла в сцене <code class="gdscript">
+								LocationBase
+							</code>
+							. В этом случае первый аргумент в обоих методах *является* ключом, а второй аргумент - ссылка на сам объект (<code class="gdscript">
+								self
+							</code>
+							). Ты можешь сохранить узел как объект тоже, поскольку все <code class="gdscript">
+								Node
+							</code>
+							являются производными от <code class="gdscript">
+								Object
+							</code>
+							, в случае, если это действительно serving твоим needs.<br>
+							<br>
+							Все сохранения хранятся как файлы ресурсов <code class="gdscript">
+								CheckpointData
+							</code>
+							, которые сохраняются по пути <code class="gdscript">
+								Checkpoints.SAVE_DIR_PATH
+							</code>
+							(который в настоящее время <code class="gdscript">
+								"user://checkpoints/"
+							</code>
+							). Их превью хранятся separately, по пути <code class="gdscript">
+								Checkpoints.SAVE_IMG_DIR_PATH
+							</code>
+							(<code class="gdscript">
+								"user://checkpoint_images/"
+							</code>
+							).
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/checkpoints.html">
+								Checkpoints
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/checkpoint_data.html">
+								CheckpointData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

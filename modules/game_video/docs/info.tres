@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Game video module. I had plans for it, but it wasn't that useful because videos are heavy especially you want to keep a good resolution.
+
+[c]Usage example[/c]
+[gd]
+GameVideo.play_video([\"game_start_vid.ogv\"])
+# Array of videos will play one after another, allowing you to split a huge video
+yield(GameVideo, \"on_finish\")
+# Continue logic after finished video
+[/gd]"
+info_rus = "Модуль игрового видео. У меня были планы на него, но он не был таким полезным, потому что видео тяжелые, особенно если вы хотите сохранить хорошее разрешение.
+
+[c]Пример использования[/c]
+[gd]
+GameVideo.play_video([\"game_start_vid.ogv\"])
+# Массив видео будет воспроизводиться одно за другим, позволяя разделить большое видео
+yield(GameVideo, \"on_finish\")
+# Продолжить логику после завершения видео
+[/gd]"
+edit_time = 1.76113e+09

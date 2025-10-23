@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Legacy exit stats menu. Maybe i should reconsider it and return this thing?
+
+For the time being there's going to be no description for this module because this functionality is deprecated right now and is unused."
+info_rus = "Устаревшее меню статистики выхода. Может, стоит пересмотреть его и вернуть эту штуку?
+
+В настоящее время описание этого модуля отсутствует, так как эта функциональность устарела и не используется."
+edit_time = 1.76113e+09

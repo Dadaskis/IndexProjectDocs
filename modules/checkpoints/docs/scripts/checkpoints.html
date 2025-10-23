@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - checkpoints
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: checkpoints
+								</h3>
+								<h3>
+									Script: checkpoints
+								</h3>
+								<h3>
+									Class Name: Checkpoints
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Special, universal saving system that saves player's progress at any<br>
+								point of the game. Emits <code class="gdscript">
+									on_save
+								</code>
+								/<code class="gdscript">
+									on_load
+								</code>
+								signals,<br>
+								that can be used by any nodes to add a save system support.<br>
+								Usage example is written at module index, take a look there.<br>
+								<br>
+								Notable functionality:<br>
+								- Saving happens on the separate thread, it is used to save some basic info.<br>
+								Therefore, do not make anything thread-unsafe when <code class="gdscript">
+									on_save
+								</code>
+								is called.<br>
+								- This class also handles UI to show saving/loading.<br>
+								- Unlike saving, loading is happening on the main thread.<br>
+								- It is also handling inputs of the player, allowing to quick-save/load<br>
+								everywhere.<br>
+								- All saves are stored at <code class="gdscript">
+									SAVE_DIR_PATH
+								</code>
+								, however, their previews<br>
+								are stored separately at <code class="gdscript">
+									SAVE_IMG_DIR_PATH
+								</code>
+								<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_save
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emitted when checkpoint save process begins
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emitted when checkpoint load process begins
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAVE_DIR_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"user://checkpoints/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Directory path where checkpoint save files (.tres) are stored
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAVE_IMG_DIR_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"user://checkpoint_images/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Directory path where checkpoint screenshot images (.png) are stored
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									AUTO_IMAGE_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/checkpoints/assets/auto_image/auto_image.png"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default image path used when no screenshot is taken during save
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disabled
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								When true, prevents any checkpoint saving functionality
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									disabled_load
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								When true, prevents loading checkpoints while still allowing saving
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_saving
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag indicating if a save operation is currently in progress
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									saves
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary storing all loaded checkpoint saves (key: save name, value: CheckpointData)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									data
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Temporary dictionary used during save/load to store object state data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									difficulty_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Stores the difficulty name from the last saved checkpoint
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_loading
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Flag indicating if a load operation is currently in progress
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									auto_image
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default image used when no screenshot is taken during save
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									UI
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the UI CanvasLayer that shows save/load indicators
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									last_save
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the most recently saved checkpoint data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									last_save_name
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of the most recent save file (without extension)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									saved_obj_count
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Counter tracking how many objects were saved in last operation
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									load_funcrefs
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of funcrefs to call when loading a checkpoint
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									load_funcrefs_mask
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary tracking which objects have registered load callbacks (key: instance ID)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									save_funcrefs
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of funcrefs to call when saving a checkpoint
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									save_funcrefs_mask
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary tracking which objects have registered save callbacks (key: instance ID)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_data
+								</p>
+								<p class="var_desc_name_value">
+									key0: String, key1: String, value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Stores a value in the checkpoint data dictionary using a two-level key system<br/>
+								key0: Primary category/group key<br/>
+								key1: Secondary specific value key<br/>
+								value: The data to store
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_data
+								</p>
+								<p class="var_desc_name_value">
+									key0: String, key1: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Retrieves a value from the checkpoint data dictionary using two-level keys<br/>
+								key0: Primary category/group key to look up<br/>
+								key1: Secondary specific value key to retrieve<br/>
+								Returns: The stored value or null if not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_data_obj
+								</p>
+								<p class="var_desc_name_value">
+									key0: String, obj: Object, keys: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves multiple properties from an object into checkpoint data<br/>
+								key0: Unique identifier for the object (usually path-based)<br/>
+								obj: The object instance to save properties from<br/>
+								keys: Array of property paths to save (e.g.
+								["position:x", "health"]
+								)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_obj_data
+								</p>
+								<p class="var_desc_name_value">
+									key0: String, obj: Object
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Restores multiple properties to an object from checkpoint data<br/>
+								key0: Unique identifier used when saving the object<br/>
+								obj: The object instance to restore properties to<br/>
+								Note: Skips any properties containing "script" in their key
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_data_node
+								</p>
+								<p class="var_desc_name_value">
+									node: Node, keys: Array
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves a node's properties to checkpoint data, with location validation<br/>
+								node: The node instance to save<br/>
+								keys: Array of property paths to save from the node<br/>
+								Note: Only saves if node is in same location as when originally saved
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_node_data
+								</p>
+								<p class="var_desc_name_value">
+									node: Node
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Restores a node's properties from checkpoint data, with location validation<br/>
+								node: The node instance to restore<br/>
+								Note: Only restores if node is in same location as when originally saved
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_node_key0
+								</p>
+								<p class="var_desc_name_value">
+									obj: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Generates and assigns a unique identifier key for checkpoint tracking<br/>
+								obj: The node/object to generate a key for<br/>
+								Note: Uses either the node's path from location root or its name as fallback
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_node_key
+								</p>
+								<p class="var_desc_name_value">
+									obj: any
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the unique checkpoint key for an object, ensuring one exists first<br/>
+								obj: The object to get the key for<br/>
+								Returns: The object's checkpoint key as String, or empty string if invalid
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_on_load
+								</p>
+								<p class="var_desc_name_value">
+									obj: any, method_name = "on_checkpoint_load"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Registers an object's method to be called during checkpoint loading<br/>
+								obj: The object containing the callback method<br/>
+								method_name: Name of method to call (default: "on_checkpoint_load")<br/>
+								Note: Prevents duplicate registrations using instance ID tracking
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_on_save
+								</p>
+								<p class="var_desc_name_value">
+									obj: any, method_name = "on_checkpoint_save"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Registers an object's method to be called during checkpoint saving<br/>
+								obj: The object containing the callback method<br/>
+								method_name: Name of method to call (default: "on_checkpoint_save")<br/>
+								Note: Prevents duplicate registrations using instance ID tracking
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_on_save_and_load
+								</p>
+								<p class="var_desc_name_value">
+									obj: any, method_name_load = "on_checkpoint_load", method_name_save = "on_checkpoint_save"
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Convenience method to register both load and save callbacks at once<br/>
+								obj: The object containing the callback methods<br/>
+								method_name_load: Name of load callback method<br/>
+								method_name_save: Name of save callback method
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_checkpoint_process
+								</p>
+								<p class="var_desc_name_value">
+									take_screenshot: = true, cp_add_name: = "", cp_override_name = ""
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Core checkpoint saving logic that handles file creation, data collection and storage<br/>
+								take_screenshot: Whether to capture and save a screenshot (default: true)<br/>
+								cp_add_name: Additional string to append to the auto-generated filename<br/>
+								cp_override_name: If provided, completely overrides the auto-generated filename
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_checkpoint_thread
+								</p>
+								<p class="var_desc_name_value">
+									args: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Thread wrapper function for save_checkpoint_process<br/>
+								args: Array containing the parameters for save_checkpoint_process<br/>
+								Note: Used to run the save process in a separate thread
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_checkpoint
+								</p>
+								<p class="var_desc_name_value">
+									take_screenshot: = true, cp_add_name: = "", cp_override_name = ""
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main save checkpoint interface that handles the full save flow<br/>
+								take_screenshot: Whether to capture a screenshot (default: true)<br/>
+								cp_add_name: Additional identifier for the save file<br/>
+								cp_override_name: Complete override for the save filename
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									call_on_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Executes all registered load callbacks and cleans up invalid references<br/>
+								Note: Automatically filters out null or invalid funcrefs and maintains only valid ones
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									call_on_save
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Executes all registered save callbacks and cleans up invalid references<br/>
+								Note: Automatically filters out null or invalid funcrefs and maintains only valid ones
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_checkpoint
+								</p>
+								<p class="var_desc_name_value">
+									checkpoint_name: = "", force_loc_change = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main checkpoint loading function that handles the complete load process<br/>
+								checkpoint_name: Name of save file to load (defaults to last save if empty)<br/>
+								force_loc_change: Whether to force location change even if already in correct location
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prepare_auto_image
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prepares the default auto-image used when no screenshot is taken<br/>
+								Loads the image from AUTO_IMAGE_PATH and stores it in auto_image variable
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_data_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads and organizes the list of available save files<br/>
+								Sorts saves by modified time and maintains up to maximum_save_panels count<br/>
+								Stores the result in the saves dictionary (filename ->
+								CheckpointData)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_data_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Dictionary
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns the dictionary of loaded save files<br/>
+								Returns: Dictionary mapping save filenames (without extension) to CheckpointData
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									prepare_UI
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prepares and instantiates the checkpoint UI elements<br/>
+								Loads the UI scene and adds it as a child node
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_game_load
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization function called when the game loads<br/>
+								Sets up UI, preloads the auto-image, and loads save data list
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_modified_time
+								</p>
+								<p class="var_desc_name_value">
+									key: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the last modified timestamp of a save file<br/>
+								key: The name of the save file (without extension)<br/>
+								Returns: Unix timestamp of last modification, or 0 if file doesn't exist
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Node ready callback - registers initialization with game startup system
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Node process callback - handles quick save/load input<br/>
+								delta: Time since last frame (unused in this implementation)
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

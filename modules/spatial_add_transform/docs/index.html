@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - spatial_add_transform
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: spatial_add_transform
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							So, sit down, feel yourself comfortable, and listen to my story... Let's assume that you are making a hyper-complex player controller that is going to kick anyone's ass. Hell yeah. Feeling good. Anyway, there's a problem... A lot of things that make your controller "alive" are related to camera movements. So, how would you handle this all without turning it into a messy spaghetti that'll shoot your legs off? **DING-DING-DING** you are right! This is what this module is all about! It wasn't really a nice story, but you get the point.<br>
+							<br>
+							<code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							is a node that is added as a child of any <code class="gdscript">
+								Spatial
+							</code>
+							-extended node. It will apply some magic tricks of offsets to the parent. All of the changes are additive and are controlled through <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							class. Simply saying, you use <code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							to register <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							and then you change its data to control offsets. This way you can have a lot of factors that can affect your potential camera's view without doing it in a destructive way. Of course, it was made for cameras in mind, but it can be used for any <code class="gdscript">
+								Spatial
+							</code>
+							-extending node because, like, we are software engineers, loving extensible things that does stuff outside its original scope, right?.. Right?..<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var camera: Camera # Let's assume you have one<br>
+								# ...<br>
+								<br>
+								var manager = SpatialAddTransformManager.new()<br>
+								camera.add_child(manager)<br>
+								manager.initialize()<br>
+								<br>
+								# ...<br>
+								<br>
+								var data: = manager.register_data(true)<br>
+								# ^^^ "true" argument is needed to immediately add it to the list<br>
+								data.degrees_rotation = Vector3(30.0, 0.0, 0.0)<br>
+								<br>
+								# Tada, it should affect your transforms<br>
+							</code>
+							<br>
+							<br>
+							Check documentation of <code class="gdscript">
+								SpatialAddTransformData
+							</code>
+							and <code class="gdscript">
+								SpatialAddTransformManager
+							</code>
+							to find out what else they can do.<br>
+							<br>
+							<code class="red-marking">
+								For more information, please reread.
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/manager.html">
+								SpatialAddTransformManager
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/data.html">
+								SpatialAddTransformData
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

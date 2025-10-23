@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - achievements
+		</title>
+		<link rel="preload" as="image" href="../../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../_guide/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: achievements
+								</h3>
+								<h3>
+									Script: achievements
+								</h3>
+								<h3>
+									Class Name: Achievements
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Main singleton to work with achievements.<br>
+								<br>
+								Note: Achievement states are persisted through the Values singleton<br>
+								- "achievements_unlocked" stores boolean unlock states<br>
+								- "achievements_counts" stores incremental progress counts<br>
+								That simply means they aren't tied to any of the save files and are fully<br>
+								global in terms of this game.<br>
+								<br>
+								Achievement resources should be placed in:<br>
+								res://modules/achievements/assets/data/<br>
+								and must be of type AchievementData (.tres resources)<br>
+								<br>
+								Usage example<br>
+								<code class="gdscript">
+									<br>
+									Achievements.unlock("ach_name") # Unlock an achievement called "ach_name"<br>
+									Achievements.lock("ach_name") # Lock that achievement back<br>
+									Achievements.add_count("ach_name") # Adds one "count" to an achievement<br>
+									Achievements.add_count("ach_name", 12) # Adds 12 "count" to an achievement<br>
+								</code>
+								<br>
+								<br>
+								Keep in mind some achievements may have a "count" property that may be useful<br>
+								for achievements that have iterative progress.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									unlocked
+								</p>
+								<p class="var_desc_name_value">
+									ach_name
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emitted if any achievement is unlocked.<br/>
+								ach_name - Unlocked achievement's name.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									count_changed
+								</p>
+								<p class="var_desc_name_value">
+									ach_name, amount
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emitted if achievement's count has been changed.<br/>
+								ach_name - Achievement's name.<br/>
+								amount - Achievement's current count.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									DATA_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/achievements/assets/data/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to achievement resources
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_value_dict
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Dictionary
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Get "unlocked" dict from Values, or return an empty dict if there is none.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_value_dict
+								</p>
+								<p class="var_desc_name_value">
+									dict: Dictionary
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Set "unlocked" dict in Values to save data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_count_value_dict
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Dictionary
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Get "counts" dict from Values, or return an empty dict if there is none.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_count_value_dict
+								</p>
+								<p class="var_desc_name_value">
+									dict: Dictionary
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Set "counts" dict in Values to save data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									unlock
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Unlock an
+								[ach_name]
+								achievement.<br/>
+								Emits an "unlocked" signal.<br/>
+								Will ignore if achievement is already unlocked
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									lock
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Locks an
+								[ach_name]
+								achievement.<br/>
+								Also resets the achievement's progress count
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_count
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any, count = 1
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds
+								[count]
+								to count of
+								[ach_name]
+								achievement.<br/>
+								If achievements count reaches the required count from its data resource,<br/>
+								it will automatically unlock the achievement.<br/>
+								Emits "count_changed" signal.<br/>
+								Clamps count to maximum required by achievement data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_count
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns an
+								[ach_name]
+								achievement's current count
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_max_count
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns an
+								[ach_name]
+								achievement's max count from its data resource<br/>
+								Returns 0 if achievement data not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reset_count
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Resets an
+								[ach_name]
+								achievement's current count to 0<br/>
+								Emits "count_changed" signal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_unlocked
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns true if an
+								[ach_name]
+								achievement is unlocked
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_data
+								</p>
+								<p class="var_desc_name_value">
+									ach_name: any
+								</p>
+								<p class="func_return_text">
+									AchievementData
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns
+								[ach_name]
+								achievement's AchievementData resource<br/>
+								Returns null if resource not found
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns a list of available achievement names (without .tres extension)
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

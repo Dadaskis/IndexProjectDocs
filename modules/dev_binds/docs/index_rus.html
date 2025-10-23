@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - dev_binds
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: dev_binds
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Бинды разработчика на случай, если тебе нужно привязать консольную команду к определённой клавише. Просто говорю, что это работает только для однострочных команд вроде "dev_menu" или "debug_fly", но не для многословных вроде "set_health 100", к сожалению. Используй консольную команду "dev_bind", чтобы увидеть, как это работает.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							1. Найди команду, которую хочешь привязать; Например: <code>
+								debug_fly
+							</code>
+							<br>
+							2. Напиши команду: <code>
+								dev_bind debug_fly
+							</code>
+							<br>
+							3. Когда попросит нажать клавишу, просто нажми нужную клавишу<br>
+							4. Та-да<br>
+							<br>
+							В случае ошибки используй команду <code>
+								dev_bind_remove
+							</code>
+							<br>
+							<br>
+							<code>
+								Пример использования в коде
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Настройка девинд<br>
+								DevBinds.setup_bind("debug_fly")<br>
+								# Удаление девинда<br>
+								DevBinds.setup_bind_remove()<br>
+								# Имей в виду: Обе эти функции будут слушать ввод с клавиатуры<br>
+								# после вызова<br>
+								<br>
+								# Устанавливает debug_fly на клавишу Z<br>
+								DevBinds.set_bind(KEY_Z, "debug_fly")<br>
+								# Удаляет привязки с клавиши Z<br>
+								DevBinds.set_bind(KEY_Z, "", true)<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/dev_binds.html">
+								DevBinds
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

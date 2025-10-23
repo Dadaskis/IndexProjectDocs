@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - dev_binds
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: dev_binds
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Developer binds in case if you need to bind console command on certain keyboard key. Just saying it works only for one-word commands like "dev_menu" or "debug_fly" but not for multiword ones like "set_health 100", sadly. Use "dev_bind" console command to see how it works. <br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							1. Find a command you want to bind; For example: <code>
+								debug_fly
+							</code>
+							<br>
+							2. Write a command: <code>
+								dev_bind debug_fly
+							</code>
+							<br>
+							3. When it'll ask you to press a key, you just press your desired key<br>
+							4. Tada<br>
+							<br>
+							In case of mistake, use <code>
+								dev_bind_remove
+							</code>
+							command<br>
+							<br>
+							<code>
+								Code usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Setup a devbind<br>
+								DevBinds.setup_bind("debug_fly")<br>
+								# Remove a devbind<br>
+								DevBinds.setup_bind_remove()<br>
+								# Keep in mind: Both of these functions will be listening to keyboard inputs<br>
+								# after call<br>
+								<br>
+								# Sets debug_fly on Z key<br>
+								DevBinds.set_bind(KEY_Z, "debug_fly")<br>
+								# Removes keybinds from Z key<br>
+								DevBinds.set_bind(KEY_Z, "", true)<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/dev_binds.html">
+								DevBinds
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

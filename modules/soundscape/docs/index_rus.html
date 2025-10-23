@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - soundscape
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: soundscape
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, что такое "саундскейпы" (soundscapes)? По сути, это просто более модное слово для атмосферных звуков. В этом проекте "саундскейпы" - это просто способ структурировать данные для атмосферы. Это включает зацикленные аудио сэмплы *и* аудио сэмплы, которые проигрываются случайным образом на протяжении игры. Разные саундскейпы могут использоваться для разных окружений: интерьеров, экстерьеров, внешних миров, в небесах и т.д. Ты действительно можешь сделать что угодно с их помощью... Пока у тебя есть какой-никакой опыт в саунд-дизайне, ты свободен делать всё, что пожелаешь.<br>
+							<br>
+							<img src="../../../_guide/.images/soundscape/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/soundscape/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Эта страница документации читается слишком нормально, и мне нужно найти способ это испортить... Ой, подожди, я только что это сделал. В любом случае...<br>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									Создание собственного саундскейпа
+								</h4>
+								<p>
+									<br>
+									Все саундскейпы хранятся в <code class="gdscript">
+										"res://modules/soundscape/assets/soundscapes/"
+									</code>
+									как <code class="gdscript">
+										SoundscapeClass
+									</code>
+									.<br>
+									<img src="../../../_guide/.images/soundscape/create0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										<br>
+										<code class="gdscript">
+											SoundscapeClass
+										</code>
+										содержит всю необходимую тебе информацию, а именно... Данные реверберации, массив зацикленных сэмплов и массив случайных сэмплов. Данные реверберации - это просто пресет для настроек реверберации/эха. Массивы должны быть понятными.<br>
+										<img src="../../../_guide/.images/soundscape/create1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_reverb_data/"
+											</code>
+											содержит файлы ресурсов <code class="gdscript">
+												SoundscapeReverbData
+											</code>
+											, которые настраивают упомянутые ранее реверберацию и эхо.<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_data_looped/"
+											</code>
+											содержит файлы ресурсов <code class="gdscript">
+												SoundscapeLoopedSound
+											</code>
+											, которые настраивают зацикленный сэмпл - всё об аудио сэмпле, громкости, высоте тона, ценность, техническом долге...<br>
+											<code class="gdscript">
+												"res://modules/soundscape/assets/sounds_data_random/"
+											</code>
+											содержит файлы ресурсов <code class="gdscript">
+												SoundscapeRandomSounds
+											</code>
+											, которые настраивают набор случайных сэмплов - всё о самих аудио сэмплах, мин./макс. громкости, мин./макс. высоте тона, местоположении людей-ящериц...<br>
+											<br>
+											Все ноды <code class="gdscript">
+												Soundscape
+											</code>
+											содержат имя класса саундскейпа для воспроизведения, которое является просто именем файла ресурса <code class="gdscript">
+												SoundscapeClass
+											</code>
+											, хранящегося в <code class="gdscript">
+												"res://modules/soundscape/assets/soundscapes/"
+											</code>
+											. Ты просто создаёшь ноду, назначаешь имя саундскейпа и наслаждаесь атмосферой своего личного адского храма.
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											assets, docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/soundscape_player.html">
+												SoundscapePlayer
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/soundscape.html">
+												Soundscape
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/soundscape_class.html">
+												SoundscapeClass
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/random_sounds.html">
+												SoundscapeRandomSounds
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/looped_sound.html">
+												SoundscapeLoopedSound
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/reverb_data.html">
+												SoundscapeReverbData
+											</a>
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

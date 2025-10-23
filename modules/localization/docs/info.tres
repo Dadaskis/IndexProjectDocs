@@ -1,0 +1,35 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]Localization[/gd] singleton that translates text in this game. If you want to change certain translation, look up [p].game_export/utilities/translation_tool[/p], this is a tool to change translations in this game.
+
+[c]Usage example[/c]
+[gd]
+# Get translated version of \"Test text\"
+# \"HUD\" is a location/context of this text that is shown up at translation utility
+var translation = Localization.get_text(\"Test text\", \"HUD\")
+
+# Forces to check \"Test text 2\" so it would be included in the next localization file dump
+Localization.force_check(\"Test text 2\")
+
+# Checks all child nodes of the given node and translates them if possible
+Localization.translate_all_nodes(node, \"HUD\")
+[/gd]"
+info_rus = "Синглтон [gd]Localization[/gd], который переводит текст в этой игре. Если ты хочешь изменить определённый перевод, загляни в [p].game_export/utilities/translation_tool[/p] - это инструмент для изменения переводов в этой игре.
+
+[c]Пример использования[/c]
+[gd]
+# Получить переведённую версию \"Test text\"
+# \"HUD\" — это расположение/контекст этого текста, который показывается в утилите перевода
+var translation = Localization.get_text(\"Test text\", \"HUD\")
+
+# Принудительно проверяет \"Test text 2\", чтобы он был включён в следующий дамп файла локализации
+Localization.force_check(\"Test text 2\")
+
+# Проверяет все дочерние узлы данного узла и переводит их, если возможно
+Localization.translate_all_nodes(node, \"HUD\")
+[/gd]"
+edit_time = 1.76123e+09

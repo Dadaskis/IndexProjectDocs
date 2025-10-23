@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_mesh_combiner
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_mesh_combiner
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<code class="gdscript">
+								LocationMeshCombiner
+							</code>
+							combines all child meshes into one singular piece to reduce drawcalls, material and surface changes. Works with <code class="gdscript">
+								LocationProp
+							</code>
+							and <code class="gdscript">
+								LocationBlockoutMesh
+							</code>
+							only.<br>
+							<br>
+							<img src="../../../_guide/.images/location_mesh_combiner/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								This node is combining all meshes despite their material count of positioning. The resulting mesh will contain globally transformed meshes combined altogether into one. Origin of <code class="gdscript">
+									LocationMeshCombiner
+								</code>
+								is always <code class="gdscript">
+									Vector3.ZERO
+								</code>
+								.<br>
+								<br>
+								This module was developed before official introduction of "Merge Groups" into branch of Godot 3. Therefore, this module is functioning better with existing toolset.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Algorithm
+							</h4>
+							<p>
+								<br>
+								1. Collect all <code class="gdscript">
+									MeshInstance
+								</code>
+								that must be combined (all of them are children of this node)<br>
+								&emsp;- Exclude special meshes like glass, player clips, etc.<br>
+								2. For each <code class="gdscript">
+									MeshInstance
+								</code>
+								:<br>
+								&emsp;- Iterate though all surfaces<br>
+								&emsp;&emsp;- Group surfaces by material using <code class="gdscript">
+									get_material_key()
+								</code>
+								which considers:<br>
+								&emsp;&emsp;&emsp;- Material resource path<br>
+								&emsp;&emsp;&emsp;- Material name<br>
+								&emsp;&emsp;&emsp;- Special shader properties of <code class="gdscript">
+									UserSpatialUbershader
+								</code>
+								<br>
+								&emsp;&emsp;- Create <code class="gdscript">
+									CombinerSurfaceData
+								</code>
+								object to track original surface info<br>
+								3. Mesh data combination<br>
+								&emsp;- For each material group:<br>
+								&emsp;&emsp;- Initialize empty arrays for combined vertex data<br>
+								&emsp;&emsp;- Process each surface in the group:<br>
+								&emsp;&emsp;- Transform vertices/normals to world space<br>
+								&emsp;&emsp;- Offset indices to account for merged vertices<br>
+								&emsp;&emsp;- Combine all standard mesh arrays (UVs, colors, bones, etc.)<br>
+								&emsp;&emsp;- Add combined surface to final <code class="gdscript">
+									ArrayMesh
+								</code>
+								<br>
+								&emsp;&emsp;- Assign appropriate material<br>
+								4. Post-Processing<br>
+								&emsp;- Clean up editor-specific materials<br>
+								&emsp;- Handle special cases (occluders, glass surfaces)<br>
+								&emsp;- Generate physics collision data<br>
+								&emsp;- Process lightmap UVs if enabled<br>
+								&emsp;- Set up LOD system if enabled<br>
+								<br>
+								TL;DR; Get all data from arrays, world-space the shit out of it, put it all together, tada, here's your combined mesh.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Usage
+							</h4>
+							<p>
+								<br>
+								<img src="../../../_guide/.images/location_mesh_combiner/use0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<img src="../../../_guide/.images/location_mesh_combiner/use1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										The node itself is functioning in a simple way. You just put all your props or blockout meshes as a child of this node and then press "Toggle Original Edit". The child nodes will disappear and you will get your fresh fancy combined mesh instead. You can press this button again to get your child meshes back to edit them.<br>
+										<br>
+										<code>
+											Quality of Life
+										</code>
+										<br>
+										Surely you can just select all props or meshes one-by-one just to put them as children of this node. But that's too much hassle when amount of overall elements is nearing hundreds and they are placed in a chaotic manner. That's why <code class="gdscript">
+											LocationMeshCombinerCube
+										</code>
+										exists.<br>
+										<img src="../../../_guide/.images/location_mesh_combiner/use2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											You can simply create this node, scale it, cover all needed meshes, it'll highlight them with a red cube. When you are done, press "Create" and it'll create you a combined mesh.
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											assets, docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/location_mesh_combiner.html">
+												LocationMeshCombiner
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/location_mesh_combiner_cube.html">
+												LocationMeshCombinerCube
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

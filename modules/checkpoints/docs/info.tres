@@ -1,0 +1,253 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A hyper-universal saving system that resurrected a victorian child and killed my mind in 3.5. Initially it was called \"checkpoints\" because, oh well, these were literal checkpoints that worked on toothsticks and gum. Over time it was rewritten to more universal solution that allows the player to save anywhere they want without breaking this game. More than that, it allows easily add a saving support practically to any node or object using this system.
+
+[c]Saving support example[/c]
+[gd]
+var spawned: bool
+var spawn_enabled: bool
+var spawned_npc: NonPlayableCharacter
+# ...
+
+# Saves NPC state to checkpoint
+func on_checkpoint_save():
+	# Save data to checkpoint system
+	Checkpoints.add_data_node(self, [
+		\"spawned\",
+		\"spawn_enabled\",
+		\"spawned_npc:transform\",
+		# ...
+		\"spawned_npc:logic:current_state_name\",
+	])
+
+# Loads NPC state from checkpoint
+func on_checkpoint_load():
+	# Load saved data
+	Checkpoints.assign_node_data(self)
+
+# Initializes node
+func node_init():
+	# Register with checkpoint system
+	Checkpoints.add_on_save_and_load(self)
+[/gd]
+
+Three main points here are [gd]Checkpoints.add_on_save_and_load(self)[/gd], [gd]on_checkpoint_load[/gd] and [gd]on_checkpoint_save[/gd]. [gd]Checkpoints.add_on_save_and_load(self)[/gd] allows you to quickly connect your node/object to signals of [gd]Checkpoints[/gd], by default the names of connected functions are [gd]on_checkpoint_load[/gd] and [gd]on_checkpoint_save[/gd] and they are called accordingly. Keep in mind, for nodes it is especially easy to add support. You just connect signals, then, just call [gd]Checkpoints.add_data_node(self, [\"var_name_here\"])[/gd] when you save and [gd]Checkpoints.assign_node_data(self)[/gd] when you load. This way, all data will be assigned with ease and you can add more saving logic here that you can fully control. [gd]Checkpoints.add_data_node[/gd] in fact is very easy to use, it just has reference to a node as the first argument and then a list of variables to save. That list contains only variable names that you'd normally get with [gd]Object.get_indexed[/gd] function. In this case, there are variables in this class called [gd]\"spawned\", \"spawn_enabled\", \"spawned_npc\"[/gd], most of which are basic types that can be saved as-is. However, [gd]\"spawned_npc\"[/gd] is a complex, custom class that has a lot of info inside. You can write analog to [gd]spawned_npc.transform[/gd] as [gd]\"spawned_npc:transform\"[/gd] and it will allow you to save this node's transforms! In this case, remember, you need to provide a list of variables that represent rather basic types, that can be saved in any [gd]Resource[/gd]-derived file. If you will provide an object to save, it might save incorrectly.
+
+However, this example only covers nodes. If you have objects, they are treated differently since they do not normally exist in a scene tree. Such objects can either be fully standalone instances of some class or just be autoloads.
+[c]Examples[/c]
+[gd]
+# BasicDamagable class save handling
+
+# Base health value for this damageable object
+var health = 100.0
+
+# Reference to the node that should be removed when destroyed
+var node_to_remove
+
+# Flag tracking if this object has been destroyed
+var is_destroyed = false
+
+# ...
+
+# Handles saving this object's state during checkpoint creation
+# Saves critical properties like health and destruction state
+func on_checkpoint_save():
+	# Register this object's data with the checkpoint system
+	Checkpoints.add_data_obj(
+		cp_key,					# Unique identifier for this object
+		self,						# Reference to this script instance
+		[							# List of properties to save:
+			\"health\",      	# Current health value
+			\"is_destroyed\" # Destruction state flag
+		]
+	)
+
+# Handles loading this object's state from a checkpoint
+# Restores saved properties and manages visual debris state
+func on_checkpoint_load():
+	# Restore saved properties from checkpoint data
+	Checkpoints.assign_obj_data(cp_key, self)
+	
+	# Clean up any existing static debris first
+	disable_static_debris_only()
+	
+	# Wait for 5 frames to ensure proper scene setup
+	for frame in range(5):
+		yield(VisualServer, \"frame_post_draw\")
+		yield(VisualServer, \"frame_post_draw\")
+	
+	# If this object was destroyed when saved, handle visual representation
+	if is_destroyed and is_instance_valid(node_to_remove):
+		# Remove the main node to show destroyed state
+		var loc_base = LocationBaseScene.get_scene()
+		loc_base.remove_node(node_to_remove)
+		
+		# If configured with debris, enable static debris visuals
+		if has_debris:
+			enable_static_debris_only()
+
+# Registers this object with the checkpoint system
+# Generates a unique key and sets up save/load callbacks
+func register_checkpoint():
+	# Create unique key combining node path and type identifier
+	cp_key = Checkpoints.get_node_key(node_to_remove) + \"__DAMAGEABLE\"
+	
+	# Register both save and load callback functions
+	Checkpoints.add_on_save_and_load(self)
+[/gd]
+[gd]
+# PlayerAnimatedItemMedical usage example
+
+# Saves current medical item state to checkpoint system
+func on_checkpoint_save():
+	Checkpoints.add_data_obj(
+		\"player_item_medical:\" + weapon_name,
+		self,
+		[
+			\"healing\",
+			\"timer\",
+			# ...
+			\"drug_active\",
+			\"drug_loop:volume_db\",
+			\"restored_health\"
+		]
+	)
+
+# Loads medical item state from checkpoint system
+func on_checkpoint_load():
+	# ...
+	Checkpoints.assign_obj_data(\"player_item_medical:\" + weapon_name, self)
+	# ...
+[/gd]
+
+Simply saying, the only difference for objects is usage of methods called [gd]Checkpoints.add_data_obj[/gd] and [gd]Checkpoints.assign_obj_data[/gd]. However, unlike nodes, they require one more parameter: The object's key. Nodes don't need it because their key is generated automatically based on positioning of this node in a [gd]LocationBase[/gd] scene. In this case, first argument in both methods *are* being the key, and second argument is the reference to an object itself ([gd]self[/gd]). You can save a node as an object too, since all [gd]Node[/gd] are [gd]Object[/gd] derived, in case if it really serves your needs.
+
+All saves are stored as [gd]CheckpointData[/gd] resource files that are saved at [gd]Checkpoints.SAVE_DIR_PATH[/gd] path (that is currently [gd]\"user://checkpoints/\"[/gd]). Their previews are stored separately, at [gd]Checkpoints.SAVE_IMG_DIR_PATH[/gd] path ([gd]\"user://checkpoint_images/\"[/gd])."
+info_rus = "Гипер-универсальная система сохранений, которая воскресила викторианского ребёнка и убила мой разум в 3.5. Изначально она называлась \"чекпойнты\", потому что, ну, это были буквальные чекпойнты, работающие на зубочистках и жвачке. Со временем она была переписана в более универсальное решение, которое позволяет игроку сохраняться где угодно, не ломая игру. Более того, она позволяет легко добавить поддержку сохранений практически любому узлу или объекту, используя эту систему.
+
+[c]Пример поддержки сохранений[/c]
+[gd]
+var spawned: bool
+var spawn_enabled: bool
+var spawned_npc: NonPlayableCharacter
+# ...
+
+# Сохраняет состояние NPC в чекпойнт
+func on_checkpoint_save():
+	# Сохраняем данные в систему чекпойнтов
+	Checkpoints.add_data_node(self, [
+		\"spawned\",
+		\"spawn_enabled\",
+		\"spawned_npc:transform\",
+		# ...
+		\"spawned_npc:logic:current_state_name\",
+	])
+
+# Загружает состояние NPC из чекпойнта
+func on_checkpoint_load():
+	# Загружаем сохранённые данные
+	Checkpoints.assign_node_data(self)
+
+# Инициализирует узел
+func node_init():
+	# Регистрируем в системе чекпойнтов
+	Checkpoints.add_on_save_and_load(self)
+[/gd]
+
+Три основных момента здесь - это [gd]Checkpoints.add_on_save_and_load(self)[/gd], [gd]on_checkpoint_load[/gd] и [gd]on_checkpoint_save[/gd]. [gd]Checkpoints.add_on_save_and_load(self)[/gd] позволяет быстро подключить твой узел/объект к сигналам [gd]Checkpoints[/gd], по умолчанию имена подключённых функций - [gd]on_checkpoint_load[/gd] и [gd]on_checkpoint_save[/gd], и они вызываются соответственно. Имей в виду, для узлов добавить поддержку особенно легко. Ты просто подключаешь сигналы, затем просто вызываешь [gd]Checkpoints.add_data_node(self, [\"var_name_here\"])[/gd] при сохранении и [gd]Checkpoints.assign_node_data(self)[/gd] при загрузке. Таким образом, все данные будут назначены с лёгкостью, и ты можешь добавить больше логики сохранения, которую ты можешь полностью контролировать. [gd]Checkpoints.add_data_node[/gd] на самом деле очень легко использовать, он просто имеет ссылку на узел в качестве первого аргумента и затем список переменных для сохранения. Этот список содержит только имена переменных, которые ты по-нормальному получил бы с помощью функции [gd]Object.get_indexed[/gd]. В данном случае, в этом классе есть переменные с именами [gd]\"spawned\", \"spawn_enabled\", \"spawned_npc\"[/gd], большинство из которых являются базовыми типами, которые могут быть сохранены как есть. Однако [gd]\"spawned_npc\"[/gd] - это сложный, пользовательский класс, который содержит много информации внутри. Ты можешь написать аналог [gd]spawned_npc.transform[/gd] как [gd]\"spawned_npc:transform\"[/gd], и это позволит тебе сохранить трансформы этого узла! В этом случае, помни, тебе нужно предоставить список переменных, которые представляют базовые типы, которые могут быть сохранены в любом файле, производном от [gd]Resource[/gd]. Если ты предоставишь просто объект для сохранения, он может сохраниться неправильно.
+
+Однако этот пример покрывает только узлы. Если у тебя есть объекты, они обрабатываются по-другому, поскольку они обычно не существуют в дереве сцены. Такие объекты могут быть либо полностью самостоятельными экземплярами какого-либо класса, либо просто автозагрузками.
+[c]Примеры[/c]
+[gd]
+# Обработка сохранения класса BasicDamagable
+
+# Базовое значение здоровья для этого объекта, которому можно нанести урон
+var health = 100.0
+
+# Ссылка на узел, который должен быть удалён при уничтожении
+var node_to_remove
+
+# Флаг, отслеживающий, был ли этот объект уничтожен
+var is_destroyed = false
+
+# ...
+
+# Обрабатывает сохранение состояния этого объекта при создании чекпойнта
+# Сохраняет критические свойства, такие как здоровье и состояние уничтожения
+func on_checkpoint_save():
+	# Регистрируем данные этого объекта в системе чекпойнтов
+	Checkpoints.add_data_obj(
+		cp_key,					# Уникальный идентификатор для этого объекта
+		self,						# Ссылка на этот экземпляр скрипта
+		[							# Список свойств для сохранения:
+			\"health\",      	# Текущее значение здоровья
+			\"is_destroyed\" # Флаг состояния уничтожения
+		]
+	)
+
+# Обрабатывает загрузку состояния этого объекта из чекпойнта
+# Восстанавливает сохранённые свойства и управляет визуальным состоянием обломков
+func on_checkpoint_load():
+	# Восстанавливаем сохранённые свойства из данных чекпойнта
+	Checkpoints.assign_obj_data(cp_key, self)
+	
+	# Сначала очищаем любые существующие статические обломки
+	disable_static_debris_only()
+	
+	# Ждём 5 кадров для обеспечения правильной настройки сцены
+	for frame in range(5):
+		yield(VisualServer, \"frame_post_draw\")
+		yield(VisualServer, \"frame_post_draw\")
+	
+	# Если этот объект был уничтожен при сохранении, обрабатываем визуальное представление
+	if is_destroyed and is_instance_valid(node_to_remove):
+		# Удаляем основной узел, чтобы показать уничтоженное состояние
+		var loc_base = LocationBaseScene.get_scene()
+		loc_base.remove_node(node_to_remove)
+		
+		# Если настроено с обломками, включаем визуализацию статических обломков
+		if has_debris:
+			enable_static_debris_only()
+
+# Регистрирует этот объект в системе чекпойнтов
+# Генерирует уникальный ключ и настраивает колбэки сохранения/загрузки
+func register_checkpoint():
+	# Создаём уникальный ключ, комбинируя путь узла и идентификатор типа
+	cp_key = Checkpoints.get_node_key(node_to_remove) + \"__DAMAGEABLE\"
+	
+	# Регистрируем функции колбэков как для сохранения, так и для загрузки
+	Checkpoints.add_on_save_and_load(self)
+[/gd]
+[gd]
+# Пример использования PlayerAnimatedItemMedical
+
+# Сохраняет текущее состояние медицинского предмета в систему чекпойнтов
+func on_checkpoint_save():
+	Checkpoints.add_data_obj(
+		\"player_item_medical:\" + weapon_name,
+		self,
+		[
+			\"healing\",
+			\"timer\",
+			# ...
+			\"drug_active\",
+			\"drug_loop:volume_db\",
+			\"restored_health\"
+		]
+	)
+
+# Загружает состояние медицинского предмета из системы чекпойнтов
+func on_checkpoint_load():
+	# ...
+	Checkpoints.assign_obj_data(\"player_item_medical:\" + weapon_name, self)
+	# ...
+[/gd]
+
+Проще говоря, единственное различие для объектов - это использование методов с именами [gd]Checkpoints.add_data_obj[/gd] и [gd]Checkpoints.assign_obj_data[/gd]. Однако, в отличие от узлов, они требуют ещё один параметр: ключ объекта. Узлы не нуждаются в нём, потому что их ключ генерируется automatically на основе позиционирования этого узла в сцене [gd]LocationBase[/gd]. В этом случае первый аргумент в обоих методах *является* ключом, а второй аргумент - ссылка на сам объект ([gd]self[/gd]). Ты можешь сохранить узел как объект тоже, поскольку все [gd]Node[/gd] являются производными от [gd]Object[/gd], в случае, если это действительно serving твоим needs.
+
+Все сохранения хранятся как файлы ресурсов [gd]CheckpointData[/gd], которые сохраняются по пути [gd]Checkpoints.SAVE_DIR_PATH[/gd] (который в настоящее время [gd]\"user://checkpoints/\"[/gd]). Их превью хранятся separately, по пути [gd]Checkpoints.SAVE_IMG_DIR_PATH[/gd] ([gd]\"user://checkpoint_images/\"[/gd])."
+edit_time = 1.76113e+09

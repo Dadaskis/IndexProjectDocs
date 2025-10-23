@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - usable_showup
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: usable_showup
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/usable_showup/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<br>
+								Видишь тот текст там? Тот, который мог бы легко оскорбить добрую часть населения США, понимаешь? Так вот, это то, что я называю "Usable Showup" (Подсказка взаимодействия). Это помогает игроку определить - что делает этот используемый объект. Это было сделано потому что:<br>
+								А: Люди путались в некоторых панелях управления, которые я всё равно люблю использовать...<br>
+								Б: Я самый ленивый уёбок на свете, конечно, я буду злоупотреблять такой хренью вместо того, чтобы правильно это level design'ить.<br>
+								Один модуль решает огромную проблему существования. Это потрясающе. Облегчает жизнь. Как глоток свежего воздуха. Глоток воздуха, полного текста, но всё же.<br>
+								<br>
+								<code>
+									Пример использования
+								</code>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Наш прославленный родительская нода<br>
+									var parent<br>
+									<br>
+									# Устанавливает основной текст подсказки (линия 0)<br>
+									func set_text0_text(text: String):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text0_text(text)<br>
+									<br>
+									# Получает основной текст подсказки (линия 0)<br>
+									func get_text0_text() ->
+									String:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return ""<br>
+									&emsp;return usable_showup.get_text0_text()<br>
+									<br>
+									# Устанавливает цвет для основного текста подсказки<br>
+									func set_text0_color(color: Color):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;usable_showup.set_text0_color(color)<br>
+									<br>
+									# Получает цвет основного текста подсказки<br>
+									func get_text0_color() ->
+									Color:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;return usable_showup.get_text0_color()<br>
+									<br>
+									# Устанавливает вторичный текст подсказки (линия 1)<br>
+									func set_text1_text(text: String):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text1_text(text)<br>
+									<br>
+									# Получает вторичный текст подсказки (линия 1)<br>
+									func get_text1_text() ->
+									String:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return ""<br>
+									&emsp;return usable_showup.get_text1_text()<br>
+									<br>
+									# Устанавливает цвет для вторичного текста подсказки<br>
+									func set_text1_color(color: Color):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_text1_color(color)<br>
+									<br>
+									# Получает цвет вторичного текста подсказки<br>
+									func get_text1_color() ->
+									Color:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return Color.black<br>
+									&emsp;return usable_showup.get_text1_color()<br>
+									<br>
+									# Показывает или скрывает UI подсказки взаимодействия<br>
+									func set_showup_visible(value: bool):<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return<br>
+									&emsp;usable_showup.set_showup_visible(value)<br>
+									<br>
+									# Проверяет, видна ли в данный момент подсказка взаимодействия<br>
+									func get_showup_visible() ->
+									bool:<br>
+									&emsp;if not is_instance_valid(usable_showup):<br>
+									&emsp;&emsp;return false<br>
+									&emsp;return usable_showup.get_showup_visible()<br>
+									<br>
+									# Создаёт и прикрепляет UI подсказки взаимодействия<br>
+									# showup_scale: Коэффициент масштабирования для UI подсказки (по умолчанию 1.0)<br>
+									func create_showup(showup_scale: = 1.0):<br>
+									&emsp;# Если подсказка уже существует, просто обновляем её масштаб и видимость<br>
+									&emsp;if usable_showup:<br>
+									&emsp;&emsp;usable_showup.scale = Vector3.ONE * showup_scale<br>
+									&emsp;&emsp;set_showup_visible(true)<br>
+									&emsp;&emsp;return<br>
+									&emsp;<br>
+									&emsp;# Создаём новый экземпляр подсказки и настраиваем его<br>
+									&emsp;usable_showup = UsableShowup.create_showup()<br>
+									&emsp;usable_showup.scale = Vector3.ONE * showup_scale<br>
+									&emsp;parent.add_child(usable_showup)<br>
+								</code>
+								<br>
+								<br>
+								И вся эта функциональность является частью класса <code class="gdscript">
+									Usable
+								</code>
+								, который уже используется всеми кнопками любого рода, настоятельно рекомендуется просто использовать <code class="gdscript">
+									Usable
+								</code>
+								. В смысле, чувак. Я уже это написал. Тебе не нужно копипастить то дерьмо, что я уже написал. Это потрясающе - эксплуатировать мой труд. Так? Просто сделай это. Это забавно. Не занимает много времени. И...<br>
+								<br>
+								Удачи.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/usable_showup.html">
+									UsableShowup
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../_guide/code_blocks.js">
+				</script>
+			</body>
+		</html>

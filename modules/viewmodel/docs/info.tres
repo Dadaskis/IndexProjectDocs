@@ -1,0 +1,281 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Viewmodel is a special type of models that are displayed in first-person view and usually represent either weapons or medical items. Besides loading of the model it provides a lot of interesting features like procedural animation, particle effects, left-hand animations, in-sight animations, etc.
+
+//img:viewmodel/example0.png
+
+[wc]Script Structure[/wc]
+[ctr]
+[gd]
+.
+├── animation_set.gd
+├── animation_sets
+│   ├── assault_rifle.gd
+│   ├── generic.gd
+│   ├── grenade.gd
+│   ├── melee.gd
+│   └── pump_shotgun.gd
+├── autoload
+│   └── viewmodel_sight_2D.gd
+├── configs
+│   ├── animation_event_data.gd
+│   └── config.gd
+├── helpers
+│   ├── animation_key_methods.gd
+│   ├── remove_object_in_seconds.gd
+│   ├── remove_sound_after_seconds.gd
+│   └── weapon_casing_logic.gd
+├── model_instance.gd
+├── preloader.gd
+├── procedural_animation.gd
+└── viewmodel.gd
+[/gd]
+[/ctr]
+
+[bc]Viewmodel [p]./viewmodel.gd[/p][/bc]
+This is the main file here, the one that provides an API to use with the entire system. It acts as the bridge between gameplay code and the underlying weapon system, managing the complete lifecycle of weapon (or any first-person) models, animations, and visual effects.
+	- Handles complete weapon setup.
+	- Provides high-level animation playback (draw, hide, shoot, reload).
+	- Manages frame-perfect animation callbacks and triggers.
+	- Provides high-level functions to work with.
+	- Uses [gd]ViewmodelModelInstance[/gd] to initialize the model.
+	- Uses [gd]ViewmodelProceduralAnimation[/gd] to coordinate the procedural animations.
+[c]Example[/c]
+[gd]
+# Initialize viewmodel
+viewmodel = Viewmodel.new()
+viewmodel.load_weapon(
+	weapon_anim_class, main_node, player, camera_transform_manager)
+animation_set = viewmodel.get_animation_set_controller()
+
+# Connect animation events
+viewmodel.add_animation_event_callback(
+	hide_enough_event, funcref(self, \"hide_enough\")
+)
+viewmodel.add_animation_event_callback(
+	take_enough_event, funcref(self, \"take_enough\")
+)
+viewmodel.add_animation_event_callback(
+	shoot_event, funcref(self, \"on_shoot\")
+)
+
+# CHanging hands
+viewmodel.change_hands(LoadoutSystem.get_viewmodel_hands())
+
+# Initialize weapon state
+animation_set.hide()
+viewmodel.anim_player.advance(10000.0)
+viewmodel.stop_all_sounds()
+
+# Taking
+animation_set.take()
+
+# Playing some other animation
+viewmodel.play_animation(\"look\")
+
+# Shooting
+animation_set.shoot()
+[/gd]
+
+[bc]Viewmodel Model Instance [p]./model_instance.gd[/p][/bc]
+Loads and positions weapon models in first-person view. Manages weapon skeletons for animations and attachments. Creates and maintains the complex node structure for viewmodel rendering. In other words, simply initializes all that node mess.
+	- Initializes the model.
+	- Creates and manages attachment points for effects (muzzle flash, casing ejection).
+	- Handles bone poses, transforms, and animation blending.
+	- Positions weapon relative to camera bone for proper first-person perspective.
+	- Manages muzzle flashes, shell ejection effects, and other weapon particles.
+	- Controls muzzle flash lights with color fading.
+	- Implements performance-optimized pools for particles and physics objects.
+	- Converts standard materials to viewmodel shader materials.
+		- Applies correct field-of-view settings to all visual elements.
+		- Prevents weapon clipping through geometry.
+	- Configures proper render layers for first-person weapons.
+
+[bc]Viewmodel Procedural Animation [p]./procedural_animation.gd[/p][/bc]
+It creates the organic weapon movement that responds to player actions, environmental factors, and physics - making weapons feel physical and responsive rather than static and robotic.
+	- Natural sway and bounce synchronized with player movement.
+	- Mouse-driven weapon rotation and position shifts.
+	- Smooth blending between different movement states.
+	- Running, walking, crouching, slow walking animations.
+	- Weapon tilt and position changes during jumps and falls.
+	- Smooth transitions between hip fire and aim-down-sights.
+	- Automatic weapon pushback when near walls/objects.
+
+[wc]Autoload: [gd]ViewmodelPreloader[/gd][/wc]
+This autoload allows to preload viewmodel GLTF models for easier asset management and optimization.
+	- Dynamic loading and caching of 3D weapon models.
+	- Separate hand model system with quality variants.
+	- Efficient loading/unloading of weapon assets.
+	- Control of left-hand animations to make them shared across multiple viewmodels.
+[c]Example[/c]
+[gd]
+# Left hand animation control
+ViewmodelPreloader.play_left_animation(\"grenade_throw\")
+ViewmodelPreloader.stop_left_animation()
+
+# Standard weapon loading pattern
+var model = ViewmodelPreloader.create_model(\"assault_rifle\", parent_node)
+var hands = ViewmodelPreloader.get_hands(\"male_hands\")
+[/gd]	
+
+[wc]Autoload: [gd]ViewmodelSight2D[/gd][/wc]
+//img:viewmodel/scope0.png
+2D scope implementation for viewmodels used by BSR-10 at the moment.
+[c]Example[/c]
+[gd]
+ViewmodelSight2D.show()
+ViewmodelSight2D.hide()
+ViewmodelSight2D.set_offset(13, 37)
+[/gd]
+
+[wc]Exporting your own viewmodel[/wc]
+//img:viewmodel/export0.png
+//img:viewmodel/export1.png
+0. Make sure hierarchy is correct.
+	- As well as you are using correct hands rig from [p]res://.dev_sources/viewmodels/[/p].
+1. Make sure you have appropriately named actions.
+2. Press [p]Export Player Weapon Viewmodel[/p].
+3. Tada.
+[r]For more examples just examine .blend files at [p]res://.dev_sources/viewmodels/[/p].[/r]"
+info_rus = "Viewmodel (Модель от первого лица) - это специальный тип моделей, которые отображаются от первого лица и обычно представляют либо оружие, либо медицинские предметы. Помимо загрузки модели, он предоставляет множество интересных функций, таких как процедурная анимация, частичные эффекты, анимации для левой руки, анимации прицеливания и т.д.
+
+//img:viewmodel/example0.png
+
+[wc]Структура скриптов[/wc]
+[ctr]
+[gd]
+.
+├── animation_set.gd
+├── animation_sets
+│   ├── assault_rifle.gd
+│   ├── generic.gd
+│   ├── grenade.gd
+│   ├── melee.gd
+│   └── pump_shotgun.gd
+├── autoload
+│   └── viewmodel_sight_2D.gd
+├── configs
+│   ├── animation_event_data.gd
+│   └── config.gd
+├── helpers
+│   ├── animation_key_methods.gd
+│   ├── remove_object_in_seconds.gd
+│   ├── remove_sound_after_seconds.gd
+│   └── weapon_casing_logic.gd
+├── model_instance.gd
+├── preloader.gd
+├── procedural_animation.gd
+└── viewmodel.gd
+[/gd]
+[/ctr]
+
+[bc]Viewmodel [p]./viewmodel.gd[/p][/bc]
+Это главный файл здесь, тот, что предоставляет API для работы со всей системой. Он выступает в качестве моста между геймплейным кодом и базовой системой оружия, управляя полным жизненным циклом моделей оружия (или любых моделей от первого лица), анимаций и визуальных эффектов.
+    - Обрабатывает полную настройку оружия.
+    - Предоставляет высокоуровневое воспроизведение анимаций (достать, убрать, выстрел, перезарядка).
+    - Управляет frame-perfect колбэками и триггерами анимаций.
+    - Предоставляет высокоуровневые функции для работы.
+    - Использует [gd]ViewmodelModelInstance[/gd] для инициализации модели.
+    - Использует [gd]ViewmodelProceduralAnimation[/gd] для координации процедурных анимаций.
+[c]Пример[/c]
+[gd]
+# Инициализация viewmodel
+viewmodel = Viewmodel.new()
+viewmodel.load_weapon(
+    weapon_anim_class, main_node, player, camera_transform_manager)
+animation_set = viewmodel.get_animation_set_controller()
+
+# Подключение событий анимации
+viewmodel.add_animation_event_callback(
+    hide_enough_event, funcref(self, \"hide_enough\")
+)
+viewmodel.add_animation_event_callback(
+    take_enough_event, funcref(self, \"take_enough\")
+)
+viewmodel.add_animation_event_callback(
+    shoot_event, funcref(self, \"on_shoot\")
+)
+
+# Смена рук
+viewmodel.change_hands(LoadoutSystem.get_viewmodel_hands())
+
+# Инициализация состояния оружия
+animation_set.hide()
+viewmodel.anim_player.advance(10000.0)
+viewmodel.stop_all_sounds()
+
+# Доставание
+animation_set.take()
+
+# Воспроизведение другой анимации
+viewmodel.play_animation(\"look\")
+
+# Выстрел
+animation_set.shoot()
+[/gd]
+
+[bc]Viewmodel Model Instance [p]./model_instance.gd[/p][/bc]
+Загружает и позиционирует модели оружия от первого лица. Управляет скелетами оружия для анимаций и attachment'ов. Создаёт и поддерживает сложную структуру нод для рендеринга viewmodel. Другими словами, просто инициализирует весь этот нодовый беспорядок.
+    - Инициализирует модель.
+    - Создаёт и управляет точками крепления для эффектов (дульная вспышка, выброс гильз).
+    - Работает с позами костей, трансформациями и blending'ом анимаций.
+    - Позиционирует оружие относительно кости камеры для правильного вида от первого лица.
+    - Управляет дульными вспышками, эффектами выброса гильз и другими частичными эффектами оружия.
+    - Контролирует огни дульных вспышек с затуханием цвета.
+    - Реализует оптимизированные по производительности пулы для частиц и физических объектов.
+    - Конвертирует стандартные материалы в шейдерные материалы для viewmodel.
+        - Применяет правильные настройки поля зрения ко всем визуальным элементам.
+        - Предотвращает clipping оружия через геометрию.
+    - Настраивает правильные слои рендеринга для оружия от первого лица.
+
+[bc]Viewmodel Procedural Animation [p]./procedural_animation.gd[/p][/bc]
+Создает органичное движение оружия, которое реагирует на действия игрока, факторы окружающей среды и физику - делая оружие физичным и отзывчивым, а не статичным и роботизированным.
+    - Естественное раскачивание и bounce, синхронизированные с движением игрока.
+    - Управляемое мышью вращение и смещение оружия.
+    - Плавное blending'ование между различными состояниями движения.
+    - Анимации бега, ходьбы, приседания, медленной ходьбы.
+    - Наклон и смещение оружия во время прыжков и падений.
+    - Плавные переходы между стрельбой от бедра и прицеливанием.
+    - Автоматическое отдаление оружия при приближении к стенам/объектам.
+
+[wc]Autoload: [gd]ViewmodelPreloader[/gd][/wc]
+Этот автолоад позволяет предзагружать GLTF-модели viewmodel'ей для более простого управления ассетами и оптимизации.
+    - Динамическая загрузка и кэширование 3D-моделей оружия.
+    - Система отдельных моделей рук с вариантами качества.
+    - Эффективная загрузка/выгрузка ассетов оружия.
+    - Контроль анимаций левой руки, чтобы они были общими для нескольких viewmodel'ей.
+[c]Пример[/c]
+[gd]
+# Контроль анимации левой руки
+ViewmodelPreloader.play_left_animation(\"grenade_throw\")
+ViewmodelPreloader.stop_left_animation()
+
+# Стандартная схема загрузки оружия
+var model = ViewmodelPreloader.create_model(\"assault_rifle\", parent_node)
+var hands = ViewmodelPreloader.get_hands(\"male_hands\")
+[/gd]    
+
+[wc]Autoload: [gd]ViewmodelSight2D[/gd][/wc]
+//img:viewmodel/scope0.png
+Реализация 2D-прицела для viewmodel'ей, используемая в данный момент BSR-10.
+[c]Пример[/c]
+[gd]
+ViewmodelSight2D.show()
+ViewmodelSight2D.hide()
+ViewmodelSight2D.set_offset(13, 37)
+[/gd]
+
+[wc]Экспорт собственного viewmodel'а[/wc]
+//img:viewmodel/export0.png
+//img:viewmodel/export1.png
+0. Убедись, что иерархия правильная.
+    - А также что ты используешь правильный риг рук из [p]res://.dev_sources/viewmodels/[/p].
+1. Убедись, что у тебя есть соответствующим образом названные actions.
+2. Нажми [p]Export Player Weapon Viewmodel[/p].
+3. Та-да.
+[r]Для большего количества примеров просто изучи .blend файлы в [p]res://.dev_sources/viewmodels/[/p].[/r]"
+edit_time = 1.76123e+09

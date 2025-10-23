@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]Globals[/gd] singleton that stores global values. Unlike [gd]Values[/gd] singleton, this one doesn't save anything globally and basically represents nothing but dictionary with 2 fancy set/get methods on top of it. Values written in this singleton are saved in a save file.
+
+[c]Usage example[/c]
+[gd]
+Globals.set_value(\"lil_something\", 1337.0)
+Globals.get_value(\"lil_something\", 0.0)
+[/gd]"
+info_rus = "Синглтон [gd]Globals[/gd], который хранит глобальные значения. В отличие от синглтона [gd]Values[/gd], этот ничего не сохраняет глобально и по сути представляет собой не что иное, как словарь с 2 классными методами set/get сверху. Значения, записанные в этом синглтоне, сохраняются в файле сохранения.
+
+[c]Пример использования[/c]
+[gd]
+Globals.set_value(\"lil_something\", 1337.0)
+Globals.get_value(\"lil_something\", 0.0)
+[/gd]"
+edit_time = 1.76113e+09

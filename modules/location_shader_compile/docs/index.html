@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_shader_compile
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_shader_compile
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Shader compiling tool that has the following algorithm:<br>
+							1. Initialization Phase<br>
+							&emsp;- Disable physics interpolation<br>
+							&emsp;- Store reference to the scene root (loc_base)<br>
+							&emsp;- Create temporary camera for compilation:<br>
+							&emsp;- Position far from origin (10000,10000,10000)<br>
+							&emsp;- Set near/far planes (0.001, 1000)<br>
+							&emsp;- Make camera current<br>
+							2. Node Collection & Setup<br>
+							&emsp;- Create container node (meshes_node) for all compilation objects<br>
+							&emsp;- Position meshes_node in front of camera (8 units forward, 2 units down)<br>
+							&emsp;- Process and add different element types to meshes_node:<br>
+							&emsp;- Location meshes (blockout, combined, props)<br>
+							&emsp;- NPC models with animations<br>
+							&emsp;- Player weapons and effects<br>
+							&emsp;- Surface particles and debris<br>
+							&emsp;- Decals<br>
+							&emsp;- Bullet trails<br>
+							&emsp;- Character particles<br>
+							3. Shader Compilation Pass<br>
+							&emsp;- Make all collected nodes visible one by one<br>
+							&emsp;- For each node:<br>
+							&emsp;&emsp;- Update progress display<br>
+							&emsp;&emsp;- Set node visible<br>
+							&emsp;&emsp;- Play any particle effects<br>
+							&emsp;- Process explosions separately at fixed position<br>
+							4. Geometry Compilation<br>
+							&emsp;- Disable occlusion culling<br>
+							&emsp;- Position camera at origin with huge far plane (300000)<br>
+							&emsp;- Render scene from 6 angles (front, back, left, right, top, bottom)<br>
+							&emsp;- Re-enable occlusion culling<br>
+							5. Post-Processing Effects<br>
+							&emsp;- Enable all player visual effects temporarily:<br>
+							&emsp;- Flashbang<br>
+							&emsp;- Underwater<br>
+							&emsp;- Night vision<br>
+							&emsp;- Drug effects<br>
+							6. Weapon-Specific Compilation<br>
+							&emsp;- Compile shaders for all player weapons<br>
+							&emsp;- Wait for weapon system to complete<br>
+							7. Cleanup Phase<br>
+							&emsp;- Remove temporary camera<br>
+							&emsp;- Disable all temporary visual effects<br>
+							&emsp;- Reparent player/camera if needed<br>
+							&emsp;- Re-enable physics interpolation<br>
+							&emsp;- Emit completion signal<br>
+							<br>
+							<code class="gdscript">
+								LocationShaderCompile
+							</code>
+							partially helps to fight shader compilation stutters that are occuring quite often in this game. If you are making something that has new visual behaviors (like instancing of meshes that haven't been rendered before), it is highly advised to add a support of this case into this class.<br>
+							<br>
+							<code>
+								Usage Example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								LocationShaderCompile.compile(self)<br>
+								yield(LocationShaderCompile, "complete")<br>
+								# Keep doing your stuff here...<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/location_shader_compile.html">
+								LocationShaderCompile
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

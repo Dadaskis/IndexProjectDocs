@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_shader_compile
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_shader_compile
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Инструмент компиляции шейдеров со следующим алгоритмом:<br>
+							1. Фаза инициализации<br>
+							&emsp;- Отключить интерполяцию физики<br>
+							&emsp;- Сохранить ссылку на корень сцены (loc_base)<br>
+							&emsp;- Создать временную камеру для компиляции:<br>
+							&emsp;- Позиционировать далеко от начала координат (10000,10000,10000)<br>
+							&emsp;- Установить ближнюю/дальнюю плоскости (0.001, 1000)<br>
+							&emsp;- Сделать камеру текущей<br>
+							2. Сбор и настройка узлов<br>
+							&emsp;- Создать узел-контейнер (meshes_node) для всех объектов компиляции<br>
+							&emsp;- Позиционировать meshes_node перед камерой (8 единиц вперёд, 2 единицы вниз)<br>
+							&emsp;- Обработать и добавить различные типы элементов в meshes_node:<br>
+							&emsp;- Локационные меши (блокаут, объединённые, пропсы)<br>
+							&emsp;- Модели NPC с анимациями<br>
+							&emsp;- Оружие игрока и эффекты<br>
+							&emsp;- Поверхностные частицы и обломки<br>
+							&emsp;- Декали<br>
+							&emsp;- Следы пуль<br>
+							&emsp;- Частицы персонажей<br>
+							3. Проход компиляции шейдеров<br>
+							&emsp;- Делать все собранные узлы видимыми по одному<br>
+							&emsp;- Для каждого узла:<br>
+							&emsp;&emsp;- Обновить отображение прогресса<br>
+							&emsp;&emsp;- Сделать узел видимым<br>
+							&emsp;&emsp;- Воспроизвести любые эффекты частиц<br>
+							&emsp;- Обработать взрывы отдельно в фиксированной позиции<br>
+							4. Компиляция геометрии<br>
+							&emsp;- Отключить отсечение окклюзии<br>
+							&emsp;- Позиционировать камеру в начале координат с огромной дальней плоскостью (300000)<br>
+							&emsp;- Рендерить сцену с 6 углов (спереди, сзади, слева, справа, сверху, снизу)<br>
+							&emsp;- Включить отсечение окклюзии обратно<br>
+							5. Пост-обработочные эффекты<br>
+							&emsp;- Включить все визуальные эффекты игрока временно:<br>
+							&emsp;- Флешбэнг<br>
+							&emsp;- Подводный<br>
+							&emsp;- Ночное видение<br>
+							&emsp;- Эффекты наркотиков<br>
+							6. Специфичная компиляция оружия<br>
+							&emsp;- Скомпилировать шейдеры для всего оружия игрока<br>
+							&emsp;- Ждать завершения системы оружия<br>
+							7. Фаза очистки<br>
+							&emsp;- Удалить временную камеру<br>
+							&emsp;- Отключить все временные визуальные эффекты<br>
+							&emsp;- Перепривязать игрока/камеру при необходимости<br>
+							&emsp;- Включить интерполяцию физики обратно<br>
+							&emsp;- Испустить сигнал завершения<br>
+							<br>
+							<code class="gdscript">
+								LocationShaderCompile
+							</code>
+							частично помогает бороться с задержками компиляции шейдеров, которые occurring quite часто в этой игре. Если ты создаёшь что-то, что имеет новое визуальное поведение (например, инстансирование мешей, которые не были отрендерены before), крайне рекомендуется добавить поддержку этого случая в этот класс.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								LocationShaderCompile.compile(self)<br>
+								yield(LocationShaderCompile, "complete")<br>
+								# Продолжай делать свои дела здесь...<br>
+							</code>
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/location_shader_compile.html">
+								LocationShaderCompile
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - achievements
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: achievements
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 8:00 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/achievements/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								Модуль Достижений. Предоставляет базовый набор инструментов для работы с достижениями в игре.<br>
+								<br>
+								<code class="gdscript">
+									"./assets/data"
+								</code>
+								содержат все ресурсы достижений.<br>
+								Каждый ресурс ссылается на определённое изображение .PNG в <code class="gdscript">
+									"./assets/icons"
+								</code>
+								для получения иконки:<br>
+								<code>
+									test_name.tres ->
+									test_name.png
+								</code>
+								<br>
+								<br>
+								Заблокировать достижение: <code class="gdscript">
+									Achievements.lock("test_name")
+								</code>
+								<br>
+								Разблокировать достижение: <code class="gdscript">
+									Achievements.unlock("test_name")
+								</code>
+								<br>
+								Добавить "счётчик" в достижение: <code class="gdscript">
+									Achievements.add_count("test_name", 1)
+								</code>
+								<br>
+								<br>
+								Все значения достижений хранятся внутри глобального класса Values, поэтому они сохраняются сразу при сохранении Values. Используются 2 словаря: <code>
+									achievements_unlocked
+								</code>
+								и <code>
+									achievements_counts
+								</code>
+								<br>
+								<code>
+									achievements_unlocked
+								</code>
+								- каждый ключ это кодовое имя достижения, а каждое значение это булево значение, где "true" означает разблокировано.<br>
+								<code>
+									achievements_counts
+								</code>
+								- каждый ключ это кодовое имя достижения, а каждое значение это число, которое указывает на текущее свойство количества достижения.<br>
+								<br>
+								<h2>
+									Как создать достижение?
+								</h2>
+								<br>
+								<br>
+								0. Создай новый ресурс <code class="gdscript">
+									AchievementData
+								</code>
+								в <code class="gdscript">
+									"res://modules/achievements/assets/data/"
+								</code>
+								. Ты можешь дать ему любое имя, главное чтобы оно было уникальным и служило своего рода кодовым именем. Используя имя этого файла, ты можешь управлять достижением методами lock/unlock/add_count и т.д.<br>
+								<img src="../../../_guide/.images/achievements/create0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<img src="../../../_guide/.images/achievements/create1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										<br>
+										1. Создай иконку для достижения и экспортируй её как .PNG в <code class="gdscript">
+											"res://modules/achievements/assets/icons/"
+										</code>
+										. Имя файла экспортированного изображения должно соответствовать кодовому имени достижения.<br>
+										<img src="../../../_guide/.images/achievements/create2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											<br>
+											2. Используй в игре. Самый простой способ: ST <code>
+												st_unlock_achievement
+											</code>
+											, который может разблокировать достижение при определённом событии локации. Однако ты можешь добавить один из методов <code>
+												Achievements
+											</code>
+											в код чего угодно.<br>
+											<img src="../../../_guide/.images/achievements/create3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												<br>
+												Всё ещё нужен способ создания "Слушателей Достижений", которые позволят программировать сложное поведение достижений, требующее комплексных шагов для выполнения. Однако это всё пока в будущем.
+											</p>
+											<h3>
+												General Information
+											</h3>
+											<h4>
+												Root directories list
+											</h4>
+											<p>
+												assets, docs, src
+											</p>
+											<h4>
+												Nodes
+											</h4>
+											<p>
+												<a class="a_simple" href="./scripts/achievement_unlocked_display.html">
+													AchievementUnlockedDisplay
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/achievements.html">
+													Achievements
+												</a>
+											</p>
+											<h4>
+												Classes
+											</h4>
+											<p>
+												None
+											</p>
+											<h4>
+												Resources
+											</h4>
+											<p>
+												<a class="a_simple" href="./scripts/achievement_data.html">
+													AchievementData
+												</a>
+											</p>
+											<h4>
+												Other Scripts
+											</h4>
+											<p>
+												None
+											</p>
+										</div>
+									</div>
+								</center>
+								<script src="../../../_guide/code_blocks.js">
+								</script>
+							</body>
+						</html>

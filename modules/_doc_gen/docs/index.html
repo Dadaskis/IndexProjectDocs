@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - _doc_gen
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: _doc_gen
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 17:20 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+						</p>
+						<h2>
+							Tags
+						</h2>
+						<p>
+							<br>
+						</p>
+						<center>
+							<code class="gdscript">
+								<br>
+								# Written
+								[like_that]
+								[/like_that]
+								<br>
+								# gd - GDScript code<br>
+								# c - General "code"<br>
+								# bc - Big centered text<br>
+								# wc - Big centered text with white background<br>
+								# t - Title / Big centered text that serves as a separator<br>
+								# p - Path, written in quotes and highlighted<br>
+								# r - Red background with red text, helpful for markings<br>
+								# ctr - Center<br>
+							</code>
+						</center>
+						<p>
+							<br>
+							<br>
+						</p>
+						<h2>
+							Description
+						</h2>
+						<p>
+							<br>
+							Index: Purger documentation generator tool that was written in two sleep deprived days while being completely offline. It was made in 2024, and only in 2025 i managed to actually start filling up the documentation to actually represent this codebase's knowledge base. Originally that was a single "editor script" in editor_scripts folder, but i decided to move it as a separate module for ease of access.<br>
+							<br>
+						</p>
+						<h2>
+							Turns this...
+						</h2>
+						<p>
+							<br>
+							<img src="../../../_guide/.images/_doc_gen/code0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+							</p>
+							<h2>
+								To this...
+							</h2>
+							<p>
+								<br>
+								<img src="../../../_guide/.images/_doc_gen/HTML0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+								</p>
+								<center>
+									<br>
+									How to use:<br>
+									1. <code class="gdscript">
+										"res://modules/_doc_gen/src/generate_docs.gd"
+									</code>
+									- double click it<br>
+									<img src="../../../_guide/.images/_doc_gen/file0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										2. In script editor, find <code class="gdscript">
+											"generate_docs.gd"
+										</code>
+										on the left and just RMB ->
+										<code>
+											Run
+										</code>
+										<br>
+										<img src="../../../_guide/.images/_doc_gen/run0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+										</center>
+										<p>
+											<br>
+											<br>
+											For more information how this thing works - just take a look into comments/documentation of <code class="gdscript">
+												"res://modules/_doc_gen/src/generate_docs.gd"
+											</code>
+											. If you are just using this thing to update documentation page, that's really all you need to know. However, if you want to maintain the documentation yourself, keep in mind: This thing is parsing code comments to turn them into content for documentation page. Additionally it is using <code class="gdscript">
+												"docs/info.tres"
+											</code>
+											files to insert module descriptions (like the one you are reading right now).<br>
+											<img src="../../../_guide/.images/_doc_gen/info0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												<img src="../../../_guide/.images/_doc_gen/info1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													<br>
+													You need to realize that this was written by sleep-deprived-me and maintained by clueless-me. This thing isn't perfect. You need to know how to use it PROPERLY.<br>
+													<br>
+													Here's an example of the perfect script <code class="gdscript">
+														"res://modules/post_processing_system/src/effects/black_debug.gd"
+													</code>
+													:<br>
+													<code class="gdscript">
+														# Provides a simple full-screen black debug overlay effect.<br>
+														# Primarily used for debugging and visual testing purposes.<br>
+														# The very first post-processing effect btw.<br>
+														<br>
+														extends PostProcessingBase<br>
+														<br>
+														class_name BlackDebugPostProcessing<br>
+														<br>
+														# Reference to the shader material used for the black overlay effect<br>
+														var shader_mat: ShaderMaterial<br>
+														<br>
+														# Initializes the black debug effect by loading the appropriate shader<br>
+														func custom_initialize():<br>
+														&emsp;# Loads the black debug shader material<br>
+														&emsp;shader_mat = load_shader("black_debug")<br>
+													</code>
+													<br>
+													<br>
+													So, as you can see, there's multiple things you need to pay attention to:<br>
+													1. At the top of the file (right at the top, right from the first line, above everything else) you set up description for your script file<br>
+													2. The only way to define a description for a variable/constant/enum is writing a comment ABOVE the definition<br>
+													3. The second point applies to functions too. Even if this system can detect arguments and all, you write what these arguments mean all by yourself in the comments anyway, just do the work<br>
+													<br>
+													If you want to set a description for an entire module, check the "docs" folder of your module (like here: <code class="gdscript">
+														"res://modules/_doc_gen/docs/info.tres"
+													</code>
+													). If you don't have this folder in your module, you don't have to create it. Just generate the documentation pages by running the editor script and then it'll be created automatically for your new module. Any of the existing modules, on other hand, already should have this folder intact.<br>
+												</p>
+												<br>
+											</p>
+											<h2>
+												More examples here...
+											</h2>
+											<p>
+												<br>
+											</p>
+											<h2>
+												Function description
+											</h2>
+											<p>
+												<br>
+											</p>
+											<h2>
+												GOOD
+											</h2>
+											<p>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													# Resets all animation states to default<br>
+													func nullify_all_states():<br>
+													&emsp;is_prepared = false
+												</code>
+											</center>
+											<p>
+												<br>
+												<h2>
+													BAD
+												</h2>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													func nullify_all_states(): # Resets all animation states to default<br>
+													&emsp;is_prepared = false
+												</code>
+											</center>
+											<p>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												Keep in mind, <br>
+												if you write a comment at the same line as declaration - it'll be ignored as this use-case is not supported.
+											</h4>
+											<p>
+												<br>
+												<br>
+											</p>
+											<h2>
+												Variable description
+											</h2>
+											<p>
+												<br>
+											</p>
+											<h2>
+												GOOD
+											</h2>
+											<p>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													# Total Amount of gibs...<br>
+													var gib_amount = 10
+												</code>
+											</center>
+											<p>
+												<br>
+											</p>
+											<h2>
+												BAD
+											</h2>
+											<p>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													var gib_amount = 10 # Total Amount of gibs...
+												</code>
+											</center>
+											<p>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												Same as in the function description example,<br>
+												if you put a comment at the variable's definition - it'll be ignored.
+											</h4>
+											<p>
+												<br>
+												<br>
+											</p>
+											<h2>
+												Script file description
+											</h2>
+											<p>
+												<br>
+											</p>
+											<h2>
+												GOOD
+											</h2>
+											<p>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													# This script spawns random gibs (body parts/debris) with physics effects.<br>
+													# It creates multiple rigid bodies with collision shapes, applies random<br>
+													# forces and torques to simulate explosion/impact, then cleans them up<br>
+													# after a configurable time. Includes settings for amount, size, mass,<br>
+													# force ranges, and lifetime. Used for gore/debris effects when characters<br>
+													# are destroyed. Particles can be customized in the instanced scene.<br>
+													#<br>
+													# For the time being, only used in cases when characters are exploded.<br>
+													<br>
+													extends Spatial
+												</code>
+											</center>
+											<p>
+												<br>
+											</p>
+											<h2>
+												BAD
+											</h2>
+											<p>
+												<br>
+											</p>
+											<center>
+												<code class="gdscript">
+													extends Spatial<br>
+													<br>
+													# This script spawns random gibs (body parts/debris) with physics effects.<br>
+													# It creates multiple rigid bodies with collision shapes, applies random<br>
+													# forces and torques to simulate explosion/impact, then cleans them up<br>
+													# after a configurable time. Includes settings for amount, size, mass,<br>
+													# force ranges, and lifetime. Used for gore/debris effects when characters<br>
+													# are destroyed. Particles can be customized in the instanced scene.<br>
+													#<br>
+													# For the time being, only used in cases when characters are exploded.
+												</code>
+											</center>
+											<p>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												As it was said, if you want to set a description of your script file, you need to write it right on the top of the file. If you add some new lines or code out there, the system will treat this file as the one without any description in it.<br>
+												<br>
+												Also, be aware, HTML tags are also processed in your comments. If you write HTML code in your code, it'll be visible in the HTML page. Be careful because it might lead to unforeseen results even if you just mention HTML tags as an example. That includes description written in info.tres files too.
+											</h4>
+											<p>
+												<br>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												You can mark a script as an autoload by writing <code class="gdscript">
+													# __AUTOLOAD
+												</code>
+												on top of the file. If the file's name doesn't represent the class name correctly (or if it just breaks), you can write <code class="gdscript">
+													# __AUTOLOAD::ClassName
+												</code>
+												to define the class name yourself.
+											</h4>
+											<p>
+											</p>
+											<h3>
+												General Information
+											</h3>
+											<h4>
+												Root directories list
+											</h4>
+											<p>
+												docs, src
+											</p>
+											<h4>
+												Nodes
+											</h4>
+											<p>
+												None
+											</p>
+											<h4>
+												Classes
+											</h4>
+											<p>
+												None
+											</p>
+											<h4>
+												Resources
+											</h4>
+											<p>
+												<a class="a_simple" href="./scripts/generate_docs.html">
+													GenerateDocs
+												</a>
+											</p>
+											<h4>
+												Other Scripts
+											</h4>
+											<p>
+												None
+											</p>
+										</div>
+									</div>
+								</center>
+								<script src="../../../_guide/code_blocks.js">
+								</script>
+							</body>
+						</html>

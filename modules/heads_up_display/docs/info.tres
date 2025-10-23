@@ -1,0 +1,71 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Extensible Heads-Up Display implementation that can practically used by any camera, but at this point its used by the player to show information like health, crosshair, ammo, tasks, etc.
+
+[c]Usage example[/c]
+[gd]
+# Initialization
+var heads_up_display = HeadsUpDisplay.new()
+heads_up_display.initialize(self)
+
+# Add a health HUD that has HealthHUD class
+var health_hud = heads_up_display.load_element(\"health\") as HealthHUD
+health_hud.initialize()
+health_hud.set_health(100)
+
+# Remove a health HUD
+heads_up_display.remove_element(\"health\")
+
+# Hide all elements
+heads_up_display.hide_all()
+
+# Show all elements
+heads_up_display.show_all()
+[/gd]
+
+If you need more information regarding specific HUD element - check documentation of needed HUD class
+
+[t]Creating your own HUD element[/t]
+All elements are stored at [p]res://modules/heads_up_display/assets/elements/[/p], they follow the pattern:
+[gd]
+\"Folder element name\"
+└── element.tscn
+[/gd]
+In this case, [p]Folder element name[/p] is a name of your folder in [p]elements[/p], it can be anything really, just keep in mind, if you call it [p]ammo[/p] - you will refer to it as [p]ammo[/p]. Your element folder may contain any kind of files in any way you'd wish to organize. It's a good practice to keep your scripts at [p]/src[/p] folder and name them accordingly to your HUD, like [p]ammo_hud.gd[/p]. More than that, it is highly advised to use [gd]class_name[/gd] to define a class for your HUD, like [gd]AmmoHUD[/gd], so in future you'd be able to work with its methods"
+info_rus = "Расширяемая реализация HUD (Heads-Up Display), которую можно использовать практически с любой камерой, но на данный момент она используется игроком для отображения информации, такой как здоровье, прицел, патроны, задания и т.д.
+
+[c]Пример использования[/c]
+[gd]
+# Инициализация
+var heads_up_display = HeadsUpDisplay.new()
+heads_up_display.initialize(self)
+
+# Добавить HUD здоровья, имеющий класс HealthHUD
+var health_hud = heads_up_display.load_element(\"health\") as HealthHUD
+health_hud.initialize()
+health_hud.set_health(100)
+
+# Удалить HUD здоровья
+heads_up_display.remove_element(\"health\")
+
+# Скрыть все элементы
+heads_up_display.hide_all()
+
+# Показать все элементы
+heads_up_display.show_all()
+[/gd]
+
+Если тебе нужно больше информации о конкретном элементе HUD - проверь документацию нужного класса HUD
+
+[t]Создание своего собственного элемента HUD[/t]
+Все элементы хранятся в [p]res://modules/heads_up_display/assets/elements/[/p], они следуют шаблону:
+[gd]
+\"Имя папки элемента\"
+└── element.tscn
+[/gd]
+В этом случае [p]Имя папки элемента[/p] - это имя твоей папки в [p]elements[/p], оно может быть любым, просто имей в виду: если ты назовёшь её [p]ammo[/p] - ты будешь обращаться к ней как [p]ammo[/p]. Твоя папка элемента может содержать любые файлы в любом порядке, как ты пожелаешь организовать. Это хорошая практика - хранить свои скрипты в папке [p]/src[/p] и называть их соответственно твоему HUD, например [p]ammo_hud.gd[/p]. Более того, настоятельно рекомендуется использовать [gd]class_name[/gd] для определения класса твоего HUD, например [gd]AmmoHUD[/gd], чтобы в будущем ты мог работать с его методами"
+edit_time = 1.76123e+09

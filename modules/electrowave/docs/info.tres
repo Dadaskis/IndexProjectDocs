@@ -1,0 +1,43 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Electrowave node that can be used by M.Inc's electro-units.
+
+[c]Usage Example[/c]
+[gd]
+# Get current location base
+var loc_base = LocationBaseScene.get_scene()
+
+# Instance and add an electrowave node
+var electrowave = Electrowave.new()
+loc_base.add_child(electrowave)
+
+# Launch it
+var start_pos = Vector3.ZERO
+var target_pos = Vector3.ONE * 10.0
+electrowave.start(start_pos, target_pos)
+[/gd]
+
+If you wanna change visuals, just edit [p]res://modules/electrowave/assets/prefab/electrowave.tscn[/p]"
+info_rus = "Узел Electrowave, который может использоваться электро-юнитами M.Inc.
+
+[c]Пример использования[/c]
+[gd]
+# Получить текущую базовую локацию
+var loc_base = LocationBaseScene.get_scene()
+
+# Создать и добавить узел electrowave
+var electrowave = Electrowave.new()
+loc_base.add_child(electrowave)
+
+# Запустить его
+var start_pos = Vector3.ZERO
+var target_pos = Vector3.ONE * 10.0
+electrowave.start(start_pos, target_pos)
+[/gd]
+
+Если хочешь изменить визуал, просто отредактируй [p]res://modules/electrowave/assets/prefab/electrowave.tscn[/p]"
+edit_time = 1.76113e+09

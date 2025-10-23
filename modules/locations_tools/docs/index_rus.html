@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - locations_tools
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: locations_tools
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак, предположим, ты использовал Hammer Editor однажды и подумал, что он типо дерьмовый. Тогда ты решаешь, что это охуенная идея превратить Blender в свой инструмент для дизайна уровней. И ты создаёшь весь этот модуль. Проходит достаточно времени, и твоё рассудок угасает, как и тот безудержный оптимизм, который был у тебя, когда ты думал, что Hammer Editor плох. В конце концов, тебе удалось сделать что-то, что ещё хуже. Добро пожаловать в "Locations Tools", дамы и господа.<br>
+							<br>
+							Эта страница будет в основном инструкцией по использованию этой системы, а не освещением её технических деталей, просто говоря.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							Location Blockout
+						</h4>
+						<p>
+							<br>
+							<img src="../../../_guide/.images/locations_tools/location_blockout0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<code class="gdscript">
+									LocationBlockout
+								</code>
+								- это узел, который даёт тебе возможность проектировать весь уровень только в Blender. Он полезен для огромных уникальных кусков геометрии. Это основа твоего игрового уровня. Этот вид геометрии может быть не таким детализированным, но он формирует layout уровня, поэтому называется "blockout". Его детализация может выходить далеко за пределы просто grayboxing, но эй, мне просто нужно было выбрать какое-нибудь весёлое имя. Этот узел принимает имя твоего blockout, читает экспортированный .glb файл в <code class="gdscript">
+									"res://locations/blockouts/"
+								</code>
+								и создаёт узлы <code class="gdscript">
+									LocationBlockoutMesh
+								</code>
+								как дочерние от этого узла. Ты можешь настраивать <code class="gdscript">
+									LocationBlockoutMesh
+								</code>
+								как пожелаешь для достижения необходимых игровых needs, у них *много* настроек.<br>
+								<br>
+							</p>
+							<h2>
+								Пометки в именах узлов
+							</h2>
+							<p>
+								<br>
+								<img src="../../../_guide/.images/locations_tools/location_blockout1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									Ты можешь поместить некоторые теги в имена твоих объектов Blender для быстрой настройки твоих будущих узлов (как ты можешь видеть на первом скриншоте).<br>
+									<code class="gdscript">
+										_CVX
+									</code>
+									- Принудительно создаёт optimized выпуклое столкновение на твоём узле.<br>
+									<code class="gdscript">
+										_NOCOL
+									</code>
+									- Отключает столкновения.<br>
+									<code class="gdscript">
+										_PLACE
+									</code>
+									- Превращает этот кусок в placeholder, который может быть удалён, как только игра запустится.<br>
+									<code class="gdscript">
+										_OCC
+									</code>
+									- Превращает этот кусок в узел <code class="gdscript">
+										Occluder
+									</code>
+									.<br>
+									<code class="gdscript">
+										_ROOMBOX
+									</code>
+									- Превращает этот кусок в <code class="gdscript">
+										Room
+									</code>
+									для целей отсечения окклюзии.<br>
+									<code class="gdscript">
+										_PORTAL
+									</code>
+									- Превращает этот кусок в <code class="gdscript">
+										Portal
+									</code>
+									для целей отсечения окклюзии.<br>
+									<code class="gdscript">
+										_ROOM
+									</code>
+									- Дополнительно создаёт узел <code class="gdscript">
+										Room
+									</code>
+									используя геометрию этого меша. В отличие от <code class="gdscript">
+										_ROOMBOX
+									</code>
+									, он не удаляет меш полностью, делая возможным использование самой геометрии комнаты для occlusion culling.<br>
+									<code class="red-marking">
+										TODO: РЕАЛИЗОВАТЬ БЫСТРЫЙ РЕЖИМ
+									</code>
+									<br>
+									<code class="gdscript">
+										_SPEC
+									</code>
+									- Делает этот <code class="gdscript">
+										LocationBlockoutMesh
+									</code>
+									видимым как отдельный узел в "быстром режиме".<br>
+									<br>
+								</p>
+								<h2>
+									Использование в Blender
+								</h2>
+								<p>
+									<br>
+									<img src="../../../_guide/.images/locations_tools/location_blockout2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Плагин BlenderFastTools имеет кучу кнопок, которые ты можешь найти очень *привлекательными*, когда захочешь работать с <code class="gdscript">
+											LocationBlockout
+										</code>
+										.<br>
+										- <code class="gdscript">
+											"Sync Godot Materials"
+										</code>
+										создаёт много материалов Blender, которые могут быть назначены твоей геометрии.<br>
+										- Если ты назначил коллекцию правильно, кнопка <code class="gdscript">
+											"Export"
+										</code>
+										в категории <code class="gdscript">
+											"Blockout Export"
+										</code>
+										экспортирует твой текущий blockout как .glb для чтения в Godot.<br>
+										Это всё. Просто как дважды два. В Godot ты просто нажимаешь checkbox <code class="gdscript">
+											"Update"
+										</code>
+										в твоём узле <code class="gdscript">
+											LocationBlockout
+										</code>
+										, после назначения правильного значения <code class="gdscript">
+											"Blockout Name"
+										</code>
+										.<br>
+										<img src="../../../_guide/.images/locations_tools/location_blockout3.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+										</p>
+										<center>
+											Да, я использую чёртов checkbox как кнопку, потому что это лучшее, что этот движок мог предложить мне без погружения в C++ магию. Привыкай :)
+										</center>
+										<p>
+											<br>
+											<br>
+										</p>
+										<h2>
+											AssetHelper
+										</h2>
+										<p>
+											<br>
+											<img src="../../../_guide/.images/locations_tools/location_blockout4.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+											</p>
+											<center>
+												Имей в виду, что ты можешь использовать AssetHelper для правильной установки имени blockout.
+											</center>
+											<p>
+												<br>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												Location Prop
+											</h4>
+											<p>
+												<br>
+												<img src="../../../_guide/.images/locations_tools/location_prop0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													<img src="../../../_guide/.images/locations_tools/location_prop1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+														В то время как <code class="gdscript">
+															LocationBlockout
+														</code>
+														предоставляет тебе возможность сделать layout твоей локации, <code class="gdscript">
+															LocationProp
+														</code>
+														позволяет тебе добавить больше деталей. Пропы - это повторяющиеся детали, которые можно размещать где угодно. Ты можешь размещать эти пропы где угодно, используя инструмент PropKit:<br>
+														<img src="../../../_guide/.images/locations_tools/location_prop2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+															<br>
+														</p>
+														<h2>
+															Пометки в именах узлов
+														</h2>
+														<p>
+															<br>
+															<img src="../../../_guide/.images/locations_tools/location_prop3.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																Ты можешь поместить некоторые теги в имена твоих объектов Blender для более точной настройки твоего пропа.<br>
+																<code class="gdscript">
+																	_PHYS
+																</code>
+																- Статическая выпуклая часть физического тела.<br>
+																<code class="gdscript">
+																	_OCC
+																</code>
+																- Окклюдер.<br>
+																<code class="gdscript">
+																	_PCLIP
+																</code>
+																- Вогнутый клип игрока.<br>
+																<code class="gdscript">
+																	_PCLIPCVX
+																</code>
+																- Выпуклый клип игрока.<br>
+																<code class="gdscript">
+																	_LOD
+																</code>
+																- LOD версия пропа.<br>
+																<code class="gdscript">
+																	_COL.*
+																	[имя_кости]
+																	*
+																</code>
+																- Выпуклая часть столкновения, которая привязана к кости скелета.<br>
+																<code class="gdscript">
+																	_DEBD
+																</code>
+																- Часть обломков, динамическая.<br>
+																<code class="gdscript">
+																	_DEBS
+																</code>
+																- Часть обломков, статическая.<br>
+																<code class="gdscript">
+																	_PART
+																</code>
+																- Часть пропа (другой узел <code class="gdscript">
+																	LocationProp
+																</code>
+																), которая создаётся как дочерняя от этого пропа.<br>
+																<code class="gdscript">
+																	_GLASS
+																</code>
+																- Оптимизированная стеклянная часть.<br>
+																<br>
+															</p>
+															<h2>
+																Использование в Blender
+															</h2>
+															<p>
+																<br>
+																<img src="../../../_guide/.images/locations_tools/location_prop4.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																	<br>
+																	Плагин BlenderFastTools имеет 2 кнопки, связанные с <code class="gdscript">
+																		LocationProp
+																	</code>
+																	.<br>
+																	- Кнопка <code class="gdscript">
+																		"Export"
+																	</code>
+																	экспортирует каждый выбранный объект в Blender как отдельные .glb файлы. Ничего слишком классного здесь. <code class="gdscript">
+																		"thing_DEBD"
+																	</code>
+																	сохраняется как <code class="gdscript">
+																		"thing_DEBD.glb"
+																	</code>
+																	в <code class="gdscript">
+																		"res://locations/props/exported/"
+																	</code>
+																	.<br>
+																	- Кнопка <code class="gdscript">
+																		"Export Animated"
+																	</code>
+																	позволяет тебе выбрать твой арматур и меш (меш должен быть привязан к арматуру) и затем экспортировать его как анимированный проп.<br>
+																	<br>
+																	Если ты хочешь узнать некоторые технические детали, просто загляни в исходный код того, что тебе нужно, и шокируйся. Или нет. Я не знаю, я не твой папочка.<br>
+																	<br>
+																	Если ты ищешь дополнительную оптимизацию, просто загляни в документацию модуля <code class="gdscript">
+																		"location_mesh_combiner"
+																	</code>
+																	.
+																</p>
+																<h3>
+																	General Information
+																</h3>
+																<h4>
+																	Root directories list
+																</h4>
+																<p>
+																	assets, docs, src
+																</p>
+																<h4>
+																	Nodes
+																</h4>
+																<p>
+																	<a class="a_simple" href="./scripts/location_dynamic_objects.html">
+																		location_dynamic_objects
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_blockout_mesh.html">
+																		LocationBlockoutMesh
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_props.html">
+																		LocationProps
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_physics_global.html">
+																		LocationPhysicsGlobal
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_portal.html">
+																		LocationPortal
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_shader_compile_view.html">
+																		LocationShaderCompileView
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_prop.html">
+																		LocationProp
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_prop_file_archive.html">
+																		LocationPropFileArchive
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_blockout_fast.html">
+																		LocationBlockoutFast
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_part.html">
+																		LocationPart
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/debris_remove.html">
+																		debris_remove
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_model_tool.html">
+																		LocationModelTool
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_blockout.html">
+																		LocationBlockout
+																	</a>
+																</p>
+																<h4>
+																	Classes
+																</h4>
+																<p>
+																	<a class="a_simple" href="./scripts/location_physics.html">
+																		LocationPhysics
+																	</a>
+																</p>
+																<h4>
+																	Resources
+																</h4>
+																<p>
+																	<a class="a_simple" href="./scripts/location_collision_dict.html">
+																		LocationCollisionDict
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_blockout_material_config.html">
+																		LocationBlockoutMaterialConfig
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_physics_data.html">
+																		LocationPhysicsData
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_prop_config.html">
+																		LocationPropConfig
+																	</a>
+																	<br>
+																	<a class="a_simple" href="./scripts/location_collision_data.html">
+																		LocationCollisionData
+																	</a>
+																</p>
+																<h4>
+																	Other Scripts
+																</h4>
+																<p>
+																	None
+																</p>
+															</div>
+														</div>
+													</center>
+													<script src="../../../_guide/code_blocks.js">
+													</script>
+												</body>
+											</html>

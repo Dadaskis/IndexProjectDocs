@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - checkpoints
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: checkpoints
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							A hyper-universal saving system that resurrected a victorian child and killed my mind in 3.5. Initially it was called "checkpoints" because, oh well, these were literal checkpoints that worked on toothsticks and gum. Over time it was rewritten to more universal solution that allows the player to save anywhere they want without breaking this game. More than that, it allows easily add a saving support practically to any node or object using this system.<br>
+							<br>
+							<code>
+								Saving support example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var spawned: bool<br>
+								var spawn_enabled: bool<br>
+								var spawned_npc: NonPlayableCharacter<br>
+								# ...<br>
+								<br>
+								# Saves NPC state to checkpoint<br>
+								func on_checkpoint_save():<br>
+								&emsp;# Save data to checkpoint system<br>
+								&emsp;Checkpoints.add_data_node(self,
+								[<br>
+								&emsp;&emsp;"spawned",<br>
+								&emsp;&emsp;"spawn_enabled",<br>
+								&emsp;&emsp;"spawned_npc:transform",<br>
+								&emsp;&emsp;# ...<br>
+								&emsp;&emsp;"spawned_npc:logic:current_state_name",<br>
+								&emsp;]
+								)<br>
+								<br>
+								# Loads NPC state from checkpoint<br>
+								func on_checkpoint_load():<br>
+								&emsp;# Load saved data<br>
+								&emsp;Checkpoints.assign_node_data(self)<br>
+								<br>
+								# Initializes node<br>
+								func node_init():<br>
+								&emsp;# Register with checkpoint system<br>
+								&emsp;Checkpoints.add_on_save_and_load(self)<br>
+							</code>
+							<br>
+							<br>
+							Three main points here are <code class="gdscript">
+								Checkpoints.add_on_save_and_load(self)
+							</code>
+							, <code class="gdscript">
+								on_checkpoint_load
+							</code>
+							and <code class="gdscript">
+								on_checkpoint_save
+							</code>
+							. <code class="gdscript">
+								Checkpoints.add_on_save_and_load(self)
+							</code>
+							allows you to quickly connect your node/object to signals of <code class="gdscript">
+								Checkpoints
+							</code>
+							, by default the names of connected functions are <code class="gdscript">
+								on_checkpoint_load
+							</code>
+							and <code class="gdscript">
+								on_checkpoint_save
+							</code>
+							and they are called accordingly. Keep in mind, for nodes it is especially easy to add support. You just connect signals, then, just call <code class="gdscript">
+								Checkpoints.add_data_node(self,
+								["var_name_here"]
+								)
+							</code>
+							when you save and <code class="gdscript">
+								Checkpoints.assign_node_data(self)
+							</code>
+							when you load. This way, all data will be assigned with ease and you can add more saving logic here that you can fully control. <code class="gdscript">
+								Checkpoints.add_data_node
+							</code>
+							in fact is very easy to use, it just has reference to a node as the first argument and then a list of variables to save. That list contains only variable names that you'd normally get with <code class="gdscript">
+								Object.get_indexed
+							</code>
+							function. In this case, there are variables in this class called <code class="gdscript">
+								"spawned", "spawn_enabled", "spawned_npc"
+							</code>
+							, most of which are basic types that can be saved as-is. However, <code class="gdscript">
+								"spawned_npc"
+							</code>
+							is a complex, custom class that has a lot of info inside. You can write analog to <code class="gdscript">
+								spawned_npc.transform
+							</code>
+							as <code class="gdscript">
+								"spawned_npc:transform"
+							</code>
+							and it will allow you to save this node's transforms! In this case, remember, you need to provide a list of variables that represent rather basic types, that can be saved in any <code class="gdscript">
+								Resource
+							</code>
+							-derived file. If you will provide an object to save, it might save incorrectly.<br>
+							<br>
+							However, this example only covers nodes. If you have objects, they are treated differently since they do not normally exist in a scene tree. Such objects can either be fully standalone instances of some class or just be autoloads.<br>
+							<code>
+								Examples
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# BasicDamagable class save handling<br>
+								<br>
+								# Base health value for this damageable object<br>
+								var health = 100.0<br>
+								<br>
+								# Reference to the node that should be removed when destroyed<br>
+								var node_to_remove<br>
+								<br>
+								# Flag tracking if this object has been destroyed<br>
+								var is_destroyed = false<br>
+								<br>
+								# ...<br>
+								<br>
+								# Handles saving this object's state during checkpoint creation<br>
+								# Saves critical properties like health and destruction state<br>
+								func on_checkpoint_save():<br>
+								&emsp;# Register this object's data with the checkpoint system<br>
+								&emsp;Checkpoints.add_data_obj(<br>
+								&emsp;&emsp;cp_key,&emsp;&emsp;&emsp;&emsp;&emsp;# Unique identifier for this object<br>
+								&emsp;&emsp;self,&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# Reference to this script instance<br>
+								&emsp;&emsp;
+								[&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;# List of properties to save:<br>
+								&emsp;&emsp;&emsp;"health",      &emsp;# Current health value<br>
+								&emsp;&emsp;&emsp;"is_destroyed" # Destruction state flag<br>
+								&emsp;&emsp;]
+								<br>
+								&emsp;)<br>
+								<br>
+								# Handles loading this object's state from a checkpoint<br>
+								# Restores saved properties and manages visual debris state<br>
+								func on_checkpoint_load():<br>
+								&emsp;# Restore saved properties from checkpoint data<br>
+								&emsp;Checkpoints.assign_obj_data(cp_key, self)<br>
+								&emsp;<br>
+								&emsp;# Clean up any existing static debris first<br>
+								&emsp;disable_static_debris_only()<br>
+								&emsp;<br>
+								&emsp;# Wait for 5 frames to ensure proper scene setup<br>
+								&emsp;for frame in range(5):<br>
+								&emsp;&emsp;yield(VisualServer, "frame_post_draw")<br>
+								&emsp;&emsp;yield(VisualServer, "frame_post_draw")<br>
+								&emsp;<br>
+								&emsp;# If this object was destroyed when saved, handle visual representation<br>
+								&emsp;if is_destroyed and is_instance_valid(node_to_remove):<br>
+								&emsp;&emsp;# Remove the main node to show destroyed state<br>
+								&emsp;&emsp;var loc_base = LocationBaseScene.get_scene()<br>
+								&emsp;&emsp;loc_base.remove_node(node_to_remove)<br>
+								&emsp;&emsp;<br>
+								&emsp;&emsp;# If configured with debris, enable static debris visuals<br>
+								&emsp;&emsp;if has_debris:<br>
+								&emsp;&emsp;&emsp;enable_static_debris_only()<br>
+								<br>
+								# Registers this object with the checkpoint system<br>
+								# Generates a unique key and sets up save/load callbacks<br>
+								func register_checkpoint():<br>
+								&emsp;# Create unique key combining node path and type identifier<br>
+								&emsp;cp_key = Checkpoints.get_node_key(node_to_remove) + "__DAMAGEABLE"<br>
+								&emsp;<br>
+								&emsp;# Register both save and load callback functions<br>
+								&emsp;Checkpoints.add_on_save_and_load(self)<br>
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# PlayerAnimatedItemMedical usage example<br>
+								<br>
+								# Saves current medical item state to checkpoint system<br>
+								func on_checkpoint_save():<br>
+								&emsp;Checkpoints.add_data_obj(<br>
+								&emsp;&emsp;"player_item_medical:" + weapon_name,<br>
+								&emsp;&emsp;self,<br>
+								&emsp;&emsp;
+								[<br>
+								&emsp;&emsp;&emsp;"healing",<br>
+								&emsp;&emsp;&emsp;"timer",<br>
+								&emsp;&emsp;&emsp;# ...<br>
+								&emsp;&emsp;&emsp;"drug_active",<br>
+								&emsp;&emsp;&emsp;"drug_loop:volume_db",<br>
+								&emsp;&emsp;&emsp;"restored_health"<br>
+								&emsp;&emsp;]
+								<br>
+								&emsp;)<br>
+								<br>
+								# Loads medical item state from checkpoint system<br>
+								func on_checkpoint_load():<br>
+								&emsp;# ...<br>
+								&emsp;Checkpoints.assign_obj_data("player_item_medical:" + weapon_name, self)<br>
+								&emsp;# ...<br>
+							</code>
+							<br>
+							<br>
+							Simply saying, the only difference for objects is usage of methods called <code class="gdscript">
+								Checkpoints.add_data_obj
+							</code>
+							and <code class="gdscript">
+								Checkpoints.assign_obj_data
+							</code>
+							. However, unlike nodes, they require one more parameter: The object's key. Nodes don't need it because their key is generated automatically based on positioning of this node in a <code class="gdscript">
+								LocationBase
+							</code>
+							scene. In this case, first argument in both methods *are* being the key, and second argument is the reference to an object itself (<code class="gdscript">
+								self
+							</code>
+							). You can save a node as an object too, since all <code class="gdscript">
+								Node
+							</code>
+							are <code class="gdscript">
+								Object
+							</code>
+							derived, in case if it really serves your needs.<br>
+							<br>
+							All saves are stored as <code class="gdscript">
+								CheckpointData
+							</code>
+							resource files that are saved at <code class="gdscript">
+								Checkpoints.SAVE_DIR_PATH
+							</code>
+							path (that is currently <code class="gdscript">
+								"user://checkpoints/"
+							</code>
+							). Their previews are stored separately, at <code class="gdscript">
+								Checkpoints.SAVE_IMG_DIR_PATH
+							</code>
+							path (<code class="gdscript">
+								"user://checkpoint_images/"
+							</code>
+							).
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/checkpoints.html">
+								Checkpoints
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/checkpoint_data.html">
+								CheckpointData
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

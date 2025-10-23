@@ -1,0 +1,91 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Developer menu that has a ton of features that earlier used to be only a part of console commands. Other than that provides very handy tools to change configs of weapons or NPCs on-the-fly making balancing a tight bit easier than ever before. But of course, inside of [gd]\"dev_menu_control.gd\"[/gd], there is a damn hell. This entire thing was written in 12-hour marathon with no extensibility in mind. It's just one, huge, monolithic script that looks like hell, reads like hell, and is, in fact, the damn hell. No, it doesn't mean i'll try to change it :)
+
+//img:dev_menu/example0.png
+
+[c]Tabs / Functionality[/c]
+[c]change_location[/c] - A list of locations you can change to. Current location is highlighted in green.
+[c]debug_tools[/c] - A bunch of debug tooling functions you can use. Most of them have self-explanatory namings, so you shouldn't have a problem navigating yourself.
+[c]set_player_weapon[/c] - A list of all player weapons, which also includes all medicals/drugs too because they are technically weapons in this game.
+[c]npc_spawn[/c] - A list of all NPC classes that you can potentially spawn with possibility of changing their config slightly.
+[c]prop_spawn[/c] - A list of all [gd]LocationProp[/gd] models that you can spawn.
+[c]faction_control[/c] - Faction manager that allows you to edit relationship between currently existing factions.
+[c]player_data_control[/c] - A menu that allows you to change certain parameters of the player.
+[c]weapon_data_override[/c] - A menu that allows you to edit raw values of ANY player weapon data, allowing you to temporarily override it for the sake of faster balancing checks. Please be advised, [r]if you have any weapons on you - edited values will not apply to them UNTIL you drop them and pick them up.[/r] Pressing \"Save Resource\" button allows you to save edited values permanently, otherwise they will be reset after you relaunch the game.
+[c]npc_weapon_data_override[/c] - Same as [c]weapon_data_override[/c], but for configs of NPC weapons.
+[c]npc_data_override[/c] - Same as [c]weapon_data_override[/c], but for configs of NPC's character data.
+[c]armor_data_override[/c] - Same as [c]weapon_data_override[/c], but for configs of player's armor (which are loadout items).
+[c]perk_data_override[/c] - Same as [c]weapon_data_override[/c], but for configs of player's perks.
+[c]music[/c] - Same as... nothing really. Just a boombox in your menu, blasting music of this game. Contains a list of all music in this game.
+[c]location_sound[/c] - A list of all available location sounds.
+[c]voicelines[/c] - A list of all available voicelines.
+[c]soundscape[/c] - A list of all available soundscapes. Be careful, if you switch a soundscape with this menu - it will override it and soundscape nodes won't apply their values until you press \"Stop Soundscape\".
+[c]difficulty[/c] - An editor menu for changing difficulty values for better balancing control.
+[c]environment[/c] - An environment editing menu that allows you changing parameters of current [gd]Environment[/gd] in real-time. Works the best with locations that aren't using lightmaps, because changes can be noticed immediately.
+[c]color_grading[/c] - A list of all available color grading LUTs that you can switch to.
+[c]achievements[/c] - A list of all achievements in this game that you can lock/unlock depending on the status of checkboxes.
+[c]loadout_item_unlock[/c] - A list of all loadout items that you can lock/unlock depending on the status of checkboxes.
+[c]values[/c] - A list of all [gd]Values[/gd] global values that you can view/edit as you wish.
+[c]globals[/c] - A list of all [gd]Globals[/gd] global values that you can view/edit as you wish.
+[c]loadout_selection[/c] - A loadout selection menu that allows you to choose any loadout item and assign it to yourself
+
+[c]Ways to add your own stuff[/c]
+So you decided to add something into this thing. Oh god, oh poor soul... What horrors you are about to witness... Either way there are ways. You practically need two things:
+	1. [gd]\"res://modules/dev_menu/src/ui/dev_menu_control.gd\"[/gd] - Open this terrible script
+	2. [gd]\"res://modules/dev_menu/assets/ui_scenes/dev_menu.tscn\"[/gd] - Open this scene
+
+From here, you have multiple options:
+	- Adding your own debug tool:
+		1. Find [gd]\"tabs/debug_tools/scroll/vbox\"[/gd] node
+		2. There's multiple grids which are related to different categories, pick your poison and create a new button in one.
+		3. Create a new function in [gd]\"dev_menu_control.gd\"[/gd]. If your button's name is [gd]be_happy[/gd], then you need to name your function [gd]func debug_be_happy():[/gd], this way dev-menu will automatically assign a signal to this function and it'll work
+	- Adding your own tab:
+		There's not so magic in this one, really. All tabs are just [gd]Control[/gd] nodes that are parented to [gd]\"tabs\"[/gd] node. It's just simple, dumb work with Godot's UI elements. Put your functions anywhere, just slap it with a duct tape. You can put all your initialization function calls at [gd]initialize()[/gd] function"
+info_rus = "Меню разработчика, в котором есть тонна функций, которые ранее были только частью консольных команд. Помимо этого, предоставляет очень удобные инструменты для изменения конфигов оружия или NPC на лету, делая балансировку немного более лёгкой, чем когда-либо прежде. Но конечно же, внутри [gd]\"dev_menu_control.gd\"[/gd] находится настоящий ад. Вся эта штука была написана за 12-часовой марафон без мысли о расширяемости. Это просто один, огромный, монолитный скрипт, который выглядит как ад, читается как ад и, по факту, является настоящим адом. Нет, это не значит, что я попытаюсь это изменить :)
+
+//img:dev_menu/example0.png
+
+[c]Вкладки / Функциональность[/c]
+[c]change_location[/c] - Список локаций, на которые ты можешь переключиться. Текущая локация подсвечена зелёным.
+[c]debug_tools[/c] - Кучка инструментов отладки, которые ты можешь использовать. Большинство из них имеют понятные названия, так что у тебя не должно быть проблем с навигацией.
+[c]set_player_weapon[/c] - Список всего оружия игрока, который также включает все медицинские/наркотические средства, потому что они технически являются оружием в этой игре.
+[c]npc_spawn[/c] - Список всех классов NPC, которых ты потенциально можешь заспавнить с возможностью лёгкого изменения их конфига.
+[c]prop_spawn[/c] - Список всех моделей [gd]LocationProp[/gd], которые ты можешь заспавнить.
+[c]faction_control[/c] - Менеджер фракций, который позволяет тебе редактировать отношения между текущими существующими фракциями.
+[c]player_data_control[/c] - Меню, которое позволяет тебе изменять определённые параметры игрока.
+[c]weapon_data_override[/c] - Меню, которое позволяет тебе редактировать значения ЛЮБОГО оружия игрока, позволяя тебе временно переопределять его ради более быстрых проверок баланса. Пожалуйста, имей в виду, [r]если у тебя есть какое-либо оружие при себе - отредактированные значения не применятся к ним, ПОКА ты не выбросишь их и не поднимешь снова.[/r] Нажатие кнопки \"Save Resource\" позволяет тебе сохранить отредактированные значения навсегда, иначе они будут сброшены после перезапуска игры.
+[c]npc_weapon_data_override[/c] - То же, что и [c]weapon_data_override[/c], но для конфигов оружия NPC.
+[c]npc_data_override[/c] - То же, что и [c]weapon_data_override[/c], но для конфигов данных персонажа NPC.
+[c]armor_data_override[/c] - То же, что и [c]weapon_data_override[/c], но для конфигов брони игрока (которые являются предметами снаряжения).
+[c]perk_data_override[/c] - То же, что и [c]weapon_data_override[/c], но для конфигов перков игрока.
+[c]music[/c] - То же, что и... ничего на самом деле. Просто бумбокс в твоём меню, играющий музыку из этой игры. Содержит список всей музыки в этой игре.
+[c]location_sound[/c] - Список всех доступных звуков локаций.
+[c]voicelines[/c] - Список всех доступных голосовых линий.
+[c]soundscape[/c] - Список всех доступных звуковых ландшафтов. Будь осторожен, если ты переключишь звуковой ландшафт через это меню - он переопределит его, и узлы звуковых ландшафтов не будут применять свои значения, пока ты не нажмёшь \"Stop Soundscape\".
+[c]difficulty[/c] - Меню редактора для изменения значений сложности для лучшего контроля балансировки.
+[c]environment[/c] - Меню редактирования окружения, которое позволяет тебе изменять параметры текущего [gd]Environment[/gd] в реальном времени. Работает лучше всего с локациями, которые не используют lightmaps, потому что изменения можно заметить сразу же.
+[c]color_grading[/c] - Список всех доступных LUTs цветокоррекции, на которые ты можешь переключиться.
+[c]achievements[/c] - Список всех достижений в этой игре, которые ты можешь блокировать/разблокировать в зависимости от статуса checkboxes.
+[c]loadout_item_unlock[/c] - Список всех предметов снаряжения, которые ты можешь блокировать/разблокировать в зависимости от статуса checkboxes.
+[c]values[/c] - Список всех глобальных значений [gd]Values[/gd], которые ты можешь просматривать/редактировать по своему желанию.
+[c]globals[/c] - Список всех глобальных значений [gd]Globals[/gd], которые ты можешь просматривать/редактировать по своему желанию.
+[c]loadout_selection[/c] - Меню выбора снаряжения, которое позволяет тебе выбрать любой предмет снаряжения и назначить его себе
+
+[c]Способы добавить свои собственные штуки[/c]
+Итак, ты решил добавить что-то в эту штуку. О боже, о бедная душа... Какие ужасы тебе предстоит увидеть... В любом случае, есть варианты. Тебе практически нужны две вещи:
+	1. [gd]\"res://modules/dev_menu/src/ui/dev_menu_control.gd\"[/gd] - Открой этот ужасный скрипт
+	2. [gd]\"res://modules/dev_menu/assets/ui_scenes/dev_menu.tscn\"[/gd] - Открой эту сцену
+
+Отсюда у тебя есть несколько вариантов:
+	- Добавление своего собственного инструмента отладки:
+		1. Найди узел [gd]\"tabs/debug_tools/scroll/vbox\"[/gd]
+		2. Там есть несколько сеток, которые относятся к разным категориям, выбери свой яд и создай новую кнопку в одной.
+		3. Создай новую функцию в [gd]\"dev_menu_control.gd\"[/gd]. Если твоя кнопка называется [gd]be_happy[/gd], тогда тебе нужно назвать свою функцию [gd]func debug_be_happy():[/gd], таким образом dev-menu automatically назначит сигнал на эту функцию, и она будет работать
+	- Добавление своей собственной вкладки:
+		Здесь не так много магии, честно. Все вкладки - это просто узлы [gd]Control[/gd], которые являются дочерними к узлу [gd]\"tabs\"[/gd]. Это просто простая, тупая работа с UI элементами Godot. Помести свои функции куда угодно, просто приклей их скотчем. Ты можешь поместить все свои вызовы функций инициализации в функцию [gd]initialize()[/gd]"
+edit_time = 1.76123e+09

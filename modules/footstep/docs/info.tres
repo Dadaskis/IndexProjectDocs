@@ -1,0 +1,49 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Footsteps module. Used by player and NPCs. Manages playing appropriate footstep sounds based on surface and movement state.
+
+[c]Usage example[/c]
+[gd]
+# Initialization
+footstep = Footstep.new()
+footstep.volume_2D = -30.0
+footstep.sound_2D = true # Whether the sound is played with 3D positioning or not
+footstep.has_cloth = true 
+footstep.has_equipment = true
+footstep.has_shoes = true
+footstep.delay = 0.001
+footstep.initialize()
+
+# Usage
+footstep.play()
+
+# Additional methods
+footstep.play_equipment_sound()
+footstep.on_landing()
+[/gd]"
+info_rus = "Модуль Footsteps. Используется игроком и NPC. Управляет воспроизведением соответствующих звуков шагов в зависимости от поверхности и состояния движения.
+
+[c]Пример использования[/c]
+[gd]
+# Инициализация
+footstep = Footstep.new()
+footstep.volume_2D = -30.0
+footstep.sound_2D = true # Воспроизводится ли звук с 3D позиционированием или нет
+footstep.has_cloth = true 
+footstep.has_equipment = true
+footstep.has_shoes = true
+footstep.delay = 0.001
+footstep.initialize()
+
+# Использование
+footstep.play()
+
+# Дополнительные методы
+footstep.play_equipment_sound()
+footstep.on_landing()
+[/gd]"
+edit_time = 1.76113e+09

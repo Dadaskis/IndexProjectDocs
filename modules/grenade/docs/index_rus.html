@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - grenade
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: grenade
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Узел Grenade для создания гранат. Для дополнительных конфигураций смотрите папки в <code class="gdscript">
+								"res://modules/grenade/assets/grenades/"
+							</code>
+							<br>
+							<br>
+							<code>
+								Пример использования"
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var loc_base = LocationBaseScene.get_scene()<br>
+								var grenade = Grenade.new()<br>
+								loc_base.add_child(grenade)<br>
+								grenade.character_owner = player.character<br>
+								grenade.add_collision_exception_with(player)  # Предотвратить столкновение с собой<br>
+								grenade.initialize("EG-5")<br>
+							</code>
+							<br>
+							<br>
+						</p>
+						<h2>
+							Создание своей собственной гранаты
+						</h2>
+						<p>
+							<br>
+							Все гранаты хранятся в <code class="gdscript">
+								"res://modules/grenade/assets/grenades/"
+							</code>
+							, каждая папка представляет собой уникальную гранату со следующей структурой файлов:<br>
+							<code class="gdscript">
+								<br>
+								├── logic.tres<br>
+								└── model.glb<br>
+							</code>
+							<br>
+							- <code class="gdscript">
+								"logic.tres"
+							</code>
+							- это практически любой ресурс, расширяющий функциональность <code class="gdscript">
+								BasicGrenadeLogic
+							</code>
+							(любая "логика гранаты"). Поскольку это файл ресурса - вы просто настраиваете его свойства через экспортируемые переменные<br>
+							- <code class="gdscript">
+								"model.glb"
+							</code>
+							- это модель гранаты, которая будет использоваться для визуализации<br>
+							Дополнительные файлы, размещённые в папке, не really имеют такого значения, это могут быть просто материалы и т.д.<br>
+							<br>
+						</p>
+						<h2>
+							Создание своей собственной логики
+						</h2>
+						<p>
+							<br>
+							<code>
+								Шаблон логики
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Базовый шаблон логики гранаты<br>
+								extends BasicGrenadeLogic<br>
+								class_name ExampleGrenadeLogic<br>
+								<br>
+								# Создайте параметры с помощью экспортируемых переменных<br>
+								export(float) var parameter: = 5.0<br>
+								<br>
+								# Напишите своё собственное поведение взрыва здесь<br>
+								func explode():<br>
+								&emsp;pass<br>
+							</code>
+							<br>
+							Напишите свой код и сохраните его в <code class="gdscript">
+								"res://modules/grenade/src/logic/"
+							</code>
+							, вы можете приглядеться к существующей логике, чтобы увидеть, что они делают "под капотом". В основном то, что вы можете изменить, это поведение взрыва. После этого вы просто можете создать свою собственную гранату, используя ваш класс для <code class="gdscript">
+								"logic.tres"
+							</code>
+							instead.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/grenade_models.html">
+								GrenadeModels
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/grenade.html">
+								Grenade
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/basic_logic.html">
+								BasicGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/frag_logic.html">
+								FragGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/flash_logic.html">
+								FlashGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/gas_logic.html">
+								GasGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/teleporer_logic.html">
+								TeleporterGrenadeLogic
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/grenade_logic_base.html">
+								GrenadeLogicBase
+							</a>
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

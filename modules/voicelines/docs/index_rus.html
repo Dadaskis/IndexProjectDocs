@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - voicelines
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: voicelines
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Была мечта у меня сделать игру с голосовыми репликами, пока я не начал с ними работать, и О БОЖЕ, как же ужасно с ними работать. Я бы лучше сделал, чтобы персонажи бубнили какую-то дичь, вместо того чтобы реально разговаривать. Бубнёж тоже интернационален. Лениво? Пошёл ты, бубнёж рулит. Так или иначе, голосовые реплики так глубоко вплетены в эту кодовую базу, что проще уже их оставить. В смысле... Что если ТЫ, бедная душа, решил, что этой игре по какой-то причине нужны голоса? Мы все и так слышим голоса в своей голове, но ты решил, что излучать голоса с помощью этой игры будет ещё лучшей идеей? Отлично. Что ж, смотри, тебе на этой странице на самом деле нечего делать... Кроме некоторых фанковых вещей...<br>
+							<br>
+							<code class="gdscript">
+								"res://modules/voicelines/assets/samples/"
+							</code>
+							содержит все психотические голоса. Их удобнее организовывать по папкам, так ты можешь... организовывать дерьмо, понимаешь? Гораздо приятнее делать что-то вроде <code class="gdscript">
+								Voicelines.play_voiceline("minc_generic/say_fight0.mp3")
+							</code>
+							, чем <code class="gdscript">
+								Voicelines.play_voiceline("minc_generic_say_fight0.mp3")
+							</code>
+							, имея дело с папкой, полной мусора.<br>
+							<code class="gdscript">
+								"res://modules/voicelines/assets/samples_voicemess/"
+							</code>
+							содержит бубнящие голоса, которые работают практически так же.<br>
+							<br>
+							<code>
+								Пример использования
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var voice = Voicelines.play_voiceline("minc_generic/say_fight0.mp3")<br>
+								var mumble = Voicelines.play_voicemess("men0.ogg")<br>
+								var char_voice = Voicelines.play_voiceline_character(<br>
+								&emsp;"minc_generic/say_research0.mp3", character, 20.0, -10.0)<br>
+							</code>
+							<br>
+							<br>
+							Для получения дополнительной информации:<br>
+							&emsp;- Проверь документацию <code class="gdscript">
+								Voicelines
+							</code>
+							<br>
+							&emsp;- Перечитай.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/voicelines.html">
+								Voicelines
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

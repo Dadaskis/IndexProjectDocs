@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_base_combiner
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_base_combiner
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+						</p>
+						<h4 style="width: 60%">
+							It is not recommended to use this feature, because it is incomplete, untested, and is confirmed to have issues. Its development was dropped because it wasn't plausible enough to use. Overall preference was given to a bunch of smaller locations that are optimized for loading screens instead.<br>
+							<br>
+							<code class="red-marking">
+								<br>
+								It is worth mentioning that Godot literally breaks when locations get too big. One of the flaws of this system's idea is related to this fact. Experimental m_day1_x failed due to overall amount of questionable behaviors/bugs and unexplained crashes that happened during playtesting of three players that tested it.<br>
+								<br>
+								Please, do not make your locations too big in terms of overall size or overall amount of nodes to avoid trouble.<br>
+								<br>
+							</code>
+							<br>
+						</h4>
+						<p>
+							<br>
+							<br>
+							The Location Base Combiner is a system that merges multiple locations into a single "continuous" location. It handles level stitching, environment setup, and runtime management of combined locations. Its main purpose is about lowering loading screens between locations to the minimum, while wasting more RAM and VRAM.<br>
+							<br>
+						</p>
+						<h2>
+							How to use it in a location
+						</h2>
+						<p>
+							<br>
+							- Create a new location for this one, or use it in an existing one, up to you<br>
+							- Create a <code class="gdscript">
+								LocationBaseCombiner
+							</code>
+							node<br>
+							<img src="../../../_guide/.images/location_base_combiner/use0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								- Add locations you want to combine into list<br>
+								<img src="../../../_guide/.images/location_base_combiner/use1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									- Click on <code>
+										Update
+									</code>
+									button<br>
+									<code class="red-marking">
+										This is a destructive operation. It will remove all nodes in the scene and replace it with its own setup. You were warned.
+									</code>
+									<br>
+									<img src="../../../_guide/.images/location_base_combiner/use2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										- Witness combined locations :)<br>
+										<img src="../../../_guide/.images/location_base_combiner/use3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											<br>
+										</p>
+										<h2>
+											How does it really work?
+										</h2>
+										<p>
+											<br>
+											It basically adds all mentioned locations into one. It is rewriting some of the location events to resolve potential conflicts, to get this kind of information <code class="gdscript">
+												LOC_UNIQUE_VARS
+											</code>
+											constant is used in the nodes that are processed in <code class="gdscript">
+												LocationBaseCombinerPart
+											</code>
+											. <code class="red-marking">
+												It is not removing loading screens completely
+											</code>
+											, but <code>
+												makes them much faster
+											</code>
+											. Sadly it happens <code class="red-marking">
+												in exchange for the initial loading screen being longer
+											</code>
+											. Practically, it allows switching between "combined" locations faster, and if you are switching to a location that isn't combined into this one - it'll change the entire location fully.
+										</p>
+										<h3>
+											General Information
+										</h3>
+										<h4>
+											Root directories list
+										</h4>
+										<p>
+											docs, src
+										</p>
+										<h4>
+											Nodes
+										</h4>
+										<p>
+											<a class="a_simple" href="./scripts/location_base_combiner_part.html">
+												LocationBaseCombinerPart
+											</a>
+											<br>
+											<a class="a_simple" href="./scripts/location_base_combiner.html">
+												LocationBaseCombiner
+											</a>
+										</p>
+										<h4>
+											Classes
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Resources
+										</h4>
+										<p>
+											None
+										</p>
+										<h4>
+											Other Scripts
+										</h4>
+										<p>
+											None
+										</p>
+									</div>
+								</div>
+							</center>
+							<script src="../../../_guide/code_blocks.js">
+							</script>
+						</body>
+					</html>

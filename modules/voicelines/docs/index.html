@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - voicelines
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: voicelines
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							I had a dream of making a game with voicelines until I started working with them and OH GOD how terrible it is to work with them. I would rather have characters mumbling shit instead of them actually speak. Mumbling shit is international too. Lazy? Screw you, mumbling for the win. Either way, voicelines are so deeply tied to this codebase to the point when it would make more sense to keep them. I mean... What if YOU, a poor soul, decided that this game needs voices for some reason? We all are hearing voices in our mind, but you decided that emitting voices by using this game would be even nicer idea? Great. Well, look, you don't really have much to do on this page... Except for some fancy things...<br>
+							<br>
+							<code class="gdscript">
+								"res://modules/voicelines/assets/samples/"
+							</code>
+							contains all the psychotic voices. It's nicer to organize them by folders, so you can... organize shit, you know? It's nicer to do something like <code class="gdscript">
+								Voicelines.play_voiceline("minc_generic/say_fight0.mp3")
+							</code>
+							rather than <code class="gdscript">
+								Voicelines.play_voiceline("minc_generic_say_fight0.mp3")
+							</code>
+							while dealing with a folder full of trash.<br>
+							<code class="gdscript">
+								"res://modules/voicelines/assets/samples_voicemess/"
+							</code>
+							has mumbling voices, which work pretty much the same way.<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								var voice = Voicelines.play_voiceline("minc_generic/say_fight0.mp3")<br>
+								var mumble = Voicelines.play_voicemess("men0.ogg")<br>
+								var char_voice = Voicelines.play_voiceline_character(<br>
+								&emsp;"minc_generic/say_research0.mp3", character, 20.0, -10.0)<br>
+							</code>
+							<br>
+							<br>
+							For more information:<br>
+							&emsp;- Check docs of <code class="gdscript">
+								Voicelines
+							</code>
+							<br>
+							&emsp;- Reread.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/voicelines.html">
+								Voicelines
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

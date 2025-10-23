@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Sometimes I feel like I would be a much happier person if I'd have possibility to bend the plane of space and time. Like Max Payne does it. A dude is taking some kind of special painkillers that give him a whole damn possibility to hack the time... But in this codebase, the only thing we can hack is our mind. I mean, not really our mind. We can write less code, alright? We can still write less, we still didn't go too far beyond the point of no return. We can manage the spaghetti... like this module does.
+
+[gd]TimeScaleManager[/gd] gives you a golden opportunity to control the time scale without worrying about other influences. You can register one influence, change it, it will all apply additively, making it possible to control time like you are a fucking Doctor Strange or something like it.
+
+[c]Usage example[/c]
+[gd]
+var data: = TimeScaleManager.register_data()
+data.scale = 0.5
+data.audio_scale = 0.5
+data.removable = false # Won't be removed on location change... maybe.
+
+TimeScaleManager.remove_data(data)
+[/gd]"
+info_rus = "Иногда мне кажется, что я был бы гораздо счастливее, если бы у меня была возможность искривлять плоскость пространства и времени. Как это делает Макс Пейн. Чувак принимает какие-то особые обезболивающие, которые дают ему чертову возможность взламывать время... Но в этой кодовой базе единственное, что мы можем взломать - это наш разум. В смысле, не совсем наш разум. Мы можем писать меньше кода, окей? Мы всё ещё можем писать меньше, мы ещё не зашли слишком далеко за точку невозврата. Мы можем управлять спагетти... как это делает данный модуль.
+
+[gd]TimeScaleManager[/gd] даёт тебе золотую возможность управлять масштабом времени, не беспокоясь о других влияниях. Ты можешь зарегистрировать одно влияние, изменить его, всё будет применяться аддитивно, что позволит тебе управлять временем, будто ты чертов Доктор Стрэндж или типа того.
+
+[c]Пример использования[/c]
+[gd]
+var data: = TimeScaleManager.register_data()
+data.scale = 0.5
+data.audio_scale = 0.5
+data.removable = false # Не будет удалено при смене локации... возможно.
+
+TimeScaleManager.remove_data(data)
+[/gd]"
+edit_time = 1.76123e+09

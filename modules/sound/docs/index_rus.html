@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - sound
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: sound
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Это потрясающий модуль для работы со звуком. Ну, то есть он не делает ничего особенного конкретного, и в основном всё сводится к той хрени, что творится внутри <code class="gdscript">
+								Sound
+							</code>
+							, но знаешь что...<br>
+							<br>
+							<code>
+								Что делает Sound?
+							</code>
+							<br>
+							Это по сути синглтон для управления звуком в этой игре. Ну знаешь, громкости, какие-то SFX. Вот список:<br>
+							<code class="gdscript">
+								<br>
+								Управление типами звуков:<br>
+								&emsp;- Классифицирует звуки по типам (окружение, музыка, голосовые реплики и т.д.)<br>
+								&emsp;- Обрабатывает различное поведение воспроизведения для каждого типа<br>
+								&emsp;- Автоматическая маршрутизация по шинам на основе типа звука<br>
+								<br>
+								Пространственный звук:<br>
+								&emsp;- Поддерживает воспроизведение как 2D, так и 3D звуков<br>
+								&emsp;- Обнаружение препятствий для окклюзии звука (закомментировано, потому что было чертовски проклято)<br>
+								<br>
+								Эффекты окружения:<br>
+								&emsp;- Динамическая система реверберации, которая анализирует окружение (в основном не используется?)<br>
+								&emsp;&emsp;- Ручная конфигурация в soundscapes может быть более предпочтительной<br>
+								&emsp;- Автоматическая классификация окружения (коридор, маленькая комната, улица и т.д.)<br>
+								&emsp;- Плавные переходы между различными акустическими средами<br>
+								&emsp;- Специальная обработка подводного звука с фильтрами<br>
+								<br>
+								Воспроизведение звуков:<br>
+								&emsp;- Создание и воспроизведение звуков с различными параметрами<br>
+								&emsp;- Модуляция высоты тона для разнообразных звуковых эффектов<br>
+								&emsp;- Автоматическая очистка завершённых звуков<br>
+								&emsp;- Плавные эффекты fade-in/out<br>
+								&emsp;- Всё в коде<br>
+								<br>
+								Управление громкостью:<br>
+								&emsp;- Индивидуальный контроль громкости для различных категорий звуков<br>
+								&emsp;- Общий контроль master-громкости<br>
+								&emsp;- Уменьшение громкости музыки при воспроизведении голосовых реплик<br>
+								&emsp;- Громкости специальных эффектов (вспышка, под водой)<br>
+								<br>
+								Интеграция с событиями:<br>
+								&emsp;- Интеграция с системой чекпоинтов для сохранения состояния звука<br>
+								<br>
+								Специальные эффекты:<br>
+								&emsp;- Аудио эффекты вспышки с временным подавлением<br>
+								&emsp;- Фильтрация подводного звука<br>
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								<br>
+								src<br>
+								├── helper<br>
+								│   └── remove_sound_on_finish.gd<br>
+								├── nodes<br>
+								│   ├── location_sound_2D.gd<br>
+								│   └── location_sound.gd<br>
+								├── reverb_system.gd<br>
+								└── sound.gd<br>
+							</code>
+							<br>
+							<br>
+							<code class="gdscript">
+								remove_sound_on_finish.gd
+							</code>
+							- Простой скрипт ноды-помощника для удаления звука, когда он закончил воспроизведение<br>
+							<code class="gdscript">
+								location_sound_2D.gd
+							</code>
+							и <code class="gdscript">
+								location_sound.gd
+							</code>
+							- Ноды, которые расширяют функциональность <code class="gdscript">
+								AudioStreamPlayer
+							</code>
+							и <code class="gdscript">
+								AudioStreamPlayer3D
+							</code>
+							, чтобы включить дополнительную функциональность, нужной по какой-то причине.<br>
+							<code class="gdscript">
+								reverb_system.gd
+							</code>
+							- Проклятая система автоматического обнаружения реверберации, она очень странная и никогда не работала так нормально, по моему мнению.<br>
+							<code class="gdscript">
+								sound.gd
+							</code>
+							- Синглтон, который сделал весь этот модуль реальным, его обязанность связана с контролем SFX в коде, что включает управление шинами и быстрое создание новых звуков.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/sound.html">
+								Sound
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/location_sound.html">
+								LocationSound
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/location_sound_2D.html">
+								LocationSound2D
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/remove_sound_on_finish.html">
+								remove_sound_on_finish
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/reverb_system.html">
+								ReverbSystem
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

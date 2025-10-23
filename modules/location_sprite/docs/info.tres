@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationSprite[/gd] is a node useful to create additional lighting effects.
+
+//img:location_sprite/example0.png
+
+[r]\"Glow\" effect allows to get smoother look, however it comes at the cost of additional CPU usage for raycasts. Excessive use of sprites with \"Glow\" enabled might lead to lower performance. Please, use sprites with this property cautiously.[/r]"
+info_rus = "[gd]LocationSprite[/gd] - это узел, полезный для создания дополнительных эффектов освещения.
+
+//img:location_sprite/example0.png
+
+[r]Эффект \"Glow\" позволяет получить более гладкий вид, однако это происходит за счёт дополнительного использования CPU для рейкастов. Чрезмерное использование спрайтов с включённым \"Glow\" может привести к снижению производительности. Пожалуйста, используй спрайты с этим свойством осторожно.[/r]"
+edit_time = 1.76123e+09

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - characters_special_ability
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: characters_special_ability
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							A module for special abilities made for objects working with <code class="gdscript">
+								Character
+							</code>
+							or for those derived from it. Usually require nothing, but the character object to inialize and, as it follows, it works as pretty universal tool for cases of "activating special abilities", just make sure to run the ability first.<br>
+							<br>
+							These are usually used for so-called "Special Devices" that can be used either by the player themselves or by the NPCs.<br>
+							<br>
+							<code>
+								Usage Example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Reference to our character<br>
+								var character: Character<br>
+								# Reference to special ability<br>
+								var spec_ability: CharacterSpecialAbility<br>
+								<br>
+								# Sets special ability by using its name<br>
+								func set_special_ability(ability_name: String):<br>
+								&emsp;# Get special ability instance...<br>
+								&emsp;spec_ability = CharacterSpecialAbility.get_ability_instance(ability_name)<br>
+								&emsp;# ... if it exists...<br>
+								&emsp;if spec_ability:<br>
+								&emsp;&emsp;# ... initialize it<br>
+								&emsp;&emsp;spec_ability.initialize(character)<br>
+								<br>
+								# Process special ability each render/physics frame<br>
+								func process_special_ability(delta):<br>
+								&emsp;# If no special ability exists - exit function<br>
+								&emsp;if not spec_ability:<br>
+								&emsp;&emsp;return<br>
+								&emsp;<br>
+								&emsp;# Update ability state<br>
+								&emsp;spec_ability.update(delta)<br>
+								&emsp;<br>
+								&emsp;# Handle ability activation input<br>
+								&emsp;if Input.is_action_just_pressed("special_ability"):<br>
+								&emsp;&emsp;# Do not do anything if ability is still on cooldown<br>
+								&emsp;&emsp;if spec_ability.is_cooldown():<br>
+								&emsp;&emsp;&emsp;return<br>
+								&emsp;&emsp;# Otherwise - run it<br>
+								&emsp;&emsp;spec_ability.run_ability()<br>
+							</code>
+							<br>
+							<br>
+							<br>
+							API of this entire thing makes it easy to make it usable by either NPCs or the player. However, you need to realize that API is still limited/simplified. Basically, the only things you can do with your special abilities are initializing, updating and "running" them.<br>
+							<br>
+							<code>
+								Template for your special ability
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								# Description for your fancy special ability here.<br>
+								<br>
+								extends CharacterSpecialAbility<br>
+								# Extending this class gives you access to following variables:<br>
+								# character_owner - Character owning this ability<br>
+								# cooldown - Cooldown<br>
+								# cooldown_timer - How much time left before cooldown is depleted<br>
+								# ability_name - Ability's name<br>
+								#<br>
+								# Therefore you can use it for your needs, for example:<br>
+								# Overriding logic for player by using "character_owner.is_player"<br>
+								<br>
+								# Runs the special ability, called once upon a time by either player/NPC/etc.<br>
+								func on_run_ability():<br>
+								&emsp;pass<br>
+								<br>
+								# Update logic of this special ability.<br>
+								func on_update(delta: float):<br>
+								&emsp;pass<br>
+								<br>
+								# Initialization of this special ability. Happens only once, when assigned to a character.<br>
+								func on_initialize():<br>
+								&emsp;pass<br>
+							</code>
+							<br>
+							<br>
+							<br>
+							All special ability scripts are stored at <code class="gdscript">
+								"res://modules/characters_special_ability/src/abilities/"
+							</code>
+							, if you want them to be valid - store them there. As it follows, ability's name is defined in a file name of the script, like <code class="gdscript">
+								"defense_field.gd"
+							</code>
+							creates a special ability named <code>
+								defense_field
+							</code>
+							that later can be instanced with <code class="gdscript">
+								CharacterSpecialAbility.get_ability_instance("defense_field")
+							</code>
+							.<br>
+							<br>
+							For more use examples, check source code of other existing special abilities, that might help you to get the logic better.
+						</p>
+						<h3>
+							General Information
+						</h3>
+						<h4>
+							Root directories list
+						</h4>
+						<p>
+							assets, docs, src
+						</p>
+						<h4>
+							Nodes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/heal_support.html">
+								heal_support
+							</a>
+						</p>
+						<h4>
+							Classes
+						</h4>
+						<p>
+							<a class="a_simple" href="./scripts/teleport.html">
+								teleport
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/defense_field.html">
+								defense_field
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/invinsibility.html">
+								invinsibility
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/grenade_madness.html">
+								grenade_madness
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/speed.html">
+								speed
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/heal_support.html">
+								heal_support
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/flashbang.html">
+								flashbang
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/killbound.html">
+								killbound
+							</a>
+							<br>
+							<a class="a_simple" href="./scripts/character_special_ability.html">
+								CharacterSpecialAbility
+							</a>
+						</p>
+						<h4>
+							Resources
+						</h4>
+						<p>
+							None
+						</p>
+						<h4>
+							Other Scripts
+						</h4>
+						<p>
+							None
+						</p>
+					</div>
+				</div>
+			</center>
+			<script src="../../../_guide/code_blocks.js">
+			</script>
+		</body>
+	</html>

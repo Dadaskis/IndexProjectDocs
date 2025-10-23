@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_logic
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_logic
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 23, 2025 at 14:33 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Итак. Этот модуль. Это просто какой-то код, верно?<br>
+							<br>
+							<code class="gdscript">
+								<br>
+								.<br>
+								├── autoload<br>
+								│   ├── base_scene.gd<br>
+								│   ├── light_queue.gd<br>
+								│   └── location_events.gd<br>
+								├── base.gd<br>
+								├── button_trigger_cube.gd<br>
+								├── button_trigger.gd<br>
+								├── button_usable.gd<br>
+								├── exit_trigger.gd<br>
+								├── logic_base.gd<br>
+								├── shader_compile<br>
+								│   └── meshes_node.gd<br>
+								├── trigger_cube.gd<br>
+								└── trigger.gd<br>
+							</code>
+							<br>
+							<br>
+							Я имею в виду, посмотри, это в основном просто GDScript, ты понимаешь, о чём я? Я опишу этот модуль, рассказав тебе, что делает каждый файл в "хронологическом" порядке важности.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							base.gd - LocationBase
+						</h4>
+						<p>
+							<br>
+							Отец всех локаций. Особый узел. Очень особенный. Это также плохо написанный god class, НО ЭЙЕЙ давай не будем так негативны насчёт этого. Все локации должны использовать <code class="gdscript">
+								LocationBase
+							</code>
+							, потому что я так решил. Реально, так легче контролировать инициализацию любой локации. Легче добавить некоторые настройки. Легко настраивать. Это было легко поддерживать тоже, когда это не было огромной кучей мусора. Честно говоря, я бы хотел рассказать тебе больше об этой штуке, но тебе лучше заглянуть в исходный код самостоятельно.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							autoload/location_events.gd - LocationEvents
+						</h4>
+						<p>
+							<br>
+							Особый синглтон, который является основой всей игровой логики локаций. Несмотря на его маленький размер исходного кода, он исключительно важен для функционирования всей этой игры.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							logic_base.gd - LocationLogicBase
+						</h4>
+						<p>
+							<br>
+							Базовый скрипт логики локации, который ты можешь использовать для определения скрипта логики локации. <code class="gdscript">
+								"res://locations/scenes/logic/"
+							</code>
+							содержит все скрипты логики, и они не используются anymore, потому что ST делают работу лучше.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							autoload/base_scene.gd - LocationBaseScene
+						</h4>
+						<p>
+							<br>
+							Маленький забавный синглтон <code class="gdscript">
+								LocationBaseScene
+							</code>
+							, который позволяет тебе получить твою текущую <code class="gdscript">
+								LocationBase
+							</code>
+							, выполнив <code class="gdscript">
+								LocationBaseScene.get_scene()
+							</code>
+							. Да. Вот почему он существует. Единственная причина.<br>
+							<br>
+						</p>
+						<h4 style="width: 60%">
+							button_trigger_cube.gd - LocationButtonTriggerCube
+						</h4>
+						<p>
+							<br>
+							<img src="../../../_guide/.images/location_logic/button_cube0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								Кнопка, которую игрок может использовать. Это куб, который ты можешь масштабировать и помещать куда угодно.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								button_trigger.gd - LocationButtonTrigger
+							</h4>
+							<p>
+								<br>
+								<img src="../../../_guide/.images/location_logic/button_cube0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									Кнопка, которую игрок может использовать. В отличие от кубической версии, тебе нужно определить начальную и конечную точки для формирования триггера. Это более старая версия, так что её не рекомендуется использовать.<br>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									trigger_cube.gd - LocationTriggerCube
+								</h4>
+								<p>
+									<br>
+									<img src="../../../_guide/.images/location_logic/trigger_cube0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Триггер, в который игрок может войти/выйти. Это куб, который ты можешь масштабировать и помещать куда угодно. Он испускает событие локации при входе/выходе.<br>
+										<br>
+									</p>
+									<h4 style="width: 60%">
+										trigger.gd - LocationTrigger
+									</h4>
+									<p>
+										<br>
+										<img src="../../../_guide/.images/location_logic/trigger0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											То же, что и <code class="gdscript">
+												LocationTriggerCube
+											</code>
+											, за исключением того, что тебе нужно определить начальную/конечную точки. Опять же, это старше, так что не really рекомендуется для использования.<br>
+											<br>
+										</p>
+										<h4 style="width: 60%">
+											light_queue.gd -  LocationLightQueue
+										</h4>
+										<p>
+											<br>
+											Синглтон, который работает с оптимизацией источников света, скрывая их, если они слишком далеко.<br>
+											<br>
+										</p>
+										<h4 style="width: 60%">
+											button_usable.gd - LocationButtonTriggerUsable
+										</h4>
+										<p>
+											<br>
+											Просто класс, расширенный от <code class="gdscript">
+												Usable
+											</code>
+											, который просто вызывает функцию <code class="gdscript">
+												use
+											</code>
+											в узле кнопки.<br>
+											<br>
+											<code class="red-marking">
+												Устарело: shader_compile/meshes_node.gd, exit_trigger.gd
+											</code>
+											<br>
+											<br>
+										</p>
+										<h4 style="width: 60%">
+											События локаций
+										</h4>
+										<p>
+											<br>
+											<img src="../../../_guide/.images/location_logic/location_events0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												События локаций просты. Какой-то код вызывает <code class="gdscript">
+													LocationEvents.location_event_occured("thingy")
+												</code>
+												, а затем другой код проверяет...<br>
+												<code class="gdscript">
+													<br>
+													LocationEvents.connect("on_location_event", self, "thingy_checker")<br>
+													# ...<br>
+													func thingy_checker(event_name, args):<br>
+													&emsp;if event_name == "thingy":<br>
+													&emsp;&emsp;Console.write_line("Вау, thingy произошло")<br>
+												</code>
+												<br>
+												Событие локации - это просто строковое сообщение, которое отправляется через этот "глобальный шин событий". Это позволяет легко создавать масштабируемые игровые системы, однако проектировать уровни с этим может быть сложно.
+											</p>
+											<h3>
+												General Information
+											</h3>
+											<h4>
+												Root directories list
+											</h4>
+											<p>
+												assets, docs, src
+											</p>
+											<h4>
+												Nodes
+											</h4>
+											<p>
+												<a class="a_simple" href="./scripts/light_queue.html">
+													light_queue
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/location_events.html">
+													LocationEvents
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/base_scene.html">
+													BaseScene
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/meshes_node.html">
+													meshes_node
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/base.html">
+													LocationBase
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/button_trigger_cube.html">
+													LocationButtonTriggerCube
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/trigger_cube.html">
+													LocationTriggerCube
+												</a>
+											</p>
+											<h4>
+												Classes
+											</h4>
+											<p>
+												<a class="a_simple" href="./scripts/exit_trigger.html">
+													ExitTrigger
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/logic_base.html">
+													LocationLogicBase
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/button_usable.html">
+													LocationButtonTriggerUsable
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/trigger.html">
+													LocationTrigger
+												</a>
+												<br>
+												<a class="a_simple" href="./scripts/button_trigger.html">
+													LocationButtonTrigger
+												</a>
+											</p>
+											<h4>
+												Resources
+											</h4>
+											<p>
+												None
+											</p>
+											<h4>
+												Other Scripts
+											</h4>
+											<p>
+												None
+											</p>
+										</div>
+									</div>
+								</center>
+								<script src="../../../_guide/code_blocks.js">
+								</script>
+							</body>
+						</html>

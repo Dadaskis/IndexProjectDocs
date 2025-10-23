@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - color_grading
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: color_grading
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							Color grading module that applies LUT texture color grading on screen. Has a bit of handy functions to make it work inside of editor as well.<br>
+							<br>
+							<code>
+								Usage example
+							</code>
+							<br>
+							<code class="gdscript">
+								<br>
+								ColorGrading.change_LUT("sin_city2")<br>
+							</code>
+							<br>
+							<br>
+							<img src="../../../_guide/.images/color_grading/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/color_grading/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Yeah, it's easy as that, there's nothing much to say about it, except... You might wonder: How exactly do you make your own color grading LUT?<br>
+									<br>
+									This is a clear LUT, that does not affect the colors:<br>
+									<img src="../../../_guide/.images/color_grading/clear_LUT.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Here's colder version of this LUT:<br>
+										<img src="../../../_guide/.images/color_grading/cold_LUT.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											Here's a version of this LUT that highlights reds:<br>
+											<img src="../../../_guide/.images/color_grading/red_LUT.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												<br>
+												As you can probably see, the main thing about LUT (Look-Up Texture) - it is just an array of colors that can be used by the game's renderer. Here's step-by-step guide how to make one yourself.<br>
+												<br>
+												Firstly, find a place you'd like to use as a "sample". I assume that you'd make color grading that *fits* specific place, but, either way, just find a place.<br>
+												<img src="../../../_guide/.images/color_grading/make0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													Open a developer menu (by using <code class="gdscript">
+														dev_menu
+													</code>
+													console command) and find "Take LUT Screenshot" button in debug tools<br>
+													<img src="../../../_guide/.images/color_grading/make1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+														After pressing this button, your game will temporarily freeze to take a screenshot with clear LUT sample on top. You need to locate <code class="gdscript">
+															"user://screenshots"
+														</code>
+														to find your new screenshot. You can do it as easily as pressing this button in editor...<br>
+														<img src="../../../_guide/.images/color_grading/make2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+															And then find your fancy new screenshot<br>
+															<img src="../../../_guide/.images/color_grading/make3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																<img src="../../../_guide/.images/color_grading/make4.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																	<br>
+																	This is just a screenshot, of course, but it has additional information in it, that is an identity LUT texture placed on the top-left corner of the image<br>
+																	<img src="../../../_guide/.images/color_grading/make5.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																		<br>
+																		This gives you possibility to take this screenshot and edit it to your will. However, you need to know: You can't use all operations of your preferred image editor, but only those that are affecting ALL colors in your image. Effects like brightness, contrast, saturation, curves, tonemapping, highlighing, etc. In GIMP, you can find such effects under "colors" tab here.<br>
+																		<img src="../../../_guide/.images/color_grading/make6.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																			<br>
+																			Let's assume that you've made all the changes related to your screenshot as you wanted, made it more cold for example<br>
+																			<img src="../../../_guide/.images/color_grading/make7.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																				<br>
+																				After this, you simply apply all effects, select this part of the image that is the LUT itself (notice how it changed its own colors too), and then you just copy it and create a new image based on your clipboard data<br>
+																				<img src="../../../_guide/.images/color_grading/make8.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																					<br>
+																					<img src="../../../_guide/.images/color_grading/make9.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																						<br>
+																						The last step in image editor is going to be about exporting your new LUT texture. All LUT textures are saved at <code class="gdscript">
+																							"res://modules/color_grading/assets/LUTs/"
+																						</code>
+																						as .PNG image files, and name of your image file sets the name of future color grading LUT as well<br>
+																						<img src="../../../_guide/.images/color_grading/make10.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																							<br>
+																							Sadly, there's one more step that is related editor importing settings. By default, .PNG textures have VRAM compression, repetition, and other unnecessary settings that will make LUT look even more broken that it actually is. To fix that, locate your LUT in Godot and double click it...<br>
+																							<img src="../../../_guide/.images/color_grading/make11.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																								<br>
+																								Change your import settings to the following...<br>
+																								Compression mode: Lossless<br>
+																								Repeat: Disabled<br>
+																								Filter: Disabled<br>
+																								Mipmaps: Disabled<br>
+																								Anisotropic: Disabled<br>
+																								sRGB: Disable<br>
+																								<img src="../../../_guide/.images/color_grading/make12.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																									<br>
+																									<br>
+																									And... after all this... You should be good to go. You can test your fancy new color grading in game using dev-menu:<br>
+																									<img src="../../../_guide/.images/color_grading/make13.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																										<br>
+																										<img src="../../../_guide/.images/color_grading/make14.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																											<br>
+																											<br>
+																											You can use color grading in multiple ways. Firstly, you can set color grading LUT in one of the <code class="gdscript">
+																												LocationBase
+																											</code>
+																											exports, which will set color grading for the entire location. This will also enable in-editor preview of your LUT. You can also use AssetHelper to assign a LUT too.<br>
+																											<img src="../../../_guide/.images/color_grading/make15.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																												<br>
+																												Or you can use <code class="gdscript">
+																													st_change_location_lut_texture
+																												</code>
+																												which will allow you to switch a LUT based on a location event.<br>
+																												<img src="../../../_guide/.images/color_grading/make16.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																													<br>
+																													<br>
+																													Have fun changing colors. Color grading doesn't have any performance cost, so you can use it as much as you wish. Players, of course, still have a possibility to disable color grading in its entirety, because... as it seems there are always players that love to disable it for whichever reason.
+																												</p>
+																												<h3>
+																													General Information
+																												</h3>
+																												<h4>
+																													Root directories list
+																												</h4>
+																												<p>
+																													assets, docs, src
+																												</p>
+																												<h4>
+																													Nodes
+																												</h4>
+																												<p>
+																													<a class="a_simple" href="./scripts/effect_game.html">
+																														effect_game
+																													</a>
+																													<br>
+																													<a class="a_simple" href="./scripts/color_grading.html">
+																														ColorGrading
+																													</a>
+																												</p>
+																												<h4>
+																													Classes
+																												</h4>
+																												<p>
+																													None
+																												</p>
+																												<h4>
+																													Resources
+																												</h4>
+																												<p>
+																													None
+																												</p>
+																												<h4>
+																													Other Scripts
+																												</h4>
+																												<p>
+																													None
+																												</p>
+																											</div>
+																										</div>
+																									</center>
+																									<script src="../../../_guide/code_blocks.js">
+																									</script>
+																								</body>
+																							</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - comics_renderer
+		</title>
+		<link rel="preload" as="image" href="../../../_guide/.images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../_guide/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../_guide/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: comics_renderer
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: October 22, 2025 at 10:46 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../_guide/.images/comics_renderer/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../_guide/.images/comics_renderer/example1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Итак... Короче говоря... Почему эта штука существует? Ну, я пытался работать с Blender и GIMP, получил неплохие результаты... а также жёсткую боль в заднице в следующие моменты:<br>
+									- Файлы .blend и .xcf занимают много места<br>
+									- Это болезненно медленно<br>
+									- Сложно редактировать позже<br>
+									- И так далее...<br>
+									<br>
+									Comics Renderer должен быть "easy-to-use" инструментом для рендеринга персонажей на любых локациях с ультимативной возможностью вернуться назад и отредактировать это позже. Эта игра имеет в себе комиксы, которые используют много "glitch" эффектов, которые потенциально превратят это в своего рода "glitch-art." Он очень быстрый, разделяет окружение/персонажа по отдельным слоям, управляет рендер-камерами и освещением, обрабатывает multi-pass рендеринг с "Shader Layers" и имеет множество опций для экспортируемых изображений.<br>
+									<br>
+									<code>
+										Алгоритм инструмента
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										- Настройка сцены<br>
+										&emsp;- Загрузка локации<br>
+										&emsp;- Размещение персонажей и пропсов<br>
+										&emsp;- Настройка освещения<br>
+										- Позирование персонажей<br>
+										&emsp;- Использование IK контролов для easy позиционирования конечностей<br>
+										&emsp;- Использование редактирования на уровне костей для fine tuning их трансформов<br>
+										&emsp;- Использование существующих анимаций, если нужно<br>
+										- Композиция камеры<br>
+										&emsp;- Позиционирование рендер-камеры<br>
+										&emsp;- Настройка Field of View<br>
+										&emsp;- Превью рендер-снимка<br>
+										- Рендеринг<br>
+										&emsp;- Конфигурация пост-обработочных эффектов Shader Layers<br>
+										&emsp;- Использование пресетов, если нужно<br>
+										&emsp;- Экспорт изображений (полное, только персонаж, только окружение)<br>
+									</code>
+									<br>
+									<br>
+									<code>
+										Иерархия скриптов
+									</code>
+									<br>
+									<code class="gdscript">
+										<br>
+										UI<br>
+										├── comics_renderer_UI_main.gd (Главный UI)<br>
+										│&emsp;# - Обрабатывает весь UI, который ты можешь видеть в Comics Renderer, просто соединяется со всеми этими узлами <br>
+										│&emsp;# и работает с ComicsRendererControl<br>
+										Помощники<br>
+										├── camera_control.gd (FPS-стиль Noclip камера)<br>
+										│&emsp;# - WASD, ПКМ для осмотра<br>
+										├── comics_renderer_hit_body.gd (Hit Body свойство, используемое для всех объектов в сцене)<br>
+										│&emsp;# - Имеет множество handy информации о выбранных объектах, полезно для настройки gizmos<br>
+										├── comic_scene_file.gd (Файл сохранения)<br>
+										│&emsp;# - Файл сохранения, который содержит всю информацию об этом рендере сцены<br>
+										├── shader_layers.gd (Shader Layers для обработки сырых рендеров)<br>
+										│&emsp;# - Комплексный массив shader слоёв, которые контролируют внешний вид финального рендера<br>
+										├── text_log.gd (Маленький скрипт для консольных логов)<br>
+										│&emsp;# - Заставляет консольные логи исчезать со временем<br>
+										Узлы<br>
+										├── bone.gd (Кость персонажа)<br>
+										│&emsp;# - Обеспечивает контроль кости персонажа, если персонаж имеет активный pose-mode<br>
+										├── character.gd (Персонаж)<br>
+										│&emsp;# - Персонаж, загружает модель, добавляет некоторые контролы для pose-mode, смены моделей и т.д.<br>
+										├── IK_control.gd (SkeletonIK для Ног/Рук)<br>
+										│&emsp;# - IK контроль для easier контроля ног/рук, maybe даже оружия<br>
+										├── loc_obj.gd (Часть локации)<br>
+										│&emsp;# - Вспомогательный скрипт, который позволяет редактировать меши локации (блокауты/пропсы/комбинированные)<br>
+										├── point_light.gd (OmniLight с любовью)<br>
+										│&emsp;# - Маленькая красивенькая OmniLight :)<br>
+										├── prop.gd (LocationProp с дополнительными шагами)<br>
+										│&emsp;# - Скрипт типа пропа, который позволяет тебе спавнить свои собственные пропсы для добавления в твои рендеры<br>
+										├── render_camera.gd (Камера для установки позиции рендеринга)<br>
+										│&emsp;# - Объект позиционирования рендер-камеры, который помогает настроить камеру для твоего будущего рендера<br>
+										├── spot_light.gd (SpotLight)<br>
+										│&emsp;# - Маленькая красивенькая SpotLight :)<br>
+										Ядро<br>
+										├── comics_renderer.gd (Главный скрипт рендеринга)<br>
+										│&emsp;# - Гигантский ебучий рендерер, вот всё, что я могу сказать, адская кухня происходит здесь<br>
+										│&emsp;# - Управляет "comics_renderer_control.gd" для взаимодействия с UI/рендерингом<br>
+										│&emsp;# &emsp;- И эта штука вызывает сам рендерер много<br>
+										│&emsp;# &emsp;- Это не хорошо, потому что это должно было следовать принципу "call down, signal up"...<br>
+										│&emsp;# &emsp;Но ох да...<br>
+										│&emsp;# - Контролирует "camera_control.gd" для добавления FPS-подобной noclip камеры с simple WASD+ПКМ управлениями<br>
+										│&emsp;# - Использует "render_camera.gd" для настройки позиционирования камеры<br>
+										│&emsp;# - Работает с "shader_layers.gd" для огромным количеством пост-обработки<br>
+										│&emsp;# - Интерфейсирует с "comics_renderer_UI_main.gd" для UI<br>
+										└── comics_renderer_control.gd (Клей между UI и рендерером)<br>
+										│&emsp;# - Специальный singleton класс, который помогает сделать намного легче общение между<br>
+										└&emsp;# узлами, объектами, UI и главным рендерером. Короче, просто конфигурирующий singleton...<br>
+									</code>
+									<br>
+									<br>
+								</p>
+								<h2>
+									Как использовать comics renderer
+								</h2>
+								<p>
+									<br>
+									Перейди в локацию <code>
+										comics_renderer
+									</code>
+									.<br>
+									<img src="../../../_guide/.images/comics_renderer/use0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Используй управления для навигации:<br>
+										WASD - Летай вокруг<br>
+										Space - Летай вверх<br>
+										Левый Control - Летай вниз<br>
+										Правая Кнопка Мыши - Поворот вида<br>
+										<br>
+										Нажми "Toggle Menu", чтобы увидеть больше свойств для контроля.<br>
+										<img src="../../../_guide/.images/comics_renderer/use1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+											Есть следующие вещи, которые ты можешь делать:<br>
+											- Нажми "Location" и выбери одну из них для загрузки как сцены<br>
+											- Создай несколько персонажей, источников света, пропсов<br>
+											- Нажми на персонажей или другие объекты для настройки<br>
+											&emsp;- Если ты переключишь "Pose Mode" персонажа, это позволит тебе изменить их позу<br>
+											- Нажми "Replace Render Camera to View", чтобы установить рендер-камеру в твой текущий вид<br>
+											- "Toggle Render Preview", регулируй Field of View согласно твоим needs<br>
+											- Ты можешь дополнительно настраивать ambient light или fog<br>
+											- Никогда не забывай нажимать "Save Scene", чтобы сохранить твою сцену, конечно<br>
+											<img src="../../../_guide/.images/comics_renderer/use2.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+												- Нажми "Render", когда ты закончил позиционировать свою сцену<br>
+												<img src="../../../_guide/.images/comics_renderer/use3.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													- Измени настройки пост-обработки<br>
+													- Используй пресеты, если нужно<br>
+													- Экспортируй<br>
+													Имей в виду: Тебе может потребоваться пере-рендерить много раз, чтобы изменить настройки освещения, чтобы они выглядели круто с пост-обработкой.
+												</p>
+												<h3>
+													General Information
+												</h3>
+												<h4>
+													Root directories list
+												</h4>
+												<p>
+													assets, docs, src
+												</p>
+												<h4>
+													Nodes
+												</h4>
+												<p>
+													<a class="a_simple" href="./scripts/comics_renderer.html">
+														comics_renderer
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/camera_control.html">
+														camera_control
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/shader_layers.html">
+														shader_layers
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/text_log.html">
+														text_log
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/comics_renderer_control.html">
+														ComicsRendererControl
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/comics_renderer_UI_main.html">
+														comics_renderer_UI_main
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/bone.html">
+														bone
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/character.html">
+														character
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/IK_control.html">
+														IK_control
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/spot_light.html">
+														spot_light
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/render_camera.html">
+														render_camera
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/prop.html">
+														prop
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/loc_obj.html">
+														loc_obj
+													</a>
+													<br>
+													<a class="a_simple" href="./scripts/point_light.html">
+														point_light
+													</a>
+												</p>
+												<h4>
+													Classes
+												</h4>
+												<p>
+													<a class="a_simple" href="./scripts/comics_renderer_hit_body.html">
+														comics_renderer_hit_body
+													</a>
+												</p>
+												<h4>
+													Resources
+												</h4>
+												<p>
+													<a class="a_simple" href="./scripts/comic_scene_file.html">
+														ComicSceneFile
+													</a>
+												</p>
+												<h4>
+													Other Scripts
+												</h4>
+												<p>
+													None
+												</p>
+											</div>
+										</div>
+									</center>
+									<script src="../../../_guide/code_blocks.js">
+									</script>
+								</body>
+							</html>
