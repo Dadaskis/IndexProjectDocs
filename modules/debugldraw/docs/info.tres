@@ -1,0 +1,79 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A special debug draw module in case if you need to draw some debug lines with immediate geometry node with not much pain. Earlier it has been used for testing the player controller but it is still useful for other kinds of 3D debugging cases (like debugging Rooms and Portals).
+
+[c]Usage Example[/c]
+[gd]
+# Renders a red line AND remembers its existence
+DebugDraw.render_line(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Color.red,
+	true
+)
+
+# Render a blue AABB only once without remembering it
+DebugDraw.render_aabb(
+	get_transformed_aabb(),
+	Color.blue,
+	false
+)
+
+# Renders a red plane once in frame
+DebugDraw.render_line(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Vector3(1.0, 0.0, 0.0),
+	Vector3(1.0, 0.0, 1.0),
+	Color.red
+)
+
+# Renders a red triangle once in frame
+DebugDraw.render_triangle(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Vector3(1.0, 0.0, 0.0),
+	Color.red
+)
+[/gd]"
+info_rus = "Специальный модуль для отладки, в случае если тебе нужно рисовать некоторые debug линии с помощью immediate geometry узла без особых проблем. Ранее он использовался для тестирования контроллера игрока, но он всё ещё useful для других видов 3D отладки (как дебаггинг Rooms и Portals).
+
+[c]Пример использования[/c]
+[gd]
+# Рендерит красную линию И запоминает её существование
+DebugDraw.render_line(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Color.red,
+	true
+)
+
+# Рендерит синий AABB только один раз без запоминания
+DebugDraw.render_aabb(
+	get_transformed_aabb(),
+	Color.blue,
+	false
+)
+
+# Рендерит красную плоскость один раз в кадре
+DebugDraw.render_line(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Vector3(1.0, 0.0, 0.0),
+	Vector3(1.0, 0.0, 1.0),
+	Color.red
+)
+
+# Рендерит красный треугольник один раз в кадре
+DebugDraw.render_triangle(
+	Vector3(0.0, 0.0, 0.0),
+	Vector3(0.0, 0.0, 1.0),
+	Vector3(1.0, 0.0, 0.0),
+	Color.red
+)
+[/gd]"
+edit_time = 1.76113e+09

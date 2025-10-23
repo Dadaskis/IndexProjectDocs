@@ -1,0 +1,151 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "A module for special abilities made for objects working with [gd]Character[/gd] or for those derived from it. Usually require nothing, but the character object to inialize and, as it follows, it works as pretty universal tool for cases of \"activating special abilities\", just make sure to run the ability first.
+
+These are usually used for so-called \"Special Devices\" that can be used either by the player themselves or by the NPCs.
+
+[c]Usage Example[/c]
+[gd]
+# Reference to our character
+var character: Character
+# Reference to special ability
+var spec_ability: CharacterSpecialAbility
+
+# Sets special ability by using its name
+func set_special_ability(ability_name: String):
+	# Get special ability instance...
+	spec_ability = CharacterSpecialAbility.get_ability_instance(ability_name)
+	# ... if it exists...
+	if spec_ability:
+		# ... initialize it
+		spec_ability.initialize(character)
+
+# Process special ability each render/physics frame
+func process_special_ability(delta):
+	# If no special ability exists - exit function
+	if not spec_ability:
+		return
+	
+	# Update ability state
+	spec_ability.update(delta)
+	
+	# Handle ability activation input
+	if Input.is_action_just_pressed(\"special_ability\"):
+		# Do not do anything if ability is still on cooldown
+		if spec_ability.is_cooldown():
+			return
+		# Otherwise - run it
+		spec_ability.run_ability()
+[/gd]
+
+
+API of this entire thing makes it easy to make it usable by either NPCs or the player. However, you need to realize that API is still limited/simplified. Basically, the only things you can do with your special abilities are initializing, updating and \"running\" them.
+
+[c]Template for your special ability[/c]
+[gd]
+# Description for your fancy special ability here.
+
+extends CharacterSpecialAbility
+# Extending this class gives you access to following variables:
+# character_owner - Character owning this ability
+# cooldown - Cooldown
+# cooldown_timer - How much time left before cooldown is depleted
+# ability_name - Ability's name
+#
+# Therefore you can use it for your needs, for example:
+# Overriding logic for player by using \"character_owner.is_player\"
+
+# Runs the special ability, called once upon a time by either player/NPC/etc.
+func on_run_ability():
+	pass
+
+# Update logic of this special ability.
+func on_update(delta: float):
+	pass
+
+# Initialization of this special ability. Happens only once, when assigned to a character.
+func on_initialize():
+	pass
+[/gd]
+
+
+All special ability scripts are stored at [gd]\"res://modules/characters_special_ability/src/abilities/\"[/gd], if you want them to be valid - store them there. As it follows, ability's name is defined in a file name of the script, like [gd]\"defense_field.gd\"[/gd] creates a special ability named [c]defense_field[/c] that later can be instanced with [gd]CharacterSpecialAbility.get_ability_instance(\"defense_field\")[/gd].
+
+For more use examples, check source code of other existing special abilities, that might help you to get the logic better."
+info_rus = "Модуль для специальных способностей, созданный для объектов, работающих с [gd]Character[/gd] или производных от него. Обычно не требуют ничего, кроме объекта персонажа для инициализации, и, как следствие, работают как довольно универсальный инструмент для случаев \"активации специальных способностей\", просто убедись, что запустил способность.
+
+Обычно они используются для так называемых \"Специальных Устройств\", которые могут использоваться как самим игроком, так и NPC.
+
+[c]Пример использования[/c]
+[gd]
+# Ссылка на нашего персонажа
+var character: Character
+# Ссылка на специальную способность
+var spec_ability: CharacterSpecialAbility
+
+# Устанавливает специальную способность по её имени
+func set_special_ability(ability_name: String):
+	# Получаем экземпляр специальной способности...
+	spec_ability = CharacterSpecialAbility.get_ability_instance(ability_name)
+	# ... если он существует...
+	if spec_ability:
+		# ... инициализируем его
+		spec_ability.initialize(character)
+
+# Обрабатываем специальную способность каждый кадр рендера/физики
+func process_special_ability(delta):
+	# Если нет специальной способности - выходим из функции
+	if not spec_ability:
+		return
+	
+	# Обновляем состояние способности
+	spec_ability.update(delta)
+	
+	# Обрабатываем ввод активации способности
+	if Input.is_action_just_pressed(\"special_ability\"):
+		# Ничего не делаем, если способность всё ещё на перезарядке
+		if spec_ability.is_cooldown():
+			return
+		# Иначе - запускаем её
+		spec_ability.run_ability()
+[/gd]
+
+
+API всей этой штуки позволяет легко сделать её пригодной для использования как NPC, так и игроком. Однако тебе нужно понимать, что API всё ещё ограничен/упрощён. По сути, единственное, что ты можешь делать со своими специальными способностями - это инициализировать, обновлять и \"запускать\" их.
+
+[c]Шаблон для твоей специальной способности[/c]
+[gd]
+# Описание твоей крутой специальной способности здесь.
+
+extends CharacterSpecialAbility
+# Наследование от этого класса даёт тебе доступ к следующим переменным:
+# character_owner - Character, владеющий этой способностью
+# cooldown - Перезарядка
+# cooldown_timer - Сколько времени осталось до окончания перезарядки
+# ability_name - Имя способности
+#
+# Поэтому ты можешь использовать их для своих нужд, например:
+# Переопределяя логику для игрока с помощью \"character_owner.is_player\"
+
+# Запускает специальную способность, вызывается однажды игроком/NPC/и т.д.
+func on_run_ability():
+	pass
+
+# Логика обновления этой специальной способности.
+func on_update(delta: float):
+	pass
+
+# Инициализация этой специальной способности. Происходит только один раз при назначении персонажу.
+func on_initialize():
+	pass
+[/gd]
+
+
+Все скрипты специальных способностей хранятся в [gd]\"res://modules/characters_special_ability/src/abilities/\"[/gd], если ты хочешь, чтобы они были валидны - храни их там. Как следствие, имя способности определяется в имени файла скрипта, например, [gd]\"defense_field.gd\"[/gd] создаёт специальную способность с именем [c]defense_field[/c], которую later можно инстанциировать с помощью [gd]CharacterSpecialAbility.get_ability_instance(\"defense_field\")[/gd].
+
+Для получения дополнительных примеров использования проверь исходный код других существующих специальных способностей, это может помочь тебе лучше понять логику."
+edit_time = 1.76113e+09

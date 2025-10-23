@@ -1,0 +1,203 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "The player himself. Or themselves. Either way, this is a player thing. This is a pretty complex module, but mainly it consists of code, so we'll break it down file-by-file.
+
+[wc]Script Structure[/wc]
+[ctr][gd]
+.
+├── globals
+│   ├── global_data.gd
+│   ├── pc_water_list.gd
+│   └── player_stats.gd
+├── mouse_look.gd
+├── nodes
+│   ├── ladder.gd
+│   ├── player_spawn.gd
+│   ├── player_teleport_pos.gd
+│   └── water.gd
+├── player_camera_motion.gd
+├── player_main.gd
+├── states
+│   ├── state_debug_fly.gd
+│   ├── state_ladder.gd
+│   ├── state_walk.gd
+│   └── state_water.gd
+├── stats_adder.gd
+└── weapon_handler.gd
+[/gd][/ctr]
+
+[bc]Player Main Script [p]./player_main.gd[/p][/bc]
+So this is a class. A big one. Not the biggest one in the game, but hey (I didn't check anyway). This ain't the typical [p]player.gd[/p] that would be the biggest thing in the game. Alright, it doesn't change the fact it is pretty huge. It is huge because there's a lot of systems that player would need to interact with. [p]player_main.gd[/p] is basically some kind of hub for all kinds of systems. It does the following:
+	- Takes [p]res://modules/player_controller/assets/scene/player.tscn[/p] and initialized the shit out of it. Like, the scene has *some* nodes, but the rest happens in the code.
+	- Manages/controls separated movement states (walk, swim, ladder, debug flying).
+		- Uses [gd]PlayerStateWalk[/gd] for walking/running physics.
+		- Uses [gd]PlayerStateLadder[/gd] for ladder movement.
+		- Uses [gd]PlayerStateWater[/gd] for swimming logic.
+		- Uses [gd]PlayerStateDebugFly[/gd] for free flight debuggning mode.
+	- Directly manages player height transition.
+		- Used by [gd]PlayerStateWalk[/gd] to tweak height for crouching.
+	- Processes picked objects physics and positioning.
+	- Processes location bounds check, resets the player's position if out-of-bounds (maybe I need to make an out_of_bounds location instead?)
+	- Controls camera hierarchy and transforms.
+	- Manages FOV adjustments from settings.
+	- Handles camera punch/shake settings.
+	- Coordinates multiple camera effects like suppression, low HP tremor, explosion wave.
+	- Initializes and updates all HUD elements, manages their visibility.
+		- Mainly just calls [gd]HeadsUpDisplay[/gd] class for that.
+	- Processes the \"mission failure\" (death).
+	- Handles some logic related to crosshairs (like in [gd]process_dealt_damage_info[/gd] function).
+	- Handles health regeneration logic.
+	- Initializes and handles the weapon system.
+		- [gd]PlayerWeaponHandler[/gd] handles the inputs for weapons.
+		- [gd]PlayerWeaponSystem[/gd] is providing an interface for weapons.
+	- Initializes mouse movement logic.
+		- Afterwards, [gd]PlayerMouseLook[/gd] is handling the mouse movement logic to move the camera.
+	- Initializes post-processing logic.
+		- Uses [gd]PostProcessingSystem[/gd] for this.
+		- Stores individual effect classes ([gd]FlashbangPostProcessing[/gd], [gd]UnderwaterPostProcessing[/gd], etc.)
+	- Stores and handles [gd]Character[/gd] data.
+	- Handles footsteps with help of [gd]Footstep[/gd] class.
+	- Handles some equipment/perk logic with help of [gd]LoadoutSystem[/gd].
+	- Handles save system's load/save functions to save its data.
+[c]Look, I know what you'll say.[/c]
+You'll say it could've been more modular. Yes, it could've been. And I'll tell you to shut the fuck up and see the reality as it is - I just needed something that would've worked and something that wouldn't fuck with my mind too much while having not-so-much cross-script calls. So, you and me, we will work with this monolithic barely-separated monster because that's what life is.
+
+[bc]Player Mouse Look [p]./mouse_look.gd[/p][/bc]
+This is a simple class that handles the mouse movement logic to move the camera, there's nothing special here.
+
+[bc]Player Camera Motion for motion blur [p]./player_camera_motion.gd[/p][/bc]
+[r]Kinda obsolete[/r] This class is used for motion blur that isn't really a part of this game anymore. There are some left-overs in the code and it can be kinda restored, but why would you need it anyway? It wasn't really nice. It was buggy and fucky.
+
+[bc]Player Weapon Handler [p]./player_weapon_handler.gd[/p][/bc]
+A class that handles interaction with the weapon system. Keep in mind, [gd]PlayerWeaponSystem[/gd] class is not a part of this module. [gd]PlayerWeaponHandler[/gd] only \"communicates\" with the weapon system and handles some inputs. I'd say it isn't really necessary to exist, but it is what it is.
+
+[bc]Player Stats Adder [/p]./stats_adder.gd[/p][/bc]
+[r]Obsolete[/r] So there was a fancy ass screen at the end of mission with all kinds of stats. It's no longer a working part of this game, there are still some left-overs that I'm too lazy to remove.
+
+[wc]Autoloads[/wc]
+[gd]PlayerData[/gd] - basically exists just because I needed to write [gd]PlayerData.get_player()[/gd] somewhere to get a player, that's kinda it.
+[gd]PCWaterList[/gd] - just a simple list of all water sources, however it also can be used to make splashes.
+[gd]PlayerStats[/gd] - [r]Obsolete[/r] related to the forementioned player stats that aren't really a part of this game anymore.
+
+[wc]Nodes[/wc]
+
+[bc][gd]PlayerControllerLadder[/gd][/bc]
+//img:player_controller/ladder0.png
+A ladder node. Player enters an area, climbs up/down, etc. Forces the player to enter [gd]PlayerStateLadder[/gd]. This thing is kinda self-explanatory, if you want to see more - take a look into source code. Works by setting the start and end points.
+
+[bc][gd]PlayerControllerWater[/gd][/bc]
+//img:player_controller/water0.png
+A water node. Player enters an area and starts swimming. Forces the player to enter [gd]PlayerStateWater[/gd]. Works by setting the start and end points.
+
+[bc][gd]PlayerSpawn[/gd][/bc]
+//img:player_controller/player_spawn0.png
+A player spawn node. Spawns the player during the location initialization. It is worth mentioning that player truly \"spawns\" only once and their instance is reused across different locations to speed up the loading screen. Transition points can be set for transitions between locations. It can also be used alongside location events to either react to spawning or to forcefully spawn the player again.
+
+[wc]States[/wc]
+[gd]PlayerStateWalk[/gd] - the common state when the player is just walking around.
+[gd]PlayerStateLadder[/gd] - activated during climbing the ladder, simply turns the movement to movement alongside the defined line (which is defined by [gd]PlayerControllerLadder[/gd]).
+[gd]PlayerStateWater[/gd] - activated during swimming in the area of water defined by [gd]PlayerWater[/gd].
+[gd]PlayerStateDebugFly[/gd] - activated with use of console commands like [p]debug_fly[/p]."
+info_rus = "Сам игрок. Или сама. В любом случае, это штука игрока. Это довольно комплексный модуль, но в основном он состоит из кода, поэтому мы разберём его файл за файлом.
+
+[wc]Структура скриптов[/wc]
+[ctr][gd]
+.
+├── globals
+│   ├── global_data.gd
+│   ├── pc_water_list.gd
+│   └── player_stats.gd
+├── mouse_look.gd
+├── nodes
+│   ├── ladder.gd
+│   ├── player_spawn.gd
+│   ├── player_teleport_pos.gd
+│   └── water.gd
+├── player_camera_motion.gd
+├── player_main.gd
+├── states
+│   ├── state_debug_fly.gd
+│   ├── state_ladder.gd
+│   ├── state_walk.gd
+│   └── state_water.gd
+├── stats_adder.gd
+└── weapon_handler.gd
+[/gd][/ctr]
+
+[bc]Главный скрипт игрока [p]./player_main.gd[/p][/bc]
+Итак, это класс. Большой. Не самый большой в игре, но эй (я всё равно не проверял). Это не типичный [p]player.gd[/p], который был бы самой большой штукой в игре. Ладно, это не меняет того факта, что он огромен. Он огромен, потому что есть много систем, с которыми игрок должен взаимодействовать. [p]player_main.gd[/p] - это своего рода хаб для всех систем. Он делает следующее:
+	- Берет [p]res://modules/player_controller/assets/scene/player.tscn[/p] и инициализирует всё из него. Типа, сцена имеет *некоторые* узлы, но остальное происходит в коде.
+	- Управляет/контролирует разделённые состояния движения (ходьба, плавание, лестница, debug полёт).
+		- Использует [gd]PlayerStateWalk[/gd] для физики ходьбы/бега.
+		- Использует [gd]PlayerStateLadder[/gd] для движения по лестнице.
+		- Использует [gd]PlayerStateWater[/gd] для логики плавания.
+		- Использует [gd]PlayerStateDebugFly[/gd] для режима свободного полёта для отладки.
+	- Напрямую управляет переходом высоты игрока.
+		- Используется [gd]PlayerStateWalk[/gd] для настройки высоты при приседании.
+	- Обрабатывает физику и позиционирование подобранных объектов.
+	- Обрабатывает проверку границ локации, сбрасывает позицию игрока, если за пределами (может мне нужно сделать локацию out_of_bounds вместо этого?)
+	- Контролирует иерархию и трансформы камеры.
+	- Управляет корректировками FOV из настроек.
+	- Обрабатывает настройки толчков/тряски камеры.
+	- Координирует multiple эффекты камеры, такие как подавление, тремор при низком HP, волна от взрыва.
+	- Инициализирует и обновляет все элементы HUD, управляет их видимостью.
+		- В основном просто вызывает класс [gd]HeadsUpDisplay[/gd] для этого.
+	- Обрабатывает \"провал миссии\" (смерть).
+	- Обрабатывает некоторую логику, связанную с прицелами (как в функции [gd]process_dealt_damage_info[/gd]).
+	- Обрабатывает логику регенерации здоровья.
+	- Инициализирует и обрабатывает систему оружия.
+		- [gd]PlayerWeaponHandler[/gd] обрабатывает вводы для оружия.
+		- [gd]PlayerWeaponSystem[/gd] предоставляет интерфейс для оружия.
+	- Инициализирует логику движения мыши.
+		- После этого [gd]PlayerMouseLook[/gd] обрабатывает логику движения мыши для перемещения камеры.
+	- Инициализирует логику пост-обработки.
+		- Использует [gd]PostProcessingSystem[/gd] для этого.
+		- Хранит отдельные классы эффектов ([gd]FlashbangPostProcessing[/gd], [gd]UnderwaterPostProcessing[/gd] и т.д.)
+	- Хранит и обрабатывает данные [gd]Character[/gd].
+	- Обрабатывает шаги с помощью класса [gd]Footstep[/gd].
+	- Обрабатывает некоторую логику снаряжения/перков с помощью [gd]LoadoutSystem[/gd].
+	- Обрабатывает функции загрузки/сохранения системы сохранений для сохранения своих данных.
+[c]Смотри, я знаю, что ты скажешь.[/c]
+Ты скажешь, что это могло быть более модульным. Да, могло бы. И я скажу тебе заткнуться нахрен и увидеть реальность такой, какая она есть - мне просто нужно было что-то, что бы работало и что не ебалось бы с моим разумом слишком сильно, имея слишком много вызовов между скриптами. Так что, ты и я, мы будем работать с этим монолитным еле-разделённым монстром, потому что такова жизнь.
+
+[bc]Движение мыши игрока [p]./mouse_look.gd[/p][/bc]
+Это простой класс, который обрабатывает логику движения мыши для перемещения камеры, здесь нет ничего special.
+
+[bc]Движение камеры игрока для размытия в движении [p]./player_camera_motion.gd[/p][/bc]
+[r]Типо устарело[/r] Этот класс использовался для размытия в движении, которое не является частью этой игры больше. В коде остались некоторые остатки, и это можно как бы восстановить, но зачем тебе это нужно? Это не было чем-то крутым. Это было багнуто и плохо.
+
+[bc]Обработчик оружия игрока [p]./player_weapon_handler.gd[/p][/bc]
+Класс, который обрабатывает взаимодействие с системой оружия. Имей в виду, класс [gd]PlayerWeaponSystem[/gd] не является частью этого модуля. [gd]PlayerWeaponHandler[/gd] только \"общается\" с системой оружия и обрабатывает некоторые вводы. Я бы сказал, что не необходимо его существование, но как уж есть.
+
+[bc]Добавление статистики игрока [/p]./stats_adder.gd[/p][/bc]
+[r]Устарело[/r] Итак, был классненький экран в конце миссии со всеми видами статистики. Это больше не работающая часть этой игры, остались некоторые остатки, которые мне слишком лень удалять.
+
+[wc]Автозагрузки[/wc]
+[gd]PlayerData[/gd] - по сути существует просто потому, что мне нужно было написать [gd]PlayerData.get_player()[/gd] где-то, чтобы получить игрока, это всё.
+[gd]PCWaterList[/gd] - просто простой список всех источников воды, он так же может использоваться для создания брызг.
+[gd]PlayerStats[/gd] - [r]Устарело[/r] связано с упомянутой ранее статистикой игрока, которая не является частью этой игры больше.
+
+[wc]Узлы[/wc]
+
+[bc][gd]PlayerControllerLadder[/gd][/bc]
+//img:player_controller/ladder0.png
+Узел лестницы. Игрок входит в область, поднимается/спускается и т.д. Принуждает игрока войти в [gd]PlayerStateLadder[/gd]. Эта штука как бы понятна, если ты хочешь увидеть больше - загляни в исходный код. Работает путём установки начальной и конечной точек.
+
+[bc][gd]PlayerControllerWater[/gd][/bc]
+//img:player_controller/water0.png
+Узел воды. Игрок входит в область и начинает плавать. Принуждает игрока войти в [gd]PlayerStateWater[/gd]. Работает путём установки начальной и конечной точек.
+
+[bc][gd]PlayerSpawn[/gd][/bc]
+//img:player_controller/player_spawn0.png
+Узел спавна игрока. Спавнит игрока во время инициализации локации. Стоит упомянуть, что игрок \"спавнится\" только один раз, и его экземпляр переиспользуется в разных локациях, чтобы ускорить экран загрузки. Могут быть установлены точки перехода для переходов между локациями. Это также может использоваться вместе с событиями локаций, чтобы либо реагировать на спавн, либо принудительно заспавнить игрока снова.
+
+[wc]Состояния[/wc]
+[gd]PlayerStateWalk[/gd] - обычное состояние, когда игрок просто ходит вокруг.
+[gd]PlayerStateLadder[/gd] - активируется во время подъёма по лестнице, просто превращает движение в движение вдоль определённой линии (которая определяется [gd]PlayerControllerLadder[/gd]).
+[gd]PlayerStateWater[/gd] - активируется во время плавания в области воды, определённой [gd]PlayerWater[/gd].
+[gd]PlayerStateDebugFly[/gd] - активируется с использованием консольных команд, таких как [p]debug_fly[/p]."
+edit_time = 1.76123e+09

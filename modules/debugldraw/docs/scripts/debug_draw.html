@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - debug_draw
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: debug_draw
+								</h3>
+								<h3>
+									Script: debug_draw
+								</h3>
+								<h3>
+									Class Name: DebugDraw
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								DebugDraw - A runtime debugging visualization system that draws lines, shapes, and volumes<br>
+								Provides immediate-mode rendering of debug geometry like AABBs, lines, planes and triangles<br>
+								with configurable colors and persistence. Useful for collision debugging, AI visualization,<br>
+								and other in-game debugging needs.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Reference to the ImmediateGeometry node used for rendering
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Timer for controlling render updates
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									delay
+								</p>
+								<p class="var_desc_name_value">
+									0.1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Delay between render updates (in seconds)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									remember_lines
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of lines that should persist between frames
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initializes the debug drawing system
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_line
+								</p>
+								<p class="var_desc_name_value">
+									pos0: Vector3, pos1: Vector3, color: Color, remember: = false
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Draws a line between two points in 3D space<br/>
+								pos0: Starting position of the line<br/>
+								pos1: Ending position of the line<br/>
+								color: Color of the line<br/>
+								remember: If true, the line will persist between frames
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_aabb
+								</p>
+								<p class="var_desc_name_value">
+									aabb: AABB, color: Color, remember = false
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders an Axis-Aligned Bounding Box (AABB) with colored lines<br/>
+								aabb: The AABB to render (contains position and size)<br/>
+								color: Color to use for the box lines<br/>
+								remember: If true, the box lines will persist between frames
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_plane
+								</p>
+								<p class="var_desc_name_value">
+									v0: Vector3, v1: Vector3, v2: Vector3, v3: Vector3, color: Color
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders a quadrilateral plane by drawing it as two triangles<br/>
+								v0, v1, v2, v3: The four corner vertices of the plane in 3D space<br/>
+								color: The color to use for the plane
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									render_triangle
+								</p>
+								<p class="var_desc_name_value">
+									v0: Vector3, v1: Vector3, v2: Vector3, color: Color
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Renders a single triangle<br/>
+								v0, v1, v2: The three vertices of the triangle in 3D space<br/>
+								color: The color to use for the triangle
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_physics_process
+								</p>
+								<p class="var_desc_name_value">
+									delta: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physics process that handles periodic rendering updates<br/>
+								delta: Time elapsed since last frame
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

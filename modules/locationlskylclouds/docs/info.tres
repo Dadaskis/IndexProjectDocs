@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationSkyClouds[/gd], as it says, creates clouds that are pretty much far from the player.
+
+//img:location_sky_clouds/example0.png
+It is stupidly easy to use, you just instance [gd]LocationSkyClouds[/gd] and tweak its parameters according to your taste. There's no special cases that'd need any description, it just is."
+info_rus = "[gd]LocationSkyClouds[/gd], как и говорится, создаёт облака, которые довольно далеко от игрока.
+
+//img:location_sky_clouds/example0.png
+Их тупо легко использовать: ты просто добавляешь [gd]LocationSkyClouds[/gd] и настраиваешь его параметры по своему вкусу. Нет особых случаев, которые требовали бы какого-либо описания, они просто есть."
+edit_time = 1.76123e+09

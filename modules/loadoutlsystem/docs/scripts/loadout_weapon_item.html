@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - loadout_weapon_item
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: loadout_system
+								</h3>
+								<h3>
+									Script: loadout_weapon_item
+								</h3>
+								<h3>
+									Class Name: LoadoutWeaponItem
+								</h3>
+								<h3>
+									Extends: LoadoutItemDataBase
+								</h3>
+								<h3>
+									RESOURCE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								Defines weapon items for the loadout system, handling both<br>
+								firearms and medical equipment. Provides detailed stats and descriptions for<br>
+								weapon properties and effects.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									WEAPONS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/player_weapon_system/assets/weapons/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to weapon assets directory
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									WEAPON_RES_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"weapon.tres"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Filename for weapon resource
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									BULLET_RES_NAME
+								</p>
+								<p class="var_desc_name_value">
+									"bullet.tres"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Filename for bullet resource
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									weapon_class
+								</p>
+								<p class="var_desc_name_value">
+									"AR-100"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Class identifier for the weapon (matches subfolder name in WEAPONS_PATH)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_medical
+								</p>
+								<p class="var_desc_name_value">
+									weapon: PlayerAnimatedItemMedical
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes medical weapon data and returns formatted description text
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									process_firearm
+								</p>
+								<p class="var_desc_name_value">
+									weapon: PlayerFirearmWeapon
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes firearm weapon data and returns formatted description text
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_additional_text
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									String
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Generates the complete additional description text for the weapon
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

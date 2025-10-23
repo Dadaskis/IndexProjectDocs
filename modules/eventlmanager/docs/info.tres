@@ -1,0 +1,77 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "General purpose event manager that is inspired by the one made for Garry's Mod. It was kinda useful at the beginning of project but i've stopped using it that much because locational events covered a lot of cases. Either way, it is still handy so it is going to stay in this project for long.
+
+[c]Usage example[/c]
+[gd]
+# Add event listener
+EventManager.add_event_listener(
+	\"character_killed\",
+	funcref(self, \"on_character_kill\")
+)
+
+# Run event
+EventManager.run_event(\"character_killed\", [victim, killer])
+
+# Remove event listener
+EventManager.remove_event_listener(
+	\"character_killed\",
+	funcref(self, \"on_character_kill\")
+)
+[/gd]
+
+By using a console command called [c]event_manager_list[/c], you can get a list of all available events:
+[c]
+$ event_manager_list
+EventManager available events list:
+player_spawn
+exit_locked_triggered
+exit_unlocked_triggered
+character_killed
+character_bullet_damage
+prop_picked
+player_ammo_pickup
+on_free_orphan_nodes
+character_shooting
+...
+[/c]"
+info_rus = "Универсальный менеджер событий, вдохновленный аналогичным из Garry's Mod. Он был довольно полезен в начале проекта, но я перестал использовать его так часто, потому что локационные события покрыли множество случаев. Тем не менее, он всё ещё полезен, поэтому останется в этом проекте надолго.
+
+[c]Пример использования[/c]
+[gd]
+# Добавить слушатель события
+EventManager.add_event_listener(
+	\"character_killed\",
+	funcref(self, \"on_character_kill\")
+)
+
+# Запустить событие
+EventManager.run_event(\"character_killed\", [victim, killer])
+
+# Удалить слушатель события
+EventManager.remove_event_listener(
+	\"character_killed\",
+	funcref(self, \"on_character_kill\")
+)
+[/gd]
+
+Используя консольную команду [c]event_manager_list[/c], можно получить список всех доступных событий:
+[c]
+$ event_manager_list
+EventManager available events list:
+player_spawn
+exit_locked_triggered
+exit_unlocked_triggered
+character_killed
+character_bullet_damage
+prop_picked
+player_ammo_pickup
+on_free_orphan_nodes
+character_shooting
+...
+[/c]"
+edit_time = 1.76113e+09

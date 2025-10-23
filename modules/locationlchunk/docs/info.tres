@@ -1,0 +1,73 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Location Chunk is a special node that takes a part of location and can optionally add/remove it to/from scene tree for optimization reasons.
+
+//img:location_chunk/example0.jpg
+
+You can use this node in your locations to partially remove chunks of the location OR remove entire sub-portions of it.
+
+[c]Properties of [gd]LocationChunk[/gd][/c]
+[gd]chunk_name[/gd] - Name of the chunk. It is used solely for in-editor naming, nothing more than that
+[gd]start_hidden[/gd] - Whether this chunk should start in a hidden state
+[gd]use_enclose[/gd] - Whether to use AABB enclosure test for node inclusion. On [gd]false[/gd] uses simple intersection check that *may* include more than it should
+[gd]use_distance[/gd] - Whether to use distance-based vibility control
+[gd]check_dist_only_on_enters[/gd] - If true, only check distance when player enters/exits chunks
+[gd]distance_n2[/gd] - Distance threshold squared for visibility (actual distance = [gd]sqrt(distance_n2)[/gd])
+[gd]force_show_on_enter[/gd] - Whether to force showing this chunk when player enters
+[gd]force_hide_on_exit[/gd] - Whether to force hiding this chunk when player enters
+[gd]force_hide_chunks[/gd] - List of chunk names to force hide when this chunk is active
+[gd]force_show_chunks[/gd] - List of chunk names to force show when this chunk is active
+[gd]on_enter_events[/gd] - List of event names to fire when player enters this chunk
+[gd]on_exit_events[/gd] - List of event names to fire when player exits this chunk
+[gd]show_event[/gd] - Event name to trigger showing this chunk
+[gd]hide_event[/gd] - Event name to trigger hiding this chunk
+[gd]check_dynamic[/gd] - Whether to check for dynamic ([gd]RigidBody[/gd]) nodes in this chunk
+[gd]check_task_points[/gd] - Whether to check for task points in this chunk
+[gd]check_NPCs[/gd] - Whether to check for NPCs in this chunk
+[gd]update_ref_probe[/gd] - Whether to update reflection probe position when this chunk is shown
+[gd]ref_probe_intensity[/gd] - Intensity to set for reflection probe when this chunk is shown
+[gd]override_environment[/gd] - Whether to override the environment settings for this chunk
+[gd]environment[/gd] - Environment to use when override_environment is true
+[gd]editor_env[/gd] - Whether to apply editor-specific environment settings
+[gd]override_LUT[/gd] - Whether to override the color grading LUT for this chunk
+[gd]color_grading_LUT[/gd] - Color grading LUT path to use when override_LUT is true
+
+[r]This node serves as a replacement for outdated [gd]LocationZone[/gd] node[/r]. You can get the same functionality by simply using [gd]force_show_on_enter[/gd] and [gd]force_hide_on_exit[/gd]. It will have pretty much the same functionality, if not more, given the fact it is processing NPCs better."
+info_rus = "Location Chunk - это специальный узел, который берёт часть локации и может опционально добавлять/удалять её из дерева сцены для оптимизации.
+
+//img:location_chunk/example0.jpg
+
+Ты можешь использовать этот узел в своих локациях, чтобы частично удалять чанки локации ИЛИ удалять целые её подчасти.
+
+[c]Свойства [gd]LocationChunk[/gd][/c]
+[gd]chunk_name[/gd] - Имя чанка. Используется только для именования в редакторе.
+[gd]start_hidden[/gd] - Должен ли этот чанк начинаться в скрытом состоянии
+[gd]use_enclose[/gd] - Использовать ли проверку включения AABB для узлов. При [gd]false[/gd] использует простую проверку пересечения, которая *может* включать больше, чем должна
+[gd]use_distance[/gd] - Использовать ли управление видимостью на основе расстояния
+[gd]check_dist_only_on_enters[/gd] - Если true, проверять расстояние только когда игрок входит/покидает чанки
+[gd]distance_n2[/gd] - Квадрат порога расстояния для видимости (актуальное расстояние = [gd]sqrt(distance_n2)[/gd])
+[gd]force_show_on_enter[/gd] - Принудительно показывать этот чанк при входе игрока
+[gd]force_hide_on_exit[/gd] - Принудительно скрывать этот чанк при выходе игрока
+[gd]force_hide_chunks[/gd] - Список имён чанков для принудительного скрытия, когда этот чанк активен
+[gd]force_show_chunks[/gd] - Список имён чанков для принудительного показа, когда этот чанк активен
+[gd]on_enter_events[/gd] - Список имён событий для запуска при входе игрока в этот чанк
+[gd]on_exit_events[/gd] - Список имён событий для запуска при выходе игрока из этого чанка
+[gd]show_event[/gd] - Имя события для активации показа этого чанка
+[gd]hide_event[/gd] - Имя события для активации скрытия этого чанка
+[gd]check_dynamic[/gd] - Проверять ли динамические узлы ([gd]RigidBody[/gd]) в этом чанке
+[gd]check_task_points[/gd] - Проверять ли точки заданий в этом чанке
+[gd]check_NPCs[/gd] - Проверять ли NPC в этом чанке
+[gd]update_ref_probe[/gd] - Обновлять ли позицию reflection probe при показе этого чанка
+[gd]ref_probe_intensity[/gd] - Интенсивность для установки reflection probe при показе этого чанка
+[gd]override_environment[/gd] - Переопределять ли настройки окружения для этого чанка
+[gd]environment[/gd] - Окружение для использования, когда override_environment равен true
+[gd]editor_env[/gd] - Применять ли настройки окружения для редактора
+[gd]override_LUT[/gd] - Переопределять ли цветокоррекцию LUT для этого чанка
+[gd]color_grading_LUT[/gd] - Путь к LUT цветокоррекции для использования, когда override_LUT равен true
+
+[r]Этот узел служит заменой устаревшему узлу [gd]LocationZone[/gd][/r]. Ты можешь получить ту же функциональность, просто используя [gd]force_show_on_enter[/gd] и [gd]force_hide_on_exit[/gd]. Это будет та же функциональность, если не больше, учитывая тот факт, что он лучше обрабатывает NPC."
+edit_time = 1.76123e+09

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - character_builder_utilities
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: character_builder
+								</h3>
+								<h3>
+									Script: character_builder_utilities
+								</h3>
+								<h3>
+									Class Name: CharacterBuilderUtilities
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									AUTOLOAD
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								CharacterBuilderUtilities singleton class contains shared logic<br>
+								in form of utility functions. It is mainly used to arrange texture data<br>
+								as well as load images and create materials<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SAVED_TEX_NAMES
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								A list of "saved" texture names, used by save_texture_data.<br/>
+								It is required to properly save subtextures in case if they were changed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									validate_materials
+								</p>
+								<p class="var_desc_name_value">
+									mesh: Mesh, path: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Validates and updates materials for a given Mesh<br/>
+								Ensures all materials are properly configured and loaded from files when available,<br/>
+								with handling for UserSpatialUbershader materials to apply albedo_correction effection.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_image_texture
+								</p>
+								<p class="var_desc_name_value">
+									path: String, is_normal_map = false
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads an image texture with provided path
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_mesh_materials
+								</p>
+								<p class="var_desc_name_value">
+									mesh: MeshInstance, res_path: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks and updates materials for a MeshInstance by:<br/>
+								1. Iterating through each surface material in the mesh<br/>
+								2. Creating a new UserSpatialUbershader material with default PBR settings<br/>
+								3. Auto-assigning textures based on filename suffixes (_D, _N, _MRSAO, etc.)<br/>
+								4. Enabling relevant material features (albedo, normal maps, emission, etc.)<br/>
+								5. Applying neutral albedo correction effect<br/>
+								6. Assigning the new material back to the mesh surface<br/>
+								<br/>
+								Eventually this function is used to replace manual creation of the materials<br/>
+								with runtime loading of textures
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_subtextures_dict
+								</p>
+								<p class="var_desc_name_value">
+									path: String, mesh: Mesh
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Scans a directory for texture files and organizes them into a dictionary structure:<br/>
+								1. Parses subdirectories in format "
+								[Material]
+								__
+								[Subtexture]
+								" to identify material variations<br/>
+								2. Loads textures based on suffix (_D=albedo, _N=normal, _MRSAO=PBR map)<br/>
+								3. Also captures existing textures from the mesh's materials as "default" variants<br/>
+								Returns a nested dictionary structure:
+								{mat_name:
+								{subtex_name:
+								{texture_type: texture}
+								}
+								}
+								<br/>
+								Example output:<br/>
+								{"Concrete":
+								{"wet":
+								{"albedo_tex": tex1}
+								, "default":
+								{"normal_map_tex": tex2}
+								}
+								}
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									save_texture_data
+								</p>
+								<p class="var_desc_name_value">
+									mesh: Mesh
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves all texture paths and material properties<br/>
+								from a Mesh's materials into a dictionary.<br/>
+								For each material surface:<br/>
+								1. Stores paths of all textures (albedo, normal, etc.) referenced by the material<br/>
+								2. Captures all float, color, and flag properties<br/>
+								3. Records enabled/disabled states for material effects<br/>
+								Returns a dictionary structured as:
+								{material_name:
+								{property_name: value}
+								}
+								<br/>
+								Example output:<br/>
+								{"MetalRusty":
+								{"albedo_tex": "res://tex/metal_d.png", "roughness": 0.8}
+								}
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_texture_data
+								</p>
+								<p class="var_desc_name_value">
+									mesh: Mesh, dict: Dictionary
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads texture paths and material properties<br/>
+								from a dictionary back into a Mesh's materials.<br/>
+								For each material surface:<br/>
+								1. Applies saved texture paths by loading the textures and assigning them<br/>
+								2. Restores all saved float, color, and flag properties<br/>
+								3. Triggers a material update to apply changes<br/>
+								Expects dictionary format:
+								{material_name:
+								{property_name: value}
+								}
+								<br/>
+								Example input:<br/>
+								{"MetalRusty":
+								{"albedo_tex": "res://tex/metal_d.png", "roughness": 0.8}
+								}
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

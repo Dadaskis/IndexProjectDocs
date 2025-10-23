@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - Gibplosions
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: gore_system
+								</h3>
+								<h3>
+									Script: Gibplosions
+								</h3>
+								<h3>
+									Class Name: GoreSystemGibs
+								</h3>
+								<h3>
+									Extends: Spatial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								This script spawns random gibs (body parts/debris) with physics effects.<br>
+								It creates multiple rigid bodies with collision shapes, applies random<br>
+								forces and torques to simulate explosion/impact, then cleans them up<br>
+								after a configurable time. Includes settings for amount, size, mass,<br>
+								force ranges, and lifetime. Used for gore/debris effects when characters<br>
+								are destroyed. Particles can be customized in the instanced scene.<br>
+								<br>
+								For the time being, only used in cases when characters are exploded.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									gib_scene
+								</p>
+								<p class="var_desc_name_value">
+									preload("res://modules/gore_system/scenes/instancescene.tscn")
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Scene containing gib parts, check it if you wish to tweak particles,<br/>
+								or add more gib models/modify materials of existing ones
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									instance_scene
+								</p>
+								<p class="var_desc_name_value">
+									gib_scene.instance()
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gib scene instance
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									children_array
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of all prefab gibs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									physics_type
+								</p>
+								<p class="var_desc_name_value">
+									RigidBody
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physics type, equal to RigidBody by default
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									layers
+								</p>
+								<p class="var_desc_name_value">
+									LocationPhysicsGlobal.assign_bit_layers(0)
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Physics layers to collide with static bodies only
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									max_gib_time
+								</p>
+								<p class="var_desc_name_value">
+									10
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum amount of time a gib can exist...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									gib_hitbox_size
+								</p>
+								<p class="var_desc_name_value">
+									0.1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gib hitbox Size...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									gib_weight
+								</p>
+								<p class="var_desc_name_value">
+									2
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gib weight...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									gib_mass
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gib Mass...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									power_range_1
+								</p>
+								<p class="var_desc_name_value">
+									1
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Minimum gib physics power...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									power_range_2
+								</p>
+								<p class="var_desc_name_value">
+									3
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Maximum gib physics power...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									gib_amount
+								</p>
+								<p class="var_desc_name_value">
+									10
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Total Amount of gibs...
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									reset_array
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Redundancy
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									kill_yourself
+								</p>
+								<p class="var_desc_name_value">
+									object: any, delay: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes all gibs
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									kill_myself
+								</p>
+								<p class="var_desc_name_value">
+									delay: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Kills script, and node that is created for effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									spawnrandomgibs
+								</p>
+								<p class="var_desc_name_value">
+									amount: any, range1: any, range2: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Main part of this script, physics logic, creation of gibs.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Spawning the gibs, yaaay
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

@@ -1,0 +1,135 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Graphics control module controls certain graphics settings of this game project.
+
+[c]Usage example[/c]
+[gd]
+# Change antialiasing
+# Possible values:
+#		\"disabled\"
+#		\"x2\"
+#		\"x4\"
+#		\"x8\"
+# There was \"x16\" too, but it was removed because FUCK IT
+Values.set_value(\"anti_aliasing_quality\", \"disabled\")
+
+# Whether enable or disable FXAA
+Values.set_value(\"fxaa_enabled\", false)
+
+# Set sun shadow map resolution
+# Possible values:
+#		\"very_low\"
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+#		\"ultra\"
+Values.set_value(\"sun_shadow_resolution\", \"high\")
+
+# Shadow map filtering quality
+# Possible values:
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+Values.set_value(\"shadow_filter_quality\", \"high\")
+
+# Overall shadow map quality setting
+# Possible values:
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+#		\"ultra\"
+Values.set_value(\"light_shadow_quality\", \"ultra\")
+
+# Depth map quality (whether HDR or not)
+# Possible values:
+#		\"low\"
+#		\"high\"
+Values.set_value(\"depth_quality\", \"high\")
+
+# Vertical Synchronization
+# Possible values:
+#		\"disabled\"
+#		\"enabled\"
+Values.set_value(\"vsync_enabled\", \"disabled\")
+
+# Depth prepass
+# Possible values:
+#		\"disabled\"
+#		\"enabled\"
+Values.set_value(\"depth_prepass\", \"enabled\")
+
+# Lighting quality, affects amount of lights one object can have
+# Possible values:
+#		\"low\"
+#		\"high\"
+Values.set_value(\"lighting_quality\", \"high\")
+[/gd]"
+info_rus = "Модуль Graphics Control управляет определёнными графическими настройками этого игрового проекта.
+
+[c]Пример использования[/c]
+[gd]
+# Изменить сглаживание
+# Возможные значения:
+#		\"disabled\"
+#		\"x2\"
+#		\"x4\"
+#		\"x8\"
+# Был и \"x16\", но его убрали, потому что НАХУЙ ЭТО
+Values.set_value(\"anti_aliasing_quality\", \"disabled\")
+
+# Включить или отключить FXAA
+Values.set_value(\"fxaa_enabled\", false)
+
+# Установить разрешение теневой карты солнца
+# Возможные значения:
+#		\"very_low\"
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+#		\"ultra\"
+Values.set_value(\"sun_shadow_resolution\", \"high\")
+
+# Качество фильтрации теневой карты
+# Возможные значения:
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+Values.set_value(\"shadow_filter_quality\", \"high\")
+
+# Общая настройка качества теневой карты
+# Возможные значения:
+#		\"low\"
+#		\"medium\"
+#		\"high\"
+#		\"ultra\"
+Values.set_value(\"light_shadow_quality\", \"ultra\")
+
+# Качество карты глубины (HDR или нет)
+# Возможные значения:
+#		\"low\"
+#		\"high\"
+Values.set_value(\"depth_quality\", \"high\")
+
+# Вертикальная синхронизация
+# Возможные значения:
+#		\"disabled\"
+#		\"enabled\"
+Values.set_value(\"vsync_enabled\", \"disabled\")
+
+# Препасс глубины
+# Возможные значения:
+#		\"disabled\"
+#		\"enabled\"
+Values.set_value(\"depth_prepass\", \"enabled\")
+
+# Качество освещения, влияет на количество источников света у одного объекта
+# Возможные значения:
+#		\"low\"
+#		\"high\"
+Values.set_value(\"lighting_quality\", \"high\")
+[/gd]"
+edit_time = 1.76113e+09

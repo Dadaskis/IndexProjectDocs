@@ -1,0 +1,225 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[t]Tags[/t]
+[ctr][gd]
+# Written [like_that][/like_that]
+# gd - GDScript code
+# c - General \"code\"
+# bc - Big centered text
+# wc - Big centered text with white background
+# t - Title / Big centered text that serves as a separator
+# p - Path, written in quotes and highlighted
+# r - Red background with red text, helpful for markings
+# ctr - Center
+[/gd][/ctr]
+
+[t]Description[/t]
+Index: Purger documentation generator tool that was written in two sleep deprived days while being completely offline. It was made in 2024, and only in 2025 i managed to actually start filling up the documentation to actually represent this codebase's knowledge base. Originally that was a single \"editor script\" in editor_scripts folder, but i decided to move it as a separate module for ease of access.
+
+[bc]Turns this...[/bc]
+//img:_doc_gen/code0.jpg
+[bc]To this...[/bc]
+//img:_doc_gen/HTML0.jpg
+
+[ctr]
+How to use:
+1. [p]res://modules/_doc_gen/src/generate_docs.gd[/p] - double click it
+//img:_doc_gen/file0.jpg
+2. In script editor, find [p]generate_docs.gd[/p] on the left and just RMB -> [c]Run[/c]
+//img:_doc_gen/run0.jpg
+[/ctr]
+
+For more information how this thing works - just take a look into comments/documentation of [p]res://modules/_doc_gen/src/generate_docs.gd[/p]. If you are just using this thing to update documentation page, that's really all you need to know. However, if you want to maintain the documentation yourself, keep in mind: This thing is parsing code comments to turn them into content for documentation page. Additionally it is using [p]docs/info.tres[/p] files to insert module descriptions (like the one you are reading right now).
+//img:_doc_gen/info0.jpg
+//img:_doc_gen/info1.jpg
+
+You need to realize that this was written by sleep-deprived-me and maintained by clueless-me. This thing isn't perfect. You need to know how to use it PROPERLY.
+
+Here's an example of the perfect script [p]res://modules/post_processing_system/src/effects/black_debug.gd[/p]:
+[gd]# Provides a simple full-screen black debug overlay effect.
+# Primarily used for debugging and visual testing purposes.
+# The very first post-processing effect btw.
+
+extends PostProcessingBase
+
+class_name BlackDebugPostProcessing
+
+# Reference to the shader material used for the black overlay effect
+var shader_mat: ShaderMaterial
+
+# Initializes the black debug effect by loading the appropriate shader
+func custom_initialize():
+	# Loads the black debug shader material
+	shader_mat = load_shader(\"black_debug\")
+[/gd]
+
+So, as you can see, there's multiple things you need to pay attention to:
+1. At the top of the file (right at the top, right from the first line, above everything else) you set up description for your script file
+2. The only way to define a description for a variable/constant/enum is writing a comment ABOVE the definition
+3. The second point applies to functions too. Even if this system can detect arguments and all, you write what these arguments mean all by yourself in the comments anyway, just do the work
+
+If you want to set a description for an entire module, check the \"docs\" folder of your module (like here: [p]res://modules/_doc_gen/docs/info.tres[/p]). If you don't have this folder in your module, you don't have to create it. Just generate the documentation pages by running the editor script and then it'll be created automatically for your new module. Any of the existing modules, on other hand, already should have this folder intact.
+</p>
+[bc]More examples here...[/bc]
+[bc]Function description[/bc]
+[bc]GOOD[/bc]
+[ctr][gd]# Resets all animation states to default
+func nullify_all_states():
+	is_prepared = false[/gd][/ctr]
+<h2>BAD</h2>
+[ctr][gd]func nullify_all_states(): # Resets all animation states to default
+	is_prepared = false[/gd][/ctr]
+[wc]Keep in mind, 
+if you write a comment at the same line as declaration - it'll be ignored as this use-case is not supported.[/wc]
+
+[bc]Variable description[/bc]
+[bc]GOOD[/bc]
+[ctr][gd]# Total Amount of gibs...
+var gib_amount = 10[/gd][/ctr]
+[bc]BAD[/bc]
+[ctr][gd]var gib_amount = 10 # Total Amount of gibs...[/gd][/ctr]
+[wc]Same as in the function description example,
+if you put a comment at the variable's definition - it'll be ignored.[/wc]
+
+[bc]Script file description[/bc]
+[bc]GOOD[/bc]
+[ctr][gd]# This script spawns random gibs (body parts/debris) with physics effects.
+# It creates multiple rigid bodies with collision shapes, applies random
+# forces and torques to simulate explosion/impact, then cleans them up
+# after a configurable time. Includes settings for amount, size, mass,
+# force ranges, and lifetime. Used for gore/debris effects when characters
+# are destroyed. Particles can be customized in the instanced scene.
+#
+# For the time being, only used in cases when characters are exploded.
+
+extends Spatial[/gd][/ctr]
+[bc]BAD[/bc]
+[ctr][gd]extends Spatial
+
+# This script spawns random gibs (body parts/debris) with physics effects.
+# It creates multiple rigid bodies with collision shapes, applies random
+# forces and torques to simulate explosion/impact, then cleans them up
+# after a configurable time. Includes settings for amount, size, mass,
+# force ranges, and lifetime. Used for gore/debris effects when characters
+# are destroyed. Particles can be customized in the instanced scene.
+#
+# For the time being, only used in cases when characters are exploded.[/gd][/ctr]
+[wc]As it was said, if you want to set a description of your script file, you need to write it right on the top of the file. If you add some new lines or code out there, the system will treat this file as the one without any description in it.
+
+Also, be aware, HTML tags are also processed in your comments. If you write HTML code in your code, it'll be visible in the HTML page. Be careful because it might lead to unforeseen results even if you just mention HTML tags as an example. That includes description written in info.tres files too.[/wc]
+
+[wc]You can mark a script as an autoload by writing [gd]# __AUTOLOAD[/gd] on top of the file. If the file's name doesn't represent the class name correctly (or if it just breaks), you can write [gd]# __AUTOLOAD::ClassName[/gd] to define the class name yourself.[/wc]"
+info_rus = "[t]Теги[/t]
+[ctr][gd]
+# Пишутся [вот_так][/вот_так]
+# gd - код GDScript
+# c - обычный \"код\"
+# bc - большой центрированный текст
+# wc - большой центрированный текст с белым фоном
+# t - Заголовок / Большой центрированный текст-разделитель
+# p - Путь, пишется в кавычках и выделяется
+# r - Красный фон с красным текстом, полезно для пометок
+# ctr - Центрирование
+[/gd][/ctr]
+
+[t]Описание[/t]
+Index: Инструмент для генерации документации Purger, написанный за два дня без сна в полном офлайне. Он был создан в 2024 году, и только в 2025 мне удалось начать заполнять документацию, чтобы она хоть как-то отражала базу знаний этого кодовой базы. Изначально это был единственный \"editor script\" в папке editor_scripts, но я решил вынести его в отдельный модуль для удобства доступа.
+
+[bc]Превращает это...[/bc]
+//img:_doc_gen/code0.jpg
+[bc]В это...[/bc]
+//img:_doc_gen/HTML0.jpg
+
+[ctr]
+Как использовать:
+1. [p]res://modules/_doc_gen/src/generate_docs.gd[/p] - кликни дважды
+//img:_doc_gen/file0.jpg
+2. В редакторе скриптов найди [p]generate_docs.gd[/p] слева и просто ПКМ -> [c]Run[/c] (запустить)
+//img:_doc_gen/run0.jpg
+[/ctr]
+
+Для получения дополнительной информации о том, как эта штука работает - просто загляни в комментарии/документацию к [p]res://modules/_doc_gen/src/generate_docs.gd[/p]. Если ты просто используешь эту штуку для обновления страницы документации, это действительно всё, что тебе нужно знать. Однако, если ты хочешь самостоятельно поддерживать документацию, имей в виду: Эта штука парсит комментарии в коде, чтобы превратить их в контент для страницы документации. Дополнительно она использует файлы [p]docs/info.tres[/p] для вставки описаний модулей (вроде того, что ты сейчас читаешь).
+//img:_doc_gen/info0.jpg
+//img:_doc_gen/info1.jpg
+
+Ты должен понимать, что это было написано мной-без-сна и поддерживается мной-без-понятия. Эта штука не идеальна. Тебе нужно знать, как использовать её ПРАВИЛЬНО.
+
+Вот пример идеального скрипта [p]res://modules/post_processing_system/src/effects/black_debug.gd[/p]:
+[gd]# Предоставляет простой полноэкранный чёрный оверлей-эффект для отладки.
+# В основном используется для отладки и визуального тестирования.
+# Кстати, самый первый пост-обработочный эффект.
+
+extends PostProcessingBase
+
+class_name BlackDebugPostProcessing
+
+# Ссылка на шейдерный материал, используемый для эффекта чёрного оверлея
+var shader_mat: ShaderMaterial
+
+# Инициализирует чёрный эффект отладки загрузкой соответствующего шейдера
+func custom_initialize():
+	# Загружает шейдерный материал для чёрной отладки
+	shader_mat = load_shader(\"black_debug\")
+[/gd]
+
+Итак, как видишь, есть несколько моментов, на которые нужно обращать внимание:
+1. В самом верху файла (прямо сверху, с первой же строки, выше всего остального) ты задаёшь описание для своего файла скрипта
+2. Единственный способ определить описание для переменной/константы/перечисления - написать комментарий НАД определением
+3. Второй пункт применяется и к функциям. Даже если эта система может обнаруживать аргументы и всё такое, ты всё равно пишешь, что эти аргументы означают, в комментариях самостоятельно, просто сделай работу
+
+Если ты хочешь задать описание для целого модуля, проверь папку \"docs\" своего модуля (как здесь: [p]res://modules/_doc_gen/docs/info.tres[/p]). Если у тебя нет этой папки в модуле, тебе не нужно её создавать. Просто сгенерируй страницы документации, запустив редакторский скрипт, и тогда она будет автоматически создана для твоего нового модуля. Любой из существующих модулей, с другой стороны, уже должен иметь эту папку.
+
+[bc]Больше примеров здесь...[/bc]
+[bc]Описание функции[/bc]
+[bc]ХОРОШО[/bc]
+[ctr][gd]# Сбрасывает все состояния анимации к значениям по умолчанию
+func nullify_all_states():
+	is_prepared = false[/gd][/ctr]
+<h2>ПЛОХО</h2>
+[ctr][gd]func nullify_all_states(): # Сбрасывает все состояния анимации к значениям по умолчанию
+	is_prepared = false[/gd][/ctr]
+[wc]Имей в виду, 
+если ты напишешь комментарий на той же строке, что и объявление - он будет проигнорирован, так как этот случай не поддерживается.[/wc]
+
+[bc]Описание переменной[/bc]
+[bc]ХОРОШО[/bc]
+[ctr][gd]# Общее количество кусков...
+var gib_amount = 10[/gd][/ctr]
+[bc]ПЛОХО[/bc]
+[ctr][gd]var gib_amount = 10 # Общее количество кусков...[/gd][/ctr]
+[wc]Так же, как в примере с описанием функции,
+если ты поставишь комментарий в строке определения переменной - он будет проигнорирован.[/wc]
+
+[bc]Описание файла скрипта[/bc]
+[bc]ХОРОШО[/bc]
+[ctr][gd]# Этот скрипт спавнит случайные куски (части тел/обломки) с физическими эффектами.
+# Он создаёт несколько твёрдых тел с коллизиями, применяет случайные
+# силы и вращающие моменты для имитации взрыва/удара, затем очищает их
+# через настраиваемое время. Включает настройки количества, размера, массы,
+# диапазонов сил и времени жизни. Используется для эффектов крови/обломков,
+# когда персонажи уничтожаются. Частицы можно настраивать в инстанснутой сцене.
+#
+# На данный момент используется только в случаях, когда персонажи взрываются.
+
+extends Spatial[/gd][/ctr]
+[bc]ПЛОХО[/bc]
+[ctr][gd]extends Spatial
+
+# Этот скрипт спавнит случайные куски (части тел/обломки) с физическими эффектами.
+# Он создаёт несколько твёрдых тел с коллизиями, применяет случайные
+# силы и вращающие моменты для имитации взрыва/удара, затем очищает их
+# через настраиваемое время. Включает настройки количества, размера, массы,
+# диапазонов сил и времени жизни. Используется для эффектов крови/обломков,
+# когда персонажи уничтожаются. Частицы можно настраивать в инстанснутой сцене.
+#
+# На данный момент используется только в случаях, когда персонажи взрываются.[/gd][/ctr]
+[wc]Как уже было сказано, если ты хочешь задать описание для своего файла скрипта, тебе нужно написать его прямо вверху файла. Если ты добавишь там пустые строки или код, система будет считать этот файл таким, в котором нет описания.
+
+Также имей в виду, что HTML-теги тоже обрабатываются в твоих комментариях. Если ты напишешь HTML-код в своём коде, он будет виден на HTML-странице. Будь осторожен, потому что это может привести к непредсказуемым результатам, даже если ты просто упомянешь HTML-теги в качестве примера. Это касается и описаний, написанных в файлах info.tres.[/wc]
+
+[wc]Ты можешь пометить скрипт как autoload, написав [gd]# __AUTOLOAD[/gd] вверху файла. Если имя файла не соответствует имени класса (или если оно просто ломается), ты можешь написать [gd]# __AUTOLOAD::ИмяКласса[/gd], чтобы самостоятельно определить имя класса.[/wc]"
+edit_time = 1.76124e+09

@@ -1,0 +1,33 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "So, let's assume that you've started making a game and you have for about zero clues how you would organize your game levels in a game engine that gives you nothing but scenes and says \"Now this is your bread and you will eat it everyday\". First thought that I had in my mind - hey, I can write a [gd]SceneChanger[/gd] singleton to load *any* scene. With a fancy ass loading screen, too! It would be amazing. It would be something that would make one happy. So I did. Then... Time passed... I made [gd]LocationChanger[/gd]... [gd]SceneChanger[/gd] and [gd]LocationChanger[/gd] have a co-dependent relationship that harms both... And here we are, having a weird kind of technical debt that is playing 4D-chess with my mind. Practically, [gd]SceneChanger[/gd] should work just fine, you'd be able to provide any scene path and it'll handle it just well. But really? I'm not sure. I don't want to know. I don't want to check. It exists *out there*, it does *that*, it fucks with [gd]LocationChanger[/gd] - alright, so be it.
+
+[c]Usage Example[/c]
+[gd]
+SceneChanger.change_scene(\"res://path/to/your/scene.scn\") 
+# Think twice, maybe you just need LocationChanger.change_location(\"game_lvl\")?
+
+SceneChanger.set_status0_text(\"Loading stuff...\")
+SceneChanger.set_status1_text(\"Doing that carefully...\")
+SceneChanger.set_status2_text(\"0 / 1337\")
+[/gd]
+
+Honestly, you don't need to use that class. Except for [gd]set_statusX_text[/gd], you seriously have no reason. Don't. Please. Save your time."
+info_rus = "Итак, предположим, ты начал делать игру и у тебя примерно ноль идей о том, как организовать уровни своей игры в движке, который не даёт тебе ничего, кроме сцен, и говорит: \"Вот твой хлеб, и ты будешь есть его каждый день\". Первая мысль, которая пришла мне в голову - эй, я могу написать синглтон [gd]SceneChanger[/gd] для загрузки *любой* сцены. И с крутой загрузочным экраном тоже! Это было бы потрясающе. Это было бы нечто, что сделало бы человека счастливым. Так я и сделал. Затем... Время прошло... Я сделал [gd]LocationChanger[/gd]... [gd]SceneChanger[/gd] и [gd]LocationChanger[/gd] имеют созависимые отношения, которые вредят обоим... И вот мы здесь, с странным видом технического долга, который играет в 4D-шахматы с моим мозгом. Практически, [gd]SceneChanger[/gd] должен работать просто прекрасно, ты сможешь указать любой путь к сцене, и он с ним прекрасно справится. Но правда? Я не уверен. Я не хочу знать. Я не хочу проверять. Он существует *где-то там*, он делает *это*, он трахается с [gd]LocationChanger[/gd] - ладно, пусть будет так.
+
+[c]Пример использования[/c]
+[gd]
+SceneChanger.change_scene(\"res://path/to/your/scene.scn\") 
+# Подумай дважды, может тебе просто нужен LocationChanger.change_location(\"game_lvl\")?
+
+SceneChanger.set_status0_text(\"Загружаем stuff...\")
+SceneChanger.set_status1_text(\"Делаем это осторожно...\")
+SceneChanger.set_status2_text(\"0 / 1337\")
+[/gd]
+
+Если честно, тебе не нужно использовать этот класс. За исключением [gd]set_statusX_text[/gd], у тебя серьёзно нет причин. Не надо. Пожалуйста. Сэкономь своё время."
+edit_time = 1.76123e+09

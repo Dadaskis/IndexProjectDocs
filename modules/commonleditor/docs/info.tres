@@ -1,0 +1,385 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:common_editor/example0.jpg
+
+A module for common editor development tools. For the time being it has:
+- Gizmos that are used by both [c]comics_renderer[/c] and [c]character_builder[/c] modules
+- Properties UI usable for material editing or other potential purposes
+
+[c]Adding gizmos support to your editor[/c]
+- Instance the following scenes in your editor scene:[gd]
+\"res://modules/common_editor/assets/prefabs/position.tscn\"
+\"res://modules/common_editor/assets/prefabs/rotation.tscn\"[/gd]
+Then, in your main editor script (i assume it's assigned to the root node):
+[c]Steal and forget[/c]
+[gd]
+# Rotation gizmo node that appears when you can rotate something
+onready var rotation_gizmo = $rotation
+# Position gizmo node that shows up when you can reposition something
+onready var position_gizmo = $position
+
+# Array of all selected hitbodies
+var selected = []
+# This variable is used for more precise check of currently selected body.
+# It might not actually store a current one, so you'd better use selected[0]
+var selected_body = null
+# Is user selecting something right now? Used for selection fix
+var is_selecting = false
+# Amount of frames in which user haven't selected anything yet
+# Used for selection fix
+var nothing_selected_frames = 0
+
+# Force selection of certain object. phys_body must have a hit_body script
+# referred to it
+func force_selection(phys_body):
+	select_node_process(phys_body, true)
+
+# Returns a ray dictionary of raycast check. It is sending a ray under cursor.
+func get_camera_ray():
+	var camera = MainCamera.get_camera()
+	if not is_instance_valid(camera):
+		return null
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * 100.0
+	var space_state = get_world().get_direct_space_state()
+	var ray = space_state.intersect_ray(from, to)
+	return ray
+
+# Additional selection check to fix selection inconsistency.
+# Always checking if there's any object under cursor, and if there's one
+# it is resetting nothing_selected_frames and is setting selected_body.
+# Called every physics frame.
+func check_node_selection_ray():
+	var ray = get_camera_ray()
+	if not ray:
+		nothing_selected_frames += 1
+		return
+	if not ray.collider:
+		nothing_selected_frames += 1
+		return
+	nothing_selected_frames = 0
+	selected_body = ray.collider
+
+# I've stolen that shit from Comics Renderer and now i'm not even sure what
+# the fuck it does here. Alright, it used to do some generic selection
+# logic here, but it was replaced by that fucked up selection fix i've made.
+# It is still used in one case when nothing_selected_frames counter is above 10.
+# I don't know why, and i don't want to know why, and i'm not gonna change it.
+func select_node(unselect_previous = true):
+	var ray = get_camera_ray()
+	if not ray:
+		selected.clear()
+		position_gizmo.reset_selection()
+		rotation_gizmo.reset_selection()
+		return
+	if not ray.collider:
+		return
+	select_node_process(ray.collider, unselect_previous)
+
+# Processes selection logic of the target body, used by selection fix instead of select_node.
+# Checks for both HIT_BODY of  \"CommonEditorBody\" used by gizmos.
+func select_node_process(body, unselect_previous = true):
+	if not is_instance_valid(body):
+		return
+	var hit_body = \\
+		HitBodyTool.get_node_property(body, \"CommonEditorBody\")
+	if hit_body:
+		select_hit_body(hit_body, unselect_previous)
+
+# Select a hit_body, simple as that
+func select_hit_body(hit_body, unselect_previous = true):
+	if hit_body.is_selected:
+		rotation_gizmo.remove_selected(hit_body)
+		position_gizmo.remove_selected(hit_body)
+		hit_body.unselect_node()
+		selected.erase(hit_body)
+		return
+	if unselect_previous and not hit_body.dont_deselect_others:
+		for select_body in selected:
+			select_body.unselect_node()
+		rotation_gizmo.reset_selection()
+		position_gizmo.reset_selection()
+		selected = []
+	if hit_body.can_be_rotated:
+		rotation_gizmo.add_selected(hit_body)
+	if hit_body.can_be_positioned:
+		position_gizmo.add_selected(hit_body)
+	hit_body.select_node()
+	selected.append(hit_body)
+
+# Unselect a hit_body
+func unselect_hit_body(hit_body):
+	if hit_body.is_selected:
+		position_gizmo.remove_selected(hit_body)
+		rotation_gizmo.remove_selected(hit_body)
+		hit_body.unselect_node()
+		selected.erase(hit_body)
+
+# Input function, simply checks if user is selecting anything
+func _input(event):
+	if event is InputEventMouseButton:
+		if in_UI:
+			return
+		if event.button_index == 1 and event.pressed:
+			is_selecting = true
+
+# Physics frame update to check following things:
+# - If nothing_selected_frames is greater than 10, there's no selected_body
+# - If the user is selecting something, it'll run the selection logic
+func _physics_process(delta):
+	if nothing_selected_frames > 10:
+		selected_body = null
+	check_node_selection_ray()
+	if is_selecting:
+		is_selecting = false
+		var keep = Input.is_key_pressed(KEY_SHIFT) or \\
+			Input.is_key_pressed(KEY_CONTROL)
+		if nothing_selected_frames > 10:
+			select_node(not keep)
+		else:
+			select_node_process(selected_body, not keep)
+[/gd]
+All of this code should be enough to add support for gizmos in your main editor script, HOWEVER, you need to add this support to your fellow edited objects as well.
+
+[c]Common Editor HitBody support[/c]
+[gd]
+# Reference to the hit body script used for selection and interaction
+const HIT_BODY = preload(
+	\"res://modules/common_editor/src/common_editor_hit_body.gd\")
+
+hit_body = HIT_BODY.new()
+hit_body.real_node = self
+hit_body.can_be_rotated = true
+hit_body.can_be_positioned = true
+hit_body.can_be_removed = true
+var size = get_aabb().get_longest_axis_size()
+hit_body.rotation_scale = size * 0.8
+hit_body.position_scale = size * 0.8
+HitBodyTool.add_node_property(static_body, HIT_BODY.OBJECT_NAME, hit_body)
+[/gd]
+
+AND this is not enough for your supported object to move around! If you want to make it move around, add this snippet:
+[gd]
+# Handles rotation operations from input
+# axis: Rotation axis vector
+# value: Rotation amount
+func on_rotate(axis: Vector3, value: float):
+	var og_axis = axis
+	var bone_rot = value * 0.005
+	if slow_edit:
+		bone_rot *= 0.2
+	rotate_object_local(axis, bone_rot)
+	rot_data.vec3 = rotation_degrees
+
+# Handles position offset operations from input
+# offset: Translation vector
+func on_offset(offset: Vector3):
+	if slow_edit:
+		offset *= 0.1
+	global_transform.origin += offset
+	pos_data.vec3 = position
+[/gd]
+Common Editor's HitBody is calling the following methods in [gd]real_node[/gd]:
+[gd]
+on_select 		# Called on selection
+on_unselect 	# Called when unselected
+on_rotate			# Called when rotated
+on_rotate			# Called on positional offset
+[/gd]
+
+It could've been simpler, but we love shooting our legs, right? :)"
+info_rus = "//img:common_editor/example0.jpg
+
+Модуль для общих инструментов разработки редакторов. На данный момент включает:
+- Gizmos, которые используются как модулями [c]comics_renderer[/c], так и [c]character_builder[/c]
+- UI свойств, пригодный для редактирования материалов или других потенциальных целей
+
+[c]Добавление поддержки gizmos в твой редактор[/c]
+- Инстанциируй следующие сцены в сцене твоего редактора:[gd]
+\"res://modules/common_editor/assets/prefabs/position.tscn\"
+\"res://modules/common_editor/assets/prefabs/rotation.tscn\"[/gd]
+Затем, в твоём главном скрипте редактора (я предполагаю, он назначен на корневой узел):
+[c]Украсть и забыть[/c]
+[gd]
+# Узел gizmo вращения, который появляется, когда ты можешь что-то вращать
+onready var rotation_gizmo = $rotation
+# Узел gizmo позиции, который показывается, когда ты можешь перемещать что-то
+onready var position_gizmo = $position
+
+# Массив всех выбранных hitbodies
+var selected = []
+# Эта переменная используется для более точной проверки текущего выбранного body.
+# Она может на деле не хранить текущий, так что тебе лучше использовать selected[0]
+var selected_body = null
+# Пользователь directly сейчас что-то выбирает? Используется для исправления выделения
+var is_selecting = false
+# Количество кадров, в которых пользователь ещё ничего не выбрал
+# Используется для исправления выделения
+var nothing_selected_frames = 0
+
+# Принудительное выделение определённого объекта. phys_body должен иметь скрипт hit_body
+# привязанный к нему
+func force_selection(phys_body):
+	select_node_process(phys_body, true)
+
+# Возвращает словарь рейкаста проверки. Он отправляет луч под курсором.
+func get_camera_ray():
+	var camera = MainCamera.get_camera()
+	if not is_instance_valid(camera):
+		return null
+	var mouse_pos = get_viewport().get_mouse_position()
+	var from = camera.project_ray_origin(mouse_pos)
+	var to = from + camera.project_ray_normal(mouse_pos) * 100.0
+	var space_state = get_world().get_direct_space_state()
+	var ray = space_state.intersect_ray(from, to)
+	return ray
+
+# Дополнительная проверка выделения для исправления несогласованности выделения.
+# Всегда проверяет, есть ли какой-либо объект под курсором, и если есть,
+# сбрасывает nothing_selected_frames и устанавливает selected_body.
+# Вызывается каждый физический кадр.
+func check_node_selection_ray():
+	var ray = get_camera_ray()
+	if not ray:
+		nothing_selected_frames += 1
+		return
+	if not ray.collider:
+		nothing_selected_frames += 1
+		return
+	nothing_selected_frames = 0
+	selected_body = ray.collider
+
+# Я украл это дерьмо из Comics Renderer и теперь я даже не уверен, что
+# блять оно здесь делает. Ладно, раньше оно делало какую-то общую логику
+# выделения здесь, но оно было заменено тем ебанутым исправлением выделения, которое я сделал.
+# Оно всё ещё используется в одном случае, когда счётчик nothing_selected_frames выше 10.
+# Я не знаю почему, и я не хочу знать почему, и я не собираюсь это менять.
+func select_node(unselect_previous = true):
+	var ray = get_camera_ray()
+	if not ray:
+		selected.clear()
+		position_gizmo.reset_selection()
+		rotation_gizmo.reset_selection()
+		return
+	if not ray.collider:
+		return
+	select_node_process(ray.collider, unselect_previous)
+
+# Обрабатывает логику выделения целевого body, используется исправлением выделения вместо select_node.
+# Проверяет как HIT_BODY \"CommonEditorBody\", используемый gizmos.
+func select_node_process(body, unselect_previous = true):
+	if not is_instance_valid(body):
+		return
+	var hit_body = \\
+		HitBodyTool.get_node_property(body, \"CommonEditorBody\")
+	if hit_body:
+		select_hit_body(hit_body, unselect_previous)
+
+# Выделить hit_body, просто как дважды два
+func select_hit_body(hit_body, unselect_previous = true):
+	if hit_body.is_selected:
+		rotation_gizmo.remove_selected(hit_body)
+		position_gizmo.remove_selected(hit_body)
+		hit_body.unselect_node()
+		selected.erase(hit_body)
+		return
+	if unselect_previous and not hit_body.dont_deselect_others:
+		for select_body in selected:
+			select_body.unselect_node()
+		rotation_gizmo.reset_selection()
+		position_gizmo.reset_selection()
+		selected = []
+	if hit_body.can_be_rotated:
+		rotation_gizmo.add_selected(hit_body)
+	if hit_body.can_be_positioned:
+		position_gizmo.add_selected(hit_body)
+	hit_body.select_node()
+	selected.append(hit_body)
+
+# Снять выделение с hit_body
+func unselect_hit_body(hit_body):
+	if hit_body.is_selected:
+		position_gizmo.remove_selected(hit_body)
+		rotation_gizmo.remove_selected(hit_body)
+		hit_body.unselect_node()
+		selected.erase(hit_body)
+
+# Функция ввода, просто проверяет, выбирает ли пользователь что-либо
+func _input(event):
+	if event is InputEventMouseButton:
+		if in_UI:
+			return
+		if event.button_index == 1 and event.pressed:
+			is_selecting = true
+
+# Обновление физического кадра для проверки следующих вещей:
+# - Если nothing_selected_frames больше 10, нет selected_body
+# - Если пользователь что-то выбирает, запустит логику выделения
+func _physics_process(delta):
+	if nothing_selected_frames > 10:
+		selected_body = null
+	check_node_selection_ray()
+	if is_selecting:
+		is_selecting = false
+		var keep = Input.is_key_pressed(KEY_SHIFT) or \\
+			Input.is_key_pressed(KEY_CONTROL)
+		if nothing_selected_frames > 10:
+			select_node(not keep)
+		else:
+			select_node_process(selected_body, not keep)
+[/gd]
+Всё этого кода должно быть достаточно для добавления поддержки gizmos в твой главный скрипт редактора, ОДНАКО, тебе нужно добавить эту поддержку и твоим редактируемым объектам тоже.
+
+[c]Поддержка Common Editor HitBody[/c]
+[gd]
+# Ссылка на скрипт hit body, используемый для выделения и взаимодействия
+const HIT_BODY = preload(
+	\"res://modules/common_editor/src/common_editor_hit_body.gd\")
+
+hit_body = HIT_BODY.new()
+hit_body.real_node = self
+hit_body.can_be_rotated = true
+hit_body.can_be_positioned = true
+hit_body.can_be_removed = true
+var size = get_aabb().get_longest_axis_size()
+hit_body.rotation_scale = size * 0.8
+hit_body.position_scale = size * 0.8
+HitBodyTool.add_node_property(static_body, HIT_BODY.OBJECT_NAME, hit_body)
+[/gd]
+
+И этого НЕ enough для твоего поддерживаемого объекта, чтобы перемещаться! Если ты хочешь, чтобы он перемещался, добавь этот сниппет:
+[gd]
+# Обрабатывает операции вращения из ввода
+# axis: Вектор оси вращения
+# value: Количество вращения
+func on_rotate(axis: Vector3, value: float):
+	var og_axis = axis
+	var bone_rot = value * 0.005
+	if slow_edit:
+		bone_rot *= 0.2
+	rotate_object_local(axis, bone_rot)
+	rot_data.vec3 = rotation_degrees
+
+# Обрабатывает операции смещения позиции из ввода
+# offset: Вектор трансляции
+func on_offset(offset: Vector3):
+	if slow_edit:
+		offset *= 0.1
+	global_transform.origin += offset
+	pos_data.vec3 = position
+[/gd]
+HitBody Common Editor вызывает следующие методы в [gd]real_node[/gd]:
+[gd]
+on_select 		# Вызывается при выделении
+on_unselect 	# Вызывается при снятии выделения
+on_rotate			# Вызывается при вращении
+on_rotate			# Вызывается при смещении позиции
+[/gd]
+
+Это могло бы быть проще, но мы любим стрелять себе в ноги, верно? :)"
+edit_time = 1.76113e+09

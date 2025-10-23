@@ -67,10 +67,8 @@ function toggleModule(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.sidebar-content').innerHTML = `
-        <p>Guides</p><a class="sidebar-class module-var" href="../../_guide/guides_HTML/General.html">General</a>
-<p>Modules</p><a class="sidebar-class module-var" href="../../modules/_doc_gen/docs/index.html">_doc_gen<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
-<a class="sidebar-class class-resource" href="../../modules/_doc_gen/docs/scripts/generate_docs.html">GenerateDocs</a>
-</div><a class="sidebar-class module-var" href="../../modules/achievements/docs/index.html">achievements<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+        <p>Guides</p><a class="sidebar-class module-var" href="../../assets/guides/General.html">General</a>
+<p>Modules</p><a class="sidebar-class module-var" href="../../modules/achievements/docs/index.html">achievements<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../modules/achievements/docs/scripts/achievement_unlocked_display.html">AchievementUnlockedDisplay</a>
 <a class="sidebar-class class-node" href="../../modules/achievements/docs/scripts/achievements.html">Achievements</a>
 <a class="sidebar-class class-resource" href="../../modules/achievements/docs/scripts/achievement_data.html">AchievementData</a>
@@ -209,6 +207,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../modules/difficulty/docs/scripts/difficulty.html">difficulty</a>
 </div><a class="sidebar-class module-var" href="../../modules/discord_rpc/docs/index.html">discord_rpc<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../modules/discord_rpc/docs/scripts/discord_game_rpc.html">DiscordGameRpc</a>
+</div><a class="sidebar-class module-var" href="../../modules/doc_gen/docs/index.html">doc_gen<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-resource" href="../../modules/doc_gen/docs/scripts/generate_docs.html">GenerateDocs</a>
+<a class="sidebar-class class-other" href="../../modules/doc_gen/docs/scripts/export_docs_standalone.html">export_docs_standalone</a>
 </div><a class="sidebar-class module-var" href="../../modules/doc_info/docs/index.html">doc_info<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../modules/doc_info/docs/scripts/doc_info_saver.html">DocInfoSaver</a>
 <a class="sidebar-class class-resource" href="../../modules/doc_info/docs/scripts/doc_info.html">DocInfo</a>
@@ -884,11 +885,9 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebarClasses.forEach((selection) => {
         let partHref = selection.getAttribute('href');
         partHref = partHref.split("index")[0]
-        partHref = partHref.split("__RUS")[0]
         partHref = partHref.replace(/\.\.\//g, "");
         let windowHref = window.location.href
         windowHref = windowHref.split("index")[0]
-        windowHref = windowHref.split("__RUS")[0]
         if(windowHref.indexOf(partHref) !== -1) {
             selection.className = "sidebar-current " + selection.className;
         }

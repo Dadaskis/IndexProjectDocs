@@ -1,0 +1,131 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Color grading module that applies LUT texture color grading on screen. Has a bit of handy functions to make it work inside of editor as well.
+
+[c]Usage example[/c]
+[gd]
+ColorGrading.change_LUT(\"sin_city2\")
+[/gd]
+
+//img:color_grading/example0.png
+//img:color_grading/example1.png
+
+Yeah, it's easy as that, there's nothing much to say about it, except... You might wonder: How exactly do you make your own color grading LUT?
+
+This is a clear LUT, that does not affect the colors:
+//img:color_grading/clear_LUT.jpg
+Here's colder version of this LUT:
+//img:color_grading/cold_LUT.jpg
+Here's a version of this LUT that highlights reds:
+//img:color_grading/red_LUT.jpg
+
+As you can probably see, the main thing about LUT (Look-Up Texture) - it is just an array of colors that can be used by the game's renderer. Here's step-by-step guide how to make one yourself.
+
+Firstly, find a place you'd like to use as a \"sample\". I assume that you'd make color grading that *fits* specific place, but, either way, just find a place.
+//img:color_grading/make0.jpg
+Open a developer menu (by using [gd]dev_menu[/gd] console command) and find \"Take LUT Screenshot\" button in debug tools
+//img:color_grading/make1.jpg
+After pressing this button, your game will temporarily freeze to take a screenshot with clear LUT sample on top. You need to locate [gd]\"user://screenshots\"[/gd] to find your new screenshot. You can do it as easily as pressing this button in editor...
+//img:color_grading/make2.jpg
+And then find your fancy new screenshot
+//img:color_grading/make3.jpg
+//img:color_grading/make4.jpg
+This is just a screenshot, of course, but it has additional information in it, that is an identity LUT texture placed on the top-left corner of the image
+//img:color_grading/make5.jpg
+This gives you possibility to take this screenshot and edit it to your will. However, you need to know: You can't use all operations of your preferred image editor, but only those that are affecting ALL colors in your image. Effects like brightness, contrast, saturation, curves, tonemapping, highlighing, etc. In GIMP, you can find such effects under \"colors\" tab here.
+//img:color_grading/make6.jpg
+Let's assume that you've made all the changes related to your screenshot as you wanted, made it more cold for example
+//img:color_grading/make7.jpg
+After this, you simply apply all effects, select this part of the image that is the LUT itself (notice how it changed its own colors too), and then you just copy it and create a new image based on your clipboard data
+//img:color_grading/make8.jpg
+//img:color_grading/make9.jpg
+The last step in image editor is going to be about exporting your new LUT texture. All LUT textures are saved at [gd]\"res://modules/color_grading/assets/LUTs/\"[/gd] as .PNG image files, and name of your image file sets the name of future color grading LUT as well
+//img:color_grading/make10.jpg
+Sadly, there's one more step that is related editor importing settings. By default, .PNG textures have VRAM compression, repetition, and other unnecessary settings that will make LUT look even more broken that it actually is. To fix that, locate your LUT in Godot and double click it...
+//img:color_grading/make11.jpg
+Change your import settings to the following...
+Compression mode: Lossless
+Repeat: Disabled
+Filter: Disabled
+Mipmaps: Disabled
+Anisotropic: Disabled
+sRGB: Disable
+//img:color_grading/make12.jpg
+
+And... after all this... You should be good to go. You can test your fancy new color grading in game using dev-menu:
+//img:color_grading/make13.jpg
+//img:color_grading/make14.jpg
+
+You can use color grading in multiple ways. Firstly, you can set color grading LUT in one of the [gd]LocationBase[/gd] exports, which will set color grading for the entire location. This will also enable in-editor preview of your LUT. You can also use AssetHelper to assign a LUT too.
+//img:color_grading/make15.jpg
+Or you can use [gd]st_change_location_lut_texture[/gd] which will allow you to switch a LUT based on a location event.
+//img:color_grading/make16.jpg
+
+Have fun changing colors. Color grading doesn't have any performance cost, so you can use it as much as you wish. Players, of course, still have a possibility to disable color grading in its entirety, because... as it seems there are always players that love to disable it for whichever reason."
+info_rus = "Модуль цветокоррекции, который применяет цветокоррекцию через LUT-текстуру на экране. Имеет несколько удобных функций для работы внутри редактора.
+
+[c]Пример использования[/c]
+[gd]
+ColorGrading.change_LUT(\"sin_city2\")
+[/gd]
+
+//img:color_grading/example0.png
+//img:color_grading/example1.png
+
+Да, это просто как дважды два, тут нечего особо добавить, кроме... Тебе возможно интересно: Как именно сделать свою собственную LUT для цветокоррекции?
+
+Это чистая LUT, которая не влияет на цвета:
+//img:color_grading/clear_LUT.jpg
+Вот более холодная версия этой LUT:
+//img:color_grading/cold_LUT.jpg
+А вот версия этой LUT, которая выделяет красные цвета:
+//img:color_grading/red_LUT.jpg
+
+Как ты видишь, главное в LUT (Look-Up Texture) - это просто массив цветов, который может использоваться рендером игры. Вот пошаговое руководство, как сделать её самостоятельно.
+
+Во-первых, найди место, которое ты хотел бы использовать как \"образец\". Я предполагаю, что ты будешь делать цветокоррекцию, которая *подходит* под конкретное место, но, в любом случае, просто найди место.
+//img:color_grading/make0.jpg
+Открой меню разработчика (с помощью консольной команды [gd]dev_menu[/gd]) и найди кнопку \"Take LUT Screenshot\" в инструментах отладки
+//img:color_grading/make1.jpg
+После нажатия этой кнопки твоя игра временно зависнет, чтобы сделать скриншот с образцом чистой LUT сверху. Тебе нужно найти [gd]\"user://screenshots\"[/gd], чтобы найти свой новый скриншот. Ты можешь сделать это так же с лёгкостью, как нажав эту кнопку в редакторе...
+//img:color_grading/make2.jpg
+И затем найти свой новый крутой скриншот
+//img:color_grading/make3.jpg
+//img:color_grading/make4.jpg
+Это просто скриншот, конечно, но он содержит дополнительную информацию - identity LUT текстуру, размещённую в верхнем левом углу изображения
+//img:color_grading/make5.jpg
+Это даёт тебе возможность взять этот скриншот и редактировать его по своему желанию. Однако тебе нужно знать: Ты не можешь использовать все операции твоего предпочитаемого графического редактора, а только те, которые влияют на ВСЕ цвета в твоём изображении. Эффекты вроде яркости, контрастности, насыщенности, кривых, тонирования, выделения и т.д. В GIMP ты можешь найти такие эффекты во вкладке \"colors\" здесь.
+//img:color_grading/make6.jpg
+Предположим, что ты сделал все изменения, связанные с твоим скриншотом, как ты хотел, сделал его более холодным, например
+//img:color_grading/make7.jpg
+После этого ты просто применяешь все эффекты, выделяешь эту часть изображения, которая является самой LUT (заметь, как она тоже изменила свои цвета), и затем ты просто копируешь её и создаёшь новое изображение на основе данных из буфера обмена
+//img:color_grading/make8.jpg
+//img:color_grading/make9.jpg
+Последний шаг в графическом редакторе будет связан с экспортом твоей новой LUT-текстуры. Все LUT-текстуры сохраняются в [gd]\"res://modules/color_grading/assets/LUTs/\"[/gd] как .PNG файлы изображений, и имя твоего файла изображения также устанавливает имя будущей LUT цветокоррекции
+//img:color_grading/make10.jpg
+К сожалению, есть ещё один шаг, связанный с настройками импорта в редакторе. По умолчанию .PNG текстуры имеют VRAM сжатие, повторение и другие ненужные настройки, которые сделают LUT ещё более сломанной, чем она на самом деле есть. Чтобы исправить это, найди свою LUT в Godot и дважды щёлкни по ней...
+//img:color_grading/make11.jpg
+Измени настройки импорта на следующие...
+Compression mode: Lossless
+Repeat: Disabled
+Filter: Disabled
+Mipmaps: Disabled
+Anisotropic: Disabled
+sRGB: Disable
+//img:color_grading/make12.jpg
+
+И... после всего этого... Всё должно быть готово. Ты можешь протестировать свою новую крутую цветокоррекцию в игре, используя дев-меню:
+//img:color_grading/make13.jpg
+//img:color_grading/make14.jpg
+
+Ты можешь использовать цветокоррекцию несколькими способами. Во-первых, ты можешь установить LUT цветокоррекции в одном из экспортов [gd]LocationBase[/gd], что установит цветокоррекцию для всей локации. Это также включит превью твоей LUT в редакторе. Ты также можешь использовать AssetHelper, чтобы назначить LUT.
+//img:color_grading/make15.jpg
+Или ты можешь использовать [gd]st_change_location_lut_texture[/gd], который позволит тебе переключать LUT на основе события локации.
+//img:color_grading/make16.jpg
+
+Веселись, меняя цвета. Цветокоррекция не имеет никакой производительной стоимости, так что ты можешь использовать её сколько угодно. Игроки, конечно, всё ещё имеют возможность полностью отключить цветокоррекцию, потому что... как кажется, всегда есть игроки, которые любят отключать её по какой-либо причине."
+edit_time = 1.76113e+09

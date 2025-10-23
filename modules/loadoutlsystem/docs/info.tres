@@ -1,0 +1,169 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "So, in the very old days, there weren't any menus for loadout. You had to pick the weapons all by yourself in a specific location where you just use the props to select your equipment. That's it. Did it work? It did. However, after testing build 4, after playing it a couple of times, I realized that... it's boring. No, seriously, it's boring to have a very limited set of weapons, a very limited set of armor, and, of course, no possibility to choose perks except for the special devices. That's when it was decided to make a menu for loadout instead. Why would you need to know about that? Well, if you'd take a look into code, you may notice some GARBAGE out there. Don't touch that garbage and just know what it does there.
+
+//img:loadout_system/example0.png
+
+[wc]General Technical Info[/wc]
+- [p]res://modules/loadout_system/assets/ui_scene/loadout_ui.tscn[/p] is the scene that has the UI. Less likely you'd need to work with that, but, hey, you need to know just in case.
+- [gd]LoadoutSelection[/gd] node is the one that is opening up the fancy loadout UI.
+- [gd]LoadoutSystem[/gd] is the singleton that handles all the logic.
+- [gd]LoadoutSystem[/gd] is using [gd]Globals[/gd] to store the data. It doesn't use the local variables and [gd]Checkpoints[/gd] saving as much because it didn't have a proper saving system by the time when it was made.
+
+Simple, isn't it?
+
+[wc]How do you add an item?[/wc]
+- Locate [p]res://modules/loadout_system/assets/items/[/p]
+- Decide what you want to add. Each folder is a separate category that is processed separately.
+- Create an appropriate [gd]Resource[/gd]-derived file.
+	- [gd]LoadoutPerkItem[/gd] for perks.
+	- [gd]LoadoutOperationItem[/gd] for \"operations\" (forget about it, it's outdated)
+	- [gd]LoadoutWeaponItem[/gd] for weapons.
+	- [gd]LoadoutSpecialDeviceItem[/gd] for special devices.
+	- [gd]LoadoutArmorItem[/gd] for armor parts.
+- [r][For weapons][/r] Make an icon with [p]loadout_iconmaker[/p] location.
+- [r][For everything else][/r] Follow the procedure for an icon:
+	- Get an image you want to work with.
+	- Pick an image editor of your choice.
+	- Open the image.
+	- Desaturate to black/white image.
+	- Tweak brightness/contrast (both brightness and contrast are high).
+	- Add sharpen.
+	- Cut out for transparency.
+	- Save at:
+		- [p]res://modules/loadout_system/assets/ui_images/big_[NAME].png[/p] for a big icon image.
+		- [p]res://modules/loadout_system/assets/ui_images/small_[NAME].png[/p] for a small icon image.
+	- Configure both [p]image_icon[/p] and [p]image_icon_small[/p] properties in your [gd]LoadoutItemDataBase[/gd]-derived file.
+
+[wc]Code example[/wc]
+[ctr][gd]
+# Set primary weapon
+LoadoutSystem.set_primary_weapon(\"AR-100\")
+# Get primary weapon
+var primary_weapon = LoadoutSystem.get_primary_weapon()
+# There's also...
+# get/set_secondary_weapon
+# get/set_melee_weapon
+# get/set_grenade_weapon
+# get/set_usable_item
+# get/set_special_device
+
+# Apply an armor part
+var item = load(\"res://modules/loadout_system/assets/items/armor/body/body_armor_lvl1.tres\")
+LoadoutSystem.set_armor_part(item.armor_type, item.get_armor_data_dict())
+
+# Apply perks
+var perks = [
+	load(\"res://modules/loadout_system/assets/items/perks/complex/perk_maniac.tres\"),
+	load(\"res://modules/loadout_system/assets/items/perks/behavior/perk_2_fast.tres\")
+]
+LoadoutSystem.set_perks_list(perks)
+
+# Give loadout to the player
+var player = PlayerData.player
+LoadoutSystem.refill_supplies()
+var loadout = LoadoutSystem.LoadoutMask.new()
+loadout.give_first = true
+loadout.give_second = true
+loadout.give_melee = true
+loadout.give_item = true
+loadout.give_grenade = true
+loadout.give_special_device = false
+loadout.give_armor = true
+loadout.activate_perks = true
+LoadoutSystem.give_loadout_to_player(loadout)
+player.initialize_perk_related_things()
+player.nv_enabled = false
+player.flashlight_enabled = false
+LoadoutSystem.reset_refill_supplies()
+[/gd][/ctr]
+
+If you wonder about the mystery modes, you can check them at [p]res://modules/loadout_system/src/logic/perk_mystery.gd[/p]
+
+Have fun."
+info_rus = "Итак, в старые времена не было никаких меню для снаряжения. Тебе приходилось самостоятельно выбирать оружие в определённой локации, где ты просто использовал пропсы для выбора своей экипировки. И всё. Работало ли это? Да. Однако после тестирования сборки 4, после нескольких игровых сессий, я понял, что... это скучно. Нет, серьёзно, скучно иметь очень ограниченный набор оружия, очень ограниченный набор брони и, конечно, никакой возможности выбирать перки, кроме специальных устройств. Именно тогда было решено сделать меню для снаряжения вместо этого. Зачем тебе нужно это знать? Ну, если ты заглянешь в код, ты можешь заметить там МУСОР. Не трогай этот мусор и просто знай, что он там делает.
+
+//img:loadout_system/example0.png
+
+[wc]Общая техническая информация[/wc]
+- [p]res://modules/loadout_system/assets/ui_scene/loadout_ui.tscn[/p] - это сцена, в которой находится UI. Маловероятно, что тебе понадобится работать с этим, но, эй, тебе нужно знать на всякий случай.
+- Узел [gd]LoadoutSelection[/gd] - это тот, который открывает крутой UI снаряжения.
+- [gd]LoadoutSystem[/gd] - это синглтон, который обрабатывает всю логику.
+- [gd]LoadoutSystem[/gd] использует [gd]Globals[/gd] для хранения данных. Он не использует локальные переменные и сохранение [gd]Checkpoints[/gd] так уж много, потому что у него не было proper системы сохранения к тому времени, когда он был сделан.
+
+Просто, не так ли?
+
+[wc]Как добавить предмет?[/wc]
+- Найди [p]res://modules/loadout_system/assets/items/[/p]
+- Реши, что ты хочешь добавить. Каждая папка - это отдельная категория, которая обрабатывается отдельно.
+- Создай соответствующий файл, производный от [gd]Resource[/gd].
+	- [gd]LoadoutPerkItem[/gd] для перков.
+	- [gd]LoadoutOperationItem[/gd] для \"операций\" (забудь об этом, это устарело)
+	- [gd]LoadoutWeaponItem[/gd] для оружия.
+	- [gd]LoadoutSpecialDeviceItem[/gd] для специальных устройств.
+	- [gd]LoadoutArmorItem[/gd] для частей брони.
+- [r][Для оружия][/r] Сделай иконку в локации [p]loadout_iconmaker[/p].
+- [r][Для всего остального][/r] Следуй процедуре для иконки:
+	- Возьми изображение, с которым хочешь работать.
+	- Выбери графический редактор по своему выбору.
+	- Открой изображение.
+	- Обесцветь до чёрно-белого изображения.
+	- Настрой яркость/контрастность (и яркость, и контрастность высокие).
+	- Добавь резкость.
+	- Вырежи для прозрачности.
+	- Сохрани по адресу:
+		- [p]res://modules/loadout_system/assets/ui_images/big_[NAME].png[/p] для большого изображения иконки.
+		- [p]res://modules/loadout_system/assets/ui_images/small_[NAME].png[/p] для маленького изображения иконки.
+	- Настрой оба свойства [p]image_icon[/p] и [p]image_icon_small[/p] в твоём файле, производном от [gd]LoadoutItemDataBase[/gd].
+
+[wc]Пример кода[/wc]
+[ctr][gd]
+# Установить основное оружие
+LoadoutSystem.set_primary_weapon(\"AR-100\")
+# Получить основное оружие
+var primary_weapon = LoadoutSystem.get_primary_weapon()
+# Также есть...
+# get/set_secondary_weapon
+# get/set_melee_weapon
+# get/set_grenade_weapon
+# get/set_usable_item
+# get/set_special_device
+
+# Применить часть брони
+var item = load(\"res://modules/loadout_system/assets/items/armor/body/body_armor_lvl1.tres\")
+LoadoutSystem.set_armor_part(item.armor_type, item.get_armor_data_dict())
+
+# Применить перки
+var perks = [
+	load(\"res://modules/loadout_system/assets/items/perks/complex/perk_maniac.tres\"),
+	load(\"res://modules/loadout_system/assets/items/perks/behavior/perk_2_fast.tres\")
+]
+LoadoutSystem.set_perks_list(perks)
+
+# Выдать снаряжение игроку
+var player = PlayerData.player
+LoadoutSystem.refill_supplies()
+var loadout = LoadoutSystem.LoadoutMask.new()
+loadout.give_first = true
+loadout.give_second = true
+loadout.give_melee = true
+loadout.give_item = true
+loadout.give_grenade = true
+loadout.give_special_device = false
+loadout.give_armor = true
+loadout.activate_perks = true
+LoadoutSystem.give_loadout_to_player(loadout)
+player.initialize_perk_related_things()
+player.nv_enabled = false
+player.flashlight_enabled = false
+LoadoutSystem.reset_refill_supplies()
+[/gd][/ctr]
+
+Если тебе интересно о mystery режимах, ты можешь проверить их в [p]res://modules/loadout_system/src/logic/perk_mystery.gd[/p]
+
+Веселись."
+edit_time = 1.76123e+09

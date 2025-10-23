@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationSmoke[/gd] creates a smoke particle effect, provides a set of controls to easily tweak.
+
+//img:location_smoke/example0.png
+
+Most of these properties should be self-explanatory. Please be adviced that you need to change [p]Extents[/p] property to actually change the volume of emitted smoke particles."
+info_rus = "[gd]LocationSmoke[/gd] создаёт эффект частиц дыма и предоставляет набор элементов управления для лёгкой настройки.
+
+//img:location_smoke/example0.png
+
+Большинство этих свойств должны быть self-explanatory. Пожалуйста, имей в виду, что тебе нужно изменить свойство [p]Extents[/p], чтобы на самом деле изменить объём испускаемых частиц дыма."
+edit_time = 1.76123e+09

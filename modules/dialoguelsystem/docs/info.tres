@@ -1,0 +1,99 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Dialogue system for this game. Doesn't provide any kind of UI, but it does make it possible to create dialog graphs in [gd]\"res://modules/dialogue_system/assets/scenes/dialog_creator.tscn\"[/gd] scene. You can also simply change location to [p]dialog_editor[/p] and it will allow you to access it too.
+
+[t]Dialog Graph Editor[/t]
+//img:dialogue_system/editor0.jpg
+
+A simple graph editing interface to make dialogs. Interface is simple overall, and it was one of the first tools ever written for this game at the start of development, when i had not much clue on how to work with UI. Therefore it is missing some functionality AND is practicing eldritch fucking horror practices. But it works, so...
+
+[c]Loading existing files[/c]
+Firstly - to load an existing dialog file that have been saved one day, you need a name of that damn dialog file. You can find all saved dialog files here: [p]res://modules/dialogue_system/assets/dialogs/[/p]
+//img:dialogue_system/files0.jpg
+
+In a text field above \"Load\" button you simply enter the name and press \"Load\". When you are done editing - press \"Save\".
+
+[c]Nodes order[/c]
+While you can potentially just connect anything with everything as you wish, it may not work correctly, so keep in mind, there's following pattern:
+[r]
+	Start -> Answer
+	Answer -> Choice
+	Choice -> Option -- or -- Multiple Options
+	Option -> Answer
+	Option -> Ending
+[/r]
+
+Nodes can be used for cyclic connections, aka you can ask a question and go back to a \"Choice\" node that provided you that option.
+
+[c]Nodes purpose[/c]
+Start			-		The starting point in a dialog graph. Connects to Answer to start a conversation
+Answer		- 		Answer of other person in dialog, not player. Connects to Choice to provide player options.
+Choice		-		A relay-like node that connects multiple Options.
+Option		-		Player's response that either leads to an Answer or Ending
+Ending		-		The dialog graph's ending! Emits an event that can be handled in a [c]Dialog Script[/c]
+
+[c]Dialog Script[/c]
+Dialog scripts are special kind of scripts made to \"react\" to an ending of a dialog. All of them are stored in [p]res://locations/scenes/dialog_logic/[/p].
+[gd]
+# Dialog logic template
+extends DialogLogicBase
+
+func on_end(event_name):
+	match event_name:
+		\"ending0\":
+			# ...
+		\"ending1\":
+			# ...
+[/gd]
+It's basically about running code that'd react to a specified ending. Ending name is entered in \"Ending\" node. Please be advised that [c]script's file name is must to be assigned to the dialog file's name to function properly.[/c] If your dialog file is called [p]m_day0_dialog[/p], then file name of your script is going to be [p]m_day0_dialog.gd[/p]. Also keep in mind that all dialog logic script are extending [gd]DialogLogicBase[/gd]."
+info_rus = "Диалоговая система для этой игры. Не предоставляет какой-либо UI, но позволяет создавать диалоговые графы в сцене [gd]\"res://modules/dialogue_system/assets/scenes/dialog_creator.tscn\"[/gd]. Вы также можете просто перейти в локацию [p]dialog_editor[/p], и это тоже даст вам доступ к редактору.
+
+[t]Редактор диалоговых графов[/t]
+//img:dialogue_system/editor0.jpg
+
+Простой интерфейс редактирования графов для создания диалогов. Интерфейс в целом простой, и это был один из первых инструментов, написанных для этой игры в начале разработки, когда я не очень понимал, как работать с UI. Поэтому в нём не хватает некоторого функционала И используются практики древнего ебучего ужаса. Но оно работает, так что...
+
+[c]Загрузка существующих файлов[/c]
+Во-первых - чтобы загрузить существующий файл диалога, который был сохранён когда-то, вам нужно имя этого чёртова файла диалога. Все сохранённые файлы диалогов можно найти здесь: [p]res://modules/dialogue_system/assets/dialogs/[/p]
+//img:dialogue_system/files0.jpg
+
+В текстовом поле над кнопкой \"Load\" вы просто вводите имя и нажимаете \"Load\". Когда закончите редактирование - нажмите \"Save\".
+
+[c]Порядок узлов[/c]
+Хотя вы можете потенциально соединять что угодно с чем угодно по своему желанию, это может работать некорректно, так что имейте в виду следующую схему:
+[r]
+	Start -> Answer
+	Answer -> Choice
+	Choice -> Option -- или -- Multiple Options
+	Option -> Answer
+	Option -> Ending
+[/r]
+
+Узлы могут использоваться для циклических соединений, т.е. вы можете задать вопрос и вернуться к узлу \"Choice\", который предоставил вам эту опцию.
+
+[c]Назначение узлов[/c]
+Start			-		Начальная точка в диалоговом графе. Соединяется с Answer для начала разговора
+Answer		- 		Ответ другого человека в диалоге, не игрока. Соединяется с Choice для предоставления игроку вариантов
+Choice		-		Ретрансляционный узел, соединяющий несколько Option
+Option		-		Ответ игрока, который ведёт либо к Answer, либо к Ending
+Ending		-		Завершение диалогового графа! Генерирует событие, которое может быть обработано в [c]Dialog Script[/c]
+
+[c]Диалоговый скрипт[/c]
+Диалоговые скрипты - это особый вид скриптов, созданных для \"реакции\" на завершение диалога. Все они хранятся в [p]res://locations/scenes/dialog_logic/[/p].
+[gd]
+# Шаблон логики диалога
+extends DialogLogicBase
+
+func on_end(event_name):
+	match event_name:
+		\"ending0\":
+			# ...
+		\"ending1\":
+			# ...
+[/gd]
+По сути, это запуск кода, который реагирует на указанное завершение. Имя завершения вводится в узле \"Ending\". Пожалуйста, учтите, что [c]имя файла скрипта должно соответствовать имени файла диалога для правильной работы.[/c] Если ваш файл диалога называется [p]m_day0_dialog[/p], то имя файла вашего скрипта будет [p]m_day0_dialog.gd[/p]. Также помните, что все скрипты логики диалогов наследуются от [gd]DialogLogicBase[/gd]."
+edit_time = 1.76113e+09

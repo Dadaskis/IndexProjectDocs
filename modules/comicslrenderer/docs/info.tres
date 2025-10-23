@@ -1,0 +1,223 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:comics_renderer/example0.jpg
+//img:comics_renderer/example1.jpg
+
+So... Long story short... Why this one exists? Well, i tried working with Blender and GIMP, got some nice results... as well as severe pain in ass in the following moments:
+- .blend and .xcf files take up a lot of space
+- It's painfully slow
+- Hard to edit later
+- Et cetera...
+
+Comics Renderer is supposed to be an easy-to-use tool to render characters at any locations with ultimate possibility of returning back to edit it later. This game is featuring comics that are using a lot of glitch effects that would potentially turn it to a glitch-art of sorts. It is extremely fast, separates environment/character by separate layers, controls render cameras and lighting, processes multi-pass rendering with \"Shader Layers\" and has a plenty of options for exportable images.
+
+[c]Tool Algorithm[/c]
+[gd]
+- Scene setup
+	- Load a location
+	- Place characters and props
+	- Set up lighting
+- Character Posing
+	- Use IK controls for easy positioning of limbs
+	- Use bone-level editing for fine tuning of their transforms
+	- Use existing animations, if needed
+- Camera Composition
+	- Position render camera
+	- Adjust Field of View
+	- Preview the render shot
+- Rendering
+	- Configure post-processing effects of Shader Layers
+	- Use presets, if needed
+	- Export images (full, character-only, environment-only)
+[/gd]
+
+[c]Script Hierarchy[/c]
+[gd]
+UI
+├── comics_renderer_UI_main.gd (Main UI)
+│	# - Handles all UI you can see in Comics Renderer, just connects to all these nodes 
+│	# and does the work with ComicsRendererControl
+Helpers
+├── camera_control.gd (FPS-Style Noclip Camera)
+│	# - WASD, RMB to look around
+├── comics_renderer_hit_body.gd (Hit Body Property used for all objects in scene)
+│	# - Has plenty of handful info about selected objects, helpful to set up gizmos
+├── comic_scene_file.gd (Save File)
+│	# - A save file that contains all information about this scene render
+├── shader_layers.gd (Shader Layers for processing raw renders)
+│	# - A comprehensive array of shader layers that control the appearance of final render
+├── text_log.gd (Small Script for Console Logs)
+│	# - Makes console logs disappear over time
+Nodes
+├── bone.gd (Character Bone)
+│	# - Provides control of character bone if character has pose-mode active
+├── character.gd (Character)
+│	# - Character, loads the model, adds some controls for pose-mode, model switching, etc
+├── IK_control.gd (SkeletonIK for Legs/Hands)
+│	# - IK control for easier control of legs/hands, maybe even weapons
+├── loc_obj.gd (A Piece of Location)
+│	# - A helper script that allows to edit location meshes (blockouts/props/combined)
+├── point_light.gd (OmniLight with love)
+│	# - A little fancy OmniLight :)
+├── prop.gd (LocationProp with extra steps)
+│	# - A prop type script that allows you to spawn your own props to add into your renders
+├── render_camera.gd (Camera to Set Position to Render From)
+│	# - A rendering camera positioning object that helps to setup a camera for your future render
+├── spot_light.gd (SpotLight)
+│	# - A little fancy SpotLight :)
+Core
+├── comics_renderer.gd (The Main Rendering Script)
+│	# - The giantic ass fucking renderer, that's all i can say, the hell's kitchen is happening here
+│	# - Manages \"comics_renderer_control.gd\" to interact with UI/rendering
+│	# 	- And this thing is calling the renderer itself a lot
+│	# 	- This isn't good, because it should've been following \"call down, signal up\" principle...
+│	# 	But oh well...
+│	# - Controls \"camera_control.gd\" to add FPS-like noclip camera with simple WASD+RMB controls
+│	# - Uses \"render_camera.gd\" to setup camera positioning
+│	# - Works with \"shader_layers.gd\" for excessive amount of post-processing
+│	# - Interfaces with \"comics_renderer_UI_main.gd\" for UI
+└── comics_renderer_control.gd (A Glue Between UI and Renderer)
+│	# - A special singleton class that helps to make it much easier to communicate between
+└	# nodes, objects, UI, and the main renderer. Basically just a configuration singleton...
+[/gd]
+
+</p><h2>How to use the comics renderer</h2><p>
+Change to [c]comics_renderer[/c] location.
+//img:comics_renderer/use0.jpg
+Use controls to navigate yourself:
+WASD - Fly around
+Space - Fly up
+Left Control - Fly down
+Right Mouse Button - Rotate view
+
+Press \"Toggle Menu\" to see more properties to control.
+//img:comics_renderer/use1.jpg
+There's following things you can do:
+- Click \"Location\" and choose one of them to load as a scene
+- Create some characters, lights, props
+- Click on characters or other objects to configure
+	- If you toggle \"Pose Mode\" of a character, this will allow you to change their pose
+- Press \"Replace Render Camera to View\" to set render camera to your current view
+- \"Toggle Render Preview\", regulate Field of View according to your needs
+- You can additionally tweak ambient light or fog
+- Never forget to press \"Save Scene\" to save your scene of course
+//img:comics_renderer/use2.jpg
+- Press \"Render\" when you are done positioning your scene
+//img:comics_renderer/use3.jpg
+- Change post-processing settings
+- Use presets, if needed
+- Export
+Keep in mind: You might need to re-render many times to change lighting settings to make them look great with post-processing."
+info_rus = "//img:comics_renderer/example0.jpg
+//img:comics_renderer/example1.jpg
+
+Итак... Короче говоря... Почему эта штука существует? Ну, я пытался работать с Blender и GIMP, получил неплохие результаты... а также жёсткую боль в заднице в следующие моменты:
+- Файлы .blend и .xcf занимают много места
+- Это болезненно медленно
+- Сложно редактировать позже
+- И так далее...
+
+Comics Renderer должен быть \"easy-to-use\" инструментом для рендеринга персонажей на любых локациях с ультимативной возможностью вернуться назад и отредактировать это позже. Эта игра имеет в себе комиксы, которые используют много \"glitch\" эффектов, которые потенциально превратят это в своего рода \"glitch-art.\" Он очень быстрый, разделяет окружение/персонажа по отдельным слоям, управляет рендер-камерами и освещением, обрабатывает multi-pass рендеринг с \"Shader Layers\" и имеет множество опций для экспортируемых изображений.
+
+[c]Алгоритм инструмента[/c]
+[gd]
+- Настройка сцены
+	- Загрузка локации
+	- Размещение персонажей и пропсов
+	- Настройка освещения
+- Позирование персонажей
+	- Использование IK контролов для easy позиционирования конечностей
+	- Использование редактирования на уровне костей для fine tuning их трансформов
+	- Использование существующих анимаций, если нужно
+- Композиция камеры
+	- Позиционирование рендер-камеры
+	- Настройка Field of View
+	- Превью рендер-снимка
+- Рендеринг
+	- Конфигурация пост-обработочных эффектов Shader Layers
+	- Использование пресетов, если нужно
+	- Экспорт изображений (полное, только персонаж, только окружение)
+[/gd]
+
+[c]Иерархия скриптов[/c]
+[gd]
+UI
+├── comics_renderer_UI_main.gd (Главный UI)
+│	# - Обрабатывает весь UI, который ты можешь видеть в Comics Renderer, просто соединяется со всеми этими узлами 
+│	# и работает с ComicsRendererControl
+Помощники
+├── camera_control.gd (FPS-стиль Noclip камера)
+│	# - WASD, ПКМ для осмотра
+├── comics_renderer_hit_body.gd (Hit Body свойство, используемое для всех объектов в сцене)
+│	# - Имеет множество handy информации о выбранных объектах, полезно для настройки gizmos
+├── comic_scene_file.gd (Файл сохранения)
+│	# - Файл сохранения, который содержит всю информацию об этом рендере сцены
+├── shader_layers.gd (Shader Layers для обработки сырых рендеров)
+│	# - Комплексный массив shader слоёв, которые контролируют внешний вид финального рендера
+├── text_log.gd (Маленький скрипт для консольных логов)
+│	# - Заставляет консольные логи исчезать со временем
+Узлы
+├── bone.gd (Кость персонажа)
+│	# - Обеспечивает контроль кости персонажа, если персонаж имеет активный pose-mode
+├── character.gd (Персонаж)
+│	# - Персонаж, загружает модель, добавляет некоторые контролы для pose-mode, смены моделей и т.д.
+├── IK_control.gd (SkeletonIK для Ног/Рук)
+│	# - IK контроль для easier контроля ног/рук, maybe даже оружия
+├── loc_obj.gd (Часть локации)
+│	# - Вспомогательный скрипт, который позволяет редактировать меши локации (блокауты/пропсы/комбинированные)
+├── point_light.gd (OmniLight с любовью)
+│	# - Маленькая красивенькая OmniLight :)
+├── prop.gd (LocationProp с дополнительными шагами)
+│	# - Скрипт типа пропа, который позволяет тебе спавнить свои собственные пропсы для добавления в твои рендеры
+├── render_camera.gd (Камера для установки позиции рендеринга)
+│	# - Объект позиционирования рендер-камеры, который помогает настроить камеру для твоего будущего рендера
+├── spot_light.gd (SpotLight)
+│	# - Маленькая красивенькая SpotLight :)
+Ядро
+├── comics_renderer.gd (Главный скрипт рендеринга)
+│	# - Гигантский ебучий рендерер, вот всё, что я могу сказать, адская кухня происходит здесь
+│	# - Управляет \"comics_renderer_control.gd\" для взаимодействия с UI/рендерингом
+│	# 	- И эта штука вызывает сам рендерер много
+│	# 	- Это не хорошо, потому что это должно было следовать принципу \"call down, signal up\"...
+│	# 	Но ох да...
+│	# - Контролирует \"camera_control.gd\" для добавления FPS-подобной noclip камеры с simple WASD+ПКМ управлениями
+│	# - Использует \"render_camera.gd\" для настройки позиционирования камеры
+│	# - Работает с \"shader_layers.gd\" для огромным количеством пост-обработки
+│	# - Интерфейсирует с \"comics_renderer_UI_main.gd\" для UI
+└── comics_renderer_control.gd (Клей между UI и рендерером)
+│	# - Специальный singleton класс, который помогает сделать намного легче общение между
+└	# узлами, объектами, UI и главным рендерером. Короче, просто конфигурирующий singleton...
+[/gd]
+
+</p><h2>Как использовать comics renderer</h2><p>
+Перейди в локацию [c]comics_renderer[/c].
+//img:comics_renderer/use0.jpg
+Используй управления для навигации:
+WASD - Летай вокруг
+Space - Летай вверх
+Левый Control - Летай вниз
+Правая Кнопка Мыши - Поворот вида
+
+Нажми \"Toggle Menu\", чтобы увидеть больше свойств для контроля.
+//img:comics_renderer/use1.jpg
+Есть следующие вещи, которые ты можешь делать:
+- Нажми \"Location\" и выбери одну из них для загрузки как сцены
+- Создай несколько персонажей, источников света, пропсов
+- Нажми на персонажей или другие объекты для настройки
+	- Если ты переключишь \"Pose Mode\" персонажа, это позволит тебе изменить их позу
+- Нажми \"Replace Render Camera to View\", чтобы установить рендер-камеру в твой текущий вид
+- \"Toggle Render Preview\", регулируй Field of View согласно твоим needs
+- Ты можешь дополнительно настраивать ambient light или fog
+- Никогда не забывай нажимать \"Save Scene\", чтобы сохранить твою сцену, конечно
+//img:comics_renderer/use2.jpg
+- Нажми \"Render\", когда ты закончил позиционировать свою сцену
+//img:comics_renderer/use3.jpg
+- Измени настройки пост-обработки
+- Используй пресеты, если нужно
+- Экспортируй
+Имей в виду: Тебе может потребоваться пере-рендерить много раз, чтобы изменить настройки освещения, чтобы они выглядели круто с пост-обработкой."
+edit_time = 1.76113e+09

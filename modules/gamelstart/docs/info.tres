@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Game start screen that you can see while loading game files. Handles the following cases:
+- Resource pack loading
+- Mod initialization
+- System initialization
+- Loading screen animations
+- Achievement checks for special conditions
+
+//img:game_start/example0.jpg
+
+In case if you want to edit the game starting scene, open: [p]res://locations/scenes/game_start.scn[/p]"
+info_rus = "Экран запуска игры, который вы видите во время загрузки игровых файлов. Обрабатывает следующие случаи:
+- Загрузка пакетов ресурсов
+- Инициализация модов
+- Инициализация системы
+- Анимации загрузочного экрана
+- Проверки достижений для специальных условий
+
+//img:game_start/example0.jpg
+
+Если вы хотите отредактировать сцену запуска игры, откройте: [p]res://locations/scenes/game_start.scn[/p]"
+edit_time = 1.76113e+09

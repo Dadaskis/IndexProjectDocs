@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Okay so that was an amazing idea. I had too much nodes in a scene, that caused some trouble. What was the first brightest idea that came to my mind? Oh, well, why not to combine all static bodies and all crap like that? Sure. Let's do this. And I did. Well, it turned out to be an ass to control, took even more disc space, and most importantly - it caused physics overhead. Never again.
+
+[r]Obsolete. Target for removal.[/r]"
+info_rus = "Так вот, это была идея. У меня было слишком много нод в сцене, что вызывало некоторые проблемы. Какая первая светлейшая идея пришла мне в голову? А, ну, почему бы не объединить все статические тела и всё такое дерьмо? Конечно. Давайте сделаем это. И я сделал. Что ж, оказалось, что это полная жопа с точки зрения управления, заняло ещё больше места на диске, и, самое главное - вызвало overhead физики. Больше никогда.
+
+[r]Устарело. Цель для удаления.[/r]"
+edit_time = 1.76123e+09

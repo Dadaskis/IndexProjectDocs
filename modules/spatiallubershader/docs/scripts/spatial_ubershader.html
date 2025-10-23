@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - spatial_ubershader
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: spatial_ubershader
+								</h3>
+								<h3>
+									Script: spatial_ubershader
+								</h3>
+								<h3>
+									Class Name: SpatialUbershader
+								</h3>
+								<h3>
+									Extends: ShaderMaterial
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								A shader material system that combines multiple shader effects into a single<br>
+								uber-shader, with support for conditional compilation via flags and automatic<br>
+								shader caching. Manages shader generation from modular effect components.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PATH_TO_EFFECTS
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/spatial_ubershader/assets/effects/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Base path for shader effect resources
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PATH_TO_EFFECT_SHADER
+								</p>
+								<p class="var_desc_name_value">
+									"/shader.tres"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Suffix for shader resource files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PATH_TO_EFFECT_CONFIG
+								</p>
+								<p class="var_desc_name_value">
+									"/config.tres"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Suffix for effect configuration files
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									IGNORE_LINE_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__IGNORE_LINE__"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Keyword to mark lines that should be ignored during processing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FRAGMENT_SPLIT_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__FRAGMENT_SPLIT__"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Keyword marking fragment shader section split
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									VERTEX_SPLIT_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__VERTEX_SPLIT__"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Keyword marking vertex shader section split
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									LIGHT_SPLIT_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__LIGHT_SPLIT__"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Keyword marking light shader section split
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FLAG_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__FLAG"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prefix for conditional compilation flags
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									FLAG_END_KEYWORD
+								</p>
+								<p class="var_desc_name_value">
+									"__FLAG_END"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Suffix for conditional compilation flags
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									SHADER_TYPE_LINE
+								</p>
+								<p class="var_desc_name_value">
+									"shader_type spatial;"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Required shader type declaration line
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									DEFAULT_EFFECT
+								</p>
+								<p class="var_desc_name_value">
+									"default"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of default base effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									flags
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of conditional compilation flags
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									update_lock
+								</p>
+								<p class="var_desc_name_value">
+									true
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Lock to prevent unnecessary shader regeneration
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_export">
+									Export
+								</p>
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									force_update
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Force update trigger (setter only)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									current_flag
+								</p>
+								<p class="var_desc_name_value">
+									"NULL"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Current active flag during shader processing
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									effects
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of enabled effects and their shaders
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									key_values
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of shader parameter values
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									render_modes
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of render modes to apply
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									shader_key
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Unique key identifying current shader configuration
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_force_update
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Setter for force_update that triggers shader regeneration
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									clean_lines
+								</p>
+								<p class="var_desc_name_value">
+									lines: Array
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Cleans shader code lines by removing empty and ignored lines
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									has_in_lines
+								</p>
+								<p class="var_desc_name_value">
+									lines: Array, search: String
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if a string exists in any of the shader code lines
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_shader_code
+								</p>
+								<p class="var_desc_name_value">
+									shader: Shader, name: String
+								</p>
+								<p class="func_return_text">
+									Dictionary
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes shader code into organized sections with flag handling
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_shader_key
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Generates a unique key for the current shader configuration
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_for_shader
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if a cached version of current shader exists
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									generate_shader
+								</p>
+								<p class="var_desc_name_value">
+									force_new: = false
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Generates the combined shader from all enabled effects
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									enable_effect
+								</p>
+								<p class="var_desc_name_value">
+									effect_name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Enables a specific shader effect by name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									disable_effect
+								</p>
+								<p class="var_desc_name_value">
+									effect_name: String
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Disables a specific shader effect by name
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_shader_value
+								</p>
+								<p class="var_desc_name_value">
+									key: String, value: any
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets a shader parameter value and stores it
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_shader_values
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates all shader parameters with stored values
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_shader_value
+								</p>
+								<p class="var_desc_name_value">
+									key: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets a stored shader parameter value
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_shader_flag
+								</p>
+								<p class="var_desc_name_value">
+									flag: String, value: bool
+								</p>
+								<p class="func_return_text">
+									void
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets a conditional compilation flag
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_shader_flag_enabled
+								</p>
+								<p class="var_desc_name_value">
+									flag: String
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if a conditional compilation flag is enabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									is_effect_enabled
+								</p>
+								<p class="var_desc_name_value">
+									effect_name: String
+								</p>
+								<p class="func_return_text">
+									bool
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks if an effect is currently enabled
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_effects_list
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									Array
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets list of currently enabled effects
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

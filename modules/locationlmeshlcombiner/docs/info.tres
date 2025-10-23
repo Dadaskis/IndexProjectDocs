@@ -1,0 +1,97 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationMeshCombiner[/gd] combines all child meshes into one singular piece to reduce drawcalls, material and surface changes. Works with [gd]LocationProp[/gd] and [gd]LocationBlockoutMesh[/gd] only.
+
+//img:location_mesh_combiner/example0.png
+
+This node is combining all meshes despite their material count of positioning. The resulting mesh will contain globally transformed meshes combined altogether into one. Origin of [gd]LocationMeshCombiner[/gd] is always [gd]Vector3.ZERO[/gd].
+
+This module was developed before official introduction of \"Merge Groups\" into branch of Godot 3. Therefore, this module is functioning better with existing toolset.
+
+[wc]Algorithm[/wc]
+1. Collect all [gd]MeshInstance[/gd] that must be combined (all of them are children of this node)
+	- Exclude special meshes like glass, player clips, etc.
+2. For each [gd]MeshInstance[/gd]:
+	- Iterate though all surfaces
+		- Group surfaces by material using [gd]get_material_key()[/gd] which considers:
+			- Material resource path
+			- Material name
+			- Special shader properties of [gd]UserSpatialUbershader[/gd]
+		- Create [gd]CombinerSurfaceData[/gd] object to track original surface info
+3. Mesh data combination
+	- For each material group:
+		- Initialize empty arrays for combined vertex data
+		- Process each surface in the group:
+		- Transform vertices/normals to world space
+		- Offset indices to account for merged vertices
+		- Combine all standard mesh arrays (UVs, colors, bones, etc.)
+		- Add combined surface to final [gd]ArrayMesh[/gd]
+		- Assign appropriate material
+4. Post-Processing
+	- Clean up editor-specific materials
+	- Handle special cases (occluders, glass surfaces)
+	- Generate physics collision data
+	- Process lightmap UVs if enabled
+	- Set up LOD system if enabled
+
+TL;DR; Get all data from arrays, world-space the shit out of it, put it all together, tada, here's your combined mesh.
+
+[wc]Usage[/wc]
+//img:location_mesh_combiner/use0.png
+//img:location_mesh_combiner/use1.png
+The node itself is functioning in a simple way. You just put all your props or blockout meshes as a child of this node and then press \"Toggle Original Edit\". The child nodes will disappear and you will get your fresh fancy combined mesh instead. You can press this button again to get your child meshes back to edit them.
+
+[c]Quality of Life[/c]
+Surely you can just select all props or meshes one-by-one just to put them as children of this node. But that's too much hassle when amount of overall elements is nearing hundreds and they are placed in a chaotic manner. That's why [gd]LocationMeshCombinerCube[/gd] exists.
+//img:location_mesh_combiner/use2.png
+You can simply create this node, scale it, cover all needed meshes, it'll highlight them with a red cube. When you are done, press \"Create\" and it'll create you a combined mesh."
+info_rus = "[gd]LocationMeshCombiner[/gd] объединяет все дочерние меши в один единый объект, чтобы уменьшить количество отрисовок, смен материалов и поверхностей. Работает только с [gd]LocationProp[/gd] и [gd]LocationBlockoutMesh[/gd].
+
+//img:location_mesh_combiner/example0.png
+
+Этот узел объединяет все меши независимо от количества их материалов или позиционирования. Итоговый меш будет содержать глобально трансформированные меши, объединённые вместе в один. Начало координат [gd]LocationMeshCombiner[/gd] всегда [gd]Vector3.ZERO[/gd].
+
+Этот модуль был разработан до официального внедрения \"Merge Groups\" в ветку Godot 3. Поэтому этот модуль лучше функционирует с существующим набором инструментов.
+
+[wc]Алгоритм[/wc]
+1. Собрать все [gd]MeshInstance[/gd], которые должны быть объединены (все они являются дочерними от этого узла)
+	- Исключить специальные меши, такие как стекло, клипы игрока и т.д.
+2. Для каждого [gd]MeshInstance[/gd]:
+	- Пройтись по всем поверхностям
+		- Сгруппировать поверхности по материалам с помощью [gd]get_material_key()[/gd], который учитывает:
+			- Путь к ресурсу материала
+			- Имя материала
+			- Специальные свойства шейдера [gd]UserSpatialUbershader[/gd]
+		- Создать объект [gd]CombinerSurfaceData[/gd] для отслеживания исходной информации о поверхности
+3. Объединение данных меша
+	- Для каждой группы материалов:
+		- Инициализировать пустые массивы для объединённых данных вершин
+		- Обработать каждую поверхность в группе:
+		- Трансформировать вершины/нормали в мировое пространство
+		- Сместить индексы для учёта объединённых вершин
+		- Объединить все стандартные массивы меша (UV, цвета, кости и т.д.)
+		- Добавить объединённую поверхность в финальный [gd]ArrayMesh[/gd]
+		- Назначить соответствующий материал
+4. Пост-обработка
+	- Очистить редактор-специфичные материалы
+	- Обработать особые случаи (окклюдеры, стеклянные поверхности)
+	- Сгенерировать данные столкновений для физики
+	- Обработать UV lightmap, если включено
+	- Настроить систему LOD, если включено
+
+TL;DR; Взять все данные из массивов, преобразовать их в мировое пространство, собрать всё вместе, та-да, вот твой объединённый меш.
+
+[wc]Использование[/wc]
+//img:location_mesh_combiner/use0.png
+//img:location_mesh_combiner/use1.png
+Сам узел функционирует просто. Ты просто помещаешь все свои пропсы или блокаут-меши как дочерние от этого узла, а затем нажимаешь \"Toggle Original Edit\". Дочерние узлы исчезнут, и ты получишь свой свежий объединённый меш вместо них. Ты можешь нажать эту кнопку снова, чтобы вернуть дочерние меши для их редактирования.
+
+[c]Удобство использования[/c]
+Конечно, ты можешь просто выбирать все пропсы или меши один за другим, чтобы поместить их как дочерние от этого узла. Но это слишком хлопотно, когда общее количество элементов приближается к сотням и они расположены хаотично. Вот почему существует [gd]LocationMeshCombinerCube[/gd].
+//img:location_mesh_combiner/use2.png
+Ты можешь просто создать этот узел, масштабировать его, покрыть все нужные меши, он выделит их красным кубом. Когда ты закончил, нажми \"Create\", и он создаст тебе объединённый меш."
+edit_time = 1.76123e+09

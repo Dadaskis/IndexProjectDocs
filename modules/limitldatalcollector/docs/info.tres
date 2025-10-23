@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "Limit Data Collector is a module that contain a class that collects data of [gd]LocationBase[/gd] and prints whichever data that is useful to understand how to work with certain \"unmentioned\" limits of this game.
+
+[c]Usage example[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+LimitDataCollector.print_data(loc_base)
+[/gd]
+
+But it is highly advised to use an export property in [gd]LocationBase[/gd] called [gd]show_stats[/gd] (or [p]Show Stats[/p] in editor)"
+info_rus = "Limit Data Collector - это модуль, содержащий класс, который собирает данные [gd]LocationBase[/gd] и выводит любые данные, полезные для понимания того, как работать с определёнными \"неназванными\" ограничениями этой игры.
+
+[c]Пример использования[/c]
+[gd]
+var loc_base = LocationBaseScene.get_scene()
+LimitDataCollector.print_data(loc_base)
+[/gd]
+
+Однако настоятельно рекомендуется использовать свойство экспорта в [gd]LocationBase[/gd] под названием [gd]show_stats[/gd] (или [p]Show Stats[/p] в редакторе)"
+edit_time = 1.76123e+09

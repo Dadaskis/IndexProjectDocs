@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - character
+		</title>
+		<link rel="preload" as="image" href="../../../../assets/images/_docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../../assets/sidebar_injector_script.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<a href="../index.html">
+						Module Index
+					</a>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<div class="top_desc">
+							<div class="script_props">
+								<h3>
+									Module: character_builder
+								</h3>
+								<h3>
+									Script: character
+								</h3>
+								<h3>
+									Class Name: null
+								</h3>
+								<h3>
+									Extends: Node
+								</h3>
+								<h3>
+									NODE
+								</h3>
+								<p class="red-marking">
+									Page last updated:<br>
+									October 23, 2025 at 17:51 UTC
+								</p>
+								<br>
+							</div>
+							<p>
+								This script handles the core functionality of the character.<br>
+								It manages:<br>
+								- Loading and managing character parts and details<br>
+								- Material handling and texture exporting<br>
+								- GLTF model exporting<br>
+								- Character saving/loading functionality<br>
+								<br>
+								The script works with a skeleton-based character where parts can be<br>
+								added/removed and materials can be edited. It provides functionality to<br>
+								export the final character as GLTF with combined textures.<br>
+							</p>
+						</div>
+						<div class="bottom_desc">
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_parts_update
+								</p>
+								<p class="var_desc_name_value">
+									parts
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when parts list is updated
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_details_update
+								</p>
+								<p class="var_desc_name_value">
+									details
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when details list is updated
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_materials_update
+								</p>
+								<p class="var_desc_name_value">
+									materials
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal emitted when materials are updated
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_update_debug_preview
+								</p>
+								<p class="var_desc_name_value">
+									textures
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal to update debug preview textures
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_part_removal
+								</p>
+								<p class="var_desc_name_value">
+									hit_body
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal when a part is removed (passes hit body info)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									on_detail_removal
+								</p>
+								<p class="var_desc_name_value">
+									hit_body
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal when a detail is removed (passes hit body info)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									edit_material_request
+								</p>
+								<p class="var_desc_name_value">
+									mat, subtextures
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal to request material editing UI
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									update_export_error
+								</p>
+								<p class="var_desc_name_value">
+									text
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal for export error messages
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_signal">
+									Signal
+								</p>
+								<p class="var_desc_name_text">
+									force_selection
+								</p>
+								<p class="var_desc_name_value">
+									phys_body
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Signal to force selection in UI
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									PARTS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/character_builder/assets/.char_parts/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing character part assets
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									DETAIL_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/character_builder/assets/.char_details/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path to directory containing character detail assets
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									MODEL_FILE
+								</p>
+								<p class="var_desc_name_value">
+									"model.glb"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Default model filename for parts/details
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									GLTF_EXPORT_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/character_builder/assets/.GLTF_exports/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path where exported GLTF files will be saved
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									HUMAN_MODELS_PATH
+								</p>
+								<p class="var_desc_name_value">
+									"res://modules/human_model/assets/models/"
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Path where human model assets are stored
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									parts
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of currently loaded character parts
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									details
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Array of currently loaded character details
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									materials
+								</p>
+								<p class="var_desc_name_value">
+									{}
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Dictionary of materials used by character (material_name: material)
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									mat_data
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Material export configuration data
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									char_name
+								</p>
+								<p class="var_desc_name_value">
+									""
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Name of current character for exporting
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									export_human_tex
+								</p>
+								<p class="var_desc_name_value">
+									true
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Whether to export textures to human models path
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									check_mesh_for_mats
+								</p>
+								<p class="var_desc_name_value">
+									mesh: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Checks a mesh instance for materials and adds them to materials dictionary<br/>
+								mesh: MeshInstance to check for materials
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									edit_material
+								</p>
+								<p class="var_desc_name_value">
+									mat: any, subtextures: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Opens material editor for specified material<br/>
+								mat: Material to edit<br/>
+								subtextures: Dictionary of subtextures for the material
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_character_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a character part by name<br/>
+								part_name: Name of part to add (must exist in PARTS_PATH)<br/>
+								Return: The created CB_CharacterPart instance or null if failed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_character_part
+								</p>
+								<p class="var_desc_name_value">
+									part_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes a character part by name<br/>
+								part_name: Name of part to remove
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_character_part_hit_body
+								</p>
+								<p class="var_desc_name_value">
+									part_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the hit body associated with a character part<br/>
+								part_name: Name of part to check<br/>
+								Return: Hit body string or null
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									duplicate_character_detail
+								</p>
+								<p class="var_desc_name_value">
+									detail_name: String, og_mesh: CB_CharacterDetail
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Duplicates an existing character detail<br/>
+								detail_name: Name of detail to duplicate<br/>
+								og_mesh: Original detail mesh to copy settings from
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_character_detail
+								</p>
+								<p class="var_desc_name_value">
+									detail_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds a character detail by name<br/>
+								detail_name: Name of detail to add (must exist in DETAIL_PATH)<br/>
+								Return: The created CB_CharacterDetail instance or null if failed
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									remove_character_detail
+								</p>
+								<p class="var_desc_name_value">
+									detail_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Removes a character detail by name<br/>
+								detail_name: Name of detail to remove
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_character_detail_hit_body
+								</p>
+								<p class="var_desc_name_value">
+									part_name: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Gets the hit body associated with a character detail<br/>
+								part_name: Name of detail to check<br/>
+								Return: Hit body string or null
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_texture_set
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Exports all character textures as combined texture sets<br/>
+								WARNING: Expensive operation - causes frame drop
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_move_UVs
+								</p>
+								<p class="var_desc_name_value">
+									child: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adjusts UV coordinates of a mesh to properly position them in the combined texture atlas<br/>
+								This remaps UVs from their original material space to their position in the exported texture<br/>
+								child: MeshInstance whose UVs need to be adjusted for texture atlas
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_assign_materials
+								</p>
+								<p class="var_desc_name_value">
+									child: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Assigns final materials to a mesh for export<br/>
+								child: MeshInstance to assign materials to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									load_GLTF
+								</p>
+								<p class="var_desc_name_value">
+									path: String
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads GLTF using that path, returns a node that'll contain the model
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_add_char_parts
+								</p>
+								<p class="var_desc_name_value">
+									new_model: Spatial
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds all character parts to export model<br/>
+								new_model: Root node to add parts to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_detail_weights
+								</p>
+								<p class="var_desc_name_value">
+									mesh: ArrayMesh, skeleton: Skeleton, bone_idx: int, target_trans: Transform
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Processes mesh weights for detail attachment to skeleton<br/>
+								mesh: ArrayMesh to process weights for<br/>
+								skeleton: Skeleton to attach to<br/>
+								bone_idx: Target bone index<br/>
+								target_trans: Transform to apply<br/>
+								Return: Processed ArrayMesh with new weights
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_add_char_details
+								</p>
+								<p class="var_desc_name_value">
+									new_model: Spatial
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds all character details to export model<br/>
+								new_model: Root node to add details to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									export_GLTF
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Exports complete character as GLTF file<br/>
+								WARNING: Expensive operation - causes temporary freeze
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									parts_update
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emits parts update signal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									details_update
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emits details update signal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									materials_update
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Emits materials update signal
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									update_material_data_export
+								</p>
+								<p class="var_desc_name_value">
+									data: CB_MaterialExportData
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updates material export configuration<br/>
+								data: CB_MaterialExportData containing export settings
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_save
+								</p>
+								<p class="var_desc_name_value">
+									save: CB_SavedCharacter
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Saves current character state to save object<br/>
+								save: CB_SavedCharacter instance to save to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									assign_mats_on_mesh
+								</p>
+								<p class="var_desc_name_value">
+									mesh: MeshInstance
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Assigns materials to mesh surfaces from materials dictionary<br/>
+								mesh: MeshInstance to assign materials to
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_load
+								</p>
+								<p class="var_desc_name_value">
+									save: CB_SavedCharacter
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Loads character state from save object<br/>
+								save: CB_SavedCharacter instance to load from
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_new
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Resets character to empty state
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									toggle_idle
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Toggles idle animation playback
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_export_human_tex
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets whether to export textures to human models path<br/>
+								value: Boolean toggle
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									_ready
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Unused initialization function
+							</p>
+						</div>
+					</div>
+				</div>
+			</center>
+			<script src="../../../../assets/code_blocks.js">
+			</script>
+		</body>
+	</html>

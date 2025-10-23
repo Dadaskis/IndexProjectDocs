@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "[gd]LocationLightVolume[/gd] creates a fake volumetric light that can be useful to enhance atmospheric point lighting in locations. Pretty self-explanatory one, so... Just use it.
+
+[r]Warning: Excessive use of these nodes can and will cause GPU overhead which leads to performance problems. Use wisely.[/r]
+
+//img:location_light_volume/example0.png"
+info_rus = "[gd]LocationLightVolume[/gd] создаёт фейковый объёмный свет, который может быть полезно для улучшения атмосферного точечного освещения в локациях. Довольно понятно, так что... Просто используй его.
+
+[r]Предупреждение: Чрезмерное использование этих узлов может и будет вызывать нагрузку на GPU, что ведёт к проблемам с производительностью. Используй с умом.[/r]
+
+//img:location_light_volume/example0.png"
+edit_time = 1.76123e+09
