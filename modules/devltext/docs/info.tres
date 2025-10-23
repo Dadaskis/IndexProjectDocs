@@ -1,9 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=2]
-
-[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
-
-[resource]
-script = ExtResource( 1 )
-info = "[gd]DevText[/gd] node that would make it possible to set up developer's text in any locations. I mean, simple as that, it's just one node here. Simply instance [gd]DevText[/gd] node!"
-info_rus = "Узел [gd]DevText[/gd], который позволяет размещать текст для разработчиков в любых локациях. Всё просто - это всего лишь один узел. Просто добавьте в сцену узел [gd]DevText[/gd]!"
-edit_time = 1.76123e+09
