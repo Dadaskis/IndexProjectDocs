@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="_guide/.images/guide_general/game_logo.png" width="200" alt="Nice image over here...">
+	<img src="_guide/.images/guide_general/game_logo.png" width="500" alt="Nice image over here...">
 </p>
 
 You have chosen or been chosen to read this weird-ass documentation. Yes, you should not expect anything too serious here. It is NOT meant to be a serious documentation. Most of the text I've written here is satiric, sarcastic, because:
