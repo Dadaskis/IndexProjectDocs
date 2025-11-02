@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:glitch_camera_scenery/example0.gif
+This module implements [p]Glitch Camera Scenery[/p]. I don't know how to describe it, but shortly - it's about showing a bunch of point cameras and then switching to pathway camera that goes through some path... Alright this ain't nice way to describe things.
+
+[wc]Usage[/wc]
+0. Create a [gd]GlitchCameraScenery[/gd] node
+1. Create a bunch of point cameras, set them up
+2. Create a bunch of pathway cameras, set them up
+3. Pick a nice name for activation event
+4. Activate the event whenever you want
+5. TADA"
+info_rus = "//img:glitch_camera_scenery/example0.gif
+Этот модуль реализует [p]Glitch Camera Scenery[/p]. Я не знаю, как это описать, но если коротко - он показывает кучу точечных камер, а затем переключается на камеру пути, которая проходит по некоторому маршруту... Ладно, это не самый удачный способ описания.
+
+[wc]Использование[/wc]
+0. Создай ноду [gd]GlitchCameraScenery[/gd]
+1. Создай кучу точечных камер, настрой их
+2. Создай кучу камер путей, настрой их
+3. Выбери красивое имя для события активации
+4. Активируй событие, когда захочешь
+5. ТА-ДА"
+edit_time = 1.76193e+09

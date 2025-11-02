@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - dynamic_weather
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: dynamic_weather
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 2, 2025 at 8:58 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/dynamic_weather/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../assets/images/dynamic_weather/example1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									"Динамическая" погода. Ага... Смотри, я знаю, это звучит странно, но я хотел получить какие-то унифицированные значения <code class="gdscript">
+										Environment
+									</code>
+									и <code class="gdscript">
+										DirectionalLight
+									</code>
+									, которые можно было бы использовать во многих локациях. Более того? Возможность переключать эти пресеты по мере прохождения локаций. К сожалению, слишком сложно реализовать плавное переключение их во время игры, поэтому рекомендуется переключать эти пресеты с помощью <code class="gdscript">
+										DynamicWeatherManager.update_locbase_environment()
+									</code>
+									только во время смены локаций или телепортов.<br>
+									<br>
+									Также рекомендуется взглянуть на:<br>
+									<code class="gdscript">
+										ST_DynamicWeatherAssign
+									</code>
+									<br>
+									<code class="gdscript">
+										ST_DynamicWeatherRandomize
+									</code>
+									<br>
+									<code class="gdscript">
+										ST_DynamicWeatherSet
+									</code>
+									<br>
+									<code class="gdscript">
+										COM_DynamicWeatherNightOnly
+									</code>
+									<br>
+									<br>
+									Assign ST помогает вызывать <code class="gdscript">
+										DynamicWeatherManager.update_locbase_environment()
+									</code>
+									без необходимости писать для этого код. Другими словами, он просто меняет значения <code class="gdscript">
+										Environment
+									</code>
+									, <code class="gdscript">
+										DirectionalLight
+									</code>
+									и <code class="gdscript">
+										LocationSkyClouds
+									</code>
+									.<br>
+									<br>
+									Randomize ST - рандомизирует время суток и ID пресета текущей "динамической" погоды.<br>
+									<br>
+									Set ST - устанавливает твоё красивенькое, предпочтительное время суток или ID пресета.<br>
+									<br>
+									Компонент "Night Only" - помогает тебе сделать видимыми только те вещи, которые ты хочешь видеть ночью. Это полезно, чтобы только определённые источники света были видны вечером/ночью.
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/dynamic_weather_config.html">
+										DynamicWeatherConfig
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/dynamic_weather_manager.html">
+										DynamicWeatherManager
+									</a>
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/dynamic_weather_data.html">
+										DynamicWeatherData
+									</a>
+									<br>
+									<a class="a_simple" href="./scripts/dynamic_weather_preset.html">
+										DynamicWeatherPreset
+									</a>
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../assets/code_blocks.js">
+					</script>
+				</body>
+			</html>

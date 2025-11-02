@@ -1,0 +1,43 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:dynamic_weather/example0.png
+//img:dynamic_weather/example1.jpg
+
+\"Dynamic\" weather. Yeah... Look, I know it sounds weird, but I wanted to get some kind of unified values of [gd]Environment[/gd] and [gd]DirectionalLight[/gd] that could be used across many locations. More than that? A possibility to switch those presets as you go in locations. Sadly it is too hard to implement seamless switching of those as you simply play this game, so it is only recommended to switch those presets with [gd]DynamicWeatherManager.update_locbase_environment()[/gd] only during switches of locations or teleports.
+
+It is also recommended to take a look at:
+[gd]ST_DynamicWeatherAssign[/gd]
+[gd]ST_DynamicWeatherRandomize[/gd]
+[gd]ST_DynamicWeatherSet[/gd]
+[gd]COM_DynamicWeatherNightOnly[/gd]
+
+Assign ST helps to call [gd]DynamicWeatherManager.update_locbase_environment()[/gd] without any need to write code for that. In other words, it is simply changing the values of [gd]Environment[/gd], [gd]DirectionalLight[/gd] and [gd]LocationSkyClouds[/gd].
+
+Randomize ST - randomizes the time of day and preset ID of current \"dynamic\" weather.
+
+Set ST - sets your fancy, preferred time of day or preset ID.
+
+\"Night Only\" Component - helps you to make only those things visible that you want at night. This is helpful to make only certain lights visible at evening/night."
+info_rus = "//img:dynamic_weather/example0.png
+//img:dynamic_weather/example1.jpg
+
+\"Динамическая\" погода. Ага... Смотри, я знаю, это звучит странно, но я хотел получить какие-то унифицированные значения [gd]Environment[/gd] и [gd]DirectionalLight[/gd], которые можно было бы использовать во многих локациях. Более того? Возможность переключать эти пресеты по мере прохождения локаций. К сожалению, слишком сложно реализовать плавное переключение их во время игры, поэтому рекомендуется переключать эти пресеты с помощью [gd]DynamicWeatherManager.update_locbase_environment()[/gd] только во время смены локаций или телепортов.
+
+Также рекомендуется взглянуть на:
+[gd]ST_DynamicWeatherAssign[/gd]
+[gd]ST_DynamicWeatherRandomize[/gd]
+[gd]ST_DynamicWeatherSet[/gd]
+[gd]COM_DynamicWeatherNightOnly[/gd]
+
+Assign ST помогает вызывать [gd]DynamicWeatherManager.update_locbase_environment()[/gd] без необходимости писать для этого код. Другими словами, он просто меняет значения [gd]Environment[/gd], [gd]DirectionalLight[/gd] и [gd]LocationSkyClouds[/gd].
+
+Randomize ST - рандомизирует время суток и ID пресета текущей \"динамической\" погоды.
+
+Set ST - устанавливает твоё красивенькое, предпочтительное время суток или ID пресета.
+
+Компонент \"Night Only\" - помогает тебе сделать видимыми только те вещи, которые ты хочешь видеть ночью. Это полезно, чтобы только определённые источники света были видны вечером/ночью."
+edit_time = 1.76207e+09

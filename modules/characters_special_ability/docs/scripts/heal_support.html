@@ -42,56 +42,63 @@
 									Class Name: null
 								</h3>
 								<h3>
-									Extends: CPUParticles
+									Extends: CharacterSpecialAbility
 								</h3>
 								<h3>
-									NODE
+									CLASS
 								</h3>
 								<p class="red-marking">
 									Page last updated:<br>
-									October 23, 2025 at 21:10 UTC
+									November 2, 2025 at 8:59 UTC
 								</p>
 								<br>
 							</div>
 							<p>
-								A simple helper script to control appearance of particles<br>
-								Used by heal_support and teleport particles<br>
+								"Heal Support" that is healing all friendly forces while making them invinsible to bullets.<br>
 							</p>
 						</div>
 						<div class="bottom_desc">
 							<div class="variable_desc_div">
-								<p class="flair_export">
-									Export
-								</p>
-								<p class="flair_var">
-									Variable
+								<p class="flair_const">
+									Constant
 								</p>
 								<p class="var_desc_name_text">
-									remove_time
+									WORK_TIME
 								</p>
 								<p class="var_desc_name_value">
-									15.0
+									8.0
 								</p>
 							</div>
 							<p class="var_desc_text">
-								Time to remove the particle
+								How much does it last?
 							</p>
 							<div class="variable_desc_div">
-								<p class="flair_export">
-									Export
-								</p>
-								<p class="flair_var">
-									Variable
+								<p class="flair_const">
+									Constant
 								</p>
 								<p class="var_desc_name_text">
-									disable_time
+									HEALTH_SPEED
 								</p>
 								<p class="var_desc_name_value">
-									13.0
+									40.0
 								</p>
 							</div>
 							<p class="var_desc_text">
-								Time to disable emitting of one
+								How fast it is healing everyone up?
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_const">
+									Constant
+								</p>
+								<p class="var_desc_name_text">
+									HEAL_PARTICLES
+								</p>
+								<p class="var_desc_name_value">
+									preload()
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Preloaded healing particles that are created on healed characters.
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_var">
@@ -105,24 +112,103 @@
 								</p>
 							</div>
 							<p class="var_desc_text">
-								Timer that is used for that logic
+								Work timer.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									ply_timer
+								</p>
+								<p class="var_desc_name_value">
+									0.0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Player timer for special overlay screen effect
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_active
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Is it active?
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									healing_characters
+								</p>
+								<p class="var_desc_name_value">
+									[]
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Which characters are healing right now?
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_func">
 									Function
 								</p>
 								<p class="var_desc_name_text">
-									_physics_process
+									on_run_ability
 								</p>
 								<p class="var_desc_name_value">
-									delta: any
+									None
 								</p>
 								<p class="func_return_text">
 									any
 								</p>
 							</div>
 							<p class="var_desc_text">
-								Physics frame update, used for timer
+								Running ability... Resets the timer, makes overlay for player,<br/>
+								finds friendly-enough characters around, makes particle on them.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_update
+								</p>
+								<p class="var_desc_name_value">
+									delta: float
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Updating basically blocks bullet damage on those character that are healing right now.<br/>
+								Additionally it makes these "hits" on players overlay to make it easier to understand<br/>
+								when player is healing from someone running this ability.
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Setting up the name and cooldown
 							</p>
 						</div>
 					</div>

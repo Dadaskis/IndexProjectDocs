@@ -31,7 +31,7 @@
 							Module: doc_gen
 						</h3>
 						<p class="red-marking">
-							Documentation last edited: October 23, 2025 at 17:20 UTC
+							Documentation last edited: October 31, 2025 at 17:00 UTC
 						</p>
 						<div class="lang-select-div">
 							<a href="./index.html">
@@ -86,7 +86,7 @@
 						</h2>
 						<p>
 							<br>
-							<img src="../../../assets/images/_doc_gen/code0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+							<img src="../../../assets/images/doc_gen/code0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 								<br>
 							</p>
 							<h2>
@@ -94,7 +94,7 @@
 							</h2>
 							<p>
 								<br>
-								<img src="../../../assets/images/_doc_gen/HTML0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<img src="../../../assets/images/doc_gen/HTML0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 									<br>
 									<br>
 								</p>
@@ -102,10 +102,10 @@
 									<br>
 									Как использовать:<br>
 									1. <code class="gdscript">
-										"res://modules/_doc_gen/src/generate_docs.gd"
+										"res://modules/doc_gen/src/generate_docs.gd"
 									</code>
 									- кликни дважды<br>
-									<img src="../../../assets/images/_doc_gen/file0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<img src="../../../assets/images/doc_gen/file0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 										<br>
 										2. В редакторе скриптов найди <code class="gdscript">
 											"generate_docs.gd"
@@ -115,22 +115,22 @@
 											Run
 										</code>
 										(запустить)<br>
-										<img src="../../../assets/images/_doc_gen/run0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<img src="../../../assets/images/doc_gen/run0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 											<br>
 										</center>
 										<p>
 											<br>
 											<br>
 											Для получения дополнительной информации о том, как эта штука работает - просто загляни в комментарии/документацию к <code class="gdscript">
-												"res://modules/_doc_gen/src/generate_docs.gd"
+												"res://modules/doc_gen/src/generate_docs.gd"
 											</code>
 											. Если ты просто используешь эту штуку для обновления страницы документации, это действительно всё, что тебе нужно знать. Однако, если ты хочешь самостоятельно поддерживать документацию, имей в виду: Эта штука парсит комментарии в коде, чтобы превратить их в контент для страницы документации. Дополнительно она использует файлы <code class="gdscript">
 												"docs/info.tres"
 											</code>
 											для вставки описаний модулей (вроде того, что ты сейчас читаешь).<br>
-											<img src="../../../assets/images/_doc_gen/info0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<img src="../../../assets/images/doc_gen/info0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 												<br>
-												<img src="../../../assets/images/_doc_gen/info1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<img src="../../../assets/images/doc_gen/info1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 													<br>
 													<br>
 													Ты должен понимать, что это было написано мной-без-сна и поддерживается мной-без-понятия. Эта штука не идеальна. Тебе нужно знать, как использовать её ПРАВИЛЬНО.<br>
@@ -164,7 +164,7 @@
 													3. Второй пункт применяется и к функциям. Даже если эта система может обнаруживать аргументы и всё такое, ты всё равно пишешь, что эти аргументы означают, в комментариях самостоятельно, просто сделай работу<br>
 													<br>
 													Если ты хочешь задать описание для целого модуля, проверь папку "docs" своего модуля (как здесь: <code class="gdscript">
-														"res://modules/_doc_gen/docs/info.tres"
+														"res://modules/doc_gen/docs/info.tres"
 													</code>
 													). Если у тебя нет этой папки в модуле, тебе не нужно её создавать. Просто сгенерируй страницы документации, запустив редакторский скрипт, и тогда она будет автоматически создана для твоего нового модуля. Любой из существующих модулей, с другой стороны, уже должен иметь эту папку.<br>
 													<br>

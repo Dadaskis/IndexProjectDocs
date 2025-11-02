@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:kill_cam/example0.gif
+This module contains a simple implementation for \"kill cams\" that can be called on any character that recently died. To activate the kill cam, write [gd]KillCamManager.activate()[/gd]. You can also use [p]st_activate_killcam[/p] for this."
+info_rus = "//img:kill_cam/example0.gif
+Этот модуль содержит простую реализацию \"kill cam\" (камер убийства), которую можно вызвать для любого персонажа, недавно погибшего. Чтобы активировать kill cam, напиши [gd]KillCamManager.activate()[/gd]. Также можно использовать для этого [p]st_activate_killcam[/p]."
+edit_time = 1.76194e+09

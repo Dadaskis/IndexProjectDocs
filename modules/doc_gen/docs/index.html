@@ -31,7 +31,7 @@
 							Module: doc_gen
 						</h3>
 						<p class="red-marking">
-							Documentation last edited: October 23, 2025 at 17:20 UTC
+							Documentation last edited: October 31, 2025 at 17:00 UTC
 						</p>
 						<div class="lang-select-div">
 							<a href="./index.html">
@@ -86,7 +86,7 @@
 						</h2>
 						<p>
 							<br>
-							<img src="../../../assets/images/_doc_gen/code0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+							<img src="../../../assets/images/doc_gen/code0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 								<br>
 							</p>
 							<h2>
@@ -94,7 +94,7 @@
 							</h2>
 							<p>
 								<br>
-								<img src="../../../assets/images/_doc_gen/HTML0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<img src="../../../assets/images/doc_gen/HTML0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 									<br>
 									<br>
 								</p>
@@ -102,10 +102,10 @@
 									<br>
 									How to use:<br>
 									1. <code class="gdscript">
-										"res://modules/_doc_gen/src/generate_docs.gd"
+										"res://modules/doc_gen/src/generate_docs.gd"
 									</code>
 									- double click it<br>
-									<img src="../../../assets/images/_doc_gen/file0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<img src="../../../assets/images/doc_gen/file0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 										<br>
 										2. In script editor, find <code class="gdscript">
 											"generate_docs.gd"
@@ -115,22 +115,22 @@
 											Run
 										</code>
 										<br>
-										<img src="../../../assets/images/_doc_gen/run0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<img src="../../../assets/images/doc_gen/run0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 											<br>
 										</center>
 										<p>
 											<br>
 											<br>
 											For more information how this thing works - just take a look into comments/documentation of <code class="gdscript">
-												"res://modules/_doc_gen/src/generate_docs.gd"
+												"res://modules/doc_gen/src/generate_docs.gd"
 											</code>
 											. If you are just using this thing to update documentation page, that's really all you need to know. However, if you want to maintain the documentation yourself, keep in mind: This thing is parsing code comments to turn them into content for documentation page. Additionally it is using <code class="gdscript">
 												"docs/info.tres"
 											</code>
 											files to insert module descriptions (like the one you are reading right now).<br>
-											<img src="../../../assets/images/_doc_gen/info0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<img src="../../../assets/images/doc_gen/info0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 												<br>
-												<img src="../../../assets/images/_doc_gen/info1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<img src="../../../assets/images/doc_gen/info1.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
 													<br>
 													<br>
 													You need to realize that this was written by sleep-deprived-me and maintained by clueless-me. This thing isn't perfect. You need to know how to use it PROPERLY.<br>
@@ -164,7 +164,7 @@
 													3. The second point applies to functions too. Even if this system can detect arguments and all, you write what these arguments mean all by yourself in the comments anyway, just do the work<br>
 													<br>
 													If you want to set a description for an entire module, check the "docs" folder of your module (like here: <code class="gdscript">
-														"res://modules/_doc_gen/docs/info.tres"
+														"res://modules/doc_gen/docs/info.tres"
 													</code>
 													). If you don't have this folder in your module, you don't have to create it. Just generate the documentation pages by running the editor script and then it'll be created automatically for your new module. Any of the existing modules, on other hand, already should have this folder intact.<br>
 												</p>

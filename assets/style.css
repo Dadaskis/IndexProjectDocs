@@ -868,4 +868,9 @@ th {
 		list-style: none; /* Remove bullets if needed */
 		width: 95%;
 	}
+
+	img {
+		width: 100%;
+		max-width: 100%;
+	}
 }
