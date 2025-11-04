@@ -374,6 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_part.html">LocationPart</a>
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_physics_global.html">LocationPhysicsGlobal</a>
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_portal.html">LocationPortal</a>
+<a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_prefab.html">LocationPrefab</a>
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_prop.html">LocationProp</a>
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_props.html">LocationProps</a>
 <a class="sidebar-class class-node" href="../../locations_tools/docs/scripts/location_prop_file_archive.html">LocationPropFileArchive</a>
@@ -538,7 +539,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class" href="../../player_controller/docs/scripts/stats_adder.html">PlayerStatsAdder</a>
 <a class="sidebar-class" href="../../player_controller/docs/scripts/weapon_handler.html">PlayerWeaponHandler</a>
 </div><a class="sidebar-class module-var" href="../../player_weapon_system/docs/index.html">player_weapon_system<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-node" href="../../player_weapon_system/docs/scripts/building_UI.html">building_UI</a>
+<a class="sidebar-class class-node" href="../../player_weapon_system/docs/scripts/replace_actionkeys.html">replace_actionkeys</a>
 <a class="sidebar-class class-resource" href="../../player_weapon_system/docs/scripts/weapon.html">PlayerWeapon</a>
+<a class="sidebar-class class-resource" href="../../player_weapon_system/docs/scripts/building_weapon.html">PlayerBuildingWeapon</a>
 <a class="sidebar-class class-resource" href="../../player_weapon_system/docs/scripts/firearm_bio_weapon.html">PlayerFirearmBioWeapon</a>
 <a class="sidebar-class class-resource" href="../../player_weapon_system/docs/scripts/firearm_electro_weapon.html">PlayerFirearmElectroWeapon</a>
 <a class="sidebar-class class-resource" href="../../player_weapon_system/docs/scripts/firearm_flash_weapon.html">PlayerFirearmFlashWeapon</a>

@@ -834,11 +834,13 @@ th {
 /* Responsive Design */
 @media (max-width: 1024px) {
 	.sidebar {
-		width: 100%;
+		width: 80%;
 		height: 400px;
 		position: relative;
 		border-right: none;
 		border-bottom: 2px solid #006064;
+		margin-left: auto;
+    	margin-right: auto;
 	}
 
 	.sidebar-content {
@@ -872,5 +874,16 @@ th {
 	img {
 		width: 100%;
 		max-width: 100%;
+	}
+
+	* {
+		text-shadow: none !important;
+		box-shadow: none !important;
+		word-wrap: break-word !important;
+    	overflow-wrap: break-word !important;
+	}
+
+	.scanlines {
+		display: none;
 	}
 }
