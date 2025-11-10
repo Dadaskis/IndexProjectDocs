@@ -1,0 +1,169 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:location_cutscene/example0.gif
+//img:location_cutscene/example1.gif
+
+Finally, a way to add animations to interactive objects. Defusing C4? Defusing a chemical bomb? Installing a sentry gun? That's what this thing is all about. It is implementing so called \"cutscenes\" in form of the [gd]LocationCutscene[/gd] node.
+
+[bc]Exporting a cutscene made in Blender[/bc]
+[wc]0. Make a cutscene in Blender with your animating skills.[/wc]
+//img:location_cutscene/export_example0.png
+[ctr]If you need any examples, check [p]res://.dev_sources/location_cutscenes[/p] folder. This can save your life.[/ctr]
+[wc]1. Locate the location cutscene export button in BlenderFastTools panel.[/wc]
+//img:location_cutscene/export_example1.png
+[ctr]Make sure to select a mesh in object mode, otherwise the button won't be available.[/ctr]
+[wc]2. Update location cutscene data folder with running the editor script.[/wc]
+//img:location_cutscene/export_example2.png
+[ctr]Double-click the script, it'll open it in the Script Editor. In the list of scripts, find [p]location_cutscene_data_update.gd[/p], click Right Mouse Button on it, in the context menu press \"Run\".[/ctr]
+[wc]3. Configure your data file.[/wc]
+//img:location_cutscene/export_example3.png
+//img:location_cutscene/export_example4.png
+[ctr]Locate [p]res://modules/location_cutscene/assets/cutscene_data/[/p][/ctr]
+Not all of the variables need to be edited if you did things \"right\". For example, if you just append-ed the viewmodel hands with not much changes in the names, like keeping things called [p]human_rig[/p] and [p]hands[/p], then the system will detect the viewmodel hands fast.
+[p]cutscene_name[/p] - Don't touch this one, it is assigned automatically and its right by default.
+[p]viewmodel_camera_path[/p] - Node path to the main camera of this cutscene.
+[p]viewmodel_camera_bone_name[/p] - Bone name to assign the main camera to.
+[p]viewmodel_hands_path[/p] - Node path to the viewmodel hands mesh.
+[p]viewmodel_skeleton_path[/p] - Node path to the viewmodel skeleton.
+[p]viewmodel_human_rig_path[/p] - Node path to the [p]human_rig[/p] node.
+[p]remove_nodes[/p] - An array of node paths that'll be removed during the scene update.
+[p]assign_location_mats[/p] - An array of node paths to meshes that need a location material be assigned to.
+[p]anim_player_path[/p] - Node path to [gd]AnimationPlayer[/gd] node.
+[p]update_scene[/p] - A boolean-button that updates the scene when you press it.
+[r]In this mess you don't need to change everything to configure your cutscene right.[/r]
+Most likely you'd need to change [p]assign_location_mats[/p] *in case* if you have some props in your cutscene that have a location material. Otherwise you'd need to configure your materials manually in the GLB folder ([p]res://modules/location_cutscene/assets/cutscene_glbs/[/p]).
+[wc]4. Update the scene file.[/wc]
+//img:location_cutscene/export_example5.png
+[ctr]Click on this checkbox and it'll update the scene file.[/ctr]
+[wc]5. Use your cutscene![/wc]
+[ctr]Methods will be described in the next section.[/ctr]
+
+[bc]Using cutscenes[/bc]
+There are 2 methods:
+	- Use [gd]LocationCutscenePlayer[/gd]
+	- Play the cutscene yourself in the code
+
+[bc]LocationCutscenePlayer[/bc]
+//img:location_cutscene/location_cutscene_player0.png
+This node comes with a preview feature that allows you to place your cutscene in the game world easily. Still clunky to use, but better than nothing.
+	- Change the cutscene name in the settings.
+	- Define some location events to start this thing playing.
+	- Tada.
+
+[bc]Playing the cutscene in code[/bc]
+Simple example:
+[gd]
+# Create and set up the cutscene instance
+var cutscene = LocationCutscene.create_cutscene(\"sentry_gun0_take\")
+add_child(cutscene) # Add it as a children *somewhere*
+cutscene.transform = Transform.IDENTITY
+cutscene.play()
+# Wait for cutscene to finish
+yield(cutscene, \"on_finish\")
+# Clean up
+cutscene.queue_free()
+[/gd]
+
+Player example:
+[gd]
+# Play cutscene
+var player = PlayerData.get_player()
+var cutscene = LocationCutscene.create_cutscene(\"sentry_gun0_take\")
+player.get_node(\"CameraHorizontal\").add_child(cutscene)
+cutscene.transform = Transform.IDENTITY
+cutscene.rotation_degrees.y = 180.0
+cutscene.position.y -= player.get_node(\"CameraHorizontal\").position.y
+cutscene.position.y += 0.2
+cutscene.reset_physics_interpolation()
+cutscene.play()
+# Wait for cutscene to finish
+yield(cutscene, \"on_finish\")
+# Clean up
+cutscene.queue_free()
+[/gd]"
+info_rus = "//img:location_cutscene/example0.gif
+//img:location_cutscene/example1.gif
+
+Наконец-то способ добавить анимации к интерактивным объектам. Обезвреживание C4? Обезвреживание химической бомбы? Установка турели? Вот для чего эта штука. Она реализует так называемые \"катсцены\" в форме ноды [gd]LocationCutscene[/gd].
+
+[bc]Экспорт катсцены, сделанной в Blender[/bc]
+[wc]0. Сделай катсцену в Blender'е с помощью своих анимационных навыков.[/wc]
+//img:location_cutscene/export_example0.png
+[ctr]Если нужны примеры, проверь папку [p]res://.dev_sources/location_cutscenes[/p]. Это может спасти тебе жизнь.[/ctr]
+[wc]1. Найди кнопку экспорта катсцены локации в панели BlenderFastTools.[/wc]
+//img:location_cutscene/export_example1.png
+[ctr]Убедись, что выбран меш в режиме объекта, иначе кнопка будет недоступна.[/ctr]
+[wc]2. Обнови папку данных катсцен локации, запустив редакторский скрипт.[/wc]
+//img:location_cutscene/export_example2.png
+[ctr]Дважды кликни по скрипту, он откроется в Редакторе Скриптов. В списке скриптов найди [p]location_cutscene_data_update.gd[/p], кликни по нему Правой Кнопкой Мыши, в контекстном меню нажми \"Run\".[/ctr]
+[wc]3. Настрой свой файл данных.[/wc]
+//img:location_cutscene/export_example3.png
+//img:location_cutscene/export_example4.png
+[ctr]Найди [p]res://modules/location_cutscene/assets/cutscene_data/[/p][/ctr]
+Не все переменные нужно редактировать, если ты сделал всё \"правильно\". Например, если ты просто append'ил руки вьюмодели без особых изменений в названиях, оставив всё называться [p]human_rig[/p] и [p]hands[/p], то система быстро определит руки вьюмодели.
+[p]cutscene_name[/p] - Не трогай эту, она назначается автоматически и по умолчанию верна.
+[p]viewmodel_camera_path[/p] - Путь к ноде основной камеры этой катсцены.
+[p]viewmodel_camera_bone_name[/p] - Имя кости, к которой привязать основную камеру.
+[p]viewmodel_hands_path[/p] - Путь к ноде меша рук вьюмодели.
+[p]viewmodel_skeleton_path[/p] - Путь к ноде скелета вьюмодели.
+[p]viewmodel_human_rig_path[/p] - Путь к ноде [p]human_rig[/p].
+[p]remove_nodes[/p] - Массив путей к нодам, которые будут удалены во время обновления сцены.
+[p]assign_location_mats[/p] - Массив путей к нодам мешей, которым нужно назначить материал локации.
+[p]anim_player_path[/p] - Путь к ноде [gd]AnimationPlayer[/gd].
+[p]update_scene[/p] - Булева кнопка, которая обновляет сцену при нажатии.
+[r]В этом бардаке не нужно менять всё, чтобы правильно настроить катсцену.[/r]
+Скорее всего, тебе понадобится изменить [p]assign_location_mats[/p] *в случае*, если в твоей катсцене есть пропы с материалом локации. Иначе тебе придётся настраивать материалы вручную в папке GLB ([p]res://modules/location_cutscene/assets/cutscene_glbs/[/p]).
+[wc]4. Обнови файл сцены.[/wc]
+//img:location_cutscene/export_example5.png
+[ctr]Нажми на этот чекбокс, и он обновит файл сцены.[/ctr]
+[wc]5. Используй свою катсцену![/wc]
+[ctr]Методы будут описаны в следующем разделе.[/ctr]
+
+[bc]Использование катсцен[/bc]
+Есть 2 метода:
+	- Использовать [gd]LocationCutscenePlayer[/gd]
+	- Проигрывать катсцену самостоятельно в коде
+
+[bc]LocationCutscenePlayer[/bc]
+//img:location_cutscene/location_cutscene_player0.png
+Эта нода поставляется с функцией предпросмотра, которая позволяет легко размещать катсцену в игровом мире. Всё ещё неудобна в использовании, но лучше, чем ничего.
+	- Измени имя катсцены в настройках.
+	- Определи некоторые события локации для начала проигрывания этой штуки.
+	- Та-да.
+
+[bc]Проигрывание катсцены в коде[/bc]
+Простой пример:
+[gd]
+# Создаём и настраиваем инстанс катсцены
+var cutscene = LocationCutscene.create_cutscene(\"sentry_gun0_take\")
+add_child(cutscene) # Добавляем её как ребёнка *куда-нибудь*
+cutscene.transform = Transform.IDENTITY
+cutscene.play()
+# Ждём окончания катсцены
+yield(cutscene, \"on_finish\")
+# Очистка
+cutscene.queue_free()
+[/gd]
+
+Пример с игроком:
+[gd]
+# Проигрываем катсцену
+var player = PlayerData.get_player()
+var cutscene = LocationCutscene.create_cutscene(\"sentry_gun0_take\")
+player.get_node(\"CameraHorizontal\").add_child(cutscene)
+cutscene.transform = Transform.IDENTITY
+cutscene.rotation_degrees.y = 180.0
+cutscene.position.y -= player.get_node(\"CameraHorizontal\").position.y
+cutscene.position.y += 0.2
+cutscene.reset_physics_interpolation()
+cutscene.play()
+# Ждём окончания катсцены
+yield(cutscene, \"on_finish\")
+# Очистка
+cutscene.queue_free()
+[/gd]"
+edit_time = 1.7628e+09

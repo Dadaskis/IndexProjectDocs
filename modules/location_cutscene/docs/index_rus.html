@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_cutscene
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_cutscene
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 10, 2025 at 17:20 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/location_cutscene/example0.gif" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../assets/images/location_cutscene/example1.gif" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Наконец-то способ добавить анимации к интерактивным объектам. Обезвреживание C4? Обезвреживание химической бомбы? Установка турели? Вот для чего эта штука. Она реализует так называемые "катсцены" в форме ноды <code class="gdscript">
+										LocationCutscene
+									</code>
+									.<br>
+									<br>
+								</p>
+								<h2>
+									Экспорт катсцены, сделанной в Blender
+								</h2>
+								<p>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									0. Сделай катсцену в Blender'е с помощью своих анимационных навыков.
+								</h4>
+								<p>
+									<br>
+									<img src="../../../assets/images/location_cutscene/export_example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+									</p>
+									<center>
+										Если нужны примеры, проверь папку <code class="gdscript">
+											"res://.dev_sources/location_cutscenes"
+										</code>
+										. Это может спасти тебе жизнь.
+									</center>
+									<p>
+										<br>
+									</p>
+									<h4 style="width: 60%">
+										1. Найди кнопку экспорта катсцены локации в панели BlenderFastTools.
+									</h4>
+									<p>
+										<br>
+										<img src="../../../assets/images/location_cutscene/export_example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+										</p>
+										<center>
+											Убедись, что выбран меш в режиме объекта, иначе кнопка будет недоступна.
+										</center>
+										<p>
+											<br>
+										</p>
+										<h4 style="width: 60%">
+											2. Обнови папку данных катсцен локации, запустив редакторский скрипт.
+										</h4>
+										<p>
+											<br>
+											<img src="../../../assets/images/location_cutscene/export_example2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+											</p>
+											<center>
+												Дважды кликни по скрипту, он откроется в Редакторе Скриптов. В списке скриптов найди <code class="gdscript">
+													"location_cutscene_data_update.gd"
+												</code>
+												, кликни по нему Правой Кнопкой Мыши, в контекстном меню нажми "Run".
+											</center>
+											<p>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												3. Настрой свой файл данных.
+											</h4>
+											<p>
+												<br>
+												<img src="../../../assets/images/location_cutscene/export_example3.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													<img src="../../../assets/images/location_cutscene/export_example4.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+													</p>
+													<center>
+														Найди <code class="gdscript">
+															"res://modules/location_cutscene/assets/cutscene_data/"
+														</code>
+													</center>
+													<p>
+														<br>
+														Не все переменные нужно редактировать, если ты сделал всё "правильно". Например, если ты просто append'ил руки вьюмодели без особых изменений в названиях, оставив всё называться <code class="gdscript">
+															"human_rig"
+														</code>
+														и <code class="gdscript">
+															"hands"
+														</code>
+														, то система быстро определит руки вьюмодели.<br>
+														<code class="gdscript">
+															"cutscene_name"
+														</code>
+														- Не трогай эту, она назначается автоматически и по умолчанию верна.<br>
+														<code class="gdscript">
+															"viewmodel_camera_path"
+														</code>
+														- Путь к ноде основной камеры этой катсцены.<br>
+														<code class="gdscript">
+															"viewmodel_camera_bone_name"
+														</code>
+														- Имя кости, к которой привязать основную камеру.<br>
+														<code class="gdscript">
+															"viewmodel_hands_path"
+														</code>
+														- Путь к ноде меша рук вьюмодели.<br>
+														<code class="gdscript">
+															"viewmodel_skeleton_path"
+														</code>
+														- Путь к ноде скелета вьюмодели.<br>
+														<code class="gdscript">
+															"viewmodel_human_rig_path"
+														</code>
+														- Путь к ноде <code class="gdscript">
+															"human_rig"
+														</code>
+														.<br>
+														<code class="gdscript">
+															"remove_nodes"
+														</code>
+														- Массив путей к нодам, которые будут удалены во время обновления сцены.<br>
+														<code class="gdscript">
+															"assign_location_mats"
+														</code>
+														- Массив путей к нодам мешей, которым нужно назначить материал локации.<br>
+														<code class="gdscript">
+															"anim_player_path"
+														</code>
+														- Путь к ноде <code class="gdscript">
+															AnimationPlayer
+														</code>
+														.<br>
+														<code class="gdscript">
+															"update_scene"
+														</code>
+														- Булева кнопка, которая обновляет сцену при нажатии.<br>
+														<code class="red-marking">
+															В этом бардаке не нужно менять всё, чтобы правильно настроить катсцену.
+														</code>
+														<br>
+														Скорее всего, тебе понадобится изменить <code class="gdscript">
+															"assign_location_mats"
+														</code>
+														*в случае*, если в твоей катсцене есть пропы с материалом локации. Иначе тебе придётся настраивать материалы вручную в папке GLB (<code class="gdscript">
+															"res://modules/location_cutscene/assets/cutscene_glbs/"
+														</code>
+														).<br>
+													</p>
+													<h4 style="width: 60%">
+														4. Обнови файл сцены.
+													</h4>
+													<p>
+														<br>
+														<img src="../../../assets/images/location_cutscene/export_example5.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+														</p>
+														<center>
+															Нажми на этот чекбокс, и он обновит файл сцены.
+														</center>
+														<p>
+															<br>
+														</p>
+														<h4 style="width: 60%">
+															5. Используй свою катсцену!
+														</h4>
+														<p>
+															<br>
+														</p>
+														<center>
+															Методы будут описаны в следующем разделе.
+														</center>
+														<p>
+															<br>
+															<br>
+														</p>
+														<h2>
+															Использование катсцен
+														</h2>
+														<p>
+															<br>
+															Есть 2 метода:<br>
+															&emsp;- Использовать <code class="gdscript">
+																LocationCutscenePlayer
+															</code>
+															<br>
+															&emsp;- Проигрывать катсцену самостоятельно в коде<br>
+															<br>
+														</p>
+														<h2>
+															LocationCutscenePlayer
+														</h2>
+														<p>
+															<br>
+															<img src="../../../assets/images/location_cutscene/location_cutscene_player0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																Эта нода поставляется с функцией предпросмотра, которая позволяет легко размещать катсцену в игровом мире. Всё ещё неудобна в использовании, но лучше, чем ничего.<br>
+																&emsp;- Измени имя катсцены в настройках.<br>
+																&emsp;- Определи некоторые события локации для начала проигрывания этой штуки.<br>
+																&emsp;- Та-да.<br>
+																<br>
+															</p>
+															<h2>
+																Проигрывание катсцены в коде
+															</h2>
+															<p>
+																<br>
+																Простой пример:<br>
+																<code class="gdscript">
+																	<br>
+																	# Создаём и настраиваем инстанс катсцены<br>
+																	var cutscene = LocationCutscene.create_cutscene("sentry_gun0_take")<br>
+																	add_child(cutscene) # Добавляем её как ребёнка *куда-нибудь*<br>
+																	cutscene.transform = Transform.IDENTITY<br>
+																	cutscene.play()<br>
+																	# Ждём окончания катсцены<br>
+																	yield(cutscene, "on_finish")<br>
+																	# Очистка<br>
+																	cutscene.queue_free()<br>
+																</code>
+																<br>
+																<br>
+																Пример с игроком:<br>
+																<code class="gdscript">
+																	<br>
+																	# Проигрываем катсцену<br>
+																	var player = PlayerData.get_player()<br>
+																	var cutscene = LocationCutscene.create_cutscene("sentry_gun0_take")<br>
+																	player.get_node("CameraHorizontal").add_child(cutscene)<br>
+																	cutscene.transform = Transform.IDENTITY<br>
+																	cutscene.rotation_degrees.y = 180.0<br>
+																	cutscene.position.y -= player.get_node("CameraHorizontal").position.y<br>
+																	cutscene.position.y += 0.2<br>
+																	cutscene.reset_physics_interpolation()<br>
+																	cutscene.play()<br>
+																	# Ждём окончания катсцены<br>
+																	yield(cutscene, "on_finish")<br>
+																	# Очистка<br>
+																	cutscene.queue_free()<br>
+																</code>
+															</p>
+															<h3>
+																General Information
+															</h3>
+															<h4>
+																Root directories list
+															</h4>
+															<p>
+																assets, docs, src
+															</p>
+															<h4>
+																Nodes
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene.html">
+																	LocationCutscene
+																</a>
+																<br>
+																<a class="a_simple" href="./scripts/location_cutscene_player.html">
+																	LocationCutscenePlayer
+																</a>
+															</p>
+															<h4>
+																Classes
+															</h4>
+															<p>
+																None
+															</p>
+															<h4>
+																Resources
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene_data.html">
+																	LocationCutsceneData
+																</a>
+															</p>
+															<h4>
+																Other Scripts
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene_data_update.html">
+																	location_cutscene_data_update
+																</a>
+															</p>
+														</div>
+													</div>
+												</center>
+												<script src="../../../assets/code_blocks.js">
+												</script>
+											</body>
+										</html>

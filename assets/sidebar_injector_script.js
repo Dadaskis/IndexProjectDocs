@@ -396,6 +396,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </div><a class="sidebar-class module-var" href="../../../location_chunk/docs/index.html">location_chunk<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../../location_chunk/docs/scripts/location_chunk_manager.html">LocationChunkManager</a>
 <a class="sidebar-class" href="../../../location_chunk/docs/scripts/location_chunk.html">LocationChunk</a>
+</div><a class="sidebar-class module-var" href="../../../location_cutscene/docs/index.html">location_cutscene<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-node" href="../../../location_cutscene/docs/scripts/location_cutscene.html">LocationCutscene</a>
+<a class="sidebar-class class-node" href="../../../location_cutscene/docs/scripts/location_cutscene_player.html">LocationCutscenePlayer</a>
+<a class="sidebar-class class-resource" href="../../../location_cutscene/docs/scripts/location_cutscene_data.html">LocationCutsceneData</a>
+<a class="sidebar-class class-other" href="../../../location_cutscene/docs/scripts/location_cutscene_data_update.html">location_cutscene_data_update</a>
 </div><a class="sidebar-class module-var" href="../../../location_decal/docs/index.html">location_decal<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../../location_decal/docs/scripts/remove_after_time.html">remove_after_time</a>
 <a class="sidebar-class class-node" href="../../../location_decal/docs/scripts/location_decal.html">LocationDecal</a>

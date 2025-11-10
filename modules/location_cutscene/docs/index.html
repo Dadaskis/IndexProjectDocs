@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - location_cutscene
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: location_cutscene
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 10, 2025 at 17:20 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/location_cutscene/example0.gif" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								<img src="../../../assets/images/location_cutscene/example1.gif" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									<br>
+									Finally, a way to add animations to interactive objects. Defusing C4? Defusing a chemical bomb? Installing a sentry gun? That's what this thing is all about. It is implementing so called "cutscenes" in form of the <code class="gdscript">
+										LocationCutscene
+									</code>
+									node.<br>
+									<br>
+								</p>
+								<h2>
+									Exporting a cutscene made in Blender
+								</h2>
+								<p>
+									<br>
+								</p>
+								<h4 style="width: 60%">
+									0. Make a cutscene in Blender with your animating skills.
+								</h4>
+								<p>
+									<br>
+									<img src="../../../assets/images/location_cutscene/export_example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+									</p>
+									<center>
+										If you need any examples, check <code class="gdscript">
+											"res://.dev_sources/location_cutscenes"
+										</code>
+										folder. This can save your life.
+									</center>
+									<p>
+										<br>
+									</p>
+									<h4 style="width: 60%">
+										1. Locate the location cutscene export button in BlenderFastTools panel.
+									</h4>
+									<p>
+										<br>
+										<img src="../../../assets/images/location_cutscene/export_example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+											<br>
+										</p>
+										<center>
+											Make sure to select a mesh in object mode, otherwise the button won't be available.
+										</center>
+										<p>
+											<br>
+										</p>
+										<h4 style="width: 60%">
+											2. Update location cutscene data folder with running the editor script.
+										</h4>
+										<p>
+											<br>
+											<img src="../../../assets/images/location_cutscene/export_example2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+												<br>
+											</p>
+											<center>
+												Double-click the script, it'll open it in the Script Editor. In the list of scripts, find <code class="gdscript">
+													"location_cutscene_data_update.gd"
+												</code>
+												, click Right Mouse Button on it, in the context menu press "Run".
+											</center>
+											<p>
+												<br>
+											</p>
+											<h4 style="width: 60%">
+												3. Configure your data file.
+											</h4>
+											<p>
+												<br>
+												<img src="../../../assets/images/location_cutscene/export_example3.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+													<br>
+													<img src="../../../assets/images/location_cutscene/export_example4.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+														<br>
+													</p>
+													<center>
+														Locate <code class="gdscript">
+															"res://modules/location_cutscene/assets/cutscene_data/"
+														</code>
+													</center>
+													<p>
+														<br>
+														Not all of the variables need to be edited if you did things "right". For example, if you just append-ed the viewmodel hands with not much changes in the names, like keeping things called <code class="gdscript">
+															"human_rig"
+														</code>
+														and <code class="gdscript">
+															"hands"
+														</code>
+														, then the system will detect the viewmodel hands fast.<br>
+														<code class="gdscript">
+															"cutscene_name"
+														</code>
+														- Don't touch this one, it is assigned automatically and its right by default.<br>
+														<code class="gdscript">
+															"viewmodel_camera_path"
+														</code>
+														- Node path to the main camera of this cutscene.<br>
+														<code class="gdscript">
+															"viewmodel_camera_bone_name"
+														</code>
+														- Bone name to assign the main camera to.<br>
+														<code class="gdscript">
+															"viewmodel_hands_path"
+														</code>
+														- Node path to the viewmodel hands mesh.<br>
+														<code class="gdscript">
+															"viewmodel_skeleton_path"
+														</code>
+														- Node path to the viewmodel skeleton.<br>
+														<code class="gdscript">
+															"viewmodel_human_rig_path"
+														</code>
+														- Node path to the <code class="gdscript">
+															"human_rig"
+														</code>
+														node.<br>
+														<code class="gdscript">
+															"remove_nodes"
+														</code>
+														- An array of node paths that'll be removed during the scene update.<br>
+														<code class="gdscript">
+															"assign_location_mats"
+														</code>
+														- An array of node paths to meshes that need a location material be assigned to.<br>
+														<code class="gdscript">
+															"anim_player_path"
+														</code>
+														- Node path to <code class="gdscript">
+															AnimationPlayer
+														</code>
+														node.<br>
+														<code class="gdscript">
+															"update_scene"
+														</code>
+														- A boolean-button that updates the scene when you press it.<br>
+														<code class="red-marking">
+															In this mess you don't need to change everything to configure your cutscene right.
+														</code>
+														<br>
+														Most likely you'd need to change <code class="gdscript">
+															"assign_location_mats"
+														</code>
+														*in case* if you have some props in your cutscene that have a location material. Otherwise you'd need to configure your materials manually in the GLB folder (<code class="gdscript">
+															"res://modules/location_cutscene/assets/cutscene_glbs/"
+														</code>
+														).<br>
+													</p>
+													<h4 style="width: 60%">
+														4. Update the scene file.
+													</h4>
+													<p>
+														<br>
+														<img src="../../../assets/images/location_cutscene/export_example5.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+															<br>
+														</p>
+														<center>
+															Click on this checkbox and it'll update the scene file.
+														</center>
+														<p>
+															<br>
+														</p>
+														<h4 style="width: 60%">
+															5. Use your cutscene!
+														</h4>
+														<p>
+															<br>
+														</p>
+														<center>
+															Methods will be described in the next section.
+														</center>
+														<p>
+															<br>
+															<br>
+														</p>
+														<h2>
+															Using cutscenes
+														</h2>
+														<p>
+															<br>
+															There are 2 methods:<br>
+															&emsp;- Use <code class="gdscript">
+																LocationCutscenePlayer
+															</code>
+															<br>
+															&emsp;- Play the cutscene yourself in the code<br>
+															<br>
+														</p>
+														<h2>
+															LocationCutscenePlayer
+														</h2>
+														<p>
+															<br>
+															<img src="../../../assets/images/location_cutscene/location_cutscene_player0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+																<br>
+																This node comes with a preview feature that allows you to place your cutscene in the game world easily. Still clunky to use, but better than nothing.<br>
+																&emsp;- Change the cutscene name in the settings.<br>
+																&emsp;- Define some location events to start this thing playing.<br>
+																&emsp;- Tada.<br>
+																<br>
+															</p>
+															<h2>
+																Playing the cutscene in code
+															</h2>
+															<p>
+																<br>
+																Simple example:<br>
+																<code class="gdscript">
+																	<br>
+																	# Create and set up the cutscene instance<br>
+																	var cutscene = LocationCutscene.create_cutscene("sentry_gun0_take")<br>
+																	add_child(cutscene) # Add it as a children *somewhere*<br>
+																	cutscene.transform = Transform.IDENTITY<br>
+																	cutscene.play()<br>
+																	# Wait for cutscene to finish<br>
+																	yield(cutscene, "on_finish")<br>
+																	# Clean up<br>
+																	cutscene.queue_free()<br>
+																</code>
+																<br>
+																<br>
+																Player example:<br>
+																<code class="gdscript">
+																	<br>
+																	# Play cutscene<br>
+																	var player = PlayerData.get_player()<br>
+																	var cutscene = LocationCutscene.create_cutscene("sentry_gun0_take")<br>
+																	player.get_node("CameraHorizontal").add_child(cutscene)<br>
+																	cutscene.transform = Transform.IDENTITY<br>
+																	cutscene.rotation_degrees.y = 180.0<br>
+																	cutscene.position.y -= player.get_node("CameraHorizontal").position.y<br>
+																	cutscene.position.y += 0.2<br>
+																	cutscene.reset_physics_interpolation()<br>
+																	cutscene.play()<br>
+																	# Wait for cutscene to finish<br>
+																	yield(cutscene, "on_finish")<br>
+																	# Clean up<br>
+																	cutscene.queue_free()<br>
+																</code>
+															</p>
+															<h3>
+																General Information
+															</h3>
+															<h4>
+																Root directories list
+															</h4>
+															<p>
+																assets, docs, src
+															</p>
+															<h4>
+																Nodes
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene.html">
+																	LocationCutscene
+																</a>
+																<br>
+																<a class="a_simple" href="./scripts/location_cutscene_player.html">
+																	LocationCutscenePlayer
+																</a>
+															</p>
+															<h4>
+																Classes
+															</h4>
+															<p>
+																None
+															</p>
+															<h4>
+																Resources
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene_data.html">
+																	LocationCutsceneData
+																</a>
+															</p>
+															<h4>
+																Other Scripts
+															</h4>
+															<p>
+																<a class="a_simple" href="./scripts/location_cutscene_data_update.html">
+																	location_cutscene_data_update
+																</a>
+															</p>
+														</div>
+													</div>
+												</center>
+												<script src="../../../assets/code_blocks.js">
+												</script>
+											</body>
+										</html>
