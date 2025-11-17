@@ -244,6 +244,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </div><a class="sidebar-class module-var" href="../../../footstep/docs/index.html">footstep<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-resource" href="../../../footstep/docs/scripts/sounds_data.html">FootstepSoundsData</a>
 <a class="sidebar-class" href="../../../footstep/docs/scripts/footstep.html">Footstep</a>
+</div><a class="sidebar-class module-var" href="../../../game_map/docs/index.html">game_map<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-node" href="../../../game_map/docs/scripts/game_map.html">GameMap</a>
+<a class="sidebar-class class-node" href="../../../game_map/docs/scripts/map_geometry.html">GameMapGeometry</a>
+<a class="sidebar-class class-node" href="../../../game_map/docs/scripts/map_interface.html">map_interface</a>
+<a class="sidebar-class class-resource" href="../../../game_map/docs/scripts/map_waypoint_data.html">GameMapWaypointData</a>
 </div><a class="sidebar-class module-var" href="../../../game_menu/docs/index.html">game_menu<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../../game_menu/docs/scripts/game_menu.html">GameMenu</a>
 <a class="sidebar-class class-node" href="../../../game_menu/docs/scripts/achievement_icon.html">achievement_icon</a>
@@ -659,6 +664,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_event_to_one_visible_node.html">ST_EventToOneVisibleNode</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_explosion_on_event.html">ST_ExplosionOnEvent</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_fire_controller.html">ST_FireController</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_game_map_lock_waypoint.html">ST_GameMapLockWaypoint</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_game_map_open.html">ST_GameMapOpen</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_game_map_unlock_waypoint.html">ST_GameMapUnlockWaypoint</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_globals_check_bool.html">ST_GlobalsCheckBool</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_globals_set_bool.html">ST_GlobalsSetBool</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_gravity_control.html">ST_GravityControl</a>

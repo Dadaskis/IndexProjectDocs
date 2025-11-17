@@ -49,7 +49,7 @@
 								</h3>
 								<p class="red-marking">
 									Page last updated:<br>
-									November 10, 2025 at 17:21 UTC
+									November 17, 2025 at 10:15 UTC
 								</p>
 								<br>
 							</div>
@@ -63,9 +63,10 @@
 									Constant
 								</p>
 								<p class="var_desc_name_text">
-									SWITCH0_SOUND_PATH
+									SWITCH0_SOUND
 								</p>
 								<p class="var_desc_name_value">
+									preload()
 								</p>
 							</div>
 							<p class="var_desc_text">
@@ -76,22 +77,10 @@
 									Constant
 								</p>
 								<p class="var_desc_name_text">
+									END0_SOUND
 								</p>
 								<p class="var_desc_name_value">
-									Undefined/Default
-								</p>
-							</div>
-							<p class="var_desc_text">
-								Switch sound
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_const">
-									Constant
-								</p>
-								<p class="var_desc_name_text">
-									END0_SOUND_PATH
-								</p>
-								<p class="var_desc_name_value">
+									preload()
 								</p>
 							</div>
 							<p class="var_desc_text">
@@ -102,39 +91,14 @@
 									Constant
 								</p>
 								<p class="var_desc_name_text">
+									EFFECT_SCENE
 								</p>
 								<p class="var_desc_name_value">
-									Undefined/Default
+									preload()
 								</p>
 							</div>
 							<p class="var_desc_text">
-								End sound
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_const">
-									Constant
-								</p>
-								<p class="var_desc_name_text">
-									EFFECT_SCENE_PATH
-								</p>
-								<p class="var_desc_name_value">
-								</p>
-							</div>
-							<p class="var_desc_text">
-								Effect shader scene path
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_const">
-									Constant
-								</p>
-								<p class="var_desc_name_text">
-								</p>
-								<p class="var_desc_name_value">
-									Undefined/Default
-								</p>
-							</div>
-							<p class="var_desc_text">
-								Effect shader scene path
+								Effect shader scene
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_const">
@@ -163,34 +127,6 @@
 							</div>
 							<p class="var_desc_text">
 								Kill cam duration
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_var">
-									Variable
-								</p>
-								<p class="var_desc_name_text">
-									switch0_sound
-								</p>
-								<p class="var_desc_name_value">
-									Undefined/Default
-								</p>
-							</div>
-							<p class="var_desc_text">
-								Switch sound sample
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_var">
-									Variable
-								</p>
-								<p class="var_desc_name_text">
-									end0_sound
-								</p>
-								<p class="var_desc_name_value">
-									Undefined/Default
-								</p>
-							</div>
-							<p class="var_desc_text">
-								End sound sample
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_var">
@@ -305,6 +241,20 @@
 								Body part to follow during the killcam scene
 							</p>
 							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									is_initialized
+								</p>
+								<p class="var_desc_name_value">
+									false
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Is initailized?
+							</p>
+							<div class="variable_desc_div">
 								<p class="flair_func">
 									Function
 								</p>
@@ -338,6 +288,24 @@
 							</div>
 							<p class="var_desc_text">
 								Runs on every character kill
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initialization function that loads all the fancy sounds,<br/>
+								initializes the shader canvas post-FX and make a camera
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_func">

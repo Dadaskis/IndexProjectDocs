@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - game_map
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: game_map
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 17, 2025 at 10:14 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/game_map/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								What can turn this game into something more open-world rather than this game map?<br>
+								<br>
+							</p>
+							<h2>
+								<code class="gdscript">
+									GameMap
+								</code>
+								singleton
+							</h2>
+							<p>
+								<br>
+								It allows you to get certain control easily.<br>
+								<code class="gdscript">
+									<br>
+									# Opens the game map, shows the "world" waypoints group, "true" means it can be closed<br>
+									GameMap.open("world", true)<br>
+									<br>
+									# Unlocks a waypoint in the "world" group<br>
+									GameMap.unlock_waypoint("world", "ghetto")<br>
+									<br>
+									# Locks a waypoint in the "world" group<br>
+									GameMap.lock_waypoint("world", "ghetto")<br>
+								</code>
+								<br>
+								<br>
+								You can also use <code class="gdscript">
+									"st_game_map_open"
+								</code>
+								, <code class="gdscript">
+									"st_game_map_unlock_waypoint"
+								</code>
+								, <code class="gdscript">
+									"game_map_lock_waypoint"
+								</code>
+								.<br>
+								<br>
+							</p>
+							<h2>
+								Structure
+							</h2>
+							<p>
+								<br>
+								Mainly this thing consists of several parts located in <code class="gdscript">
+									"res://modules/game_map/assets/prefabs/"
+								</code>
+								.<br>
+								<br>
+								<code class="gdscript">
+									"map_geometry"
+								</code>
+								- this is the map's geometry that is shown in the game map interface.<br>
+								<code class="gdscript">
+									"map_viewport"
+								</code>
+								- simply puts the map geometry into <code class="gdscript">
+									Viewport
+								</code>
+								to render it later.<br>
+								<code class="gdscript">
+									"map_interface"
+								</code>
+								- this is the core of this entire system, it implements all the logic related to controls and general system's behavior.<br>
+								<code class="gdscript">
+									"map_waypoint"
+								</code>
+								- implements a waypoint.<br>
+								<code class="gdscript">
+									"game_map"
+								</code>
+								- this is the <code class="gdscript">
+									GameMap
+								</code>
+								singleton.<br>
+								<br>
+								It's pretty simple, if you want to know more - take a look into implementation of <code class="gdscript">
+									"map_interface"
+								</code>
+								.
+							</p>
+							<h3>
+								General Information
+							</h3>
+							<h4>
+								Root directories list
+							</h4>
+							<p>
+								assets, docs, src
+							</p>
+							<h4>
+								Nodes
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/game_map.html">
+									GameMap
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/map_geometry.html">
+									GameMapGeometry
+								</a>
+								<br>
+								<a class="a_simple" href="./scripts/map_interface.html">
+									map_interface
+								</a>
+							</p>
+							<h4>
+								Classes
+							</h4>
+							<p>
+								None
+							</p>
+							<h4>
+								Resources
+							</h4>
+							<p>
+								<a class="a_simple" href="./scripts/map_waypoint_data.html">
+									GameMapWaypointData
+								</a>
+							</p>
+							<h4>
+								Other Scripts
+							</h4>
+							<p>
+								None
+							</p>
+						</div>
+					</div>
+				</center>
+				<script src="../../../assets/code_blocks.js">
+				</script>
+			</body>
+		</html>

@@ -1,0 +1,63 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:game_map/example0.jpg
+What can turn this game into something more open-world rather than this game map?
+
+[bc][gd]GameMap[/gd] singleton[/bc]
+It allows you to get certain control easily.
+[gd]
+# Opens the game map, shows the \"world\" waypoints group, \"true\" means it can be closed
+GameMap.open(\"world\", true)
+
+# Unlocks a waypoint in the \"world\" group
+GameMap.unlock_waypoint(\"world\", \"ghetto\")
+
+# Locks a waypoint in the \"world\" group
+GameMap.lock_waypoint(\"world\", \"ghetto\")
+[/gd]
+
+You can also use [p]st_game_map_open[/p], [p]st_game_map_unlock_waypoint[/p], [p]game_map_lock_waypoint[/p].
+
+[bc]Structure[/bc]
+Mainly this thing consists of several parts located in [p]res://modules/game_map/assets/prefabs/[/p].
+
+[p]map_geometry[/p] - this is the map's geometry that is shown in the game map interface.
+[p]map_viewport[/p] - simply puts the map geometry into [gd]Viewport[/gd] to render it later.
+[p]map_interface[/p] - this is the core of this entire system, it implements all the logic related to controls and general system's behavior.
+[p]map_waypoint[/p] - implements a waypoint.
+[p]game_map[/p] - this is the [gd]GameMap[/gd] singleton.
+
+It's pretty simple, if you want to know more - take a look into implementation of [p]map_interface[/p]."
+info_rus = "//img:game_map/example0.jpg
+Что может превратить эту игру во что-то более похожее на открытый мир, нежели эта игровая карта?
+
+[bc][gd]GameMap[/gd] синглтон[/bc]
+Он позволяет легко получить определённый контроль.
+[gd]
+# Открывает игровую карту, показывает группу путевых точек \"world\", \"true\" означает, что её можно закрыть
+GameMap.open(\"world\", true)
+
+# Разблокирует путевую точку в группе \"world\"
+GameMap.unlock_waypoint(\"world\", \"ghetto\")
+
+# Блокирует путевую точку в группе \"world\"
+GameMap.lock_waypoint(\"world\", \"ghetto\")
+[/gd]
+
+Также можно использовать [p]st_game_map_open[/p], [p]st_game_map_unlock_waypoint[/p], [p]game_map_lock_waypoint[/p].
+
+[bc]Структура[/bc]
+В основном эта штука состоит из нескольких частей, расположенных в [p]res://modules/game_map/assets/prefabs/[/p].
+
+[p]map_geometry[/p] - это геометрия карты, которая показывается в интерфейсе игровой карты.
+[p]map_viewport[/p] - просто помещает геометрию карты в [gd]Viewport[/gd], чтобы отрендерить её позже.
+[p]map_interface[/p] - это ядро всей системы, оно реализует всю логику, связанную с управлением и общим поведением системы.
+[p]map_waypoint[/p] - реализует путевую точку.
+[p]game_map[/p] - это синглтон [gd]GameMap[/gd].
+
+Всё довольно просто, если хочешь знать больше - загляни в реализацию [p]map_interface[/p]."
+edit_time = 1.76337e+09
