@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - universal_choice_window
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: universal_choice_window
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 21, 2025 at 23:06 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/universal_choice_window/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								Очень простой модуль, который добавляет синглтон <code class="gdscript">
+									UniversalChoiceWindow
+								</code>
+								, позволяющий открывать такое прикольненькое дешёвое окошко, которое даёт тебе уникальную возможность превратить этот шутер в приключенческую игру. К чёрту здоровое понимание геймдизайна, мы вливаем это дерьмо.<br>
+								<br>
+							</p>
+							<h2>
+								Как использовать?
+							</h2>
+							<p>
+								<br>
+								Ну, ты либо идёшь кодом, либо используешь ST.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Код
+							</h4>
+							<p>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Массив для твоих жалких выборов<br>
+									var array =
+									[]
+									<br>
+									# Первый выбор<br>
+									var choice0 = UniversalChoiceWindowData.new()<br>
+									# "Display name" означает нормальный, человеко-читаемый текст на кнопке<br>
+									choice0.display_name = "Рыдать"<br>
+									# "Event name" означает событие локации, которое будет вызвано при нажатии на эту кнопку<br>
+									choice0.event_name = "weep"<br>
+									# Ещё один выбор для примера<br>
+									var choice1 = UniversalChoiceWindowData.new()<br>
+									choice1.display_name = "Игнорировать"<br>
+									choice1.event_name = ""<br>
+									# Ты передаёшь этому дерьму 2 аргумента - текст описания и массив выборов.<br>
+									UniversalChoiceWindow.open("Воздух здесь такой.",
+									[choice0, choice1]
+									)<br>
+									# ТА-ДА, у тебя открыто твоё чёртово окно.<br>
+								</code>
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Script Toolkit
+							</h4>
+							<p>
+								<br>
+								<img src="../../../assets/images/universal_choice_window/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									В смысле. Ты просто используешь <code class="gdscript">
+										"st_universal_choice_window"
+									</code>
+									. Да да да. Ты просто используешь его. Вот и всё. Ты просто передаёшь ему аргументы. О да. И тогда это просто работает. Есть ли что-то, что тебе действительно нужно знать об этом?
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/universal_choice_window.html">
+										UniversalChoiceWindow
+									</a>
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/universal_choice_window_data.html">
+										UniversalChoiceWindowData
+									</a>
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../assets/code_blocks.js">
+					</script>
+				</body>
+			</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - universal_choice_window
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: universal_choice_window
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 21, 2025 at 23:06 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/universal_choice_window/example0.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								A very simple module that adds <code class="gdscript">
+									UniversalChoiceWindow
+								</code>
+								singleton that allows opening such a fancy cheap-ass window that gives you a unique possibility to turn this shooter into an adventure game. Fuck the healthy understanding of game design, we pour that shit in.<br>
+								<br>
+							</p>
+							<h2>
+								How to use?
+							</h2>
+							<p>
+								<br>
+								Well, you either go the code way or use the ST.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Code
+							</h4>
+							<p>
+								<br>
+								<code class="gdscript">
+									<br>
+									# Array for your pity choices<br>
+									var array =
+									[]
+									<br>
+									# First choice<br>
+									var choice0 = UniversalChoiceWindowData.new()<br>
+									# "Display name" means a normal, human-readable text on the button<br>
+									choice0.display_name = "Weep"<br>
+									# "Event name" stands for a location event that'll be emitted when you press that button<br>
+									choice0.event_name = "weep"<br>
+									# Another choice just as an example<br>
+									var choice1 = UniversalChoiceWindowData.new()<br>
+									choice1.display_name = "Ignore"<br>
+									choice1.event_name = ""<br>
+									# You pass that shit 2 arguments - a description text and an array of choices.<br>
+									UniversalChoiceWindow.open("The air thing here.",
+									[choice0, choice1]
+									)<br>
+									# TADA you have your damn window open.<br>
+								</code>
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Script Toolkit
+							</h4>
+							<p>
+								<br>
+								<img src="../../../assets/images/universal_choice_window/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									I mean. You just use <code class="gdscript">
+										"st_universal_choice_window"
+									</code>
+									. Yes yes yes. You just use it. That's it. You just pass it the arguments. Oh yes. And then it just works. Is there really anything you need to know about?
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/universal_choice_window.html">
+										UniversalChoiceWindow
+									</a>
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/universal_choice_window_data.html">
+										UniversalChoiceWindowData
+									</a>
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../assets/code_blocks.js">
+					</script>
+				</body>
+			</html>

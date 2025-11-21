@@ -1,0 +1,63 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:universal_choice_window/example0.png
+A very simple module that adds [gd]UniversalChoiceWindow[/gd] singleton that allows opening such a fancy cheap-ass window that gives you a unique possibility to turn this shooter into an adventure game. Fuck the healthy understanding of game design, we pour that shit in.
+
+[bc]How to use?[/bc]
+Well, you either go the code way or use the ST.
+
+[wc]Code[/wc]
+[gd]
+# Array for your pity choices
+var array = []
+# First choice
+var choice0 = UniversalChoiceWindowData.new()
+# \"Display name\" means a normal, human-readable text on the button
+choice0.display_name = \"Weep\"
+# \"Event name\" stands for a location event that'll be emitted when you press that button
+choice0.event_name = \"weep\"
+# Another choice just as an example
+var choice1 = UniversalChoiceWindowData.new()
+choice1.display_name = \"Ignore\"
+choice1.event_name = \"\"
+# You pass that shit 2 arguments - a description text and an array of choices.
+UniversalChoiceWindow.open(\"The air thing here.\", [choice0, choice1])
+# TADA you have your damn window open.
+[/gd]
+
+[wc]Script Toolkit[/wc]
+//img:universal_choice_window/example1.png
+I mean. You just use [p]st_universal_choice_window[/p]. Yes yes yes. You just use it. That's it. You just pass it the arguments. Oh yes. And then it just works. Is there really anything you need to know about?"
+info_rus = "//img:universal_choice_window/example0.png
+Очень простой модуль, который добавляет синглтон [gd]UniversalChoiceWindow[/gd], позволяющий открывать такое прикольненькое дешёвое окошко, которое даёт тебе уникальную возможность превратить этот шутер в приключенческую игру. К чёрту здоровое понимание геймдизайна, мы вливаем это дерьмо.
+
+[bc]Как использовать?[/bc]
+Ну, ты либо идёшь кодом, либо используешь ST.
+
+[wc]Код[/wc]
+[gd]
+# Массив для твоих жалких выборов
+var array = []
+# Первый выбор
+var choice0 = UniversalChoiceWindowData.new()
+# \"Display name\" означает нормальный, человеко-читаемый текст на кнопке
+choice0.display_name = \"Рыдать\"
+# \"Event name\" означает событие локации, которое будет вызвано при нажатии на эту кнопку
+choice0.event_name = \"weep\"
+# Ещё один выбор для примера
+var choice1 = UniversalChoiceWindowData.new()
+choice1.display_name = \"Игнорировать\"
+choice1.event_name = \"\"
+# Ты передаёшь этому дерьму 2 аргумента - текст описания и массив выборов.
+UniversalChoiceWindow.open(\"Воздух здесь такой.\", [choice0, choice1])
+# ТА-ДА, у тебя открыто твоё чёртово окно.
+[/gd]
+
+[wc]Script Toolkit[/wc]
+//img:universal_choice_window/example1.png
+В смысле. Ты просто используешь [p]st_universal_choice_window[/p]. Да да да. Ты просто используешь его. Вот и всё. Ты просто передаёшь ему аргументы. О да. И тогда это просто работает. Есть ли что-то, что тебе действительно нужно знать об этом?"
+edit_time = 1.76377e+09

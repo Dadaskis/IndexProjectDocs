@@ -746,6 +746,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_timer_countdown_hud.html">ST_TimerCountdownHUD</a>
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_toggle_button_on_event.html">ST_ToggleButtonOnEvent</a>
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_tutorial_hud.html">ST_TutorialHUD</a>
+<a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_universal_choice_window.html">ST_UniversalChoiceWindow</a>
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_unlock_achievement.html">ST_UnlockAchievement</a>
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_update_reflection_probe.html">ST_UpdateReflectionProbe</a>
 <a class="sidebar-class class-node" href="../../script_toolkit/docs/scripts/st_use_loadout.html">ST_UseLoadout</a>
@@ -802,6 +803,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../time_scale_manager/docs/scripts/time_scale_manager.html">TimeScaleManager</a>
 </div><a class="sidebar-class module-var" href="../../trigger_base/docs/index.html">trigger_base<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../trigger_base/docs/scripts/trigger_base.html">TriggerBase</a>
+</div><a class="sidebar-class module-var" href="../../universal_choice_window/docs/index.html">universal_choice_window<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-node" href="../../universal_choice_window/docs/scripts/universal_choice_window.html">UniversalChoiceWindow</a>
+<a class="sidebar-class class-resource" href="../../universal_choice_window/docs/scripts/universal_choice_window_data.html">UniversalChoiceWindowData</a>
 </div><a class="sidebar-class module-var" href="../../usable/docs/index.html">usable<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class" href="../../usable/docs/scripts/usable.html">Usable</a>
 <a class="sidebar-class" href="../../usable/docs/scripts/usable_link.html">UsableLink</a>
