@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			Index Project - keypad_menu
+		</title>
+		<link rel="preload" as="image" href="../../../assets/images/docs_background.png">
+		<link rel="stylesheet" type="text/css" href="../../../assets/style.css">
+	</head>
+	<body>
+		<div class="scanlines">
+		</div>
+		<script src="../../../assets/sidebar_injector_module.js">
+		</script>
+		<center>
+			<div class="everything">
+				<div class="sidebar">
+					<h1>
+						Index Project Guide
+					</h1>
+					<br/>
+					<br/>
+					<input type="text" class="searchbar" placeholder="Search...">
+						<div class="sidebar-content" id="sidebar-content">
+						</div>
+					</div>
+					<div class="main_body">
+						<h3>
+							Module: keypad_menu
+						</h3>
+						<p class="red-marking">
+							Documentation last edited: November 23, 2025 at 11:45 UTC
+						</p>
+						<div class="lang-select-div">
+							<a href="./index.html">
+								ENG
+							</a>
+							<a href="./index_rus.html">
+								RUS
+							</a>
+						</div>
+						<h4>
+							Description
+						</h4>
+						<p>
+							<img src="../../../assets/images/keypad_menu/example0.jpg" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+								<br>
+								This is it, that's the point when we can turn this game into immersive-sim, oh yeah. Actually, nevermind, this may not happen.<br>
+								<br>
+								There are 2 ways to use this thing, you either write code or you use ST.<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Code
+							</h4>
+							<p>
+								<br>
+								First argument is password (as a string). Second argument is an event name when access is granted.<br>
+								<code class="gdscript">
+									KeypadMenu.open("1337", "keypad_access_granted")
+								</code>
+								<br>
+								<br>
+							</p>
+							<h4 style="width: 60%">
+								Script Toolkit
+							</h4>
+							<p>
+								<br>
+								<img src="../../../assets/images/keypad_menu/example1.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+									<br>
+									Simply use <code class="gdscript">
+										"st_keypad"
+									</code>
+									. <code class="gdscript">
+										"Open Event"
+									</code>
+									is an event that has to happen when this keypad needs to be opened (shit it's harder to write than I thought). <code class="gdscript">
+										"Password"
+									</code>
+									is the password, keep in mind there's 4 digit limit. <code class="gdscript">
+										"Access Event Name"
+									</code>
+									is an event that happens when you enter the password right.
+								</p>
+								<h3>
+									General Information
+								</h3>
+								<h4>
+									Root directories list
+								</h4>
+								<p>
+									assets, docs, src
+								</p>
+								<h4>
+									Nodes
+								</h4>
+								<p>
+									<a class="a_simple" href="./scripts/keypad_menu.html">
+										KeypadMenu
+									</a>
+								</p>
+								<h4>
+									Classes
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Resources
+								</h4>
+								<p>
+									None
+								</p>
+								<h4>
+									Other Scripts
+								</h4>
+								<p>
+									None
+								</p>
+							</div>
+						</div>
+					</center>
+					<script src="../../../assets/code_blocks.js">
+					</script>
+				</body>
+			</html>

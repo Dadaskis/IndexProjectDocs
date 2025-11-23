@@ -340,6 +340,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-resource" href="../../modules/human_model/docs/scripts/footstep_marks.html">HumanModelFootstepMarks</a>
 <a class="sidebar-class class-resource" href="../../modules/human_model/docs/scripts/weapon_config.html">HumanWeaponConfig</a>
 <a class="sidebar-class" href="../../modules/human_model/docs/scripts/human_model.html">HumanModel</a>
+</div><a class="sidebar-class module-var" href="../../modules/keypad_menu/docs/index.html">keypad_menu<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
+<a class="sidebar-class class-node" href="../../modules/keypad_menu/docs/scripts/keypad_menu.html">KeypadMenu</a>
 </div><a class="sidebar-class module-var" href="../../modules/kill_cam/docs/index.html">kill_cam<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../modules/kill_cam/docs/scripts/kill_cam_manager.html">KillCamManager</a>
 </div><a class="sidebar-class module-var" href="../../modules/laser_sight/docs/index.html">laser_sight<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
@@ -672,6 +674,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_gravity_control.html">ST_GravityControl</a>
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_hack_waves.html">ST_HackWaves</a>
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_instance_location_prefab.html">ST_InstanceLocationPrefab</a>
+<a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_keypad.html">ST_Keypad</a>
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_kill_NPC.html">ST_KillNPC</a>
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_lerp_light_energy_on_event.html">ST_LerpLightEnergyOnEvent</a>
 <a class="sidebar-class class-node" href="../../modules/script_toolkit/docs/scripts/st_light_color_sine_blend.html">ST_LightColorSineBlend</a>

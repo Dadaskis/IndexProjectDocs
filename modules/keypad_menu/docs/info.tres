@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://modules/doc_info/src/doc_info.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+info = "//img:keypad_menu/example0.jpg
+This is it, that's the point when we can turn this game into immersive-sim, oh yeah. Actually, nevermind, this may not happen.
+
+There are 2 ways to use this thing, you either write code or you use ST.
+
+[wc]Code[/wc]
+First argument is password (as a string). Second argument is an event name when access is granted.
+[gd]KeypadMenu.open(\"1337\", \"keypad_access_granted\")[/gd]
+
+[wc]Script Toolkit[/wc]
+//img:keypad_menu/example1.png
+Simply use [p]st_keypad[/p]. [p]Open Event[/p] is an event that has to happen when this keypad needs to be opened (shit it's harder to write than I thought). [p]Password[/p] is the password, keep in mind there's 4 digit limit. [p]Access Event Name[/p] is an event that happens when you enter the password right."
+info_rus = ""
+edit_time = 1.7639e+09
