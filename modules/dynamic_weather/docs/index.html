@@ -31,7 +31,7 @@
 							Module: dynamic_weather
 						</h3>
 						<p class="red-marking">
-							Documentation last edited: November 2, 2025 at 7:53 UTC
+							Documentation last edited: December 1, 2025 at 21:49 UTC
 						</p>
 						<div class="lang-select-div">
 							<a href="./index.html">
@@ -97,57 +97,82 @@
 									<br>
 									Set ST - sets your fancy, preferred time of day or preset ID.<br>
 									<br>
-									"Night Only" Component - helps you to make only those things visible that you want at night. This is helpful to make only certain lights visible at evening/night.
-								</p>
-								<h3>
-									General Information
-								</h3>
-								<h4>
-									Root directories list
-								</h4>
-								<p>
-									assets, docs, src
-								</p>
-								<h4>
-									Nodes
-								</h4>
-								<p>
-									<a class="a_simple" href="./scripts/dynamic_weather_config.html">
-										DynamicWeatherConfig
-									</a>
+									"Night Only" Component - helps you to make only those things visible that you want at night. This is helpful to make only certain lights visible at evening/night.<br>
 									<br>
-									<a class="a_simple" href="./scripts/dynamic_weather_manager.html">
-										DynamicWeatherManager
-									</a>
-								</p>
-								<h4>
-									Classes
-								</h4>
-								<p>
-									None
-								</p>
-								<h4>
-									Resources
-								</h4>
-								<p>
-									<a class="a_simple" href="./scripts/dynamic_weather_data.html">
-										DynamicWeatherData
-									</a>
-									<br>
-									<a class="a_simple" href="./scripts/dynamic_weather_preset.html">
-										DynamicWeatherPreset
-									</a>
-								</p>
-								<h4>
-									Other Scripts
-								</h4>
-								<p>
-									None
-								</p>
+									<img src="../../../assets/images/dynamic_weather/example2.png" width="400px" onclick="maximizeImage(this)" class="clickable-image">
+										<br>
+										Look, there's a thing called <code class="gdscript">
+											DynamicWeatherConfig
+										</code>
+										, this node allows you to check existing presets, create some new ones and update an existing one. Change <code class="gdscript">
+											"Time of day"
+										</code>
+										to whichever value you need. <code class="gdscript">
+											"Preset ID"
+										</code>
+										allows you to select a preset. <code class="gdscript">
+											"Add preset"
+										</code>
+										makes a new preset based on the values of <code class="gdscript">
+											WorldEnvironment
+										</code>
+										and <code class="gdscript">
+											DirectionalLight
+										</code>
+										. Same with <code class="gdscript">
+											"Update preset"
+										</code>
+										, it takes the values and updates the preset in file.
+									</p>
+									<h3>
+										General Information
+									</h3>
+									<h4>
+										Root directories list
+									</h4>
+									<p>
+										assets, docs, src
+									</p>
+									<h4>
+										Nodes
+									</h4>
+									<p>
+										<a class="a_simple" href="./scripts/dynamic_weather_config.html">
+											DynamicWeatherConfig
+										</a>
+										<br>
+										<a class="a_simple" href="./scripts/dynamic_weather_manager.html">
+											DynamicWeatherManager
+										</a>
+									</p>
+									<h4>
+										Classes
+									</h4>
+									<p>
+										None
+									</p>
+									<h4>
+										Resources
+									</h4>
+									<p>
+										<a class="a_simple" href="./scripts/dynamic_weather_data.html">
+											DynamicWeatherData
+										</a>
+										<br>
+										<a class="a_simple" href="./scripts/dynamic_weather_preset.html">
+											DynamicWeatherPreset
+										</a>
+									</p>
+									<h4>
+										Other Scripts
+									</h4>
+									<p>
+										None
+									</p>
+								</div>
 							</div>
-						</div>
-					</center>
-					<script src="../../../assets/code_blocks.js">
-					</script>
-				</body>
-			</html>
+						</center>
+						<script src="../../../assets/code_blocks.js">
+						</script>
+					</body>
+				</html>

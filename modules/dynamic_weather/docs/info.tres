@@ -21,7 +21,10 @@ Randomize ST - randomizes the time of day and preset ID of current \"dynamic\" w
 
 Set ST - sets your fancy, preferred time of day or preset ID.
 
-\"Night Only\" Component - helps you to make only those things visible that you want at night. This is helpful to make only certain lights visible at evening/night."
+\"Night Only\" Component - helps you to make only those things visible that you want at night. This is helpful to make only certain lights visible at evening/night.
+
+//img:dynamic_weather/example2.png
+Look, there's a thing called [gd]DynamicWeatherConfig[/gd], this node allows you to check existing presets, create some new ones and update an existing one. Change [p]Time of day[/p] to whichever value you need. [p]Preset ID[/p] allows you to select a preset. [p]Add preset[/p] makes a new preset based on the values of [gd]WorldEnvironment[/gd] and [gd]DirectionalLight[/gd]. Same with [p]Update preset[/p], it takes the values and updates the preset in file."
 info_rus = "//img:dynamic_weather/example0.png
 //img:dynamic_weather/example1.jpg
 
@@ -39,5 +42,8 @@ Randomize ST - рандомизирует время суток и ID пресе
 
 Set ST - устанавливает твоё красивенькое, предпочтительное время суток или ID пресета.
 
-Компонент \"Night Only\" - помогает тебе сделать видимыми только те вещи, которые ты хочешь видеть ночью. Это полезно, чтобы только определённые источники света были видны вечером/ночью."
-edit_time = 1.76207e+09
+Компонент \"Night Only\" - помогает тебе сделать видимыми только те вещи, которые ты хочешь видеть ночью. Это полезно, чтобы только определённые источники света были видны вечером/ночью.
+
+//img:dynamic_weather/example2.png
+Смотри, есть штука под названием [gd]DynamicWeatherConfig[/gd], эта нода позволяет тебе проверять существующие пресеты, создавать новые и обновлять существующий. Измени [p]Time of day[/p] на любое нужное тебе значение. [p]Preset ID[/p] позволяет выбрать пресет. [p]Add preset[/p] создаёт новый пресет на основе значений из [gd]WorldEnvironment[/gd] и [gd]DirectionalLight[/gd]. То же самое с [p]Update preset[/p] - он берёт значения и обновляет пресет в файле."
+edit_time = 1.76463e+09

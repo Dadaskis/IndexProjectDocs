@@ -16,5 +16,16 @@ First argument is password (as a string). Second argument is an event name when 
 [wc]Script Toolkit[/wc]
 //img:keypad_menu/example1.png
 Simply use [p]st_keypad[/p]. [p]Open Event[/p] is an event that has to happen when this keypad needs to be opened (shit it's harder to write than I thought). [p]Password[/p] is the password, keep in mind there's 4 digit limit. [p]Access Event Name[/p] is an event that happens when you enter the password right."
-info_rus = ""
+info_rus = "//img:keypad_menu/example0.jpg
+Вот оно, тот самый момент, когда мы можем превратить эту игру в immersive-sim, о да. Хотя, неважно, возможно, этого и не случится.
+
+Есть 2 способа использовать эту штуку: либо писать код, либо использовать ST.
+
+[wc]Код[/wc]
+Первый аргумент - пароль (как строка). Второй аргумент - имя события при успешном доступе.
+[gd]KeypadMenu.open(\"1337\", \"keypad_access_granted\")[/gd]
+
+[wc]Script Toolkit[/wc]
+//img:keypad_menu/example1.png
+Просто используй [p]st_keypad[/p]. [p]Open Event[/p] - это событие, которое должно произойти, когда эту клавиатуру нужно открыть (чёрт, это сложнее описать, чем я думал). [p]Password[/p] - это пароль, имей в виду, что есть ограничение в 4 цифры. [p]Access Event Name[/p] - это событие, которое происходит при правильном вводе пароля."
 edit_time = 1.7639e+09

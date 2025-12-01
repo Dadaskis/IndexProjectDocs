@@ -49,7 +49,7 @@
 								</h3>
 								<p class="red-marking">
 									Page last updated:<br>
-									November 23, 2025 at 11:46 UTC
+									December 1, 2025 at 21:49 UTC
 								</p>
 								<br>
 							</div>
@@ -1102,6 +1102,34 @@
 							</div>
 							<p class="var_desc_text">
 								Displays countdown timers
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									money_hud
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Displays money
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									new_message_hud
+								</p>
+								<p class="var_desc_name_value">
+									Undefined/Default
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Displays new message
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_var">
@@ -2924,6 +2952,20 @@
 								Death cutscene
 							</p>
 							<div class="variable_desc_div">
+								<p class="flair_var">
+									Variable
+								</p>
+								<p class="var_desc_name_text">
+									money
+								</p>
+								<p class="var_desc_name_value">
+									0
+								</p>
+							</div>
+							<p class="var_desc_text">
+								How much money the player has
+							</p>
+							<div class="variable_desc_div">
 								<p class="flair_func">
 									Function
 								</p>
@@ -3976,6 +4018,57 @@
 							</div>
 							<p class="var_desc_text">
 								Initializes death cutscene
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_new_message_to_respond
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prints a HUD message that there's new dialog available
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									on_failed_to_start_a_dialog
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Prints a HUD message that a dialog can't be started
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									initialize_new_message_events
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Initalizes functions related to the new messages
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_func">
@@ -5104,23 +5197,6 @@
 									Function
 								</p>
 								<p class="var_desc_name_text">
-									transition_data_save
-								</p>
-								<p class="var_desc_name_value">
-									None
-								</p>
-								<p class="func_return_text">
-									any
-								</p>
-							</div>
-							<p class="var_desc_text">
-								Saves player state for location transitions
-							</p>
-							<div class="variable_desc_div">
-								<p class="flair_func">
-									Function
-								</p>
-								<p class="var_desc_name_text">
 									start_loadout_logic
 								</p>
 								<p class="var_desc_name_value">
@@ -5277,7 +5353,7 @@
 									before_location_change
 								</p>
 								<p class="var_desc_name_value">
-									transition_data_save: = true
+									None
 								</p>
 								<p class="func_return_text">
 									any
@@ -5472,6 +5548,57 @@
 							</div>
 							<p class="var_desc_text">
 								Handles player spawn/respawn sequence
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									set_money
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Sets money amount
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									add_money
+								</p>
+								<p class="var_desc_name_value">
+									value: any
+								</p>
+								<p class="func_return_text">
+									any
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Adds money amount
+							</p>
+							<div class="variable_desc_div">
+								<p class="flair_func">
+									Function
+								</p>
+								<p class="var_desc_name_text">
+									get_money
+								</p>
+								<p class="var_desc_name_value">
+									None
+								</p>
+								<p class="func_return_text">
+									int
+								</p>
+							</div>
+							<p class="var_desc_text">
+								Returns money amount
 							</p>
 							<div class="variable_desc_div">
 								<p class="flair_func">

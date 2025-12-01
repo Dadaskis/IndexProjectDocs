@@ -313,6 +313,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/message_hud.html">MessageHUD</a>
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/death_hud.html">MissionFailedHUD</a>
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/mission_status_hud.html">MissionStatusHUD</a>
+<a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/money_hud.html">MoneyHUD</a>
+<a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/new_message_hud.html">NewMessageHUD</a>
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/operation_start_hud.html">OperationStartHUD</a>
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/plot_message_hud.html">PlotMessageHUD</a>
 <a class="sidebar-class class-node" href="../../../heads_up_display/docs/scripts/plot_tell_hud.html">PlotTellHUD</a>
@@ -588,6 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class" href="../../../post_processing_system/docs/scripts/post_processing_system.html">PostProcessingSystem</a>
 </div><a class="sidebar-class module-var" href="../../../pre_mission_dialog/docs/index.html">pre_mission_dialog<button onclick="event.preventDefault();toggleModule(this)" class="module-toggle-btn">-</button></a><div class="module-container">
 <a class="sidebar-class class-node" href="../../../pre_mission_dialog/docs/scripts/dialog.html">dialog</a>
+<a class="sidebar-class class-node" href="../../../pre_mission_dialog/docs/scripts/dialog_new_message.html">DialogNewMessage</a>
 <a class="sidebar-class class-node" href="../../../pre_mission_dialog/docs/scripts/option.html">option</a>
 <a class="sidebar-class class-node" href="../../../pre_mission_dialog/docs/scripts/pre_mission_dialog.html">PreMissionDialog</a>
 <a class="sidebar-class" href="../../../pre_mission_dialog/docs/scripts/dialog_logic_base.html">DialogLogicBase</a>
@@ -655,6 +658,9 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_control_usable_showup.html">ST_ControlUsableShowup</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_delayed_event.html">ST_DelayedEvent</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dialog_messages.html">ST_DialogMessages</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dialog_new_message.html">ST_DialogNewMessage</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dialog_new_message_change_name.html">ST_DialogNewMessageChangeName</a>
+<a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dialog_new_message_open.html">ST_DialogNewMessageOpen</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dynamic_weather_assign.html">ST_DynamicWeatherAssign</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dynamic_weather_randomize.html">ST_DynamicWeatherRandomize</a>
 <a class="sidebar-class class-node" href="../../../script_toolkit/docs/scripts/st_dynamic_weather_set.html">ST_DynamicWeatherSet</a>
